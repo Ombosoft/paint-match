@@ -3,7 +3,7 @@ import {animationDurationMs, dropletBlendDelay, dropletsUntilReset, extraCommitD
 import {colorTable} from "./Levels";
 import {matCompSum, matScaleByVec, vecCompSum, vecDistance, vecNormalize, vecRound, vecScale} from "./Vec";
 import convert from "color-convert";
-import {Alert, Button, Collapse, IconButton, Stack, Tooltip} from "@mui/material";
+import {Alert, AlertTitle, Button, Collapse, IconButton, Stack, Tooltip} from "@mui/material";
 import UndoIcon from "@mui/icons-material/Undo";
 import ReplayIcon from "@mui/icons-material/Replay";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
@@ -157,16 +157,16 @@ export function Game({debug}) {
         <Collapse in={victory}>
             <Alert
                 action={
-                    <Button
-                        color="inherit"
-                        size="small"
+                    <IconButton
                         onClick={nextLevel}
-                    >Next Level
-                    </Button>
+                        color="secondary"
+                        size="large">
+                        <SkipNextIcon fontSize="large"/>
+                    </IconButton>
                 }
                 sx={{mb: 2}}
             >
-                Well done!
+                <AlertTitle sx={{fontSize: 22, marginTop: 0, marginBottom: 0}}>Well done!</AlertTitle>
             </Alert>
         </Collapse>
 

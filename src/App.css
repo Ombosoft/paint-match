@@ -69,3 +69,13 @@
     transform: rotate(360deg);
   }
 }
+
+.MuiAlert-message {
+  display: flex;
+  align-items: center;
+}
+
+.MuiAlert-icon {
+  display: flex;
+  align-items: center;
+}
