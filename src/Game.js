@@ -3,7 +3,7 @@ import {animationDurationMs, dropletBlendDelay, dropletsUntilReset, extraCommitD
 import {colorTable} from "./Levels";
 import {matCompSum, matScaleByVec, vecCompSum, vecDistance, vecNormalize, vecRound, vecScale} from "./Vec";
 import convert from "color-convert";
-import {Alert, AlertTitle, Button, Collapse, IconButton, Stack, Tooltip} from "@mui/material";
+import {Alert, AlertTitle, Collapse, IconButton, Stack, Tooltip} from "@mui/material";
 import UndoIcon from "@mui/icons-material/Undo";
 import ReplayIcon from "@mui/icons-material/Replay";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
@@ -77,7 +77,7 @@ export function Game({debug}) {
         const basis = [cyan, magenta, yellow, black, red, green, blue];
         const blendResult = matCompSum(matScaleByVec(basis, compWeights));
         const nonWhiteScale = vecCompSum(blendResult) / 100;
-        const scaleWithWhite = nonWhiteScale + cs.white > 0 ? nonWhiteScale / (nonWhiteScale + cs.white) : 0;
+        const scaleWithWhite = nonWhiteScale + cs.white > 0 ? nonWhiteScale / (nonWhiteScale + 3 * cs.white) : 0;
         const normalized = vecScale(vecNormalize(blendResult), 100 * scaleWithWhite);
         // console.log("compWeights", compWeights, "basis", basis, "blendResult", blendResult,
         //     "nonWhiteScale", nonWhiteScale, "scaleWithWhite", scaleWithWhite, "normalized", normalized);
