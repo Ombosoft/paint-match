@@ -13,6 +13,7 @@ import {ColorButton} from "./ColorButton";
 import {ColorSquare} from "./ColorSquare";
 import {distanceToPercentMatch, randInt} from "./Utils";
 import {cmykColors, zeroComponents} from "./Colors";
+import {useLocalStorage} from "./LocalStorageHook";
 
 export function Game({debug}) {
     const [victory, setVictory] = useState(false);
@@ -23,8 +24,8 @@ export function Game({debug}) {
     const [dropletColor, setDropletColor] = useState()
 
 
-    const [level, setLevel] = useState(skipLevels);
-    const [targetLevel, setTargetLevel] = useState(colorTable[skipLevels]);
+    const [level, setLevel] = useLocalStorage("level", skipLevels);
+    const [targetLevel, setTargetLevel] = useState(colorTable[level]);
     const [distance, setDistance] = useState(200);
     const [distanceGotWorse, setDistanceGotWorse] = useState(false);
     const [resetCount, setResetCount] = useState(0);

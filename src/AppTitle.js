@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {Button} from "@mui/material";
 
 export function AppTitle({onDebug}) {
     const [clickCount, setClickCount] = useState(0);
@@ -12,9 +13,10 @@ export function AppTitle({onDebug}) {
         onDebug(newDebug);
     }
 
-    return (
+    return <>
         <p onClick={maybeTriggerDebug}>
             Paint Match
         </p>
-    );
+        {debug && <Button onClick={localStorage.clear()}>Clr LS</Button>}
+    </>;
 }
