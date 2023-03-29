@@ -52,7 +52,7 @@ export const cmykColors = [
     {color: "yellow", minLevel: 0},
     {color: "black", minLevel: 8},
     {color: "white", minLevel: 4},
-    {color: "red", minLevel: 9},
+    {color: "red", minLevel: 10},
     {color: "green", minLevel: 12},
     {color: "blue", minLevel: 15}
 ];
