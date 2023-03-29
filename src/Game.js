@@ -12,28 +12,7 @@ import {ColorSlider} from "./ColorSlider";
 import {ColorButton} from "./ColorButton";
 import {ColorSquare} from "./ColorSquare";
 import {distanceToPercentMatch, randInt} from "./Utils";
-
-const zeroComponents = {
-    red: 0,
-    green: 0,
-    blue: 0,
-    cyan: 0,
-    magenta: 0,
-    yellow: 0,
-    black: 0,
-    white: 0,
-};
-
-const cmykColors = [
-    {color: "cyan", minLevel: 1},
-    {color: "magenta", minLevel: 2},
-    {color: "yellow", minLevel: 0},
-    {color: "black", minLevel: 8},
-    {color: "white", minLevel: 4},
-    {color: "red", minLevel: 9},
-    {color: "green", minLevel: 12},
-    {color: "blue", minLevel: 15}
-];
+import {cmykColors, zeroComponents} from "./Colors";
 
 export function Game({debug}) {
     const [victory, setVictory] = useState(false);

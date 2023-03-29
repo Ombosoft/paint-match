@@ -36,3 +36,23 @@ export const theme = createTheme({
         },
     },
 });
+export const zeroComponents = {
+    red: 0,
+    green: 0,
+    blue: 0,
+    cyan: 0,
+    magenta: 0,
+    yellow: 0,
+    black: 0,
+    white: 0,
+};
+export const cmykColors = [
+    {color: "cyan", minLevel: 1},
+    {color: "magenta", minLevel: 2},
+    {color: "yellow", minLevel: 0},
+    {color: "black", minLevel: 8},
+    {color: "white", minLevel: 4},
+    {color: "red", minLevel: 9},
+    {color: "green", minLevel: 12},
+    {color: "blue", minLevel: 15}
+];
