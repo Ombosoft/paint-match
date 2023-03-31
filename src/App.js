@@ -1,9 +1,10 @@
 import './App.css';
 import React, {useState} from "react";
-import {AppTitle} from "./AppTitle";
-import {Game} from "./Game";
+import AppTitle from "./AppTitle";
+import Game from "./Game";
 
 
+// Main app component.
 function App() {
     const [debug, setDebug] = useState(false);
     return (

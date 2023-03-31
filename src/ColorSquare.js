@@ -1,8 +1,9 @@
 import OpacityIcon from "@mui/icons-material/Opacity";
 import React from "react";
 import {animationDurationMs, dropletBlendDelay} from "./Constants";
+import PropTypes from 'prop-types';
 
-export function ColorSquare({color, label, showColor, showDroplet, dropletColor}) {
+function ColorSquare({color, label, showColor, showDroplet, dropletColor}) {
     const dColor = dropletColor ? `${dropletColor}` : `#${color}`;
     const dDelay = dropletColor ? dropletBlendDelay : animationDurationMs - dropletBlendDelay;
     console.log("dc", dropletColor, dColor, dDelay);
@@ -29,3 +30,13 @@ export function ColorSquare({color, label, showColor, showDroplet, dropletColor}
         </>
     );
 }
+
+ColorSquare.propTypes = {
+    color: PropTypes.string.isRequired,
+    label: PropTypes.string,
+    showColor: PropTypes.bool,
+    showDroplet: PropTypes.bool,
+    dropletColor: PropTypes.string,
+};
+
+export default ColorSquare;

@@ -8,14 +8,16 @@ import UndoIcon from "@mui/icons-material/Undo";
 import ReplayIcon from "@mui/icons-material/Replay";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import TuneIcon from '@mui/icons-material/Tune';
-import {ColorSlider} from "./ColorSlider";
-import {ColorButton} from "./ColorButton";
-import {ColorSquare} from "./ColorSquare";
+import ColorSlider from "./ColorSlider";
+import ColorButton from "./ColorButton";
+import ColorSquare from "./ColorSquare";
 import {distanceToPercentMatch, randInt} from "./Utils";
 import {cmykColors, zeroComponents} from "./Colors";
 import {useLocalStorage} from "./LocalStorageHook";
+import PropTypes from 'prop-types';
 
-export function Game({debug}) {
+
+function Game({debug}) {
     const [victory, setVictory] = useState(false);
     const [bottle, setBottle] = useState(true);
 
@@ -235,3 +237,9 @@ export function Game({debug}) {
         </Stack>
     </>;
 }
+
+Game.propTypes = {
+    debug: PropTypes.bool.isRequired,
+};
+
+export default Game;

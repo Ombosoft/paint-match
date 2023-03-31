@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import {Button} from "@mui/material";
+import PropTypes from 'prop-types';
 
-export function AppTitle({onDebug}) {
+function AppTitle({onDebug}) {
     const [clickCount, setClickCount] = useState(0);
     const [debug, setDebug] = useState(false);
 
@@ -20,3 +21,9 @@ export function AppTitle({onDebug}) {
         {debug && <Button onClick={localStorage.clear()}>Clr LS</Button>}
     </>;
 }
+
+AppTitle.propTypes = {
+    onDebug: PropTypes.func.isRequired,
+};
+
+export default AppTitle;
