@@ -8,8 +8,8 @@ import UndoIcon from "@mui/icons-material/Undo";
 import ReplayIcon from "@mui/icons-material/Replay";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import TuneIcon from '@mui/icons-material/Tune';
-import ColorSlider from "./ColorSlider";
-import ColorButton from "./ColorButton";
+import ColorSliders from "./ColorSliders";
+import ColorButtons from "./ColorButtons";
 import ColorSquare from "./ColorSquare";
 import {distanceToPercentMatch, randInt} from "./Utils";
 import {cmykColors, zeroComponents} from "./Colors";
@@ -192,31 +192,18 @@ function Game({debug}) {
             </Tooltip>
         </Stack>
 
-        {!bottle && <> {
-            cmykColors
-                .map(color =>
-                        level >= color.minLevel && <ColorSlider
-                            key={color.color}
-                            color={color.color}
-                            components={components}
-                            onSetComponentValue={setComponentValue}
-                        />
-                )
-        }</>}
+        {!bottle && (
+            <ColorSliders cmykColors={cmykColors}
+                          level={level}
+                          components={components}
+                          onSetComponentValue={setComponentValue}/>
+        )}
 
 
-        {bottle &&
-            <Stack direction="column" spacing={1}>
-                <>{cmykColors.map(color =>
-                        level >= color.minLevel && <ColorButton
-                            key={color.color}
-                            color={color.color}
-                            components={components}
-                            onClick={handleClick}
-                        />
-                )
-                }</>
-            </Stack>
+        {bottle && (<ColorButtons cmykColors={cmykColors}
+                                  level={level}
+                                  components={components}
+                                  onClick={handleClick}/>)
         }
 
         <Stack direction="row">
