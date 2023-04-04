@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {animationDurationMs, dropletBlendDelay, dropletsUntilReset, extraCommitDelay, skipLevels} from "./Constants";
 import {colorTable} from "./Levels";
 import {matCompSum, matScaleByVec, vecCompSum, vecDistance, vecNormalize, vecRound, vecScale} from "./Vec";
@@ -12,7 +12,7 @@ import ColorSliders from "./ColorSliders";
 import VictoryPanel from "./VictoryPanel";
 import ColorButtons from "./ColorButtons";
 import ColorSquare from "./ColorSquare";
-import {distanceToPercentMatch, randInt} from "./Utils";
+import {distanceToPercentMatch, randomLevel} from "./Utils";
 import {cmykColors, zeroComponents} from "./Colors";
 import {useLocalStorage} from "./LocalStorageHook";
 import PropTypes from 'prop-types';
@@ -66,16 +66,6 @@ function Game({debug}) {
         return vecRound(normalized);
     }
 
-    function randomLevel() {
-        const min = 5;
-        const max = 95;
-        return {
-            name: "",
-            cmyk: [randInt(min, max), randInt(min, max), randInt(min, max), randInt(min, max / 2)],
-            tolerance: 5,
-        };
-    }
-
     function checkCommit(cs) {
         console.log('commit', getCurrentComponents(cs));
         const targetUniform = convert.cmyk.xyz(targetLevel.cmyk);
@@ -120,19 +110,19 @@ function Game({debug}) {
         setBottle(true);
     }
 
-    function handleClick(color) {
+    const handleClick = useCallback((color) => {
         saveUndo();
         setComponents(prevState => {
             return {...prevState, [color]: prevState[color] + 1};
         });
         setDropletColor(color);
         setNumDroplets((prev) => prev + 1);
-    }
+    }, []);
 
-    function setComponentValue(colorName, value) {
+    const setComponentValue = useCallback((colorName, value) => {
         saveUndo();
         setComponents(prevState => ({...prevState, [colorName]: value}));
-    }
+    }, []);
 
     const allowResetWhen = victory || distanceGotWorse || numDroplets > dropletsUntilReset;
     return <>

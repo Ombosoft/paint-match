@@ -8,3 +8,13 @@ export function randInt(min, max) {
 export function distanceToPercentMatch(distance) {
     return Math.round(100 - Math.min(100, distance / 3));
 }
+
+export function randomLevel() {
+    const min = 5;
+    const max = 95;
+    return {
+        name: "",
+        cmyk: [randInt(min, max), randInt(min, max), randInt(min, max), randInt(min, max / 2)],
+        tolerance: 5,
+    };
+}
