@@ -14,11 +14,17 @@ function AppTitle({onDebug}) {
         onDebug(newDebug);
     }
 
+    function clearLocalStorage() {
+        localStorage.clear();
+    }
+
     return <>
         <p onClick={maybeTriggerDebug}>
             Paint Match
         </p>
-        {debug && <Button onClick={localStorage.clear()}>Clr LS</Button>}
+        {debug && (
+            <Button onClick={clearLocalStorage}>Clear Local Storage</Button>
+        )}
     </>;
 }
 
