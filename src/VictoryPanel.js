@@ -22,8 +22,8 @@ function VictoryPanel({isVictory, onNextLevel}) {
 }
 
 VictoryPanel.propTypes = {
-    isVictory: PropTypes.bool,
-    onNextLevel: PropTypes.func
+    isVictory: PropTypes.bool.isRequired,
+    onNextLevel: PropTypes.func.isRequired,
 };
 
 export default VictoryPanel;
