@@ -3,19 +3,19 @@ import {animationDurationMs, dropletBlendDelay, dropletsUntilReset, extraCommitD
 import {colorTable} from "./Levels";
 import {matCompSum, matScaleByVec, vecCompSum, vecDistance, vecNormalize, vecRound, vecScale} from "./Vec";
 import convert from "color-convert";
-import {Alert, AlertTitle, Collapse, IconButton, Stack, Tooltip} from "@mui/material";
+import {IconButton, Stack, Tooltip} from "@mui/material";
 import UndoIcon from "@mui/icons-material/Undo";
 import ReplayIcon from "@mui/icons-material/Replay";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import TuneIcon from '@mui/icons-material/Tune';
 import ColorSliders from "./ColorSliders";
+import VictoryPanel from "./VictoryPanel";
 import ColorButtons from "./ColorButtons";
 import ColorSquare from "./ColorSquare";
 import {distanceToPercentMatch, randInt} from "./Utils";
 import {cmykColors, zeroComponents} from "./Colors";
 import {useLocalStorage} from "./LocalStorageHook";
 import PropTypes from 'prop-types';
-
 
 function Game({debug}) {
     const [victory, setVictory] = useState(false);
@@ -136,21 +136,7 @@ function Game({debug}) {
 
     const allowResetWhen = victory || distanceGotWorse || numDroplets > dropletsUntilReset;
     return <>
-        <Collapse in={victory}>
-            <Alert
-                action={
-                    <IconButton
-                        onClick={nextLevel}
-                        color="secondary"
-                        size="large">
-                        <SkipNextIcon fontSize="large"/>
-                    </IconButton>
-                }
-                sx={{mb: 2}}
-            >
-                <AlertTitle sx={{fontSize: 22, marginTop: 0, marginBottom: 0}}>Well done!</AlertTitle>
-            </Alert>
-        </Collapse>
+        <VictoryPanel isVictory={victory} onNextLevel={nextLevel}/>
 
         <Stack direction="row">
             <p>Level {level}</p>
