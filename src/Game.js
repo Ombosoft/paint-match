@@ -91,6 +91,7 @@ function Game({debug}) {
     }
 
     function saveUndo() {
+        console.log("saveUndo", components);
         setPrevComponents(components);
     }
 
@@ -117,12 +118,12 @@ function Game({debug}) {
         });
         setDropletColor(color);
         setNumDroplets((prev) => prev + 1);
-    }, []);
+    }, [saveUndo]);
 
     const setComponentValue = useCallback((colorName, value) => {
         saveUndo();
         setComponents(prevState => ({...prevState, [colorName]: value}));
-    }, []);
+    }, [saveUndo]);
 
     const allowResetWhen = victory || distanceGotWorse || numDroplets > dropletsUntilReset;
     return <>

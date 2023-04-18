@@ -26,7 +26,7 @@ function ColorButton({color, components, onClick}) {
 
 ColorButton.propTypes = {
     color: PropTypes.string.isRequired,
-    components: PropTypes.array.isRequired,
+    components: PropTypes.object.isRequired,
     onClick: PropTypes.func.isRequired,
 };
 

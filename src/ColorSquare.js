@@ -6,8 +6,9 @@ import PropTypes from 'prop-types';
 function ColorSquare({color, label, showColor, showDroplet, dropletColor}) {
     const dColor = dropletColor ? `${dropletColor}` : `#${color}`;
     const dDelay = dropletColor ? dropletBlendDelay : animationDurationMs - dropletBlendDelay;
-    console.log("dc", dropletColor, dColor, dDelay);
+    // TODO useEffect etc
     return (<>
+            {/*<Tooltip title="This is the color you want to get" open={true}>*/}
             <span className="Picker-square" style={{
                 backgroundColor: `#${color}`,
                 transitionProperty: "background-color",
@@ -26,7 +27,8 @@ function ColorSquare({color, label, showColor, showDroplet, dropletColor}) {
                 <div>
             {showColor && color}
             </div>
-        </span>
+            </span>
+            {/*</Tooltip>*/}
         </>
     );
 }
