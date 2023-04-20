@@ -188,6 +188,8 @@ function Game({debug}) {
                 color={convert.cmyk.hex(targetLevel.cmyk)}
                 label={debug ? `${targetLevel.name}  (${targetLevel.cmyk})` : targetLevel.name}
                 showColor={debug}
+                tooltip="Color you want to get"
+                showTooltip={true}
             />
             <ColorSquare
                 color={convert.cmyk.hex(getCurrentComponents(components))}
@@ -197,6 +199,8 @@ function Game({debug}) {
                 showColor={debug}
                 dropletColor={dropletColor}
                 showDroplet
+                tooltip="Color mixture you're making"
+                showTooltip={true}
             />
         </Stack>
     </>;
