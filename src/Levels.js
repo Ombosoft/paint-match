@@ -401,12 +401,12 @@ export const colorTable = [
     {name: "salmon", cmyk: [0, 45, 59, 20], tolerance: 4}, // level=431, complexity=38
     {name: "peachpuff", cmyk: [0, 15, 27, 20], tolerance: 4}, // level=432, complexity=38
     {name: "peru", cmyk: [0, 35, 69, 20], tolerance: 4}, // level=433, complexity=38
-    {name: "brick", cmyk: [0, 35, 80, 39], tolerance: 4}, // level=434, complexity=38
-    {name: "light goldenrod", cmyk: [0, 7, 45, 20], tolerance: 4}, // level=435, complexity=38
-    {name: "olive drab", cmyk: [25, 0, 76, 7], tolerance: 4}, // level=436, complexity=38
-    {name: "frog", cmyk: [31, 0, 44, 25], tolerance: 4}, // level=437, complexity=38
-    {name: "fraser fir", cmyk: [28, 0, 25, 58], tolerance: 4}, // level=438, complexity=38
-    {name: "eton blue", cmyk: [25, 0, 19, 22], tolerance: 4}, // level=439, complexity=38
+    {name: "brick", cmyk: [0, 35, 80, 39], tolerance: 3}, // level=434, complexity=38
+    {name: "light goldenrod", cmyk: [0, 7, 45, 20], tolerance: 3}, // level=435, complexity=38
+    {name: "olive drab", cmyk: [25, 0, 76, 7], tolerance: 3}, // level=436, complexity=38
+    {name: "frog", cmyk: [31, 0, 44, 25], tolerance: 3}, // level=437, complexity=38
+    {name: "fraser fir", cmyk: [28, 0, 25, 58], tolerance: 3}, // level=438, complexity=38
+    {name: "eton blue", cmyk: [25, 0, 19, 22], tolerance: 3}, // level=439, complexity=38
     {name: "sea green", cmyk: [75, 0, 27, 44], tolerance: 4}, // level=440, complexity=38
     {name: "liberty", cmyk: [25, 0, 5, 14], tolerance: 4}, // level=441, complexity=38
     {name: "masters jacket", cmyk: [64, 0, 13, 75], tolerance: 4}, // level=442, complexity=38
