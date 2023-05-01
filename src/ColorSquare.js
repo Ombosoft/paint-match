@@ -1,15 +1,14 @@
 import OpacityIcon from "@mui/icons-material/Opacity";
 import React from "react";
-import {animationDurationMs, dropletBlendDelay} from "./Constants";
+import { animationDurationMs, dropletBlendDelay } from "./Constants";
 import PropTypes from 'prop-types';
-import {Tooltip} from "@mui/material";
+import { Tooltip } from "@mui/material";
 
-function ColorSquare({color, label, showColor, showDroplet, dropletColor, tooltip, showTooltip}) {
+function ColorSquare({ color, label, showColor, showDroplet, dropletColor, tooltip, showTooltip }) {
     const dColor = dropletColor ? `${dropletColor}` : `#${color}`;
     const dDelay = dropletColor ? dropletBlendDelay : animationDurationMs - dropletBlendDelay;
-    // TODO useEffect etc
     return (<>
-            <Tooltip title={tooltip} open={showTooltip}>
+        <Tooltip title={<h1>{tooltip}</h1>} open={showTooltip} arrow>
             <span className="Picker-square" style={{
                 backgroundColor: `#${color}`,
                 transitionProperty: "background-color",
@@ -22,15 +21,15 @@ function ColorSquare({color, label, showColor, showDroplet, dropletColor, toolti
                         transitionDuration: `${dDelay}ms`,
                         transitionProperty: "color",
                         transitionTimingFunction: "ease-in-out"
-                    }}/>
+                    }} />
                 )}
                 {label && (<div>{label}</div>)}
                 <div>
-            {showColor && color}
-            </div>
+                    {showColor && color}
+                </div>
             </span>
-            </Tooltip>
-        </>
+        </Tooltip>
+    </>
     );
 }
 

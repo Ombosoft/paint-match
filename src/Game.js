@@ -27,6 +27,7 @@ function Game({debug}) {
 
 
     const [level, setLevel] = useLocalStorage("level", skipLevels);
+    const [showTutorial, setShowTutorial] = useLocalStorage("tutorial", true);
     const [targetLevel, setTargetLevel] = useState(colorTable[level]);
     const [distance, setDistance] = useState(200);
     const [distanceGotWorse, setDistanceGotWorse] = useState(false);
@@ -111,6 +112,10 @@ function Game({debug}) {
         setBottle(true);
     }
 
+    function endTutorial() {
+        setShowTutorial(false);
+    }
+
     const handleClick = useCallback((color) => {
         saveUndo();
         setComponents(prevState => {
@@ -118,6 +123,7 @@ function Game({debug}) {
         });
         setDropletColor(color);
         setNumDroplets((prev) => prev + 1);
+        endTutorial();
     }, [saveUndo]);
 
     const setComponentValue = useCallback((colorName, value) => {
@@ -180,7 +186,10 @@ function Game({debug}) {
         {bottle && (<ColorButtons cmykColors={cmykColors}
                                   level={level}
                                   components={components}
-                                  onClick={handleClick}/>)
+                                  onClick={handleClick}
+                                  tooltip="Lala"
+                                  showTooltip={true}
+                                  />)
         }
 
         <Stack direction="row">
@@ -188,8 +197,8 @@ function Game({debug}) {
                 color={convert.cmyk.hex(targetLevel.cmyk)}
                 label={debug ? `${targetLevel.name}  (${targetLevel.cmyk})` : targetLevel.name}
                 showColor={debug}
-                tooltip="Color you want to get"
-                showTooltip={true}
+                tooltip="Target color"
+                showTooltip={showTutorial}
             />
             <ColorSquare
                 color={convert.cmyk.hex(getCurrentComponents(components))}
@@ -199,8 +208,8 @@ function Game({debug}) {
                 showColor={debug}
                 dropletColor={dropletColor}
                 showDroplet
-                tooltip="Color mixture you're making"
-                showTooltip={true}
+                tooltip="Current Mix"
+                showTooltip={showTutorial}
             />
         </Stack>
     </>;
