@@ -1,9 +1,9 @@
-import React, {useCallback, useEffect, useState} from "react";
-import {animationDurationMs, dropletBlendDelay, dropletsUntilReset, extraCommitDelay, skipLevels} from "./Constants";
-import {colorTable} from "./Levels";
-import {matCompSum, matScaleByVec, vecCompSum, vecDistance, vecNormalize, vecRound, vecScale} from "./Vec";
+import React, { useCallback, useEffect, useState } from "react";
+import { animationDurationMs, dropletBlendDelay, dropletsUntilReset, extraCommitDelay, skipLevels } from "./Constants";
+import { colorTable } from "./Levels";
+import { matCompSum, matScaleByVec, vecCompSum, vecDistance, vecNormalize, vecRound, vecScale } from "./Vec";
 import convert from "color-convert";
-import {IconButton, Stack, Tooltip} from "@mui/material";
+import { IconButton, Stack, Tooltip } from "@mui/material";
 import UndoIcon from "@mui/icons-material/Undo";
 import ReplayIcon from "@mui/icons-material/Replay";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
@@ -12,12 +12,12 @@ import ColorSliders from "./ColorSliders";
 import VictoryPanel from "./VictoryPanel";
 import ColorButtons from "./ColorButtons";
 import ColorSquare from "./ColorSquare";
-import {distanceToPercentMatch, randomLevel} from "./Utils";
-import {cmykColors, zeroComponents} from "./Colors";
-import {useLocalStorage} from "./LocalStorageHook";
+import { distanceToPercentMatch, randomLevel } from "./Utils";
+import { cmykColors, zeroComponents } from "./Colors";
+import { useLocalStorage } from "./LocalStorageHook";
 import PropTypes from 'prop-types';
 
-function Game({debug}) {
+function Game({ debug }) {
     const [victory, setVictory] = useState(false);
     const [bottle, setBottle] = useState(true);
 
@@ -119,7 +119,7 @@ function Game({debug}) {
     const handleClick = useCallback((color) => {
         saveUndo();
         setComponents(prevState => {
-            return {...prevState, [color]: prevState[color] + 1};
+            return { ...prevState, [color]: prevState[color] + 1 };
         });
         setDropletColor(color);
         setNumDroplets((prev) => prev + 1);
@@ -128,67 +128,71 @@ function Game({debug}) {
 
     const setComponentValue = useCallback((colorName, value) => {
         saveUndo();
-        setComponents(prevState => ({...prevState, [colorName]: value}));
+        setComponents(prevState => ({ ...prevState, [colorName]: value }));
     }, [saveUndo]);
 
     const allowResetWhen = victory || distanceGotWorse || numDroplets > dropletsUntilReset;
+    const enableUndo = components !== prevComponents && !victory;
+    const enableReset = components !== zeroComponents && allowResetWhen;
+    const enableSkip = debug || (resetCount >= 6 && !victory);
+    const enableSliders = debug || (resetCount >= 3 && !victory);
     return <>
-        <VictoryPanel isVictory={victory} onNextLevel={nextLevel}/>
+        <VictoryPanel isVictory={victory} onNextLevel={nextLevel} />
 
         <Stack direction="row">
             <p>Level {level}</p>
-            <Tooltip title="Undo" placement="top-end" arrow>
+            <Tooltip title="Undo" placement="top-end" arrow disabled={!enableUndo}>
                 <IconButton
                     onClick={undo}
                     color="secondary"
                     size="medium"
-                    disabled={components === prevComponents || victory}>
-                    <UndoIcon fontSize="large"/>
+                    disabled={!enableUndo}>
+                    <UndoIcon fontSize="large" />
                 </IconButton>
             </Tooltip>
-            <Tooltip title="Start over" placement="top-end" arrow>
+            <Tooltip title="Start over" placement="top-end" arrow disabled={!enableReset}>
                 <IconButton
                     onClick={resetColors}
                     color="secondary"
                     size="medium"
-                    disabled={components === zeroComponents || !allowResetWhen}>
-                    <ReplayIcon fontSize="large"/>
+                    disabled={!enableReset}>
+                    <ReplayIcon fontSize="large" />
                 </IconButton>
             </Tooltip>
-            <Tooltip title="Skip level" placement="top-end" arrow>
+            <Tooltip title="Skip level" placement="top-end" arrow disabled={!enableSkip}>
                 <IconButton
                     onClick={nextLevel}
                     color="secondary"
                     size="medium"
-                    disabled={(resetCount < 6 && !debug) || victory}>
-                    <SkipNextIcon fontSize="large"/>
+                    disabled={!enableSkip}>
+                    <SkipNextIcon fontSize="large" />
                 </IconButton>
             </Tooltip>
-            <Tooltip title="Sliders" placement="top-end" arrow>
+            <Tooltip title="Sliders" placement="top-end" arrow disabled={!enableSliders}>
                 <IconButton
                     onClick={() => setBottle((prev) => !prev)}
                     color="secondary"
                     size="medium"
-                    disabled={(resetCount < 3 && !debug) || victory}>
-                    <TuneIcon fontSize="large"/>
+                    disabled={!enableSliders}>
+                    <TuneIcon fontSize="large" />
                 </IconButton>
             </Tooltip>
         </Stack>
 
         {!bottle && (
             <ColorSliders cmykColors={cmykColors}
-                          level={level}
-                          components={components}
-                          onSetComponentValue={setComponentValue}/>
+                level={level}
+                components={components}
+                onSetComponentValue={setComponentValue} />
         )}
 
 
         {bottle && (<ColorButtons cmykColors={cmykColors}
-                                  level={level}
-                                  components={components}
-                                  onClick={handleClick}
-                                  showTooltip={showTutorial}
-                                  />)
+            level={level}
+            components={components}
+            onClick={handleClick}
+            showTooltip={showTutorial}
+        />)
         }
 
         <Stack direction="row">
