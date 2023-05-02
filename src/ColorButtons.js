@@ -8,7 +8,6 @@ function ColorButtons({
     level,
     components,
     onClick, 
-    tooltip, 
     showTooltip
 }) {
     return (<Stack direction="column" spacing={1}>
@@ -18,7 +17,7 @@ function ColorButtons({
                 color={color.color}
                 components={components}
                 onClick={onClick}
-                tooltip={tooltip}
+                tooltip="Press to Drop Paint"
                 showTooltip={showTooltip}
             />
         )
@@ -36,7 +35,6 @@ ColorButtons.propTypes = {
     level: PropTypes.number.isRequired,
     components: PropTypes.object.isRequired,
     onClick: PropTypes.func.isRequired,
-    tooltip: PropTypes.string,
     showTooltip: PropTypes.bool,
 };
 export default ColorButtons;

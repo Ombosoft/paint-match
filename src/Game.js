@@ -187,8 +187,7 @@ function Game({debug}) {
                                   level={level}
                                   components={components}
                                   onClick={handleClick}
-                                  tooltip="Lala"
-                                  showTooltip={true}
+                                  showTooltip={showTutorial}
                                   />)
         }
 
