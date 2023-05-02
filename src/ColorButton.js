@@ -7,7 +7,6 @@ import { Tooltip } from "@mui/material";
 
 function ColorButton({ color, components, onClick, tooltip, showTooltip }) {
     const handleClick = () => onClick(color);
-    console.log("tt", tooltip, showTooltip);
     return (
         <Stack direction="row" spacing={2} className="ButtonRow">
             <ThemeProvider theme={theme}>

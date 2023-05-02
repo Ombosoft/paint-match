@@ -29,7 +29,8 @@ function Game({ debug }) {
     const [level, setLevel] = useLocalStorage("level", skipLevels);
     const [showTutorial, setShowTutorial] = useLocalStorage("tutorial", true);
     const [targetLevel, setTargetLevel] = useState(colorTable[level]);
-    const [distance, setDistance] = useState(200);
+    const maxDistance = 400;
+    const [distance, setDistance] = useState(maxDistance);
     const [distanceGotWorse, setDistanceGotWorse] = useState(false);
     const [resetCount, setResetCount] = useState(0);
     const [numDroplets, setNumDroplets] = useState(0);
@@ -73,7 +74,6 @@ function Game({ debug }) {
         const curUniform = convert.cmyk.xyz(getCurrentComponents(cs));
         const newDistance = vecDistance(targetUniform, curUniform);
         setDistance(newDistance);
-        console.log("dgw", distanceGotWorse, newDistance, distance);
         setDistanceGotWorse(distanceGotWorse || newDistance > distance);
         if (newDistance <= targetLevel.tolerance) {
             setVictory(true);
@@ -85,7 +85,7 @@ function Game({ debug }) {
         setComponents(zeroComponents);
         setDropletColor(undefined);
         setResetCount(p => p + 1);
-        setDistance(200);
+        setDistance(maxDistance);
         setDistanceGotWorse(false);
         setNumDroplets(0);
         setVictory(false);

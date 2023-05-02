@@ -1,7 +1,7 @@
 export const colorTable = [
     {name: "yellow", cmyk: [0, 0, 100, 0], tolerance: 4}, // level=2, complexity=2
     {name: "aqua", cmyk: [100, 0, 0, 0], tolerance: 4}, // level=3, complexity=2
-    {name: "cyan", cmyk: [0, 100, 0, 0], tolerance: 4}, // level=4, complexity=2
+    {name: "magenta", cmyk: [0, 100, 0, 0], tolerance: 4}, // level=4, complexity=2
     {name: "black", cmyk: [0, 0, 0, 100], tolerance: 4}, // level=1, complexity=2
     {name: "gray", cmyk: [0, 0, 0, 50], tolerance: 4}, // level=5, complexity=4
     {name: "red", cmyk: [0, 100, 100, 0], tolerance: 4}, // level=6, complexity=4
