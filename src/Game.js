@@ -42,6 +42,18 @@ function Game() {
         setDebug(newDebug);
     }, []);
 
+    const checkCommit = useCallback((cs) => {
+        console.log('commit', getCurrentComponents(cs));
+        const targetUniform = convert.cmyk.xyz(targetLevel.cmyk);
+        const curUniform = convert.cmyk.xyz(getCurrentComponents(cs));
+        const newDistance = vecDistance(targetUniform, curUniform);
+        setDistance(newDistance);
+        setDistanceGotWorse(distanceGotWorse || newDistance > distance);
+        if (newDistance <= targetLevel.tolerance) {
+            setVictory(true);
+        }
+    }, [distance, distanceGotWorse, targetLevel]);
+
     useEffect(() => {
         const timerId1 = setTimeout(
             () => checkCommit(components),
@@ -53,7 +65,7 @@ function Game() {
             clearTimeout(timerId1);
             clearTimeout(timerId2);
         }
-    }, [components]);
+    }, [components, checkCommit]);
 
     // Returns CMYK
     function getCurrentComponents(cs) {
@@ -75,18 +87,6 @@ function Game() {
         return vecRound(normalized);
     }
 
-    function checkCommit(cs) {
-        console.log('commit', getCurrentComponents(cs));
-        const targetUniform = convert.cmyk.xyz(targetLevel.cmyk);
-        const curUniform = convert.cmyk.xyz(getCurrentComponents(cs));
-        const newDistance = vecDistance(targetUniform, curUniform);
-        setDistance(newDistance);
-        setDistanceGotWorse(distanceGotWorse || newDistance > distance);
-        if (newDistance <= targetLevel.tolerance) {
-            setVictory(true);
-        }
-    }
-
     function resetColors() {
         saveUndo();
         setComponents(zeroComponents);
@@ -98,10 +98,10 @@ function Game() {
         setVictory(false);
     }
 
-    function saveUndo() {
+    const saveUndo = useCallback(() => {
         console.log("saveUndo", components);
         setPrevComponents(components);
-    }
+    }, [components]);
 
     function undo() {
         setComponents(prevComponents);
@@ -119,9 +119,9 @@ function Game() {
         setBottle(true);
     }
 
-    function endTutorial() {
+    const endTutorial = useCallback(() => {
         setShowTutorial(false);
-    }
+    }, [setShowTutorial]);
 
     const handleClick = useCallback((color) => {
         saveUndo();
@@ -131,7 +131,7 @@ function Game() {
         setDropletColor(color);
         setNumDroplets((prev) => prev + 1);
         endTutorial();
-    }, [saveUndo]);
+    }, [saveUndo, endTutorial]);
 
     const setComponentValue = useCallback((colorName, value) => {
         saveUndo();
