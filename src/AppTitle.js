@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Button} from "@mui/material";
 import PropTypes from 'prop-types';
 
-function AppTitle({onDebug}) {
+function AppTitle({onDebug, level}) {
     const [clickCount, setClickCount] = useState(0);
     const [debug, setDebug] = useState(false);
 
@@ -20,7 +20,7 @@ function AppTitle({onDebug}) {
 
     return <>
         <p onClick={maybeTriggerDebug}>
-            Paint Match
+        Level {level}
         </p>
         {debug && (
             <Button onClick={clearLocalStorage}>Clear Local Storage</Button>
@@ -30,6 +30,7 @@ function AppTitle({onDebug}) {
 
 AppTitle.propTypes = {
     onDebug: PropTypes.func.isRequired,
+    level: PropTypes.number.isRequired,
 };
 
 export default AppTitle;

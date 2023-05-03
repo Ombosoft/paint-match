@@ -15,9 +15,9 @@ import ColorSquare from "./ColorSquare";
 import { distanceToPercentMatch, randomLevel } from "./Utils";
 import { cmykColors, zeroComponents } from "./Colors";
 import { useLocalStorage } from "./LocalStorageHook";
-import PropTypes from 'prop-types';
+import AppTitle from "./AppTitle";
 
-function Game({ debug }) {
+function Game() {
     const [victory, setVictory] = useState(false);
     const [bottle, setBottle] = useState(true);
 
@@ -34,6 +34,13 @@ function Game({ debug }) {
     const [distanceGotWorse, setDistanceGotWorse] = useState(false);
     const [resetCount, setResetCount] = useState(0);
     const [numDroplets, setNumDroplets] = useState(0);
+    // State for debug mode
+    const [debug, setDebug] = useState(false);
+
+    // Callback for handling debug mode changes
+    const handleDebug = useCallback((newDebug) => {
+        setDebug(newDebug);
+    }, []);
 
     useEffect(() => {
         const timerId1 = setTimeout(
@@ -140,7 +147,7 @@ function Game({ debug }) {
         <VictoryPanel isVictory={victory} onNextLevel={nextLevel} />
 
         <Stack direction="row">
-            <p>Level {level}</p>
+        <AppTitle onDebug={handleDebug} level={level}/>
             <Tooltip title="Undo" placement="top-end" arrow disabled={!enableUndo}>
                 <IconButton
                     onClick={undo}
@@ -217,9 +224,5 @@ function Game({ debug }) {
         </Stack>
     </>;
 }
-
-Game.propTypes = {
-    debug: PropTypes.bool.isRequired,
-};
 
 export default Game;
