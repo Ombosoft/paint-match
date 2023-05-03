@@ -18,7 +18,7 @@ function ColorButtons({
                 components={components}
                 onClick={onClick}
                 tooltip="Press to Drop Paint"
-                showTooltip={showTooltip}
+                showTooltip={color.color === 'yellow' && showTooltip}
             />
         )
         }</>
