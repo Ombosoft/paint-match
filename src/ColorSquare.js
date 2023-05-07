@@ -8,12 +8,12 @@ function ColorSquare({ color, label, showColor, showDroplet, dropletColor, toolt
     const dColor = dropletColor ? `${dropletColor}` : `#${color}`;
     const dDelay = dropletColor ? dropletBlendDelay : animationDurationMs - dropletBlendDelay;
     return (<>
-        <Tooltip title={<h1>{tooltip}</h1>} open={showTooltip} arrow>
+        <Tooltip title={<h1>{tooltip}</h1>} open={showTooltip} arrow placement="top">
             <span className="Picker-square" style={{
                 backgroundColor: `#${color}`,
                 transitionProperty: "background-color",
                 transitionDuration: `${animationDurationMs}ms`,
-                transitionTimingFunction: "ease-in-out"
+                transitionTimingFunction: "ease-in-out",
             }}>
                 {showDroplet && (
                     <OpacityIcon fontSize="large" style={{

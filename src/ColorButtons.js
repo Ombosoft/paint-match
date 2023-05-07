@@ -10,7 +10,7 @@ function ColorButtons({
     onClick, 
     showTooltip
 }) {
-    return (<Stack direction="column" spacing={1}>
+    return (<Stack direction="column" spacing={1} sx={{marginTop:"1em"}}>
         <>{cmykColors.map(color =>
             level >= color.minLevel && <ColorButton
                 key={color.color}

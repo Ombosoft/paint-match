@@ -10,7 +10,7 @@ function ColorButton({ color, components, onClick, tooltip, showTooltip }) {
     return (
         <Stack direction="row" spacing={2} className="ButtonRow">
             <ThemeProvider theme={theme}>
-                <Tooltip title={<h1>{tooltip}</h1>} open={showTooltip} arrow placement="top">
+                <Tooltip title={<h1>{tooltip}</h1>} open={showTooltip} arrow placement="bottom">
                     <Button className="Color-button"
                         variant="contained"
                         color={color}

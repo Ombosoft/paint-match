@@ -185,23 +185,6 @@ function Game() {
                 </IconButton>
             </Tooltip>
         </Stack>
-
-        {!bottle && (
-            <ColorSliders cmykColors={cmykColors}
-                level={level}
-                components={components}
-                onSetComponentValue={setComponentValue} />
-        )}
-
-
-        {bottle && (<ColorButtons cmykColors={cmykColors}
-            level={level}
-            components={components}
-            onClick={handleClick}
-            showTooltip={showTutorial}
-        />)
-        }
-
         <Stack direction="row">
             <ColorSquare
                 color={convert.cmyk.hex(targetLevel.cmyk)}
@@ -222,6 +205,22 @@ function Game() {
                 showTooltip={showTutorial}
             />
         </Stack>
+
+        {!bottle && (
+            <ColorSliders cmykColors={cmykColors}
+                level={level}
+                components={components}
+                onSetComponentValue={setComponentValue} />
+        )}
+
+
+        {bottle && (<ColorButtons cmykColors={cmykColors}
+            level={level}
+            components={components}
+            onClick={handleClick}
+            showTooltip={showTutorial}
+        />)
+        }
     </>;
 }
 
