@@ -25,14 +25,14 @@ export const colorTable = [
     {name: "sea green", cmyk: [100, 0, 33, 0], tolerance: 4}, // level=24, complexity=8
     {name: "purple", cmyk: [33, 100, 0, 0], tolerance: 3}, // level=26, complexity=8
     {name: "fuchsia", cmyk: [0, 100, 33, 0], tolerance: 3}, // level=27, complexity=8
-    {name: "bone", cmyk: [0, 0, 20, 0], tolerance: 4}, // level=29, complexity=10
+    {name: "bone", cmyk: [0, 0, 20, 0], tolerance: 5}, // level=29, complexity=10
     {name: "deep sky blue", cmyk: [100, 25, 0, 0], tolerance: 4}, // level=30, complexity=10
     {name: "nectarine", cmyk: [0, 80, 100, 0], tolerance: 3}, // level=31, complexity=12
     {name: "ralph yellow", cmyk: [0, 0, 100, 20], tolerance: 4}, // level=32, complexity=12
     {name: "light teal", cmyk: [100, 0, 20, 0], tolerance: 5}, // level=34, complexity=12
     {name: "cyan", cmyk: [100, 0, 0, 20], tolerance: 4}, // level=35, complexity=12
     {name: "periwinkle", cmyk: [33, 33, 0, 0], tolerance: 4}, // level=36, complexity=12
-    {name: "cornflower", cmyk: [80, 100, 0, 0], tolerance: 2}, // level=37, complexity=12
+    {name: "cornflower", cmyk: [80, 100, 0, 0], tolerance: 1}, // level=37, complexity=12
     {name: "grape", cmyk: [20, 100, 0, 0], tolerance: 5}, // level=38, complexity=12
     {name: "magenta", cmyk: [0, 100, 0, 20], tolerance: 4}, // level=39, complexity=12
     {name: "rose", cmyk: [0, 100, 20, 0], tolerance: 3}, // level=40, complexity=12
