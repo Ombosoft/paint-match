@@ -39,6 +39,7 @@ export const colorTable = [
     {name: "dark cherry red", cmyk: [0, 100, 100, 80], tolerance: 3}, // level=42, complexity=14
     {name: "red", cmyk: [0, 100, 100, 20], tolerance: 4}, // level=43, complexity=14
     {name: "orange", cmyk: [0, 60, 100, 0], tolerance: 4}, // level=44, complexity=14
+    {name: "pale turquoise", cmyk: [27, 0, 0, 0], tolerance: 4}, // level=68, complexity=15
     {name: "yolk", cmyk: [0, 10, 100, 0], tolerance: 4}, // level=45, complexity=14
     {name: "pine green", cmyk: [100, 0, 100, 80], tolerance: 3}, // level=46, complexity=14
     {name: "green", cmyk: [100, 0, 100, 20], tolerance: 4}, // level=47, complexity=14
@@ -54,30 +55,26 @@ export const colorTable = [
     {name: "dirty green", cmyk: [0, 0, 100, 45], tolerance: 4}, // level=62, complexity=15
     {name: "papaya", cmyk: [0, 0, 51, 0], tolerance: 4}, // level=63, complexity=15
     {name: "light yellow", cmyk: [0, 0, 12, 0], tolerance: 5}, // level=64, complexity=15
-    {name: "ivory", cmyk: [0, 0, 6, 0], tolerance: 4}, // level=65, complexity=15
     {name: "dark cyan", cmyk: [100, 0, 0, 45], tolerance: 4}, // level=66, complexity=15
     {name: "light blue", cmyk: [41, 0, 0, 0], tolerance: 4}, // level=67, complexity=15
-    {name: "pale turquoise", cmyk: [27, 0, 0, 0], tolerance: 4}, // level=68, complexity=15
     {name: "light cyan", cmyk: [12, 0, 0, 0], tolerance: 4}, // level=69, complexity=15
     {name: "dark magenta", cmyk: [0, 100, 0, 45], tolerance: 4}, // level=71, complexity=15
     {name: "plum", cmyk: [0, 27, 0, 0], tolerance: 4}, // level=72, complexity=15
-    {name: "thistle", cmyk: [0, 12, 0, 0], tolerance: 4}, // level=73, complexity=15
     {name: "blood red", cmyk: [0, 100, 100, 60], tolerance: 1}, // level=74, complexity=16
+    {name: "thistle", cmyk: [0, 12, 0, 0], tolerance: 4}, // level=73, complexity=15
     {name: "orange red", cmyk: [0, 75, 75, 0], tolerance: 5}, // level=75, complexity=16
     {name: "dark orange", cmyk: [0, 50, 100, 20], tolerance: 4}, // level=76, complexity=16
     {name: "chartreuse", cmyk: [50, 0, 100, 20], tolerance: 4}, // level=77, complexity=16
     {name: "irish flag", cmyk: [100, 0, 100, 40], tolerance: 4}, // level=78, complexity=16
-    {name: "spring green", cmyk: [100, 0, 50, 20], tolerance: 4}, // level=79, complexity=16
+    {name: "spring green", cmyk: [100, 0, 50, 20], tolerance: 5}, // level=79, complexity=16
     {name: "dark red", cmyk: [0, 100, 100, 45], tolerance: 2}, // level=80, complexity=17
-    {name: "orange red", cmyk: [0, 86, 100, 0], tolerance: 1}, // level=81, complexity=17
     {name: "orange red", cmyk: [0, 73, 100, 0], tolerance: 1}, // level=82, complexity=17
     {name: "dark orange", cmyk: [0, 47, 100, 0], tolerance: 3}, // level=83, complexity=17
     {name: "gold", cmyk: [0, 16, 100, 0], tolerance: 4}, // level=84, complexity=17
     {name: "yellow", cmyk: [0, 0, 100, 7], tolerance: 4}, // level=85, complexity=17
-    {name: "green", cmyk: [100, 0, 100, 45], tolerance: 4}, // level=86, complexity=17
+    {name: "dark green", cmyk: [100, 0, 100, 45], tolerance: 4}, // level=86, complexity=17
     {name: "cyan", cmyk: [100, 0, 0, 7], tolerance: 4}, // level=87, complexity=17
-    {name: "cichlid", cmyk: [100, 76, 0, 0], tolerance: 3}, // level=89, complexity=17
-    {name: "turquoise", cmyk: [100, 4, 0, 0], tolerance: 5}, // level=88, complexity=17
+    {name: "cichlid", cmyk: [100, 76, 0, 0], tolerance: 2}, // level=89, complexity=17
     {name: "dark blue", cmyk: [100, 100, 0, 45], tolerance: 5}, // level=90, complexity=17
     {name: "magenta", cmyk: [0, 100, 0, 7], tolerance: 5}, // level=91, complexity=17
     {name: "starbucks", cmyk: [100, 0, 50, 60], tolerance: 4}, // level=92, complexity=18
@@ -393,6 +390,7 @@ export const colorTable = [
     {name: "cadet blue", cmyk: [40, 4, 0, 20], tolerance: 4}, // level=424, complexity=37
     {name: "cerulean", cmyk: [98, 10, 0, 20], tolerance: 4}, // level=425, complexity=37
     {name: "medium orchid", cmyk: [12, 60, 0, 20], tolerance: 4}, // level=426, complexity=37
+    {name: "turquoise", cmyk: [100, 4, 0, 0], tolerance: 5}, // level=88, complexity=17
     {name: "maroon", cmyk: [0, 80, 30, 7], tolerance: 4}, // level=427, complexity=37
     {name: "carnation", cmyk: [0, 40, 20, 13], tolerance: 4}, // level=428, complexity=37
     {name: "hot pink", cmyk: [0, 53, 30, 20], tolerance: 4}, // level=429, complexity=37
