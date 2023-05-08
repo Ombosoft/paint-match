@@ -59,7 +59,6 @@ export const colorTable = [
     {name: "light blue", cmyk: [41, 0, 0, 0], tolerance: 4}, // level=67, complexity=15
     {name: "pale turquoise", cmyk: [27, 0, 0, 0], tolerance: 4}, // level=68, complexity=15
     {name: "light cyan", cmyk: [12, 0, 0, 0], tolerance: 4}, // level=69, complexity=15
-    {name: "azure", cmyk: [6, 0, 0, 0], tolerance: 4}, // level=70, complexity=15
     {name: "dark magenta", cmyk: [0, 100, 0, 45], tolerance: 4}, // level=71, complexity=15
     {name: "plum", cmyk: [0, 27, 0, 0], tolerance: 4}, // level=72, complexity=15
     {name: "thistle", cmyk: [0, 12, 0, 0], tolerance: 4}, // level=73, complexity=15
