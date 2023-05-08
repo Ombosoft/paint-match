@@ -141,7 +141,7 @@ function Game() {
     const allowResetWhen = victory || distanceGotWorse || numDroplets > dropletsUntilReset;
     const enableUndo = components !== prevComponents && !victory;
     const enableReset = components !== zeroComponents && allowResetWhen;
-    const enableSkip = debug || (resetCount >= 6 && !victory);
+    const enableSkip = debug || (resetCount >= 3 && !victory);
     const enableSliders = debug || (resetCount >= 3 && !victory);
     return <>
         <VictoryPanel isVictory={victory} onNextLevel={nextLevel} />
