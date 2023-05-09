@@ -12,6 +12,21 @@ npm start
 
 Resources
 ---
+
 Gameplay [video](https://www.youtube.com/watch?v=dOK4pSOQViY)
 
 Play online on [itch.io](https://ombosoft.itch.io/paint-match)
+
+Credits
+---
+
+The game idea and code by [Shurik](https://twitter.com/ombosoft)
+
+Music by [sulosounds](https://sulosounds.itch.io/100-songs)
+
+Licensing
+---
+This project is licensed under multiple licenses:
+
+- The source code is licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for the full license text.
+- The music is licensed under the Creative Commons CC0. See [LICENSE-MUSIC.txt](LICENSE-MUSIC.txt) for the full license text.
