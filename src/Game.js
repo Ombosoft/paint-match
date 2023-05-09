@@ -146,8 +146,6 @@ function Game({ autoPlayMusic }) {
     const enableSkip = debug || (resetCount >= 3 && !victory);
     const enableSliders = debug || (resetCount >= 3 && !victory);
     return <>
-        <VictoryPanel isVictory={victory} onNextLevel={nextLevel} />
-
         <Stack direction="row">
             <AppTitle onDebug={handleDebug} level={level} />
             <Tooltip title="Undo" placement="top-end" arrow disabled={!enableUndo}>
@@ -223,6 +221,7 @@ function Game({ autoPlayMusic }) {
             showTooltip={showTutorial}
         />)
         }
+        <VictoryPanel isVictory={victory} onNextLevel={nextLevel} />
     </>;
 }
 
