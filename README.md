@@ -29,4 +29,4 @@ Licensing
 This project is licensed under multiple licenses:
 
 - The source code is licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for the full license text.
-- The music is licensed under the Creative Commons CC0. See [LICENSE-MUSIC.txt](LICENSE-MUSIC.txt) for the full license text.
+- The music is licensed under the [Creative Commons CC0](https://creativecommons.org/share-your-work/public-domain/cc0/).
