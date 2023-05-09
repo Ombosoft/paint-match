@@ -4,7 +4,7 @@ import { useLocalStorage } from "./LocalStorageHook";
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
 import { IconButton, Tooltip } from "@mui/material";
-import { musicVolume } from './Constants';
+import { musicVolume, musicFadeDurationMs } from './Constants';
 
 // Music hook, returns mute button and autoplay callback to be called 
 // when interaction with the app started.
@@ -33,9 +33,9 @@ function useMusic() {
         const newMuted = !muted;
         setMuted(newMuted);
         if (newMuted) {
-            sound.current.stop();
+            sound.current.fade(musicVolume, 0, musicFadeDurationMs);
         } else {
-            sound.current.play();
+            sound.current.fade(0, musicVolume, musicFadeDurationMs);
         }
     }, [muted, setMuted]);
     // Mute button to place where appropriate on the screen
@@ -45,7 +45,7 @@ function useMusic() {
                 onClick={toggleMute}
                 color="secondary"
                 size="medium"
-                sx={{padding: "1em"}}>
+                sx={{ padding: "1em" }}>
                 {muted ? (<MusicOffIcon fontSize="med" />) : (<MusicNoteIcon fontSize="med" />)}
             </IconButton>
         </Tooltip>

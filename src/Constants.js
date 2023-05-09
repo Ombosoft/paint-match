@@ -6,3 +6,4 @@ export const dropletBlendDelay = 150;
 export const dropletsUntilReset = 10;
 
 export const musicVolume = 0.4;
+export const musicFadeDurationMs = 500;
