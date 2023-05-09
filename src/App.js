@@ -1,7 +1,5 @@
 import './App.css';
 import Game from "./Game";
-import MusicOffIcon from '@mui/icons-material/MusicOff';
-import { IconButton } from "@mui/material";
 import useMusic from "./Music";
 import { Stack } from "@mui/material";
 
