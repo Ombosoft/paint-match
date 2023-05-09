@@ -221,7 +221,7 @@ function Game({ autoPlayMusic }) {
             showTooltip={showTutorial}
         />)
         }
-        <VictoryPanel isVictory={victory} onNextLevel={nextLevel} />
+        <VictoryPanel level={level} isVictory={victory} onNextLevel={nextLevel} />
     </>;
 }
 

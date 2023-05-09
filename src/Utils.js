@@ -3,6 +3,11 @@ export function randInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
+// Pick random element from array
+export function randElement(arr) {
+    return arr[randInt(0, arr.length)];
+}
+
 // Convert color distance to percentage of match.
 // The closer the distance is to zero, the higher the percentage of match.
 export function distanceToPercentMatch(distance) {
