@@ -1,6 +1,5 @@
-import Checkbox from '@mui/material/Checkbox';
 import { Howl } from 'howler';
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { useLocalStorage } from "./LocalStorageHook";
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
@@ -30,7 +29,7 @@ function useMusic() {
             sound.current = newSound;
         }
     });
-    const toggleMute = (event) => {
+    const toggleMute = useCallback(() => {
         const newMuted = !muted;
         setMuted(newMuted);
         if (newMuted) {
@@ -38,7 +37,7 @@ function useMusic() {
         } else {
             sound.current.play();
         }
-    };
+    }, [muted, setMuted]);
     // Mute button to place where appropriate on the screen
     const MuteButton = useCallback(() => (<>
         <Tooltip title={muted ? "Play music" : "Mute music"} placement="top-end" arrow>
@@ -50,7 +49,7 @@ function useMusic() {
                 {muted ? (<MusicOffIcon fontSize="med" />) : (<MusicNoteIcon fontSize="med" />)}
             </IconButton>
         </Tooltip>
-    </>));
+    </>), [muted, toggleMute]);
     // Callback that starts music when the app is ready
     const autoPlay = useCallback(() => {
         if (muted || sound.current.playing()) {
