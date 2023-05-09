@@ -4,3 +4,5 @@ export const animationDurationMs = 1000;
 export const dropletBlendDelay = 150;
 
 export const dropletsUntilReset = 10;
+
+export const musicVolume = 0.4;
