@@ -7,6 +7,8 @@ import MusicOffIcon from '@mui/icons-material/MusicOff';
 import { IconButton, Tooltip } from "@mui/material";
 import { musicVolume } from './Constants';
 
+// Music hook, returns mute button and autoplay callback to be called 
+// when interaction with the app started.
 function useMusic() {
     const [muted, setMuted] = useLocalStorage("muteMusic", false);
     // persist Howl sound instance between renders
@@ -43,8 +45,9 @@ function useMusic() {
             <IconButton
                 onClick={toggleMute}
                 color="secondary"
-                size="medium">
-                {muted ? (<MusicOffIcon fontSize="large" />) : (<MusicNoteIcon fontSize="large" />)}
+                size="medium"
+                sx={{padding: "1em"}}>
+                {muted ? (<MusicOffIcon fontSize="med" />) : (<MusicNoteIcon fontSize="med" />)}
             </IconButton>
         </Tooltip>
     </>));

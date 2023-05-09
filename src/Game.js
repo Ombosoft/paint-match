@@ -16,9 +16,9 @@ import { distanceToPercentMatch, randomLevel } from "./Utils";
 import { cmykColors, zeroComponents } from "./Colors";
 import { useLocalStorage } from "./LocalStorageHook";
 import AppTitle from "./AppTitle";
-import useMusic from "./Music";
+import PropTypes from 'prop-types';
 
-function Game() {
+function Game({ autoPlayMusic }) {
     const [victory, setVictory] = useState(false);
     const [bottle, setBottle] = useState(true);
 
@@ -124,10 +124,8 @@ function Game() {
         setShowTutorial(false);
     }, [setShowTutorial]);
 
-    const [MuteButton, autoPlay] = useMusic();
-
     const handleClick = useCallback((color) => {
-        autoPlay();
+        autoPlayMusic();
         saveUndo();
         setComponents(prevState => {
             return { ...prevState, [color]: prevState[color] + 1 };
@@ -135,7 +133,7 @@ function Game() {
         setDropletColor(color);
         setNumDroplets((prev) => prev + 1);
         endTutorial();
-    }, [saveUndo, endTutorial, autoPlay]);
+    }, [saveUndo, endTutorial, autoPlayMusic]);
 
     const setComponentValue = useCallback((colorName, value) => {
         saveUndo();
@@ -151,7 +149,6 @@ function Game() {
         <VictoryPanel isVictory={victory} onNextLevel={nextLevel} />
 
         <Stack direction="row">
-            <MuteButton/>
             <AppTitle onDebug={handleDebug} level={level} />
             <Tooltip title="Undo" placement="top-end" arrow disabled={!enableUndo}>
                 <IconButton
@@ -227,6 +224,10 @@ function Game() {
         />)
         }
     </>;
+}
+
+Game.propTypes = {
+    autoPlayMusic: PropTypes.func.isRequired,
 }
 
 export default Game;
