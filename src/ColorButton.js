@@ -19,7 +19,11 @@ function ColorButton({ color, components, onClick, tooltip, showTooltip }) {
                         {color}
                     </Button>
                 </Tooltip>
-                <div>{components[color]}</div>
+                <div
+                    style={{ width: "2em" }}
+                >
+                    {components[color]}
+                </div>
                 <IconButton onClick={handleClick} style={{ padding: 0 }}>
                     <ColorizeIcon color={color} fontSize="large" />
                 </IconButton>
