@@ -14,7 +14,10 @@ function ColorButton({ color, components, onClick, tooltip, showTooltip }) {
                     <Button className="Color-button"
                         variant="contained"
                         color={color}
-                        style={{ width: "8em" }}
+                        sx={{
+                            boxShadow: '1px 1px 8px 2px rgba(255, 255, 255, 0.3)',
+                            width: "8em",
+                          }}
                         onClick={handleClick}>
                         {color}
                     </Button>
