@@ -85,8 +85,6 @@ function Game({ autoPlayMusic }) {
         const nonWhiteScale = vecCompSum(blendResult) / 100;
         const scaleWithWhite = nonWhiteScale + cs.white > 0 ? nonWhiteScale / (nonWhiteScale + 3 * cs.white) : 0;
         const normalized = vecScale(vecNormalize(blendResult), 100 * scaleWithWhite);
-        // console.log("compWeights", compWeights, "basis", basis, "blendResult", blendResult,
-        //     "nonWhiteScale", nonWhiteScale, "scaleWithWhite", scaleWithWhite, "normalized", normalized);
         return vecRound(normalized);
     }
 
@@ -103,7 +101,6 @@ function Game({ autoPlayMusic }) {
     }
 
     const saveUndo = useCallback(() => {
-        console.log("saveUndo", components);
         setPrevComponents(components);
     }, [components]);
 
