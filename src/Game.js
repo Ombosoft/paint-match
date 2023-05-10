@@ -17,6 +17,7 @@ import { cmykColors, zeroComponents } from "./Colors";
 import { useLocalStorage } from "./LocalStorageHook";
 import AppTitle from "./AppTitle";
 import PropTypes from 'prop-types';
+import useTutorial from "./Tutorial";
 
 function Game({ autoPlayMusic }) {
     const [victory, setVictory] = useState(false);
@@ -28,7 +29,7 @@ function Game({ autoPlayMusic }) {
 
 
     const [level, setLevel] = useLocalStorage("level", skipLevels);
-    const [showTutorial, setShowTutorial] = useLocalStorage("tutorial", true);
+    const [showBasicTutorial, endBasicTutorial] = useTutorial();
     const [targetLevel, setTargetLevel] = useState(colorTable[level]);
     const maxDistance = 400;
     const [distance, setDistance] = useState(maxDistance);
@@ -120,10 +121,6 @@ function Game({ autoPlayMusic }) {
         setBottle(true);
     }
 
-    const endTutorial = useCallback(() => {
-        setShowTutorial(false);
-    }, [setShowTutorial]);
-
     const handleClick = useCallback((color) => {
         autoPlayMusic();
         saveUndo();
@@ -132,8 +129,8 @@ function Game({ autoPlayMusic }) {
         });
         setDropletColor(color);
         setNumDroplets((prev) => prev + 1);
-        endTutorial();
-    }, [saveUndo, endTutorial, autoPlayMusic]);
+        endBasicTutorial();
+    }, [saveUndo, endBasicTutorial, autoPlayMusic]);
 
     const setComponentValue = useCallback((colorName, value) => {
         saveUndo();
@@ -191,7 +188,7 @@ function Game({ autoPlayMusic }) {
                 label={debug ? `${targetLevel.name}  (${targetLevel.cmyk})` : targetLevel.name}
                 showColor={debug}
                 tooltip="Target color"
-                showTooltip={showTutorial}
+                showTooltip={showBasicTutorial}
             />
             <ColorSquare
                 color={convert.cmyk.hex(getCurrentComponents(components))}
@@ -202,7 +199,7 @@ function Game({ autoPlayMusic }) {
                 dropletColor={dropletColor}
                 showDroplet
                 tooltip="Current Mix"
-                showTooltip={showTutorial}
+                showTooltip={showBasicTutorial}
             />
         </Stack>
 
@@ -218,7 +215,7 @@ function Game({ autoPlayMusic }) {
             level={level}
             components={components}
             onClick={handleClick}
-            showTooltip={showTutorial}
+            showTooltip={showBasicTutorial}
         />)
         }
         <VictoryPanel level={level} isVictory={victory} onNextLevel={nextLevel} />

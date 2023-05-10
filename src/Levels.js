@@ -32,7 +32,7 @@ export const colorTable = [
     {name: "light teal", cmyk: [100, 0, 20, 0], tolerance: 5}, // level=34, complexity=12
     {name: "cyanish", cmyk: [100, 0, 0, 20], tolerance: 4}, // level=35, complexity=12
     {name: "periwinkle", cmyk: [33, 33, 0, 0], tolerance: 4}, // level=36, complexity=12
-    {name: "cornflower", cmyk: [80, 100, 0, 0], tolerance: 1}, // level=37, complexity=12
+    {name: "cornflower", cmyk: [80, 100, 0, 0], tolerance: 0}, // level=37, complexity=12
     {name: "grape", cmyk: [20, 100, 0, 0], tolerance: 5}, // level=38, complexity=12
     {name: "magenta", cmyk: [0, 100, 0, 20], tolerance: 4}, // level=39, complexity=12
     {name: "rose", cmyk: [0, 100, 20, 0], tolerance: 3}, // level=40, complexity=12
