@@ -1,7 +1,7 @@
+import { Stack } from "@mui/material";
 import './App.css';
 import Game from "./Game";
 import useMusic from "./Music";
-import { Stack } from "@mui/material";
 
 
 // Main app component.

@@ -1,8 +1,8 @@
 import OpacityIcon from "@mui/icons-material/Opacity";
+import { Tooltip } from "@mui/material";
+import PropTypes from 'prop-types';
 import React from "react";
 import { animationDurationMs, dropletBlendDelay } from "./Constants";
-import PropTypes from 'prop-types';
-import { Tooltip } from "@mui/material";
 
 function ColorSquare({ color, label, showColor, showDroplet, dropletColor, tooltip, showTooltip }) {
     const dColor = dropletColor ? `${dropletColor}` : `#${color}`;

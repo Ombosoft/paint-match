@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
-import ColorButton from "./ColorButton";
-import React from "react";
 import PropTypes from 'prop-types';
+import React from "react";
+import ColorButton from "./ColorButton";
 
 function ColorButtons({
     cmykColors,

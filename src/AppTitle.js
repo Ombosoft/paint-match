@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {Button} from "@mui/material";
+import { Button } from "@mui/material";
 import PropTypes from 'prop-types';
+import React, { useState } from "react";
 
 function AppTitle({onDebug, level}) {
     const [clickCount, setClickCount] = useState(0);

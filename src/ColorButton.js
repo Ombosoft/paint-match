@@ -1,9 +1,8 @@
-import { Button, IconButton, Stack, ThemeProvider } from "@mui/material";
-import { theme } from "./Colors";
 import ColorizeIcon from "@mui/icons-material/Colorize";
-import React from "react";
+import { Button, IconButton, Stack, ThemeProvider, Tooltip } from "@mui/material";
 import PropTypes from 'prop-types';
-import { Tooltip } from "@mui/material";
+import React from "react";
+import { theme } from "./Colors";
 
 function ColorButton({ color, components, onClick, tooltip, showTooltip }) {
     const handleClick = () => onClick(color);

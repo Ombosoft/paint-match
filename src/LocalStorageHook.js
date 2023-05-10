@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 // Custom hook to manage localStorage data with fallback.
 export function useLocalStorage(key, defaultValue) {

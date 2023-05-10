@@ -1,10 +1,10 @@
-import { Howl } from 'howler';
-import React, { useEffect, useRef, useCallback } from "react";
-import { useLocalStorage } from "./LocalStorageHook";
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
 import { IconButton, Tooltip } from "@mui/material";
-import { musicVolume, musicFadeDurationMs } from './Constants';
+import { Howl } from 'howler';
+import React, { useCallback, useEffect, useRef } from "react";
+import { musicFadeDurationMs, musicVolume } from './Constants';
+import { useLocalStorage } from "./LocalStorageHook";
 
 // Music hook, returns mute button and autoplay callback to be called 
 // when interaction with the app started.

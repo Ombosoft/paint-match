@@ -1,6 +1,6 @@
+import ReplayIcon from "@mui/icons-material/Replay";
 import PropTypes from 'prop-types';
 import React from "react";
-import ReplayIcon from "@mui/icons-material/Replay";
 import NiceButton from "./NiceButton";
 
 function ResetButton({ showTutorial, allowReset, resetColors }) {

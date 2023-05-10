@@ -1,6 +1,6 @@
-import ColorSlider from "./ColorSlider";
-import React from "react";
 import PropTypes from 'prop-types';
+import React from "react";
+import ColorSlider from "./ColorSlider";
 
 function ColorSliders({
                           cmykColors,
