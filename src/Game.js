@@ -3,7 +3,7 @@ import { animationDurationMs, dropletBlendDelay, dropletsUntilReset, extraCommit
 import { colorTable } from "./Levels";
 import { matCompSum, matScaleByVec, vecCompSum, vecDistance, vecNormalize, vecRound, vecScale } from "./Vec";
 import convert from "color-convert";
-import { IconButton, Stack, Tooltip } from "@mui/material";
+import { Stack } from "@mui/material";
 import UndoIcon from "@mui/icons-material/Undo";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import TuneIcon from '@mui/icons-material/Tune';
@@ -18,6 +18,7 @@ import { useLocalStorage } from "./LocalStorageHook";
 import AppTitle from "./AppTitle";
 import PropTypes from 'prop-types';
 import useTutorial from "./Tutorial";
+import NiceButton from "./NiceButton";
 
 function Game({ autoPlayMusic }) {
     const [victory, setVictory] = useState(false);
@@ -146,39 +147,25 @@ function Game({ autoPlayMusic }) {
     return <>
         <Stack direction="row">
             <AppTitle onDebug={handleDebug} level={level} />
-            <Tooltip title="Undo" placement="top-end" arrow disabled={!enableUndo}>
-                <IconButton
-                    onClick={undo}
-                    color="secondary"
-                    size="medium"
-                    disabled={!enableUndo}>
-                    <UndoIcon fontSize="large" />
-                </IconButton>
-            </Tooltip>
+            <NiceButton title="Undo" enabled={enableUndo} onClick={undo}>
+                <UndoIcon fontSize="large" />
+            </NiceButton>
             <ResetButton
                 showTutorial={canShowReset(level, numDroplets)}
                 allowReset={components !== zeroComponents && allowResetWhen}
                 resetColors={resetColors}
             />
-            <Tooltip title="Skip level" placement="top-end" arrow disabled={!enableSkip}>
-                <IconButton
-                    onClick={nextLevel}
-                    color="secondary"
-                    size="medium"
-                    disabled={!enableSkip}>
-                    <SkipNextIcon fontSize="large" />
-                </IconButton>
-            </Tooltip>
-            <Tooltip title="Sliders" placement="top-end" arrow disabled={!enableSliders}>
-                <IconButton
-                    onClick={() => setBottle((prev) => !prev)}
-                    color="secondary"
-                    size="medium"
-                    disabled={!enableSliders}>
-                    <TuneIcon fontSize="large" />
-                </IconButton>
-            </Tooltip>
-        </Stack>
+            <NiceButton title="Skip level" enabled={enableSkip} onClick={nextLevel}>
+                <SkipNextIcon fontSize="large" />
+            </NiceButton>
+            <NiceButton
+                title="Sliders"
+                enabled={enableSliders}
+                onClick={() => setBottle((prev) => !prev)}
+            >
+                <TuneIcon fontSize="large" />
+            </NiceButton>
+        </Stack >
         <Stack direction="row">
             <ColorSquare
                 color={convert.cmyk.hex(targetLevel.cmyk)}
@@ -200,20 +187,23 @@ function Game({ autoPlayMusic }) {
             />
         </Stack>
 
-        {!bottle && (
-            <ColorSliders cmykColors={cmykColors}
+        {
+            !bottle && (
+                <ColorSliders cmykColors={cmykColors}
+                    level={level}
+                    components={components}
+                    onSetComponentValue={setComponentValue} />
+            )
+        }
+
+
+        {
+            bottle && (<ColorButtons cmykColors={cmykColors}
                 level={level}
                 components={components}
-                onSetComponentValue={setComponentValue} />
-        )}
-
-
-        {bottle && (<ColorButtons cmykColors={cmykColors}
-            level={level}
-            components={components}
-            onClick={handleClick}
-            showTooltip={showBasicTutorial}
-        />)
+                onClick={handleClick}
+                showTooltip={showBasicTutorial}
+            />)
         }
         <VictoryPanel level={level} isVictory={victory} onNextLevel={nextLevel} />
     </>;

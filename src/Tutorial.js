@@ -12,7 +12,7 @@ export default function useTutorial() {
 
     function canShowReset(level, numDroplets) {
         if (resetCount > maxRelevantResets) {
-            return;
+            return false;
         }
         if (level < 60) {
             return numDroplets > 20;
