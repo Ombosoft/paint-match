@@ -5,10 +5,10 @@ import { matCompSum, matScaleByVec, vecCompSum, vecDistance, vecNormalize, vecRo
 import convert from "color-convert";
 import { IconButton, Stack, Tooltip } from "@mui/material";
 import UndoIcon from "@mui/icons-material/Undo";
-import ReplayIcon from "@mui/icons-material/Replay";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import TuneIcon from '@mui/icons-material/Tune';
 import ColorSliders from "./ColorSliders";
+import ResetButton from "./ResetButton";
 import VictoryPanel from "./VictoryPanel";
 import ColorButtons from "./ColorButtons";
 import ColorSquare from "./ColorSquare";
@@ -29,7 +29,7 @@ function Game({ autoPlayMusic }) {
 
 
     const [level, setLevel] = useLocalStorage("level", skipLevels);
-    const [showBasicTutorial, endBasicTutorial] = useTutorial();
+    const [showBasicTutorial, endBasicTutorial, canShowReset, onResetColors] = useTutorial();
     const [targetLevel, setTargetLevel] = useState(colorTable[level]);
     const maxDistance = 400;
     const [distance, setDistance] = useState(maxDistance);
@@ -98,6 +98,7 @@ function Game({ autoPlayMusic }) {
         setDistanceGotWorse(false);
         setNumDroplets(0);
         setVictory(false);
+        onResetColors();
     }
 
     const saveUndo = useCallback(() => {
@@ -139,9 +140,9 @@ function Game({ autoPlayMusic }) {
 
     const allowResetWhen = victory || distanceGotWorse || numDroplets > dropletsUntilReset;
     const enableUndo = components !== prevComponents && !victory;
-    const enableReset = components !== zeroComponents && allowResetWhen;
     const enableSkip = debug || (resetCount >= 3 && !victory);
     const enableSliders = debug || (resetCount >= 3 && !victory);
+
     return <>
         <Stack direction="row">
             <AppTitle onDebug={handleDebug} level={level} />
@@ -154,15 +155,11 @@ function Game({ autoPlayMusic }) {
                     <UndoIcon fontSize="large" />
                 </IconButton>
             </Tooltip>
-            <Tooltip title="Start over" placement="top-end" arrow disabled={!enableReset}>
-                <IconButton
-                    onClick={resetColors}
-                    color="secondary"
-                    size="medium"
-                    disabled={!enableReset}>
-                    <ReplayIcon fontSize="large" />
-                </IconButton>
-            </Tooltip>
+            <ResetButton
+                showTutorial={canShowReset(level, numDroplets)}
+                allowReset={components !== zeroComponents && allowResetWhen}
+                resetColors={resetColors}
+            />
             <Tooltip title="Skip level" placement="top-end" arrow disabled={!enableSkip}>
                 <IconButton
                     onClick={nextLevel}
