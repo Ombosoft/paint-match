@@ -8,7 +8,7 @@ import { randElement } from "./Utils.js";
 function VictoryPanel({ level, isVictory, onNextLevel }) {
     const prevLevel = useRef(0);
     const toast = useRef(randElement(toasts));
-    if (isVictory && level != prevLevel.current) {
+    if (isVictory && level !== prevLevel.current) {
         prevLevel.current = level;
         toast.current = randElement(toasts);
     }
