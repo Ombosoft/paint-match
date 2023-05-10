@@ -1,5 +1,6 @@
 * Background music
-* Rearrange UI
+* Improved UI
+* Improved tutorial
 
 ## 1
 2023-05-008
