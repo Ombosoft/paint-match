@@ -23,3 +23,7 @@ export function randomLevel() {
         tolerance: 5,
     };
 }
+
+export function simplePlural(count, singular) {
+    return count === 1 ? singular : singular + 's';
+}

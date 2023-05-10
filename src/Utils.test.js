@@ -1,4 +1,4 @@
-import { randElement, randInt } from "./Utils";
+import { randElement, randInt, simplePlural } from "./Utils";
 
 test('randInt', () => {
     for (let i = 0; i < 100; ++i) {
@@ -14,4 +14,9 @@ test('randElement', () => {
         let rnd = randElement(arr);
         expect(arr).toContain(rnd);
     }
+});
+
+test('simplePlural', () => {
+    expect(simplePlural(1, "droplet")).toEqual("droplet");
+    expect(simplePlural(2, "droplet")).toEqual("droplets");
 });

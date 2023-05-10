@@ -1,4 +1,4 @@
-import SkipNextIcon from "@mui/icons-material/SkipNext";
+import FastForwardIcon from '@mui/icons-material/FastForward';
 import TuneIcon from '@mui/icons-material/Tune';
 import UndoIcon from "@mui/icons-material/Undo";
 import { Stack } from "@mui/material";
@@ -153,7 +153,7 @@ function Game({ autoPlayMusic }) {
                 resetColors={resetColors}
             />
             <NiceButton title="Skip level" enabled={enableSkip} onClick={nextLevel}>
-                <SkipNextIcon fontSize="large" />
+                <FastForwardIcon fontSize="large" />
             </NiceButton>
             <NiceButton
                 title="Sliders"
@@ -202,7 +202,14 @@ function Game({ autoPlayMusic }) {
                 showTooltip={showBasicTutorial}
             />)
         }
-        <VictoryPanel level={level} isVictory={victory} onNextLevel={nextLevel} />
+        <VictoryPanel
+            level={level}
+            levelName={targetLevel.name}
+            isVictory={victory}
+            onNextLevel={nextLevel}
+            onReset={resetColors}
+            numDroplets={numDroplets}
+        />
     </>;
 }
 
