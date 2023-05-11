@@ -6,7 +6,7 @@ import React, { forwardRef, useRef } from "react";
 import { toasts } from "./Toasts.js";
 import { randElement, simplePlural } from "./Utils.js";
 
-function VictoryPanel({ level, levelName, numDroplets, isVictory, onReset, onNextLevel }) {
+function VictoryPanel({ level, color, levelName, numDroplets, isVictory, onReset, onNextLevel }) {
     const prevLevel = useRef(0);
     const toast = useRef(randElement(toasts));
     if (isVictory && level !== prevLevel.current) {
@@ -23,7 +23,13 @@ function VictoryPanel({ level, levelName, numDroplets, isVictory, onReset, onNex
         <Dialog
             open={isVictory}
             TransitionComponent={Transition}
-        >
+            PaperProps={{
+                sx: {
+                  borderColor: `#${color}`, 
+                  borderWidth: '1em',
+                  borderStyle: 'solid',
+                },
+              }}        >
             <DialogTitle sx={{
                 fontWeight: "bold", textTransform: "capitalize",
             }}>

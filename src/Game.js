@@ -140,6 +140,10 @@ function Game({ autoPlayMusic }) {
         setComponents(prevState => ({ ...prevState, [colorName]: value }));
     }
 
+    function targetColorRGB() {
+        return convert.cmyk.hex(targetLevel.cmyk);
+    }
+
     const allowResetWhen = victory || distanceGotWorse || numDroplets > dropletsUntilReset;
     const enableUndo = components !== prevComponents && !victory;
     const enableSkip = debug || (resetCount >= 3 && !victory) || (distance <= targetLevel.tolerance);
@@ -169,7 +173,7 @@ function Game({ autoPlayMusic }) {
         </Stack >
         <Stack direction="row">
             <ColorSquare
-                color={convert.cmyk.hex(targetLevel.cmyk)}
+                color={targetColorRGB()}
                 label={debug ? `${targetLevel.name}  (${targetLevel.cmyk})` : targetLevel.name}
                 showColor={debug}
                 tooltip="Target color"
@@ -208,6 +212,7 @@ function Game({ autoPlayMusic }) {
         }
         <VictoryPanel
             level={level}
+            color={targetColorRGB()}
             levelName={targetLevel.name}
             isVictory={victory}
             onNextLevel={nextLevel}
