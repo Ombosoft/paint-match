@@ -1,6 +1,6 @@
 import { IconButton, Tooltip } from "@mui/material";
 import PropTypes from 'prop-types';
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 
 // IconButton with tooltip that can be forced to show
 function NiceButton({ title, enabled, onClick, forceTooltip, xOffset, children }) {
