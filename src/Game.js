@@ -4,7 +4,7 @@ import UndoIcon from "@mui/icons-material/Undo";
 import { Stack } from "@mui/material";
 import convert from "color-convert";
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import AppTitle from "./AppTitle";
 import ColorButtons from "./ColorButtons";
 import ColorSliders from "./ColorSliders";
@@ -45,7 +45,7 @@ function Game({ autoPlayMusic }) {
         setDebug(newDebug);
     }
 
-    function checkCommit(cs)  {
+    const checkCommit = useCallback((cs) => {
         const targetUniform = convert.cmyk.xyz(targetLevel.cmyk);
         const curUniform = convert.cmyk.xyz(getCurrentComponents(cs));
         const newDistance = vecDistance(targetUniform, curUniform);
@@ -55,7 +55,7 @@ function Game({ autoPlayMusic }) {
         if (newDistance <= 0) {
             setVictory(true);
         }
-    }
+    }, [distance, distanceGotWorse, targetLevel]);
 
     useEffect(() => {
         const timerId1 = setTimeout(
