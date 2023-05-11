@@ -23,7 +23,7 @@ function AppTitle({onDebug, level}) {
         Level {level}
         </p>
         {debug && (
-            <Button onClick={clearLocalStorage}>Clear Local Storage</Button>
+            <Button size="small" onClick={clearLocalStorage}>CLS</Button>
         )}
     </>;
 }
