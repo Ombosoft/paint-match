@@ -2,7 +2,7 @@ import FastForwardIcon from '@mui/icons-material/FastForward';
 import ReplayIcon from "@mui/icons-material/Replay";
 import { Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Slide, Stack } from "@mui/material";
 import PropTypes from "prop-types";
-import React, { forwardRef, useRef, useState, useEffect } from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 import { toasts } from "./Toasts.js";
 import { randElement, simplePlural } from "./Utils.js";
 
@@ -24,17 +24,17 @@ function VictoryPanel({ level, color, levelName, numDroplets, isVictory, onReset
     const [dialogOpen, setDialogOpen] = useState(false);
     useEffect(() => {
         if (isVictory) {
-          const timerId = setTimeout(() => {
-            setDialogOpen(true);
-          }, 500); // Delay opening dialog
-      
-          return () => {
-            clearTimeout(timerId);
-          };
+            const timerId = setTimeout(() => {
+                setDialogOpen(true);
+            }, 500); // Delay opening dialog
+
+            return () => {
+                clearTimeout(timerId);
+            };
         } else {
             setDialogOpen(false);
         }
-      }, [isVictory]);
+    }, [isVictory]);
 
     if (!isVictory) {
         return (<></>);
@@ -47,12 +47,19 @@ function VictoryPanel({ level, color, levelName, numDroplets, isVictory, onReset
                 sx: {
                     borderColor: `#${color}`,
                     borderWidth: '1em',
-                    borderStyle: 'solid',
+                    borderStyle: 'outset',
                 },
-            }}        >
+            }}
+        >
             <DialogTitle sx={{
-                fontWeight: "bold", textTransform: "capitalize",
-            }}>
+                fontWeight: "bold", 
+                textTransform: "capitalize",
+                textShadow: "4px 4px 10px white, -1px -1px 1px #FFFFFFB0, 1px 1px 1px #FFFFFFB0, -1px 0px 1px #FFFFFFB0, 1px 0px 1px #FFFFFFB0",
+                backgroundColor: `#${color}`,
+                borderWidth: '2px',
+                borderStyle: 'solid',
+                borderColor: 'white',
+        }}>
                 {level} {levelName}
             </DialogTitle>
             <DialogContent>

@@ -9,7 +9,7 @@ export const colorTable = [
     {name: "blue", cmyk: [100, 100, 0, 0], tolerance: 4}, // level=8, complexity=4
     {name: "light gray", cmyk: [0, 0, 0, 33], tolerance: 4}, // level=9, complexity=6
     {name: "navy", cmyk: [100, 100, 0, 50], tolerance: 4}, // level=25, complexity=8
-    {name: "dark orange", cmyk: [0, 50, 100, 0], tolerance: 4}, // level=10, complexity=6
+    {name: "orange", cmyk: [0, 50, 100, 0], tolerance: 4}, // level=10, complexity=6
     {name: "olive", cmyk: [0, 0, 100, 50], tolerance: 4}, // level=11, complexity=6
     {name: "chartreuse", cmyk: [50, 0, 100, 0], tolerance: 4}, // level=13, complexity=6
     {name: "spring green", cmyk: [100, 0, 50, 0], tolerance: 4}, // level=14, complexity=6
