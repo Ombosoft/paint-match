@@ -26,7 +26,7 @@ function VictoryPanel({ level, color, levelName, numDroplets, isVictory, onReset
         if (isVictory) {
             const timerId = setTimeout(() => {
                 setDialogOpen(true);
-            }, 500); // Delay opening dialog
+            }, 600); // Delay opening dialog
 
             return () => {
                 clearTimeout(timerId);
