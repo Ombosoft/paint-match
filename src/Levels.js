@@ -20,7 +20,7 @@ export const colorTable = [
     {name: "orange red", cmyk: [0, 100, 50, 0], tolerance: 4}, // level=19, complexity=6
     {name: "maroon", cmyk: [0, 100, 100, 50], tolerance: 4}, // level=21, complexity=8
     {name: "gold", cmyk: [0, 33, 100, 0], tolerance: 4}, // level=22, complexity=8
-    {name: "green", cmyk: [100, 0, 100, 50], tolerance: 4}, // level=23, complexity=8
+    {name: "deep green", cmyk: [100, 0, 100, 50], tolerance: 4}, // level=23, complexity=8
     {name: "popcorn yellow", cmyk: [0, 0, 33, 0], tolerance: 4}, // level=12, complexity=6
     {name: "sea green", cmyk: [100, 0, 33, 0], tolerance: 4}, // level=24, complexity=8
     {name: "purple", cmyk: [33, 100, 0, 0], tolerance: 3}, // level=26, complexity=8
