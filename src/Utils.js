@@ -11,7 +11,7 @@ export function randElement(arr) {
 // Convert color distance to percentage of match.
 // The closer the distance is to zero, the higher the percentage of match.
 export function distanceToPercentMatch(distance) {
-    return Math.round(100 - Math.min(100, distance / 3));
+    return Math.round(Math.max(100 - distance, 0));
 }
 
 export function randomLevel() {

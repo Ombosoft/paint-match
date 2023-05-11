@@ -46,13 +46,13 @@ function Game({ autoPlayMusic }) {
     }, []);
 
     const checkCommit = useCallback((cs) => {
-        console.log('commit', getCurrentComponents(cs));
         const targetUniform = convert.cmyk.xyz(targetLevel.cmyk);
         const curUniform = convert.cmyk.xyz(getCurrentComponents(cs));
         const newDistance = vecDistance(targetUniform, curUniform);
+        console.log('commit', newDistance);
         setDistance(newDistance);
         setDistanceGotWorse(distanceGotWorse || newDistance > distance);
-        if (newDistance <= targetLevel.tolerance) {
+        if (newDistance <= 0) {
             setVictory(true);
         }
     }, [distance, distanceGotWorse, targetLevel]);
@@ -88,6 +88,11 @@ function Game({ autoPlayMusic }) {
         return vecRound(normalized);
     }
 
+    function userResetColors() {
+        resetColors();
+        onResetColors();
+    }
+
     function resetColors() {
         saveUndo();
         setComponents(zeroComponents);
@@ -97,7 +102,6 @@ function Game({ autoPlayMusic }) {
         setDistanceGotWorse(false);
         setNumDroplets(0);
         setVictory(false);
-        onResetColors();
     }
 
     const saveUndo = useCallback(() => {
@@ -138,7 +142,7 @@ function Game({ autoPlayMusic }) {
 
     const allowResetWhen = victory || distanceGotWorse || numDroplets > dropletsUntilReset;
     const enableUndo = components !== prevComponents && !victory;
-    const enableSkip = debug || (resetCount >= 3 && !victory);
+    const enableSkip = debug || (resetCount >= 3 && !victory) || (distance <= targetLevel.tolerance);
     const enableSliders = debug || (resetCount >= 3 && !victory);
 
     return <>
@@ -150,7 +154,7 @@ function Game({ autoPlayMusic }) {
             <ResetButton
                 showTutorial={canShowReset(level, numDroplets)}
                 allowReset={components !== zeroComponents && allowResetWhen}
-                resetColors={resetColors}
+                resetColors={userResetColors}
             />
             <NiceButton title="Skip level" enabled={enableSkip} onClick={nextLevel}>
                 <FastForwardIcon fontSize="large" />
@@ -207,7 +211,7 @@ function Game({ autoPlayMusic }) {
             levelName={targetLevel.name}
             isVictory={victory}
             onNextLevel={nextLevel}
-            onReset={resetColors}
+            onReset={userResetColors}
             numDroplets={numDroplets}
         />
     </>;
