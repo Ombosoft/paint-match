@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useState } from "react";
 import AppTitle from "./AppTitle";
 import ColorButtons from "./ColorButtons";
+import colorDistance from './ColorDistance';
 import ColorSliders from "./ColorSliders";
 import ColorSquare from "./ColorSquare";
 import { cmykColors, zeroComponents } from "./Colors";
@@ -17,7 +18,7 @@ import NiceButton from "./NiceButton";
 import ResetButton from "./ResetButton";
 import useTutorial from "./Tutorial";
 import { distanceToPercentMatch, randomLevel } from "./Utils";
-import { matCompSum, matScaleByVec, vecCompSum, vecDistance, vecNormalize, vecRound, vecScale } from "./Vec";
+import { matCompSum, matScaleByVec, vecCompSum, vecNormalize, vecRound, vecScale } from "./Vec";
 import VictoryPanel from "./VictoryPanel";
 
 function Game({ autoPlayMusic }) {
@@ -46,10 +47,7 @@ function Game({ autoPlayMusic }) {
     }
 
     const checkCommit = useCallback((cs) => {
-        const targetUniform = convert.cmyk.xyz(targetLevel.cmyk);
-        const curUniform = convert.cmyk.xyz(getCurrentComponents(cs));
-        const newDistance = vecDistance(targetUniform, curUniform);
-        console.log('commit', newDistance);
+        const newDistance = colorDistance(targetLevel.cmyk, getCurrentComponents(cs));
         setDistance(newDistance);
         setDistanceGotWorse(distanceGotWorse || newDistance > distance);
         if (newDistance <= 0) {
@@ -104,7 +102,7 @@ function Game({ autoPlayMusic }) {
         setVictory(false);
     }
 
-    function saveUndo () {
+    function saveUndo() {
         setPrevComponents(components);
     }
 
@@ -135,7 +133,7 @@ function Game({ autoPlayMusic }) {
         endBasicTutorial();
     }
 
-    function setComponentValue (colorName, value) {
+    function setComponentValue(colorName, value) {
         saveUndo();
         setComponents(prevState => ({ ...prevState, [colorName]: value }));
     }
