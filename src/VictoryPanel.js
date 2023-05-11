@@ -2,7 +2,7 @@ import FastForwardIcon from '@mui/icons-material/FastForward';
 import ReplayIcon from "@mui/icons-material/Replay";
 import { Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Slide, Stack } from "@mui/material";
 import PropTypes from "prop-types";
-import React, { forwardRef, useRef } from "react";
+import React, { forwardRef, useRef, useState, useEffect } from "react";
 import { toasts } from "./Toasts.js";
 import { randElement, simplePlural } from "./Utils.js";
 
@@ -14,22 +14,42 @@ function VictoryPanel({ level, color, levelName, numDroplets, isVictory, onReset
         toast.current = randElement(toasts);
     }
     const Transition = forwardRef(function Transition(props, ref) {
-        return <Slide direction="up" ref={ref} {...props} />;
+        return <Slide
+            direction="up"
+            ref={ref}
+            {...props}
+            timeout={500}
+        />;
     });
+    const [dialogOpen, setDialogOpen] = useState(false);
+    useEffect(() => {
+        if (isVictory) {
+          const timerId = setTimeout(() => {
+            setDialogOpen(true);
+          }, 500); // Delay opening dialog
+      
+          return () => {
+            clearTimeout(timerId);
+          };
+        } else {
+            setDialogOpen(false);
+        }
+      }, [isVictory]);
+
     if (!isVictory) {
         return (<></>);
     }
     return (
         <Dialog
-            open={isVictory}
+            open={dialogOpen}
             TransitionComponent={Transition}
             PaperProps={{
                 sx: {
-                  borderColor: `#${color}`, 
-                  borderWidth: '1em',
-                  borderStyle: 'solid',
+                    borderColor: `#${color}`,
+                    borderWidth: '1em',
+                    borderStyle: 'solid',
                 },
-              }}        >
+            }}        >
             <DialogTitle sx={{
                 fontWeight: "bold", textTransform: "capitalize",
             }}>
@@ -43,20 +63,20 @@ function VictoryPanel({ level, color, levelName, numDroplets, isVictory, onReset
                     <h4>You used {numDroplets} {simplePlural(numDroplets, 'droplet')}</h4>
                     <h3>{toast.current}</h3>
                     <DialogActions>
-                    <Stack direction="row">
-                        <IconButton
-                            onClick={onReset}
-                            color="secondary"
-                            size="large">
-                            <ReplayIcon fontSize="large" />
-                        </IconButton>
-                        <IconButton
-                            onClick={onNextLevel}
-                            color="secondary"
-                            size="large">
-                            <FastForwardIcon fontSize="large" />
-                        </IconButton>
-                    </Stack>
+                        <Stack direction="row">
+                            <IconButton
+                                onClick={onReset}
+                                color="secondary"
+                                size="large">
+                                <ReplayIcon fontSize="large" />
+                            </IconButton>
+                            <IconButton
+                                onClick={onNextLevel}
+                                color="secondary"
+                                size="large">
+                                <FastForwardIcon fontSize="large" />
+                            </IconButton>
+                        </Stack>
                     </DialogActions>
 
                 </Stack>
@@ -68,6 +88,7 @@ function VictoryPanel({ level, color, levelName, numDroplets, isVictory, onReset
 
 VictoryPanel.propTypes = {
     level: PropTypes.number.isRequired,
+    color: PropTypes.string.isRequired,
     levelName: PropTypes.string.isRequired,
     numDroplets: PropTypes.number.isRequired,
     isVictory: PropTypes.bool.isRequired,
