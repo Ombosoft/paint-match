@@ -14,6 +14,11 @@ function NiceButton({ title, enabled, onClick, forceTooltip, xOffset, children }
         setOpenTooltip(true);
     }, []);
 
+    const handleClick = useCallback(() => {
+        setOpenTooltip(false);
+        onClick();
+    }, []);
+
     if (!enabled) {
         return (
             <IconButton
@@ -45,7 +50,7 @@ function NiceButton({ title, enabled, onClick, forceTooltip, xOffset, children }
             }}
         >
             <IconButton
-                onClick={onClick}
+                onClick={handleClick}
                 color="secondary"
                 size="medium"
             >
