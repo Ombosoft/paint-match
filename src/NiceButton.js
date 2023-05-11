@@ -6,18 +6,18 @@ import React, { useCallback, useState } from "react";
 function NiceButton({ title, enabled, onClick, forceTooltip, xOffset, children }) {
     const [openTooltip, setOpenTooltip] = useState(false);
 
-    const handleClose = useCallback(() => {
+    function handleClose() {
         setOpenTooltip(false);
-    }, []);
+    }
 
-    const handleOpen = useCallback(() => {
+    function handleOpen() {
         setOpenTooltip(true);
-    }, []);
+    }
 
-    const handleClick = useCallback(() => {
+    function handleClick() {
         setOpenTooltip(false);
         onClick();
-    }, []);
+    }
 
     if (!enabled) {
         return (

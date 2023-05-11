@@ -4,7 +4,7 @@ import UndoIcon from "@mui/icons-material/Undo";
 import { Stack } from "@mui/material";
 import convert from "color-convert";
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppTitle from "./AppTitle";
 import ColorButtons from "./ColorButtons";
 import ColorSliders from "./ColorSliders";
@@ -41,11 +41,11 @@ function Game({ autoPlayMusic }) {
     const [debug, setDebug] = useState(false);
 
     // Callback for handling debug mode changes
-    const handleDebug = useCallback((newDebug) => {
+    function handleDebug(newDebug) {
         setDebug(newDebug);
-    }, []);
+    }
 
-    const checkCommit = useCallback((cs) => {
+    function checkCommit(cs)  {
         const targetUniform = convert.cmyk.xyz(targetLevel.cmyk);
         const curUniform = convert.cmyk.xyz(getCurrentComponents(cs));
         const newDistance = vecDistance(targetUniform, curUniform);
@@ -55,7 +55,7 @@ function Game({ autoPlayMusic }) {
         if (newDistance <= 0) {
             setVictory(true);
         }
-    }, [distance, distanceGotWorse, targetLevel]);
+    }
 
     useEffect(() => {
         const timerId1 = setTimeout(
@@ -104,9 +104,9 @@ function Game({ autoPlayMusic }) {
         setVictory(false);
     }
 
-    const saveUndo = useCallback(() => {
+    function saveUndo () {
         setPrevComponents(components);
-    }, [components]);
+    }
 
     function undo() {
         setComponents(prevComponents);
@@ -124,7 +124,7 @@ function Game({ autoPlayMusic }) {
         setBottle(true);
     }
 
-    const handleClick = useCallback((color) => {
+    function handleClick(color) {
         autoPlayMusic();
         saveUndo();
         setComponents(prevState => {
@@ -133,12 +133,12 @@ function Game({ autoPlayMusic }) {
         setDropletColor(color);
         setNumDroplets((prev) => prev + 1);
         endBasicTutorial();
-    }, [saveUndo, endBasicTutorial, autoPlayMusic]);
+    }
 
-    const setComponentValue = useCallback((colorName, value) => {
+    function setComponentValue (colorName, value) {
         saveUndo();
         setComponents(prevState => ({ ...prevState, [colorName]: value }));
-    }, [saveUndo]);
+    }
 
     const allowResetWhen = victory || distanceGotWorse || numDroplets > dropletsUntilReset;
     const enableUndo = components !== prevComponents && !victory;
