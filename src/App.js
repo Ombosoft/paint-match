@@ -15,7 +15,7 @@ function App() {
                 <Stack direction="row" justifyContent="end" sx={{
                     position: 'fixed',
                     bottom: "0em",
-                    right: "0em",
+                    left: "0em",
                 }}>
                     <MuteButton />
                 </Stack>
