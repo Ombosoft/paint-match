@@ -20,6 +20,7 @@ import { useTutorial } from "./Tutorial";
 import { distanceToPercentMatch, randomLevel } from "./Utils";
 import { matCompSum, matScaleByVec, vecCompSum, vecNormalize, vecRound, vecScale } from "./Vec";
 import VictoryPanel from "./VictoryPanel";
+import { useVictorySound } from './Sfx';
 
 function Game({ autoPlayMusic }) {
     const [victory, setVictory] = useState(false);
@@ -39,6 +40,7 @@ function Game({ autoPlayMusic }) {
     const [resetCount, setResetCount] = useState(0);
     // State for debug mode
     const [debug, setDebug] = useState(false);
+    const [victorySound] = useVictorySound();
 
     // Callback for handling debug mode changes
     function handleDebug(newDebug) {
@@ -48,6 +50,9 @@ function Game({ autoPlayMusic }) {
     const numDroplets = vecCompSum(Object.values(components));
 
     const checkCommit = useCallback((cs) => {
+        if (victory) {
+            return;
+        }
         const newDistance = colorDistance(targetLevel.cmyk, getCurrentComponents(cs));
         setDistance(newDistance);
         setDistanceGotWorse(distanceGotWorse || newDistance > distance);
@@ -55,8 +60,10 @@ function Game({ autoPlayMusic }) {
         console.log('wintol', winTolerance, 'newDist:', newDistance);
         if (newDistance <= winTolerance) {
             setVictory(true);
+            console.log('victory');
+            victorySound();
         }
-    }, [distance, distanceGotWorse, targetLevel]);
+    }, [distance, distanceGotWorse, targetLevel, victorySound, victory]);
 
     useEffect(() => {
         const timerId1 = setTimeout(
