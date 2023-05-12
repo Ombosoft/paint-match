@@ -37,7 +37,6 @@ function Game({ autoPlayMusic }) {
     const [distance, setDistance] = useState(maxDistance);
     const [distanceGotWorse, setDistanceGotWorse] = useState(false);
     const [resetCount, setResetCount] = useState(0);
-    const [numDroplets, setNumDroplets] = useState(0);
     // State for debug mode
     const [debug, setDebug] = useState(false);
 
@@ -45,6 +44,8 @@ function Game({ autoPlayMusic }) {
     function handleDebug(newDebug) {
         setDebug(newDebug);
     }
+
+    const numDroplets = vecCompSum(Object.values(components));
 
     const checkCommit = useCallback((cs) => {
         const newDistance = colorDistance(targetLevel.cmyk, getCurrentComponents(cs));
@@ -98,7 +99,6 @@ function Game({ autoPlayMusic }) {
         setResetCount(p => p + 1);
         setDistance(maxDistance);
         setDistanceGotWorse(false);
-        setNumDroplets(0);
         setVictory(false);
     }
 
@@ -129,7 +129,6 @@ function Game({ autoPlayMusic }) {
             return { ...prevState, [color]: prevState[color] + 1 };
         });
         setDropletColor(color);
-        setNumDroplets((prev) => prev + 1);
         endBasicTutorial();
     }
 
