@@ -60,30 +60,30 @@ export const colorTable = [
     {name: "dark magenta", cmyk: [0, 100, 0, 45], tolerance: 4}, // level=71, complexity=15
     {name: "plum", cmyk: [0, 27, 0, 0], tolerance: 4}, // level=72, complexity=15
     {name: "thistle", cmyk: [0, 12, 0, 0], tolerance: 4}, // level=73, complexity=15
-    {name: "orange red", cmyk: [0, 75, 75, 0], tolerance: 5}, // level=75, complexity=16
-    {name: "aqua", cmyk: [50, 0, 0, 20], tolerance: 4, winTolerance: 0.5}, // level=49, complexity=14
     {name: "dark orange", cmyk: [0, 50, 100, 20], tolerance: 4}, // level=76, complexity=16
     {name: "dirty green", cmyk: [0, 0, 100, 45], tolerance: 4}, // level=62, complexity=15
     {name: "chartreuse", cmyk: [50, 0, 100, 20], tolerance: 4}, // level=77, complexity=16
     {name: "irish flag", cmyk: [100, 0, 100, 40], tolerance: 4}, // level=78, complexity=16
     {name: "spring green", cmyk: [100, 0, 50, 20], tolerance: 5}, // level=79, complexity=16
     {name: "dark red", cmyk: [0, 100, 100, 45], tolerance: 2}, // level=80, complexity=17
-    {name: "orange red", cmyk: [0, 73, 100, 0], tolerance: 1}, // level=82, complexity=17
     {name: "dark orange", cmyk: [0, 47, 100, 0], tolerance: 3}, // level=83, complexity=17
     {name: "gold", cmyk: [0, 16, 100, 0], tolerance: 4}, // level=84, complexity=17
     {name: "yellow", cmyk: [0, 0, 100, 7], tolerance: 4}, // level=85, complexity=17
     {name: "dark green", cmyk: [100, 0, 100, 45], tolerance: 4}, // level=86, complexity=17
+    {name: "orange red", cmyk: [0, 73, 100, 0], tolerance: 1}, // level=82, complexity=17
     {name: "cyan", cmyk: [100, 0, 0, 7], tolerance: 4}, // level=87, complexity=17
     {name: "cichlid", cmyk: [100, 76, 0, 0], tolerance: 2}, // level=89, complexity=17
-    {name: "dark blue", cmyk: [100, 100, 0, 45], tolerance: 5}, // level=90, complexity=17
+    {name: "dark blue", cmyk: [100, 100, 0, 45], tolerance: 5, winTolerance: 0.5}, // level=90, complexity=17
     {name: "magenta", cmyk: [0, 100, 0, 7], tolerance: 5}, // level=91, complexity=17
-    {name: "starbucks", cmyk: [100, 0, 50, 60], tolerance: 4}, // level=92, complexity=18
     {name: "lavender", cmyk: [0, 25, 0, 20], tolerance: 4}, // level=93, complexity=18
     {name: "brown", cmyk: [0, 50, 100, 45], tolerance: 2}, // level=99, complexity=19
+    {name: "orange red", cmyk: [0, 75, 75, 0], tolerance: 5}, // level=75, complexity=16
     {name: "pink", cmyk: [0, 25, 20, 0], tolerance: 5}, // level=94, complexity=18
     {name: "red", cmyk: [0, 100, 100, 7], tolerance: 4}, // level=95, complexity=19
+    {name: "aqua", cmyk: [50, 0, 0, 20], tolerance: 4, winTolerance: 0.5}, // level=49, complexity=14
     {name: "coral", cmyk: [0, 55, 66, 0], tolerance: 3}, // level=96, complexity=19
     {name: "warm gray", cmyk: [0, 0, 18, 50], tolerance: 4}, // level=100, complexity=19
+    {name: "starbucks", cmyk: [100, 0, 50, 60], tolerance: 4}, // level=92, complexity=18
     {name: "coral", cmyk: [0, 50, 69, 0], tolerance: 4}, // level=97, complexity=19
     {name: "chartreuse", cmyk: [50, 0, 100, 45], tolerance: 4}, // level=101, complexity=19
     {name: "dumpster", cmyk: [100, 0, 100, 69], tolerance: 4}, // level=102, complexity=19
