@@ -16,7 +16,7 @@ function useMusic() {
     useEffect(() => {
         if (!sound.current) {
             const newSound = new Howl({
-                src: ['/music/bossa-nova-tokyo.webm'],
+                src: [process.env.PUBLIC_URL + '/music/bossa-nova-tokyo.webm'],
                 onend: () => {
                     if (muted) {
                         return;
