@@ -11,7 +11,7 @@ import colorDistance from './ColorDistance';
 import ColorSliders from "./ColorSliders";
 import ColorSquare from "./ColorSquare";
 import { cmykColors, zeroComponents } from "./Colors";
-import { animationDurationMs, dropletBlendDelay, dropletsUntilReset, extraCommitDelay, skipLevels } from "./Constants";
+import { animationDurationMs, defaultWinTolerance, dropletBlendDelay, dropletsUntilReset, extraCommitDelay, skipLevels } from "./Constants";
 import { colorTable } from "./Levels";
 import { useLocalStorage } from "./LocalStorageHook";
 import NiceButton from "./NiceButton";
@@ -51,7 +51,9 @@ function Game({ autoPlayMusic }) {
         const newDistance = colorDistance(targetLevel.cmyk, getCurrentComponents(cs));
         setDistance(newDistance);
         setDistanceGotWorse(distanceGotWorse || newDistance > distance);
-        if (newDistance <= 0) {
+        const winTolerance = targetLevel.winTolerance ?? defaultWinTolerance;
+        console.log('wintol', winTolerance, 'newDist:', newDistance);
+        if (newDistance <= winTolerance) {
             setVictory(true);
         }
     }, [distance, distanceGotWorse, targetLevel]);

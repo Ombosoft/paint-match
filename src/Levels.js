@@ -31,39 +31,39 @@ export const colorTable = [
     {name: "ralph yellow", cmyk: [0, 0, 100, 20], tolerance: 4}, // level=32, complexity=12
     {name: "light teal", cmyk: [100, 0, 20, 0], tolerance: 5}, // level=34, complexity=12
     {name: "cyanish", cmyk: [100, 0, 0, 20], tolerance: 4}, // level=35, complexity=12
-    {name: "cornflower", cmyk: [80, 100, 0, 0], tolerance: 1}, // level=37, complexity=12
     {name: "grape", cmyk: [20, 100, 0, 0], tolerance: 5}, // level=38, complexity=12
+    {name: "cornflower", cmyk: [80, 100, 0, 0], tolerance: 1}, // level=37, complexity=12
     {name: "dark cherry red", cmyk: [0, 100, 100, 80], tolerance: 3}, // level=42, complexity=14
     {name: "dark magenta", cmyk: [0, 100, 0, 20], tolerance: 4}, // level=39, complexity=12
     {name: "periwinkle", cmyk: [33, 33, 0, 0], tolerance: 4}, // level=36, complexity=12
     {name: "rose", cmyk: [0, 100, 20, 0], tolerance: 3}, // level=40, complexity=12
     {name: "red", cmyk: [0, 100, 100, 20], tolerance: 4}, // level=43, complexity=14
     {name: "orange", cmyk: [0, 60, 100, 0], tolerance: 4}, // level=44, complexity=14
-    {name: "pale turquoise", cmyk: [27, 0, 0, 0], tolerance: 4}, // level=68, complexity=15
+    {name: "green", cmyk: [100, 0, 100, 20], tolerance: 4}, // level=47, complexity=14
     {name: "yolk", cmyk: [0, 10, 100, 0], tolerance: 4}, // level=45, complexity=14
     {name: "pine green", cmyk: [100, 0, 100, 80], tolerance: 3}, // level=46, complexity=14
-    {name: "green", cmyk: [100, 0, 100, 20], tolerance: 4}, // level=47, complexity=14
-    {name: "neon avocado", cmyk: [100, 0, 60, 0], tolerance: 5}, // level=48, complexity=14
-    {name: "aqua", cmyk: [50, 0, 0, 20], tolerance: 4}, // level=49, complexity=14
+    {name: "pale turquoise", cmyk: [27, 0, 0, 0], tolerance: 4, winTolerance: 0.9}, // level=68, complexity=15
     {name: "midnight blue", cmyk: [100, 100, 0, 80], tolerance: 4}, // level=50, complexity=14
+    {name: "neon avocado", cmyk: [100, 0, 60, 0], tolerance: 5}, // level=48, complexity=14
     {name: "medium blue", cmyk: [100, 100, 0, 20], tolerance: 4}, // level=51, complexity=14
     {name: "true purple", cmyk: [0, 100, 0, 40], tolerance: 4}, // level=53, complexity=14
     {name: "broadway pink", cmyk: [0, 100, 60, 0], tolerance: 4}, // level=54, complexity=14
     {name: "gainsboro", cmyk: [0, 0, 0, 14], tolerance: 4}, // level=58, complexity=15
+    {name: "blood red", cmyk: [0, 100, 100, 60], tolerance: 1}, // level=74, complexity=16
     {name: "dark orange", cmyk: [0, 45, 100, 0], tolerance: 5}, // level=60, complexity=15
     {name: "orange", cmyk: [0, 35, 100, 0], tolerance: 4}, // level=61, complexity=15
-    {name: "dirty green", cmyk: [0, 0, 100, 45], tolerance: 4}, // level=62, complexity=15
     {name: "papaya", cmyk: [0, 0, 51, 0], tolerance: 4}, // level=63, complexity=15
     {name: "light yellow", cmyk: [0, 0, 12, 0], tolerance: 5}, // level=64, complexity=15
     {name: "dark cyan", cmyk: [100, 0, 0, 45], tolerance: 4}, // level=66, complexity=15
-    {name: "light blue", cmyk: [41, 0, 0, 0], tolerance: 4}, // level=67, complexity=15
+    {name: "light blue", cmyk: [41, 0, 0, 0], tolerance: 4, winTolerance: 0.5}, // level=67, complexity=15
     {name: "light cyan", cmyk: [12, 0, 0, 0], tolerance: 4}, // level=69, complexity=15
     {name: "dark magenta", cmyk: [0, 100, 0, 45], tolerance: 4}, // level=71, complexity=15
     {name: "plum", cmyk: [0, 27, 0, 0], tolerance: 4}, // level=72, complexity=15
-    {name: "blood red", cmyk: [0, 100, 100, 60], tolerance: 1}, // level=74, complexity=16
     {name: "thistle", cmyk: [0, 12, 0, 0], tolerance: 4}, // level=73, complexity=15
     {name: "orange red", cmyk: [0, 75, 75, 0], tolerance: 5}, // level=75, complexity=16
+    {name: "aqua", cmyk: [50, 0, 0, 20], tolerance: 4, winTolerance: 0.5}, // level=49, complexity=14
     {name: "dark orange", cmyk: [0, 50, 100, 20], tolerance: 4}, // level=76, complexity=16
+    {name: "dirty green", cmyk: [0, 0, 100, 45], tolerance: 4}, // level=62, complexity=15
     {name: "chartreuse", cmyk: [50, 0, 100, 20], tolerance: 4}, // level=77, complexity=16
     {name: "irish flag", cmyk: [100, 0, 100, 40], tolerance: 4}, // level=78, complexity=16
     {name: "spring green", cmyk: [100, 0, 50, 20], tolerance: 5}, // level=79, complexity=16
