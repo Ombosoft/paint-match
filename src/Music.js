@@ -35,6 +35,9 @@ function useMusic() {
         if (newMuted) {
             sound.current.fade(musicVolume, 0, musicFadeDurationMs);
         } else {
+            if (!sound.current.playing()) {
+                sound.current.play();
+            }
             sound.current.fade(0, musicVolume, musicFadeDurationMs);
         }
     }, [muted, setMuted]);
@@ -56,7 +59,7 @@ function useMusic() {
             return;
         }
         sound.current.play();
-    }, [muted]);
+    }, [muted, sound]);
     return [MuteButton, autoPlay];
 };
 
