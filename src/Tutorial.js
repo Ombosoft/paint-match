@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useLocalStorage } from "./LocalStorageHook";
 
 
-export default function useTutorial() {
+export function useTutorial() {
     const maxRelevantResets = 3;
     const [showBasicTutorial, setShowBasicTutorial] = useLocalStorage("tutorial", true);
     const [resetCount, setResetCount] = useLocalStorage("reset-count", 0);
@@ -27,6 +27,13 @@ export default function useTutorial() {
         setResetCount((prev) => prev + 1);
     }
 
-
     return [showBasicTutorial, endBasicTutorial, canShowReset, onResetColors];
+}
+
+export function useSkipLevelTutorial() {
+    const [allowSkipLevelTutorial, setAllowSkipLevelTutorial] = useLocalStorage("tutorial-skip-level", true);
+    function onSkipLevelUsed() {
+        setAllowSkipLevelTutorial(false);
+    }
+    return [allowSkipLevelTutorial, onSkipLevelUsed];
 }

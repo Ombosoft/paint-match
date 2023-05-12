@@ -1,4 +1,3 @@
-import FastForwardIcon from '@mui/icons-material/FastForward';
 import TuneIcon from '@mui/icons-material/Tune';
 import UndoIcon from "@mui/icons-material/Undo";
 import { Stack } from "@mui/material";
@@ -16,7 +15,8 @@ import { colorTable } from "./Levels";
 import { useLocalStorage } from "./LocalStorageHook";
 import NiceButton from "./NiceButton";
 import ResetButton from "./ResetButton";
-import useTutorial from "./Tutorial";
+import SkipLevelButton from './SkipLevelButton';
+import { useTutorial } from "./Tutorial";
 import { distanceToPercentMatch, randomLevel } from "./Utils";
 import { matCompSum, matScaleByVec, vecCompSum, vecNormalize, vecRound, vecScale } from "./Vec";
 import VictoryPanel from "./VictoryPanel";
@@ -145,7 +145,7 @@ function Game({ autoPlayMusic }) {
 
     const allowResetWhen = victory || distanceGotWorse || numDroplets > dropletsUntilReset;
     const enableUndo = components !== prevComponents && !victory;
-    const enableSkip = debug || (resetCount >= 3 && !victory) || (distance <= targetLevel.tolerance);
+    const enableSkip = debug || (resetCount >= 3 && !victory) || (distance <= targetLevel.tolerance && !victory);
     const enableSliders = debug || (resetCount >= 3 && !victory);
 
     return <>
@@ -159,9 +159,10 @@ function Game({ autoPlayMusic }) {
                 allowReset={components !== zeroComponents && allowResetWhen}
                 resetColors={userResetColors}
             />
-            <NiceButton title="Skip level" enabled={enableSkip} onClick={nextLevel}>
-                <FastForwardIcon fontSize="large" />
-            </NiceButton>
+            <SkipLevelButton
+                enabled={enableSkip}
+                nextLevel={nextLevel}
+            />
             <NiceButton
                 title="Sliders"
                 enabled={enableSliders}
