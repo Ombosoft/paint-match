@@ -3,14 +3,17 @@ import PropTypes from 'prop-types';
 import React from "react";
 import NiceButton from "./NiceButton";
 import { useResetTutorial } from "./Tutorial";
+import { useResetSound } from "./Sfx";
 
 // Start over button in the main game screen and tutorial for it
 function ResetButton({ level, numDroplets, allowReset, resetColors }) {
+    const [resetSound] = useResetSound();
     const [canShowReset, onResetColors] = useResetTutorial();
     const showTutorial = canShowReset(level, numDroplets);
     const enableReset = showTutorial || allowReset;
 
     function handleClick() {
+        resetSound();
         onResetColors();
         resetColors();
     }

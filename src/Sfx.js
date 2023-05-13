@@ -5,6 +5,10 @@ export function useVictorySound() {
     return useSound(process.env.PUBLIC_URL + '/sfx/victory.webm', {volume: 0.4});
 }
 
+export function useResetSound() {
+    return useSound(process.env.PUBLIC_URL + '/sfx/reset.webm', {volume: 0.3});
+}
+
 export function useSkipSound() {
         // Start and duration, ms
         const skipSprites = {
