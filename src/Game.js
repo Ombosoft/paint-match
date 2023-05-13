@@ -15,12 +15,12 @@ import { colorTable } from "./Levels";
 import { useLocalStorage } from "./LocalStorageHook";
 import NiceButton from "./NiceButton";
 import ResetButton from "./ResetButton";
+import { useVictorySound } from './Sfx';
 import SkipLevelButton from './SkipLevelButton';
 import { useTutorial } from "./Tutorial";
 import { distanceToPercentMatch, randomLevel } from "./Utils";
 import { matCompSum, matScaleByVec, vecCompSum, vecNormalize, vecRound, vecScale } from "./Vec";
 import VictoryPanel from "./VictoryPanel";
-import { useVictorySound } from './Sfx';
 
 function Game({ autoPlayMusic }) {
     const [victory, setVictory] = useState(false);

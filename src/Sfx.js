@@ -1,5 +1,5 @@
 import useSound from 'use-sound';
-import { randElement, randInt } from './Utils';
+import { randElement } from './Utils';
 
 export function useVictorySound() {
     return useSound(process.env.PUBLIC_URL + '/sfx/victory.webm', {volume: 0.4});
