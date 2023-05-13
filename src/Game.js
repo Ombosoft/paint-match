@@ -41,14 +41,15 @@ function Game({ autoPlayMusic }) {
     // State for debug mode
     const [debug, setDebug] = useState(false);
     const [victorySound] = useVictorySound();
-    const [dropletSound] = useDropletSound();
+
+    const numDroplets = vecCompSum(Object.values(components));
+    const [dropletSound] = useDropletSound(numDroplets);
 
     // Callback for handling debug mode changes
     function handleDebug(newDebug) {
         setDebug(newDebug);
     }
 
-    const numDroplets = vecCompSum(Object.values(components));
 
     const checkCommit = useCallback((cs) => {
         if (victory) {

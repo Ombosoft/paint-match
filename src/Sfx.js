@@ -2,7 +2,7 @@ import useSound from 'use-sound';
 import { randElement } from './Utils';
 
 export function useVictorySound() {
-    return useSound(process.env.PUBLIC_URL + '/sfx/victory.webm', {volume: 0.4});
+    return useSound(process.env.PUBLIC_URL + '/sfx/victory.webm', { volume: 0.4 });
 }
 
 export function useResetSound() {
@@ -21,8 +21,8 @@ function useResetSfx(rate) {
 }
 
 export function useSkipSound() {
-        // Start and duration, ms
-        const skipSprites = {
+    // Start and duration, ms
+    const skipSprites = {
         '0': [30, 900],
         '1': [1960, 900],
         '2': [3890, 1140],
@@ -40,14 +40,24 @@ export function useSkipSound() {
         sprite: skipSprites,
     });
     const play = () => {
-        sprites({id: randElement(Object.keys(skipSprites))});
+        sprites({ id: randElement(Object.keys(skipSprites)) });
     };
     return [play];
 }
 
-export function useDropletSound() {
-        // Start and duration, ms
-        const dropletSprites = {
+function playbackRate(numDroplets) {
+    if (numDroplets <= 10) {
+        return 0.55 + 0.05 * numDroplets;
+    }
+    if (numDroplets <= 50) {
+        return playbackRate(10) + 0.02 * (numDroplets - 10);
+    }
+    return Math.min(2.6, playbackRate(50) + 0.003 * (numDroplets - 50));
+}
+
+export function useDropletSound(numDroplets) {
+    // Start and duration, ms
+    const dropletSprites = {
         '0': [140, 340],
         '1': [811, 480],
         '2': [1566, 490],
@@ -62,17 +72,17 @@ export function useDropletSound() {
         '11': [8569, 513],
         '12': [10098, 555],
         '13': [10926, 358],
-        '14': [11621, 518],
-        '15': [12427, 438],
-        '16': [13253, 375],
+        '14': [12427, 438],
+        '15': [13253, 375],
     };
     const [sprites] = useSound(process.env.PUBLIC_URL + '/sfx/droplet.webm', {
         volume: 0.6,
         interrupt: true,
+        playbackRate: playbackRate(numDroplets),
         sprite: dropletSprites,
     });
     const play = () => {
-        sprites({id: randElement(Object.keys(dropletSprites))});
+        sprites({ id: randElement(Object.keys(dropletSprites)) });
     };
     return [play];
 }
