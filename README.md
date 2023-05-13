@@ -27,6 +27,8 @@ Music: [sulosounds](https://sulosounds.itch.io/100-songs)
 Sounds:
 * [paronamixxe](https://freesound.org/people/paronamixxe/sounds/178907/)
 * [sophiehall3535](https://freesound.org/people/sophiehall3535/sounds/248045/)
+* [banasz](https://freesound.org/people/banasz/sounds/583808/)
+* [xkeril](https://freesound.org/people/xkeril/sounds/609772/)
 
 Licensing
 ---

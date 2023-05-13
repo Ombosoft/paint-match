@@ -44,3 +44,35 @@ export function useSkipSound() {
     };
     return [play];
 }
+
+export function useDropletSound() {
+        // Start and duration, ms
+        const dropletSprites = {
+        '0': [140, 340],
+        '1': [811, 480],
+        '2': [1566, 490],
+        '3': [2387, 410],
+        '4': [3202, 520],
+        '5': [4048, 425],
+        '6': [4784, 430],
+        '7': [5609, 640],
+        '8': [6375, 425],
+        '9': [7158, 393],
+        '10': [7819, 483],
+        '11': [8569, 513],
+        '12': [10098, 555],
+        '13': [10926, 358],
+        '14': [11621, 518],
+        '15': [12427, 438],
+        '16': [13253, 375],
+    };
+    const [sprites] = useSound(process.env.PUBLIC_URL + '/sfx/droplet.webm', {
+        volume: 0.6,
+        interrupt: true,
+        sprite: dropletSprites,
+    });
+    const play = () => {
+        sprites({id: randElement(Object.keys(dropletSprites))});
+    };
+    return [play];
+}

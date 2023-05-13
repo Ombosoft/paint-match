@@ -14,7 +14,7 @@ import { colorTable } from "./Levels";
 import { useLocalStorage } from "./LocalStorageHook";
 import NiceButton from "./NiceButton";
 import ResetButton from "./ResetButton";
-import { useVictorySound } from './Sfx';
+import { useDropletSound, useVictorySound } from './Sfx';
 import SkipLevelButton from './SkipLevelButton';
 import { useTutorial } from "./Tutorial";
 import UndoButton from './UndoButton';
@@ -41,6 +41,7 @@ function Game({ autoPlayMusic }) {
     // State for debug mode
     const [debug, setDebug] = useState(false);
     const [victorySound] = useVictorySound();
+    const [dropletSound] = useDropletSound();
 
     // Callback for handling debug mode changes
     function handleDebug(newDebug) {
@@ -127,6 +128,7 @@ function Game({ autoPlayMusic }) {
     }
 
     function handleClick(color) {
+        dropletSound();
         autoPlayMusic();
         saveUndo();
         setComponents(prevState => {
