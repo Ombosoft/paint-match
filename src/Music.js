@@ -12,13 +12,19 @@ function useMusic() {
     const [muted, setMuted] = useLocalStorage("muteMusic", false);
     // persist Howl sound instance between renders
     const sound = useRef();
+    const mutedRef = useRef(muted);
+
+    useEffect(() => {
+        mutedRef.current = muted; // refresh muted flag so it's visible in onend callback
+    }, [muted]);
 
     useEffect(() => {
         if (!sound.current) {
             const newSound = new Howl({
                 src: [process.env.PUBLIC_URL + '/music/bossa-nova-tokyo.webm'],
                 onend: () => {
-                    if (muted) {
+                    console.log('end muted:', muted);
+                    if (mutedRef.current) {
                         return;
                     }
                     // Loop or change track (todo)
@@ -28,7 +34,7 @@ function useMusic() {
             });
             sound.current = newSound;
         }
-    });
+    }, [sound]);
     const toggleMute = useCallback(() => {
         const newMuted = !muted;
         setMuted(newMuted);
