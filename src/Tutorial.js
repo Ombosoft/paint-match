@@ -3,13 +3,17 @@ import { useLocalStorage } from "./LocalStorageHook";
 
 
 export function useTutorial() {
-    const maxRelevantResets = 3;
     const [showBasicTutorial, setShowBasicTutorial] = useLocalStorage("tutorial", true);
-    const [resetCount, setResetCount] = useLocalStorage("reset-count", 0);
     const endBasicTutorial = useCallback(() => {
         setShowBasicTutorial(false);
     }, [setShowBasicTutorial]);
 
+    return [showBasicTutorial, endBasicTutorial];
+}
+
+export function useResetTutorial() {
+    const maxRelevantResets = 3;
+    const [resetCount, setResetCount] = useLocalStorage("reset-count", 0);
     function canShowReset(level, numDroplets) {
         if (resetCount > maxRelevantResets) {
             return false;
@@ -26,8 +30,7 @@ export function useTutorial() {
         }
         setResetCount((prev) => prev + 1);
     }
-
-    return [showBasicTutorial, endBasicTutorial, canShowReset, onResetColors];
+    return [canShowReset, onResetColors];
 }
 
 export function useSkipLevelTutorial() {

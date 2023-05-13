@@ -32,7 +32,7 @@ function Game({ autoPlayMusic }) {
 
 
     const [level, setLevel] = useLocalStorage("level", skipLevels);
-    const [showBasicTutorial, endBasicTutorial, canShowReset, onResetColors] = useTutorial();
+    const [showBasicTutorial, endBasicTutorial] = useTutorial();
     const [targetLevel, setTargetLevel] = useState(colorTable[level]);
     const maxDistance = 400;
     const [distance, setDistance] = useState(maxDistance);
@@ -96,11 +96,6 @@ function Game({ autoPlayMusic }) {
         return vecRound(normalized);
     }
 
-    function userResetColors() {
-        resetColors();
-        onResetColors();
-    }
-
     function resetColors() {
         saveUndo();
         setComponents(zeroComponents);
@@ -162,9 +157,10 @@ function Game({ autoPlayMusic }) {
                 <UndoIcon fontSize="large" />
             </NiceButton>
             <ResetButton
-                showTutorial={canShowReset(level, numDroplets)}
+                level={level}
+                numDroplets={numDroplets}
                 allowReset={components !== zeroComponents && allowResetWhen}
-                resetColors={userResetColors}
+                resetColors={resetColors}
             />
             <SkipLevelButton
                 enabled={enableSkip}
@@ -223,7 +219,7 @@ function Game({ autoPlayMusic }) {
             levelName={targetLevel.name}
             isVictory={victory}
             onNextLevel={nextLevel}
-            onReset={userResetColors}
+            onReset={resetColors}
             numDroplets={numDroplets}
         />
     </>;
