@@ -20,11 +20,13 @@ Play online on [itch.io](https://ombosoft.itch.io/paint-match)
 Credits
 ---
 
-The game idea and code by [Shurik](https://twitter.com/ombosoft)
+The game idea and code: [Shurik](https://twitter.com/ombosoft) ([Ombosoft](https://ombosoft.itch.io))
 
-Music by [sulosounds](https://sulosounds.itch.io/100-songs)
-Sounds by
+Music: [sulosounds](https://sulosounds.itch.io/100-songs)
+
+Sounds:
 * [paronamixxe](https://freesound.org/people/paronamixxe/sounds/178907/)
+* [sophiehall3535](https://freesound.org/people/sophiehall3535/sounds/248045/)
 
 Licensing
 ---

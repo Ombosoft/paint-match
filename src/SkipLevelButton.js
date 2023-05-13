@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from "react";
 import NiceButton from "./NiceButton";
 import { useSkipLevelTutorial } from "./Tutorial";
+import { useSkipSound } from "./Sfx";
 
 // Button and tutorial
 function SkipLevelButton({ enabled, nextLevel }) {
     const [allowSkipLevelTutorial, onSkipLevelUsed] = useSkipLevelTutorial();
     const [showTutorial, setShowTutorial] = useState(false);
+    const [skipSound] = useSkipSound();
     useEffect(() => {
         if (allowSkipLevelTutorial && enabled) {
             setShowTutorial(true);
@@ -23,6 +25,7 @@ function SkipLevelButton({ enabled, nextLevel }) {
     }, [allowSkipLevelTutorial, enabled]);
 
     function handleClick() {
+        skipSound();
         onSkipLevelUsed();
         nextLevel();
     }
