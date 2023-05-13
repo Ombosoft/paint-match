@@ -1,5 +1,4 @@
 import TuneIcon from '@mui/icons-material/Tune';
-import UndoIcon from "@mui/icons-material/Undo";
 import { Stack } from "@mui/material";
 import convert from "color-convert";
 import PropTypes from 'prop-types';
@@ -18,6 +17,7 @@ import ResetButton from "./ResetButton";
 import { useVictorySound } from './Sfx';
 import SkipLevelButton from './SkipLevelButton';
 import { useTutorial } from "./Tutorial";
+import UndoButton from './UndoButton';
 import { distanceToPercentMatch, randomLevel } from "./Utils";
 import { matCompSum, matScaleByVec, vecCompSum, vecNormalize, vecRound, vecScale } from "./Vec";
 import VictoryPanel from "./VictoryPanel";
@@ -153,9 +153,7 @@ function Game({ autoPlayMusic }) {
     return <>
         <Stack direction="row">
             <AppTitle onDebug={handleDebug} level={level} />
-            <NiceButton title="Undo" enabled={enableUndo} onClick={undo}>
-                <UndoIcon fontSize="large" />
-            </NiceButton>
+            <UndoButton enabled={enableUndo} onClick={undo}/>
             <ResetButton
                 level={level}
                 numDroplets={numDroplets}

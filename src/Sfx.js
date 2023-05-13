@@ -6,7 +6,18 @@ export function useVictorySound() {
 }
 
 export function useResetSound() {
-    return useSound(process.env.PUBLIC_URL + '/sfx/reset.webm', {volume: 0.3});
+    return useResetSfx(1.0);
+}
+
+export function useUndoSound() {
+    return useResetSfx(2.0);
+}
+
+function useResetSfx(rate) {
+    return useSound(process.env.PUBLIC_URL + '/sfx/reset.webm', {
+        volume: 0.3,
+        playbackRate: rate,
+    });
 }
 
 export function useSkipSound() {
