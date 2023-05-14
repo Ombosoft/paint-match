@@ -42,7 +42,6 @@ export const colorTable = [
     {name: "green", cmyk: [100, 0, 100, 20], tolerance: 4}, // level=47, complexity=14
     {name: "yolk", cmyk: [0, 10, 100, 0], tolerance: 4}, // level=45, complexity=14
     {name: "pine green", cmyk: [100, 0, 100, 80], tolerance: 3}, // level=46, complexity=14
-    {name: "pale turquoise", cmyk: [27, 0, 0, 0], tolerance: 4, winTolerance: 0.8}, // level=68, complexity=15
     {name: "midnight blue", cmyk: [100, 100, 0, 80], tolerance: 4}, // level=50, complexity=14
     {name: "neon avocado", cmyk: [100, 0, 60, 0], tolerance: 5}, // level=48, complexity=14
     {name: "medium blue", cmyk: [100, 100, 0, 20], tolerance: 4}, // level=51, complexity=14
@@ -51,6 +50,7 @@ export const colorTable = [
     {name: "gainsboro", cmyk: [0, 0, 0, 14], tolerance: 4}, // level=58, complexity=15
     {name: "blood red", cmyk: [0, 100, 100, 60], tolerance: 1}, // level=74, complexity=16
     {name: "dark orange", cmyk: [0, 45, 100, 0], tolerance: 5}, // level=60, complexity=15
+    {name: "pale turquoise", cmyk: [27, 0, 0, 0], tolerance: 4, winTolerance: 0.8}, // level=68, complexity=15
     {name: "orange", cmyk: [0, 35, 100, 0], tolerance: 4}, // level=61, complexity=15
     {name: "papaya", cmyk: [0, 0, 51, 0], tolerance: 4, winTolerance: 0.3}, // level=63, complexity=15
     {name: "light yellow", cmyk: [0, 0, 12, 0], tolerance: 5}, // level=64, complexity=15

@@ -187,7 +187,7 @@ function Game({ autoPlayMusic }) {
                 color={convert.cmyk.hex(getCurrentComponents(components))}
                 label={debug
                     ? `d${distance} (${getCurrentComponents(components)})`
-                    : `${distanceToPercentMatch(distance)}%`}
+                    : `${distanceToPercentMatch(distance, victory)}%`}
                 showColor={debug}
                 dropletColor={dropletColor}
                 showDroplet
