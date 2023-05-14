@@ -14,7 +14,11 @@ export function distanceToPercentMatch(distance, victory) {
     if (victory) {
         return 100;
     }
-    return Math.round(Math.max(100 - 2 * distance, 0));
+    const percent = Math.max(100 - 2 * distance, 0);
+    if (percent < 98) {
+        return Math.round(percent);
+    }
+    return percent.toFixed(1);
 }
 
 export function randomLevel() {
