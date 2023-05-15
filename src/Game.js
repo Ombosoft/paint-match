@@ -146,6 +146,8 @@ function Game({ autoPlayMusic }) {
     const goodEnough = distance <= targetLevel.tolerance;
     const enableSkip = debug || (resetCount >= 3 && !victory) || (goodEnough && !victory);
     const enableSliders = debug || (resetCount >= 3 && !victory);
+    const targetRGB = targetColorRGB();
+    const currentRGB = victory ? targetRGB : convert.cmyk.hex(getCurrentComponents(components));
 
     return (
         <NumDropletsContext.Provider value={numDroplets}>
@@ -169,14 +171,14 @@ function Game({ autoPlayMusic }) {
             </Stack >
             <Stack direction="row">
                 <ColorSquare
-                    color={targetColorRGB()}
+                    color={targetRGB}
                     label={debug ? `${targetLevel.name}  (${targetLevel.cmyk})` : targetLevel.name}
                     showColor={debug}
                     tooltip="Target color"
                     showTooltip={showBasicTutorial}
                 />
                 <ColorSquare
-                    color={convert.cmyk.hex(getCurrentComponents(components))}
+                    color={currentRGB}
                     label={debug
                         ? `d${distance} (${getCurrentComponents(components)})`
                         : `${distanceToPercentMatch(distance, victory)}%`}

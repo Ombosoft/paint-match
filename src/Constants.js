@@ -8,4 +8,4 @@ export const dropletsUntilReset = 5;
 export const musicVolume = 0.3;
 export const musicFadeDurationMs = 500;
 
-export const defaultWinTolerance = 0.01;
+export const defaultWinTolerance = 0.5;
