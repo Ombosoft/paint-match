@@ -1,5 +1,4 @@
 export const extraCommitDelay = -500;
-export const skipLevels = 0;
 export const animationDurationMs = 1000;
 export const dropletBlendDelay = 150;
 

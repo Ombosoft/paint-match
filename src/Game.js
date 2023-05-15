@@ -14,10 +14,10 @@ import {
     dropletBlendDelay,
     dropletsUntilReset,
     extraCommitDelay,
-    skipLevels,
 } from "./Constants";
+import useLevelStatus from "./LevelStatus";
 import { colorTable } from "./Levels";
-import { useLocalStorage } from "./LocalStorageHook";
+import LevelsButton from "./LevelsButton";
 import { NumDropletsContext } from "./NumDropletsContext";
 import ResetButton from "./ResetButton";
 import SkipLevelButton from "./SkipLevelButton";
@@ -43,9 +43,9 @@ function Game({ autoPlayMusic }) {
     const [prevComponents, setPrevComponents] = useState(zeroComponents);
     const [dropletColor, setDropletColor] = useState();
 
-    const [level, setLevel] = useLocalStorage("level", skipLevels);
+    const [curLevel, setCurLevel] = useLevelStatus();
     const [showBasicTutorial, endBasicTutorial] = useTutorial();
-    const [targetLevel, setTargetLevel] = useState(colorTable[level]);
+    const [targetLevel, setTargetLevel] = useState(colorTable[curLevel]);
     const maxDistance = 400;
     const [distance, setDistance] = useState(maxDistance);
     const [distanceGotWorse, setDistanceGotWorse] = useState(false);
@@ -149,8 +149,8 @@ function Game({ autoPlayMusic }) {
         setVictory(false);
         resetColors();
         setPrevComponents(zeroComponents);
-        const newLevel = level + 1;
-        setLevel(newLevel);
+        const newLevel = curLevel + 1;
+        setCurLevel(newLevel);
         const newTarget =
             colorTable.length > newLevel ? colorTable[newLevel] : randomLevel();
         setTargetLevel(newTarget);
@@ -192,10 +192,11 @@ function Game({ autoPlayMusic }) {
     return (
         <NumDropletsContext.Provider value={numDroplets}>
             <Stack direction="row">
-                <AppTitle onDebug={handleDebug} level={level} />
+                <LevelsButton/>
+                <AppTitle onDebug={handleDebug} level={curLevel} />
                 <UndoButton enabled={enableUndo} onClick={undo} />
                 <ResetButton
-                    level={level}
+                    level={curLevel}
                     allowReset={components !== zeroComponents && allowResetWhen}
                     resetColors={resetColors}
                 />
@@ -241,7 +242,7 @@ function Game({ autoPlayMusic }) {
             {!bottle && (
                 <ColorSliders
                     cmykColors={cmykColors}
-                    level={level}
+                    level={curLevel}
                     components={components}
                     onSetComponentValue={setComponentValue}
                 />
@@ -250,14 +251,14 @@ function Game({ autoPlayMusic }) {
             {bottle && (
                 <ColorButtons
                     cmykColors={cmykColors}
-                    level={level}
+                    level={curLevel}
                     components={components}
                     onClick={handleClick}
                     showTooltip={showBasicTutorial}
                 />
             )}
             <VictoryPanel
-                level={level}
+                level={curLevel}
                 color={targetColorRGB()}
                 levelName={targetLevel.name}
                 isVictory={victory}
