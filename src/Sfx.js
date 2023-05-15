@@ -106,7 +106,7 @@ function useHowl({ src, volume, rate, sprite}) {
         rate: rate,
         sprite: sprite,
     }));
-    const play = () => {
+    const play = useCallback(() => {
         sound.stop();
         if (muted) {
             return;
@@ -119,6 +119,6 @@ function useHowl({ src, volume, rate, sprite}) {
         if (rate) {
             sound.rate(rate);
         }
-    };
+    }, [muted, sound, rate, sprite]);
     return play;
 }

@@ -39,7 +39,7 @@ function VictoryPanel({ level, color, levelName, isVictory, onReset, onNextLevel
         } else {
             setDialogOpen(false);
         }
-    }, [isVictory]);
+    }, [isVictory, victorySound]);
 
     if (!isVictory) {
         return (<></>);

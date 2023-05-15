@@ -3,6 +3,7 @@ import MusicOffIcon from '@mui/icons-material/MusicOff';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import { IconButton, Stack, Tooltip } from "@mui/material";
+import PropTypes from 'prop-types';
 import React, { useContext } from "react";
 import { SoundsMutedContext } from './Sfx';
 
@@ -43,4 +44,10 @@ function MuteButton({ muted, toggleMute, onIcon, offIcon, title }) {
             </IconButton>
         </Tooltip>
     </>);
+}
+
+MuteButtons.prototypes = {
+    musicMuted: PropTypes.bool.isRequired, 
+    toggleMuteMusic: PropTypes.func.isRequired, 
+    toggleMuteSounds: PropTypes.func.isRequired,
 }
