@@ -1,12 +1,13 @@
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
-import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
-import { IconButton, Tooltip } from "@mui/material";
-import React from "react";
-import { Stack } from "@mui/material";
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import { IconButton, Stack, Tooltip } from "@mui/material";
+import React, { useContext } from "react";
+import { SoundsMutedContext } from './Sfx';
 
-export function MuteButtons({ musicMuted, toggleMuteMusic }) {
+export function MuteButtons({ musicMuted, toggleMuteMusic, toggleMuteSounds }) {
+    const soundsMuted = useContext(SoundsMutedContext);
     return (
         <Stack direction="row" justifyContent="end" sx={{
             position: 'fixed',
@@ -21,8 +22,8 @@ export function MuteButtons({ musicMuted, toggleMuteMusic }) {
                 title="music"
             />
             <MuteButton
-                muted={musicMuted}
-                toggleMute={toggleMuteMusic}
+                muted={soundsMuted}
+                toggleMute={toggleMuteSounds}
                 onIcon={(<VolumeUpIcon />)}
                 offIcon={(<VolumeOffIcon />)}
                 title="sounds"

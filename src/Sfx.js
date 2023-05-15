@@ -1,8 +1,23 @@
+import { createContext, useCallback } from 'react';
 import useSound from 'use-sound';
+import { useLocalStorage } from "./LocalStorageHook";
 import { randElement } from './Utils';
 
+export const SoundsMutedContext = createContext(false);
+
+export function useSoundControl() {
+    const [muted, setMuted] = useLocalStorage("muteSounds", false);
+    const toggleMute = useCallback(() => {
+        const newMuted = !muted;
+        setMuted(newMuted);
+    }, [muted, setMuted]);
+    return [muted, toggleMute];
+}
+
 export function useVictorySound() {
-    return useSound(process.env.PUBLIC_URL + '/sfx/victory.webm', { volume: 0.4 });
+    return useSound(process.env.PUBLIC_URL + '/sfx/victory.webm', {
+        volume: 0.4,
+    });
 }
 
 export function useResetSound() {
@@ -55,7 +70,7 @@ function playbackRate(numDroplets) {
     return Math.min(2.6, playbackRate(50) + 0.003 * (numDroplets - 50));
 }
 
-export function useDropletSound(numDroplets) {
+export function useDropletSound(numDroplets, muted) {
     // Start and duration, ms
     const dropletSprites = {
         '0': [140, 340],
@@ -79,6 +94,7 @@ export function useDropletSound(numDroplets) {
         volume: 0.6,
         interrupt: true,
         playbackRate: playbackRate(numDroplets),
+        soundEnabled: !muted,
         sprite: dropletSprites,
     });
     const play = () => {
