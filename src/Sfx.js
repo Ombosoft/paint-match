@@ -1,5 +1,5 @@
-import { createContext, useCallback } from 'react';
-import useSound from 'use-sound';
+import { Howl } from 'howler';
+import { createContext, useCallback, useState } from 'react';
 import { useLocalStorage } from "./LocalStorageHook";
 import { randElement } from './Utils';
 
@@ -14,28 +14,34 @@ export function useSoundControl() {
     return [muted, toggleMute];
 }
 
-export function useVictorySound() {
-    return useSound(process.env.PUBLIC_URL + '/sfx/victory.webm', {
+export function useVictorySound(muted) {
+    return useHowl({
+        src: '/sfx/victory.webm',
         volume: 0.4,
+        rate: 1.0,
+        sprite: null,
+        muted: muted,
     });
 }
 
-export function useResetSound() {
-    return useResetSfx(1.0);
+export function useResetSound(muted) {
+    return useResetSfx(muted, 1.0);
 }
 
-export function useUndoSound() {
-    return useResetSfx(2.0);
+export function useUndoSound(muted) {
+    return useResetSfx(muted, 2.0);
 }
 
-function useResetSfx(rate) {
-    return useSound(process.env.PUBLIC_URL + '/sfx/reset.webm', {
+function useResetSfx(muted, rate) {
+    return useHowl({
+        src: '/sfx/reset.webm',
         volume: 0.3,
-        playbackRate: rate,
+        rate: rate,
+        muted: muted
     });
 }
 
-export function useSkipSound() {
+export function useSkipSound(muted) {
     // Start and duration, ms
     const skipSprites = {
         '0': [30, 900],
@@ -49,15 +55,12 @@ export function useSkipSound() {
         '8': [22198, 871],
         '9': [23931, 681],
     };
-    const [sprites] = useSound(process.env.PUBLIC_URL + '/sfx/skip.webm', {
+    return useHowl({
+        src: '/sfx/skip.webm',
         volume: 1.0,
-        interrupt: true,
         sprite: skipSprites,
+        muted: muted
     });
-    const play = () => {
-        sprites({ id: randElement(Object.keys(skipSprites)) });
-    };
-    return [play];
 }
 
 function playbackRate(numDroplets) {
@@ -90,15 +93,35 @@ export function useDropletSound(numDroplets, muted) {
         '14': [12427, 438],
         '15': [13253, 375],
     };
-    const [sprites] = useSound(process.env.PUBLIC_URL + '/sfx/droplet.webm', {
+    return useHowl({
+        src: '/sfx/droplet.webm',
         volume: 0.6,
-        interrupt: true,
-        playbackRate: playbackRate(numDroplets),
-        soundEnabled: !muted,
+        rate: playbackRate(numDroplets),
         sprite: dropletSprites,
+        muted: muted
     });
+}
+
+function useHowl({ src, volume, rate, sprite, muted }) {
+    const [sound] = useState(new Howl({
+        src: process.env.PUBLIC_URL + src,
+        volume: volume,
+        rate: rate,
+        sprite: sprite,
+    }));
     const play = () => {
-        sprites({ id: randElement(Object.keys(dropletSprites)) });
+        sound.stop();
+        if (muted) {
+            return;
+        }
+        if (sprite) {
+            sound.play(randElement(Object.keys(sprite)));
+        } else {
+            sound.play();
+        }
+        if (rate) {
+            sound.rate(rate);
+        }
     };
-    return [play];
+    return play;
 }

@@ -7,7 +7,7 @@ import { SoundsMutedContext, useDropletSound } from './Sfx';
 
 function ColorButton({ color, components, onClick, tooltip, showTooltip, numDroplets }) {
     const soundsMuted = useContext(SoundsMutedContext);
-    const [dropletSound] = useDropletSound(numDroplets, soundsMuted);
+    const dropletSound = useDropletSound(numDroplets, soundsMuted);
     const handleClick = () => {
         dropletSound();
         onClick(color);

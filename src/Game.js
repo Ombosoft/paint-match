@@ -38,12 +38,11 @@ function Game({ autoPlayMusic }) {
     const [distance, setDistance] = useState(maxDistance);
     const [distanceGotWorse, setDistanceGotWorse] = useState(false);
     const [resetCount, setResetCount] = useState(0);
-    // State for debug mode
     const [debug, setDebug] = useState(false);
-    const [victorySound] = useVictorySound();
 
     const numDroplets = vecCompSum(Object.values(components));
     const soundsMuted = useContext(SoundsMutedContext);
+    const victorySound = useVictorySound(soundsMuted);
 
     // Callback for handling debug mode changes
     function handleDebug(newDebug) {

@@ -1,13 +1,14 @@
 import ReplayIcon from "@mui/icons-material/Replay";
 import PropTypes from 'prop-types';
-import React from "react";
+import React, { useContext } from "react";
 import NiceButton from "./NiceButton";
-import { useResetSound } from "./Sfx";
+import { SoundsMutedContext, useResetSound } from "./Sfx";
 import { useResetTutorial } from "./Tutorial";
 
 // Start over button in the main game screen and tutorial for it
 function ResetButton({ level, numDroplets, allowReset, resetColors }) {
-    const [resetSound] = useResetSound();
+    const soundsMuted = useContext(SoundsMutedContext);
+    const resetSound = useResetSound(soundsMuted);
     const [canShowReset, onResetColors] = useResetTutorial();
     const showTutorial = canShowReset(level, numDroplets);
     const enableReset = showTutorial || allowReset;
