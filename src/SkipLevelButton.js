@@ -8,41 +8,41 @@ import { useSkipLevelTutorial } from "./Tutorial";
 
 // Button and tutorial
 function SkipLevelButton({ enabled, goodEnough, nextLevel }) {
-  const [allowSkipLevelTutorial, onSkipLevelUsed] = useSkipLevelTutorial();
-  const showTutorial = useDisappearingState(
-    allowSkipLevelTutorial && enabled && goodEnough
-  );
-  const skipSound = useSkipSound();
+    const [allowSkipLevelTutorial, onSkipLevelUsed] = useSkipLevelTutorial();
+    const showTutorial = useDisappearingState(
+        allowSkipLevelTutorial && enabled && goodEnough
+    );
+    const skipSound = useSkipSound();
 
-  function handleClick() {
-    skipSound();
-    onSkipLevelUsed();
-    nextLevel();
-  }
+    function handleClick() {
+        skipSound();
+        onSkipLevelUsed();
+        nextLevel();
+    }
 
-  return (
-    <NiceButton
-      title={
-        allowSkipLevelTutorial && goodEnough ? (
-          <h1>Good enough! You may skip this level</h1>
-        ) : (
-          "Skip level"
-        )
-      }
-      enabled={enabled}
-      onClick={handleClick}
-      forceTooltip={showTutorial}
-      xOffset={allowSkipLevelTutorial && goodEnough ? 100 : 0}
-    >
-      <FastForwardIcon fontSize="large" />
-    </NiceButton>
-  );
+    return (
+        <NiceButton
+            title={
+                allowSkipLevelTutorial && goodEnough ? (
+                    <h1>Good enough! You may skip this level</h1>
+                ) : (
+                    "Skip level"
+                )
+            }
+            enabled={enabled}
+            onClick={handleClick}
+            forceTooltip={showTutorial}
+            xOffset={allowSkipLevelTutorial && goodEnough ? 100 : 0}
+        >
+            <FastForwardIcon fontSize="large" />
+        </NiceButton>
+    );
 }
 
 SkipLevelButton.propTypes = {
-  enabled: PropTypes.bool.isRequired,
-  goodEnough: PropTypes.bool.isRequired,
-  nextLevel: PropTypes.func.isRequired,
+    enabled: PropTypes.bool.isRequired,
+    goodEnough: PropTypes.bool.isRequired,
+    nextLevel: PropTypes.func.isRequired,
 };
 
 export default SkipLevelButton;

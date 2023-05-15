@@ -1,68 +1,68 @@
 .App {
-  text-align: center;
-  user-select: none;
+    text-align: center;
+    user-select: none;
 }
 
 .MuiDialog-root {
-  user-select: none;
+    user-select: none;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .Picker-square {
-  background-color: #61dafb;
-  min-height: 20vh;
-  min-width: 20vh;
-  max-width: 20vh;
-  padding-left: 1vh;
-  padding-right: 1vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  text-shadow: 1px 1px black;
-  text-transform: capitalize;
-  margin-top: 2vh;
-  margin-bottom: 1vh;
+    background-color: #61dafb;
+    min-height: 20vh;
+    min-width: 20vh;
+    max-width: 20vh;
+    padding-left: 1vh;
+    padding-right: 1vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    text-shadow: 1px 1px black;
+    text-transform: capitalize;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
 }
 
 .Picker-slider {
-  width: 90%;
+    width: 90%;
 }
 
 .Color-button {
-  text-shadow: 1px 1px black;
+    text-shadow: 1px 1px black;
 }
 
 .ColorizeButton {
-  padding: 0;
+    padding: 0;
 }
 
 .ButtonRow {
-  justify-content: space-between;
+    justify-content: space-between;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 .MuiAlert-message {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .MuiAlert-icon {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
