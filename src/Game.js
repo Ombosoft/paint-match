@@ -2,7 +2,7 @@ import TuneIcon from '@mui/icons-material/Tune';
 import { Stack } from "@mui/material";
 import convert from "color-convert";
 import PropTypes from 'prop-types';
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import AppTitle from "./AppTitle";
 import ColorButtons from "./ColorButtons";
 import colorDistance from './ColorDistance';
@@ -14,7 +14,7 @@ import { colorTable } from "./Levels";
 import { useLocalStorage } from "./LocalStorageHook";
 import NiceButton from "./NiceButton";
 import ResetButton from "./ResetButton";
-import { SoundsMutedContext, useVictorySound } from './Sfx';
+import { useVictorySound } from './Sfx';
 import SkipLevelButton from './SkipLevelButton';
 import { useTutorial } from "./Tutorial";
 import UndoButton from './UndoButton';
@@ -41,8 +41,7 @@ function Game({ autoPlayMusic }) {
     const [debug, setDebug] = useState(false);
 
     const numDroplets = vecCompSum(Object.values(components));
-    const soundsMuted = useContext(SoundsMutedContext);
-    const victorySound = useVictorySound(soundsMuted);
+    const victorySound = useVictorySound();
 
     // Callback for handling debug mode changes
     function handleDebug(newDebug) {

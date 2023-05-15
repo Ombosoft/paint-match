@@ -7,8 +7,7 @@ import { useResetTutorial } from "./Tutorial";
 
 // Start over button in the main game screen and tutorial for it
 function ResetButton({ level, numDroplets, allowReset, resetColors }) {
-    const soundsMuted = useContext(SoundsMutedContext);
-    const resetSound = useResetSound(soundsMuted);
+    const resetSound = useResetSound();
     const [canShowReset, onResetColors] = useResetTutorial();
     const showTutorial = canShowReset(level, numDroplets);
     const enableReset = showTutorial || allowReset;

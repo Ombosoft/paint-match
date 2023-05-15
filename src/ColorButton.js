@@ -1,13 +1,12 @@
 import ColorizeIcon from "@mui/icons-material/Colorize";
 import { Button, IconButton, Stack, ThemeProvider, Tooltip } from "@mui/material";
 import PropTypes from 'prop-types';
-import React, { useContext } from "react";
+import React from "react";
 import { theme } from "./Colors";
-import { SoundsMutedContext, useDropletSound } from './Sfx';
+import { useDropletSound } from './Sfx';
 
 function ColorButton({ color, components, onClick, tooltip, showTooltip, numDroplets }) {
-    const soundsMuted = useContext(SoundsMutedContext);
-    const dropletSound = useDropletSound(numDroplets, soundsMuted);
+    const dropletSound = useDropletSound(numDroplets);
     const handleClick = () => {
         dropletSound();
         onClick(color);

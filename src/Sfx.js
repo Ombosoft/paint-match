@@ -1,5 +1,5 @@
 import { Howl } from 'howler';
-import { createContext, useCallback, useState } from 'react';
+import { createContext, useCallback, useContext, useState } from 'react';
 import { useLocalStorage } from "./LocalStorageHook";
 import { randElement } from './Utils';
 
@@ -14,34 +14,32 @@ export function useSoundControl() {
     return [muted, toggleMute];
 }
 
-export function useVictorySound(muted) {
+export function useVictorySound() {
     return useHowl({
         src: '/sfx/victory.webm',
         volume: 0.4,
         rate: 1.0,
         sprite: null,
-        muted: muted,
     });
 }
 
-export function useResetSound(muted) {
-    return useResetSfx(muted, 1.0);
+export function useResetSound() {
+    return useResetSfx(1.0);
 }
 
-export function useUndoSound(muted) {
-    return useResetSfx(muted, 2.0);
+export function useUndoSound() {
+    return useResetSfx(2.0);
 }
 
-function useResetSfx(muted, rate) {
+function useResetSfx(rate) {
     return useHowl({
         src: '/sfx/reset.webm',
         volume: 0.3,
         rate: rate,
-        muted: muted
     });
 }
 
-export function useSkipSound(muted) {
+export function useSkipSound() {
     // Start and duration, ms
     const skipSprites = {
         '0': [30, 900],
@@ -59,7 +57,6 @@ export function useSkipSound(muted) {
         src: '/sfx/skip.webm',
         volume: 1.0,
         sprite: skipSprites,
-        muted: muted
     });
 }
 
@@ -73,7 +70,7 @@ function playbackRate(numDroplets) {
     return Math.min(2.6, playbackRate(50) + 0.003 * (numDroplets - 50));
 }
 
-export function useDropletSound(numDroplets, muted) {
+export function useDropletSound(numDroplets) {
     // Start and duration, ms
     const dropletSprites = {
         '0': [140, 340],
@@ -98,11 +95,11 @@ export function useDropletSound(numDroplets, muted) {
         volume: 0.6,
         rate: playbackRate(numDroplets),
         sprite: dropletSprites,
-        muted: muted
     });
 }
 
-function useHowl({ src, volume, rate, sprite, muted }) {
+function useHowl({ src, volume, rate, sprite}) {
+    const muted = useContext(SoundsMutedContext);
     const [sound] = useState(new Howl({
         src: process.env.PUBLIC_URL + src,
         volume: volume,

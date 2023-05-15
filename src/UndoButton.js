@@ -1,11 +1,9 @@
 import UndoIcon from "@mui/icons-material/Undo";
-import { useContext } from "react";
 import NiceButton from "./NiceButton";
-import { SoundsMutedContext, useUndoSound } from "./Sfx";
+import { useUndoSound } from "./Sfx";
 
 export default function UndoButton({enabled, onClick}) {
-    const soundsMuted = useContext(SoundsMutedContext);
-    const undoSound = useUndoSound(soundsMuted);
+    const undoSound = useUndoSound();
 
     function handleClick() {
         undoSound();
