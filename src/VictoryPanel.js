@@ -3,10 +3,12 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import { Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Slide, Stack } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { forwardRef, useEffect, useRef, useState } from "react";
+import { useVictorySound } from './Sfx.js';
 import { toasts } from "./Toasts.js";
 import { randElement, simplePlural } from "./Utils.js";
 
 function VictoryPanel({ level, color, levelName, numDroplets, isVictory, onReset, onNextLevel }) {
+    const victorySound = useVictorySound();
     const prevLevel = useRef(0);
     const toast = useRef(randElement(toasts));
     if (isVictory && level !== prevLevel.current) {
@@ -24,6 +26,7 @@ function VictoryPanel({ level, color, levelName, numDroplets, isVictory, onReset
     const [dialogOpen, setDialogOpen] = useState(false);
     useEffect(() => {
         if (isVictory) {
+            victorySound();
             const timerId = setTimeout(() => {
                 setDialogOpen(true);
             }, 600); // Delay opening dialog
