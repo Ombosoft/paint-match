@@ -1,5 +1,5 @@
 import { Howl } from 'howler';
-import { createContext, useCallback, useContext, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { useLocalStorage } from "./LocalStorageHook";
 import { randElement } from './Utils';
 
@@ -100,13 +100,22 @@ export function useDropletSound(numDroplets) {
 
 function useHowl({ src, volume, rate, sprite}) {
     const muted = useContext(SoundsMutedContext);
-    const [sound] = useState(new Howl({
-        src: process.env.PUBLIC_URL + src,
-        volume: volume,
-        rate: rate,
-        sprite: sprite,
-    }));
+    const [sound, setSound] = useState();
+    // Have to use effect to prevent leaking. Howler keeps all created Howl instances 
+    useEffect(() => {
+        if (!sound) {
+            setSound(new Howl({
+                src: process.env.PUBLIC_URL + src,
+                volume: volume,
+                rate: rate,
+                sprite: sprite,
+            }));
+        }
+    });
     const play = useCallback(() => {
+        if (!sound) {
+            return;
+        }
         sound.stop();
         if (muted) {
             return;
