@@ -1,22 +1,23 @@
 import FastForwardIcon from "@mui/icons-material/FastForward";
 import ReplayIcon from "@mui/icons-material/Replay";
 import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  Slide,
-  Stack,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    IconButton,
+    Slide,
+    Stack,
 } from "@mui/material";
 import PropTypes from "prop-types";
 import React, {
-  forwardRef,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
+    forwardRef,
+    useContext,
+    useEffect,
+    useRef,
+    useState,
 } from "react";
+import LevelsButton from "./LevelsButton.js";
 import { NumDropletsContext } from "./NumDropletsContext.js";
 import { useVictorySound } from "./Sfx.js";
 import { toasts } from "./Toasts.js";
@@ -42,12 +43,13 @@ function VictoryPanel({
         return <Slide direction="up" ref={ref} {...props} timeout={500} />;
     });
     const [dialogOpen, setDialogOpen] = useState(false);
+    // Delay opening dialog
     useEffect(() => {
         if (isVictory) {
             victorySound();
             const timerId = setTimeout(() => {
                 setDialogOpen(true);
-            }, 600); // Delay opening dialog
+            }, 600); 
 
             return () => {
                 clearTimeout(timerId);
@@ -102,6 +104,7 @@ function VictoryPanel({
                     <h3>{toast.current}</h3>
                     <DialogActions>
                         <Stack direction="row">
+                            <LevelsButton onClick={() => setDialogOpen(false)}/>
                             <IconButton
                                 onClick={onReset}
                                 color="secondary"

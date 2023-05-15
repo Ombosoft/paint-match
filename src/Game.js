@@ -18,6 +18,8 @@ import {
 import useLevelStatus from "./LevelStatus";
 import { colorTable } from "./Levels";
 import LevelsButton from "./LevelsButton";
+import LevelsPanel from "./LevelsPanel";
+import { LevelsPanelContext } from "./LevelsPanelContext";
 import { NumDropletsContext } from "./NumDropletsContext";
 import ResetButton from "./ResetButton";
 import SkipLevelButton from "./SkipLevelButton";
@@ -51,6 +53,7 @@ function Game({ autoPlayMusic }) {
     const [distanceGotWorse, setDistanceGotWorse] = useState(false);
     const [resetCount, setResetCount] = useState(0);
     const [debug, setDebug] = useState(false);
+    const [levelsPanelOpen, setLevelsPanelOpen] = useState(false);
 
     const numDroplets = vecCompSum(Object.values(components));
 
@@ -146,10 +149,13 @@ function Game({ autoPlayMusic }) {
     }
 
     function nextLevel() {
+        setLevel(curLevel + 1);
+    }
+
+    function setLevel(newLevel) {
         setVictory(false);
         resetColors();
         setPrevComponents(zeroComponents);
-        const newLevel = curLevel + 1;
         setCurLevel(newLevel);
         const newTarget =
             colorTable.length > newLevel ? colorTable[newLevel] : randomLevel();
@@ -177,6 +183,11 @@ function Game({ autoPlayMusic }) {
         return convert.cmyk.hex(targetLevel.cmyk);
     }
 
+    function handleLevelChoice(newLevel) {
+        setLevelsPanelOpen(false);
+        setLevel(newLevel);
+    }
+
     const allowResetWhen =
         victory || distanceGotWorse || numDroplets > dropletsUntilReset;
     const enableUndo = components !== prevComponents && !victory;
@@ -191,80 +202,90 @@ function Game({ autoPlayMusic }) {
 
     return (
         <NumDropletsContext.Provider value={numDroplets}>
-            <Stack direction="row">
-                <LevelsButton/>
-                <AppTitle onDebug={handleDebug} level={curLevel} />
-                <UndoButton enabled={enableUndo} onClick={undo} />
-                <ResetButton
-                    level={curLevel}
-                    allowReset={components !== zeroComponents && allowResetWhen}
-                    resetColors={resetColors}
-                />
-                <SkipLevelButton
-                    enabled={enableSkip}
-                    goodEnough={goodEnough}
-                    nextLevel={nextLevel}
-                />
-                <SlidersButton
-                    enabled={enableSliders}
-                    onClick={() => setBottle((prev) => !prev)}
-                />
-            </Stack>
-            <Stack direction="row">
-                <ColorSquare
-                    color={targetRGB}
-                    label={
-                        debug
-                            ? `${targetLevel.name}  (${targetLevel.cmyk})`
-                            : targetLevel.name
-                    }
-                    showColor={debug}
-                    tooltip="Target color"
-                    showTooltip={showBasicTutorial}
-                />
-                <ColorSquare
-                    color={currentRGB}
-                    label={
-                        debug
-                            ? `d${distance} (${getCurrentComponents(
-                                  components
-                              )})`
-                            : `${distanceToPercentMatch(distance, victory)}%`
-                    }
-                    showColor={debug}
-                    dropletColor={dropletColor}
-                    showDroplet
-                    tooltip="Current Mix"
-                    showTooltip={showBasicTutorial}
-                />
-            </Stack>
+            <LevelsPanelContext.Provider
+                value={{ setLevelsPanelOpen: setLevelsPanelOpen }}
+            >
+                <Stack direction="row">
+                    <LevelsButton />
+                    <AppTitle onDebug={handleDebug} level={curLevel} />
+                    <UndoButton enabled={enableUndo} onClick={undo} />
+                    <ResetButton
+                        level={curLevel}
+                        allowReset={
+                            components !== zeroComponents && allowResetWhen
+                        }
+                        resetColors={resetColors}
+                    />
+                    <SkipLevelButton
+                        enabled={enableSkip}
+                        goodEnough={goodEnough}
+                        nextLevel={nextLevel}
+                    />
+                    <SlidersButton
+                        enabled={enableSliders}
+                        onClick={() => setBottle((prev) => !prev)}
+                    />
+                </Stack>
+                <Stack direction="row">
+                    <ColorSquare
+                        color={targetRGB}
+                        label={
+                            debug
+                                ? `${targetLevel.name}  (${targetLevel.cmyk})`
+                                : targetLevel.name
+                        }
+                        showColor={debug}
+                        tooltip="Target color"
+                        showTooltip={showBasicTutorial}
+                    />
+                    <ColorSquare
+                        color={currentRGB}
+                        label={
+                            debug
+                                ? `d${distance} (${getCurrentComponents(
+                                      components
+                                  )})`
+                                : `${distanceToPercentMatch(
+                                      distance,
+                                      victory
+                                  )}%`
+                        }
+                        showColor={debug}
+                        dropletColor={dropletColor}
+                        showDroplet
+                        tooltip="Current Mix"
+                        showTooltip={showBasicTutorial}
+                    />
+                </Stack>
 
-            {!bottle && (
-                <ColorSliders
-                    cmykColors={cmykColors}
-                    level={curLevel}
-                    components={components}
-                    onSetComponentValue={setComponentValue}
-                />
-            )}
+                {!bottle && (
+                    <ColorSliders
+                        cmykColors={cmykColors}
+                        level={curLevel}
+                        components={components}
+                        onSetComponentValue={setComponentValue}
+                    />
+                )}
 
-            {bottle && (
-                <ColorButtons
-                    cmykColors={cmykColors}
+                {bottle && (
+                    <ColorButtons
+                        cmykColors={cmykColors}
+                        level={curLevel}
+                        components={components}
+                        onClick={handleClick}
+                        showTooltip={showBasicTutorial}
+                    />
+                )}
+                <VictoryPanel
                     level={curLevel}
-                    components={components}
-                    onClick={handleClick}
-                    showTooltip={showBasicTutorial}
+                    color={targetColorRGB()}
+                    levelName={targetLevel.name}
+                    isVictory={victory}
+                    onNextLevel={nextLevel}
+                    onReset={resetColors}
                 />
-            )}
-            <VictoryPanel
-                level={curLevel}
-                color={targetColorRGB()}
-                levelName={targetLevel.name}
-                isVictory={victory}
-                onNextLevel={nextLevel}
-                onReset={resetColors}
-            />
+                <LevelsPanel open={levelsPanelOpen} onClose={handleLevelChoice} />
+            </LevelsPanelContext.Provider>
         </NumDropletsContext.Provider>
     );
 }
