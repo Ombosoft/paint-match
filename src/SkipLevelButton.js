@@ -7,9 +7,9 @@ import { useSkipSound } from "./Sfx";
 import { useSkipLevelTutorial } from "./Tutorial";
 
 // Button and tutorial
-function SkipLevelButton({ enabled, nextLevel }) {
+function SkipLevelButton({ enabled, goodEnough, nextLevel }) {
     const [allowSkipLevelTutorial, onSkipLevelUsed] = useSkipLevelTutorial();
-    const showTutorial = useDisappearingState(allowSkipLevelTutorial && enabled);
+    const showTutorial = useDisappearingState(allowSkipLevelTutorial && enabled && goodEnough);
     const skipSound = useSkipSound();
 
     function handleClick() {
@@ -33,6 +33,7 @@ function SkipLevelButton({ enabled, nextLevel }) {
 
 SkipLevelButton.propTypes = {
     enabled: PropTypes.bool.isRequired,
+    goodEnough: PropTypes.bool.isRequired,
     nextLevel: PropTypes.func.isRequired,
 }
 

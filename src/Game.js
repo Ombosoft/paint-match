@@ -144,7 +144,8 @@ function Game({ autoPlayMusic }) {
 
     const allowResetWhen = victory || distanceGotWorse || numDroplets > dropletsUntilReset;
     const enableUndo = components !== prevComponents && !victory;
-    const enableSkip = debug || (resetCount >= 3 && !victory) || (distance <= targetLevel.tolerance && !victory);
+    const goodEnough = distance <= targetLevel.tolerance;
+    const enableSkip = debug || (resetCount >= 3 && !victory) || (goodEnough && !victory);
     const enableSliders = debug || (resetCount >= 3 && !victory);
 
     return (
@@ -159,6 +160,7 @@ function Game({ autoPlayMusic }) {
                 />
                 <SkipLevelButton
                     enabled={enableSkip}
+                    goodEnough={goodEnough}
                     nextLevel={nextLevel}
                 />
                 <NiceButton
