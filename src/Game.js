@@ -54,7 +54,7 @@ function Game({ autoPlayMusic }) {
         const newDistance = colorDistance(targetLevel.cmyk, getCurrentComponents(cs));
         setDistance(newDistance);
         setDistanceGotWorse(distanceGotWorse || newDistance > distance);
-        const winTolerance = targetLevel.winTolerance ?? defaultWinTolerance;
+        const winTolerance = defaultWinTolerance + (targetLevel.extraWinTolerance ?? 0.0);
         console.log('wintol', winTolerance, 'newDist:', newDistance);
         if (newDistance <= winTolerance) {
             setVictory(true);
