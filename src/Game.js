@@ -203,7 +203,6 @@ function Game({ autoPlayMusic }) {
             {
                 bottle && (<ColorButtons cmykColors={cmykColors}
                     level={level}
-                    numDroplets={numDroplets}
                     components={components}
                     onClick={handleClick}
                     showTooltip={showBasicTutorial}
@@ -216,7 +215,6 @@ function Game({ autoPlayMusic }) {
                 isVictory={victory}
                 onNextLevel={nextLevel}
                 onReset={resetColors}
-                numDroplets={numDroplets}
             />
         </NumDropletsContext.Provider>);
 }

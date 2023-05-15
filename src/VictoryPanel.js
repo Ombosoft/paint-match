@@ -2,12 +2,14 @@ import FastForwardIcon from '@mui/icons-material/FastForward';
 import ReplayIcon from "@mui/icons-material/Replay";
 import { Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Slide, Stack } from "@mui/material";
 import PropTypes from "prop-types";
-import React, { forwardRef, useEffect, useRef, useState } from "react";
+import React, { forwardRef, useContext, useEffect, useRef, useState } from "react";
+import { NumDropletsContext } from './NumDropletsContext.js';
 import { useVictorySound } from './Sfx.js';
 import { toasts } from "./Toasts.js";
 import { randElement, simplePlural } from "./Utils.js";
 
-function VictoryPanel({ level, color, levelName, numDroplets, isVictory, onReset, onNextLevel }) {
+function VictoryPanel({ level, color, levelName, isVictory, onReset, onNextLevel }) {
+    const numDroplets = useContext(NumDropletsContext);
     const victorySound = useVictorySound();
     const prevLevel = useRef(0);
     const toast = useRef(randElement(toasts));
@@ -100,7 +102,6 @@ VictoryPanel.propTypes = {
     level: PropTypes.number.isRequired,
     color: PropTypes.string.isRequired,
     levelName: PropTypes.string.isRequired,
-    numDroplets: PropTypes.number.isRequired,
     isVictory: PropTypes.bool.isRequired,
     onReset: PropTypes.func.isRequired,
     onNextLevel: PropTypes.func.isRequired,
