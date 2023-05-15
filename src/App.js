@@ -6,13 +6,16 @@ import { MuteButtons } from "./MuteButtons";
 
 // Main app component.
 function App() {
-    const [muted, toggleMute, autoPlay] = useMusic();
+    const [musicMuted, toggleMuteMusic, autoPlay] = useMusic();
 
     return (
         <div className="App">
             <header className="App-header">
                 <Game autoPlayMusic={autoPlay} />
-                <MuteButtons muted={muted} toggleMute={toggleMute}/>
+                <MuteButtons
+                    musicMuted={musicMuted}
+                    toggleMuteMusic={toggleMuteMusic}
+                />
             </header>
         </div>
     );

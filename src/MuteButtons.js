@@ -1,30 +1,44 @@
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import MusicOffIcon from '@mui/icons-material/MusicOff';
+import VolumeUpIcon from '@mui/icons-material/VolumeUp';
+import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import { IconButton, Tooltip } from "@mui/material";
 import React from "react";
 import { Stack } from "@mui/material";
 
-export function MuteButtons({ muted, toggleMute }) {
+export function MuteButtons({ musicMuted, toggleMuteMusic }) {
     return (
         <Stack direction="row" justifyContent="end" sx={{
             position: 'fixed',
-            bottom: "0em",
-            left: "0em",
+            bottom: "1em",
+            left: "1em",
         }}>
-            <MuteButton muted={muted} toggleMute={toggleMute} />
+            <MuteButton
+                muted={musicMuted}
+                toggleMute={toggleMuteMusic}
+                onIcon={(<MusicNoteIcon />)}
+                offIcon={(<MusicOffIcon />)}
+                title="music"
+            />
+            <MuteButton
+                muted={musicMuted}
+                toggleMute={toggleMuteMusic}
+                onIcon={(<VolumeUpIcon />)}
+                offIcon={(<VolumeOffIcon />)}
+                title="sounds"
+            />
         </Stack>);
 }
 
-
-function MuteButton({ muted, toggleMute }) {
+function MuteButton({ muted, toggleMute, onIcon, offIcon, title }) {
     return (<>
-        <Tooltip title={muted ? "Play music" : "Mute music"} placement="top-end" arrow>
+        <Tooltip title={muted ? `Play ${title}` : `Mute ${title}`} placement="top-end" arrow>
             <IconButton
                 onClick={toggleMute}
                 color="secondary"
                 size="medium"
-                sx={{ padding: "1em" }}>
-                {muted ? (<MusicOffIcon fontSize="med" />) : (<MusicNoteIcon fontSize="med" />)}
+            >
+                {muted ? offIcon : onIcon}
             </IconButton>
         </Tooltip>
     </>);
