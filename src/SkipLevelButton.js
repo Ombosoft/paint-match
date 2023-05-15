@@ -20,11 +20,11 @@ function SkipLevelButton({ enabled, goodEnough, nextLevel }) {
 
     return (
         <NiceButton
-            title={allowSkipLevelTutorial ? (<h1>Good enough! You may skip this level</h1>) : "Skip level"}
+            title={allowSkipLevelTutorial && goodEnough ? (<h1>Good enough! You may skip this level</h1>) : "Skip level"}
             enabled={enabled}
             onClick={handleClick}
             forceTooltip={showTutorial}
-            xOffset={allowSkipLevelTutorial ? 100 : 0}
+            xOffset={allowSkipLevelTutorial && goodEnough ? 100 : 0}
         >
             <FastForwardIcon fontSize="large" />
         </NiceButton>
