@@ -1,8 +1,5 @@
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
-import MusicOffIcon from '@mui/icons-material/MusicOff';
-import { IconButton, Tooltip } from "@mui/material";
 import { Howl } from 'howler';
-import React, { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { musicFadeDurationMs, musicVolume } from './Constants';
 import { useLocalStorage } from "./LocalStorageHook";
 
@@ -46,18 +43,6 @@ function useMusic() {
             sound.current.fade(0, musicVolume, musicFadeDurationMs);
         }
     }, [muted, setMuted]);
-    // Mute button to place where appropriate on the screen
-    const MuteButton = useCallback(() => (<>
-        <Tooltip title={muted ? "Play music" : "Mute music"} placement="top-end" arrow>
-            <IconButton
-                onClick={toggleMute}
-                color="secondary"
-                size="medium"
-                sx={{ padding: "1em" }}>
-                {muted ? (<MusicOffIcon fontSize="med" />) : (<MusicNoteIcon fontSize="med" />)}
-            </IconButton>
-        </Tooltip>
-    </>), [muted, toggleMute]);
     // Callback that starts music when the app is ready
     const autoPlay = useCallback(() => {
         if (muted || sound.current.playing()) {
@@ -65,7 +50,7 @@ function useMusic() {
         }
         sound.current.play();
     }, [muted, sound]);
-    return [MuteButton, autoPlay];
+    return [muted, toggleMute, autoPlay];
 };
 
 export default useMusic;

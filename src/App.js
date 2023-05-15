@@ -2,11 +2,12 @@ import { Stack } from "@mui/material";
 import './App.css';
 import Game from "./Game";
 import useMusic from "./Music";
+import { MuteButton } from "./MuteButtons";
 
 
 // Main app component.
 function App() {
-    const [MuteButton, autoPlay] = useMusic();
+    const [muted, toggleMute, autoPlay] = useMusic();
 
     return (
         <div className="App">
@@ -17,7 +18,7 @@ function App() {
                     bottom: "0em",
                     left: "0em",
                 }}>
-                    <MuteButton />
+                    <MuteButton muted={muted} toggleMute={toggleMute}/>
                 </Stack>
             </header>
         </div>
