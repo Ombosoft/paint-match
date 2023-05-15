@@ -34,9 +34,17 @@ export function useResetTutorial() {
 }
 
 export function useSkipLevelTutorial() {
-    const [allowSkipLevelTutorial, setAllowSkipLevelTutorial] = useLocalStorage("tutorial-skip-level", true);
-    function onSkipLevelUsed() {
-        setAllowSkipLevelTutorial(false);
+    return useOneOffTutorial("tutorial-skip-level");
+}
+
+export function useSlidersTutorial() {
+    return useOneOffTutorial("tutorial-sliders");
+}
+
+function useOneOffTutorial(key) {
+    const [allow, setAllow] = useLocalStorage(key, true);
+    function onUsed() {
+        setAllow(false);
     }
-    return [allowSkipLevelTutorial, onSkipLevelUsed];
+    return [allow, onUsed];
 }

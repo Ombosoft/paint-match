@@ -1,4 +1,3 @@
-import TuneIcon from '@mui/icons-material/Tune';
 import { Stack } from "@mui/material";
 import convert from "color-convert";
 import PropTypes from 'prop-types';
@@ -12,10 +11,10 @@ import { cmykColors, zeroComponents } from "./Colors";
 import { animationDurationMs, defaultWinTolerance, dropletBlendDelay, dropletsUntilReset, extraCommitDelay, skipLevels } from "./Constants";
 import { colorTable } from "./Levels";
 import { useLocalStorage } from "./LocalStorageHook";
-import NiceButton from "./NiceButton";
 import { NumDropletsContext } from './NumDropletsContext';
 import ResetButton from "./ResetButton";
 import SkipLevelButton from './SkipLevelButton';
+import SlidersButton from './SlidersButton';
 import { useTutorial } from "./Tutorial";
 import UndoButton from './UndoButton';
 import { distanceToPercentMatch, randomLevel } from "./Utils";
@@ -163,13 +162,10 @@ function Game({ autoPlayMusic }) {
                     goodEnough={goodEnough}
                     nextLevel={nextLevel}
                 />
-                <NiceButton
-                    title="Sliders"
+                <SlidersButton
                     enabled={enableSliders}
                     onClick={() => setBottle((prev) => !prev)}
-                >
-                    <TuneIcon fontSize="large" />
-                </NiceButton>
+                />
             </Stack >
             <Stack direction="row">
                 <ColorSquare
