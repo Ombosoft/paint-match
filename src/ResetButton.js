@@ -1,6 +1,7 @@
 import ReplayIcon from "@mui/icons-material/Replay";
 import PropTypes from 'prop-types';
 import React, { useContext } from "react";
+import useDisappearingState from "./DisappearingState";
 import NiceButton from "./NiceButton";
 import { NumDropletsContext } from "./NumDropletsContext";
 import { useResetSound } from "./Sfx";
@@ -11,7 +12,7 @@ function ResetButton({ level, allowReset, resetColors }) {
     const numDroplets = useContext(NumDropletsContext);
     const resetSound = useResetSound();
     const [canShowReset, onResetColors] = useResetTutorial();
-    const showTutorial = canShowReset(level, numDroplets);
+    const showTutorial = useDisappearingState(canShowReset(level, numDroplets));
     const enableReset = showTutorial || allowReset;
 
     function handleClick() {
