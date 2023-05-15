@@ -98,10 +98,10 @@ export function useDropletSound(numDroplets) {
     });
 }
 
-function useHowl({ src, volume, rate, sprite}) {
+function useHowl({ src, volume, rate, sprite }) {
     const muted = useContext(SoundsMutedContext);
     const [sound, setSound] = useState();
-    // Have to use effect to prevent leaking. Howler keeps all created Howl instances 
+    // Have to use effect to prevent leaking. Howler keeps all created Howl instances.
     useEffect(() => {
         if (!sound) {
             setSound(new Howl({
@@ -110,8 +110,11 @@ function useHowl({ src, volume, rate, sprite}) {
                 rate: rate,
                 sprite: sprite,
             }));
+            // console.log('Howl count', Howler._howls.length);
         }
-    });
+        // There's no need to create more than one instance per sound.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
     const play = useCallback(() => {
         if (!sound) {
             return;
