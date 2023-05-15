@@ -14,7 +14,7 @@ import { colorTable } from "./Levels";
 import { useLocalStorage } from "./LocalStorageHook";
 import NiceButton from "./NiceButton";
 import ResetButton from "./ResetButton";
-import { SoundsMutedContext, useDropletSound, useVictorySound } from './Sfx';
+import { SoundsMutedContext, useVictorySound } from './Sfx';
 import SkipLevelButton from './SkipLevelButton';
 import { useTutorial } from "./Tutorial";
 import UndoButton from './UndoButton';
@@ -44,7 +44,6 @@ function Game({ autoPlayMusic }) {
 
     const numDroplets = vecCompSum(Object.values(components));
     const soundsMuted = useContext(SoundsMutedContext);
-    const [dropletSound] = useDropletSound(numDroplets, soundsMuted);
 
     // Callback for handling debug mode changes
     function handleDebug(newDebug) {
@@ -130,7 +129,6 @@ function Game({ autoPlayMusic }) {
     }
 
     function handleClick(color) {
-        dropletSound();
         autoPlayMusic();
         saveUndo();
         setComponents(prevState => {
@@ -210,6 +208,7 @@ function Game({ autoPlayMusic }) {
         {
             bottle && (<ColorButtons cmykColors={cmykColors}
                 level={level}
+                numDroplets={numDroplets}
                 components={components}
                 onClick={handleClick}
                 showTooltip={showBasicTutorial}

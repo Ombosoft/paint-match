@@ -1,11 +1,17 @@
 import ColorizeIcon from "@mui/icons-material/Colorize";
 import { Button, IconButton, Stack, ThemeProvider, Tooltip } from "@mui/material";
 import PropTypes from 'prop-types';
-import React from "react";
+import React, { useContext } from "react";
 import { theme } from "./Colors";
+import { SoundsMutedContext, useDropletSound } from './Sfx';
 
-function ColorButton({ color, components, onClick, tooltip, showTooltip }) {
-    const handleClick = () => onClick(color);
+function ColorButton({ color, components, onClick, tooltip, showTooltip, numDroplets }) {
+    const soundsMuted = useContext(SoundsMutedContext);
+    const [dropletSound] = useDropletSound(numDroplets, soundsMuted);
+    const handleClick = () => {
+        dropletSound();
+        onClick(color);
+    };
     return (
         <Stack direction="row" spacing={2} className="ButtonRow">
             <ThemeProvider theme={theme}>
@@ -40,6 +46,7 @@ ColorButton.propTypes = {
     onClick: PropTypes.func.isRequired,
     tooltip: PropTypes.string,
     showTooltip: PropTypes.bool,
+    numDroplets: PropTypes.number.isRequired,
 };
 
 export default ColorButton;

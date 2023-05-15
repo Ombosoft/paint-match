@@ -6,6 +6,7 @@ import ColorButton from "./ColorButton";
 function ColorButtons({
     cmykColors,
     level,
+    numDroplets,
     components,
     onClick, 
     showTooltip
@@ -19,6 +20,7 @@ function ColorButtons({
                 onClick={onClick}
                 tooltip="Press to Drop Paint"
                 showTooltip={color.color === 'yellow' && showTooltip}
+                numDroplets={numDroplets}
             />
         )
         }</>
@@ -33,6 +35,7 @@ ColorButtons.propTypes = {
         })
     ).isRequired,
     level: PropTypes.number.isRequired,
+    numDroplets: PropTypes.number.isRequired,
     components: PropTypes.object.isRequired,
     onClick: PropTypes.func.isRequired,
     showTooltip: PropTypes.bool,
