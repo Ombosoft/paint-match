@@ -1,16 +1,19 @@
 import { Button, Dialog, DialogContent } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
+import { range } from "./Utils";
 
-function LevelsPanel({ open, onClose }) {
+// Choose level dialog
+function LevelsPanel({ open, onClose, curLevel, unlockedLevel }) {
+    function PickLevelButton({ level }) {
+        return <Button onClick={() => onClose(level)}>{level}</Button>;
+    }
     return (
-        <Dialog
-            open={open}
-            onClose={() => onClose(0)}
-        >
+        <Dialog open={open} onClose={() => onClose(curLevel)}>
             <DialogContent>
-                <Button onClick={() => onClose(1)}>1</Button>
-                <Button>2</Button>
+                {range(unlockedLevel + 1).map((level) => (
+                    <PickLevelButton key={level} level={level} />
+                ))}
             </DialogContent>
         </Dialog>
     );
@@ -18,6 +21,8 @@ function LevelsPanel({ open, onClose }) {
 
 LevelsPanel.propTypes = {
     open: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    unlockedLevel: PropTypes.number.isRequired,
 };
 
 export default LevelsPanel;

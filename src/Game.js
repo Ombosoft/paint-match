@@ -45,7 +45,8 @@ function Game({ autoPlayMusic }) {
     const [prevComponents, setPrevComponents] = useState(zeroComponents);
     const [dropletColor, setDropletColor] = useState();
 
-    const [curLevel, setCurLevel] = useLevelStatus();
+    const [curLevel, setCurLevel, unlockedLevel, unlockLevel] =
+        useLevelStatus();
     const [showBasicTutorial, endBasicTutorial] = useTutorial();
     const [targetLevel, setTargetLevel] = useState(colorTable[curLevel]);
     const maxDistance = 400;
@@ -61,6 +62,13 @@ function Game({ autoPlayMusic }) {
     function handleDebug(newDebug) {
         setDebug(newDebug);
     }
+
+    const goodEnough = useCallback(
+        (newDistance) => {
+            return newDistance <= targetLevel.tolerance;
+        },
+        [targetLevel.tolerance]
+    );
 
     const checkCommit = useCallback(
         (cs) => {
@@ -79,8 +87,20 @@ function Game({ autoPlayMusic }) {
             if (newDistance <= winTolerance) {
                 setVictory(true);
             }
+            if (goodEnough(newDistance)) {
+                unlockLevel(curLevel + 1);
+            }
         },
-        [distance, distanceGotWorse, targetLevel, victory]
+        [
+            curLevel,
+            distance,
+            distanceGotWorse,
+            goodEnough,
+            targetLevel.cmyk,
+            targetLevel.extraWinTolerance,
+            unlockLevel,
+            victory,
+        ]
     );
 
     useEffect(() => {
@@ -191,9 +211,10 @@ function Game({ autoPlayMusic }) {
     const allowResetWhen =
         victory || distanceGotWorse || numDroplets > dropletsUntilReset;
     const enableUndo = components !== prevComponents && !victory;
-    const goodEnough = distance <= targetLevel.tolerance;
     const enableSkip =
-        debug || (resetCount >= 3 && !victory) || (goodEnough && !victory);
+        debug ||
+        (resetCount >= 3 && !victory) ||
+        (goodEnough(distance) && !victory);
     const enableSliders = debug || (resetCount >= 3 && !victory);
     const targetRGB = targetColorRGB();
     const currentRGB = victory
@@ -218,7 +239,7 @@ function Game({ autoPlayMusic }) {
                     />
                     <SkipLevelButton
                         enabled={enableSkip}
-                        goodEnough={goodEnough}
+                        goodEnough={goodEnough(distance)}
                         nextLevel={nextLevel}
                     />
                     <SlidersButton
@@ -284,7 +305,12 @@ function Game({ autoPlayMusic }) {
                     onNextLevel={nextLevel}
                     onReset={resetColors}
                 />
-                <LevelsPanel open={levelsPanelOpen} onClose={handleLevelChoice} />
+                <LevelsPanel
+                    open={levelsPanelOpen}
+                    onClose={handleLevelChoice}
+                    curLevel={curLevel}
+                    unlockedLevel={unlockedLevel}
+                />
             </LevelsPanelContext.Provider>
         </NumDropletsContext.Provider>
     );

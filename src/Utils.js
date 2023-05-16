@@ -39,3 +39,7 @@ export function randomLevel() {
 export function simplePlural(count, singular) {
     return count === 1 ? singular : singular + "s";
 }
+
+export function range(upperExclusive) {
+    return [...Array(upperExclusive).keys()];
+}
