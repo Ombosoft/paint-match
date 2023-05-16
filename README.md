@@ -13,9 +13,11 @@ npm start
 Resources
 ---
 
-Gameplay [video](https://www.youtube.com/watch?v=dOK4pSOQViY)
+* Gameplay [video](https://youtu.be/gaLXOZms3Aw)
 
-Play online on [itch.io](https://ombosoft.itch.io/paint-match)
+* Play online on [itch.io](https://ombosoft.itch.io/paint-match)
+
+* Development [build](https://ombosoft.itch.io/paint-match-rc) (password: test)
 
 Credits
 ---
