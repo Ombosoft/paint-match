@@ -13,26 +13,17 @@ export function useTutorial() {
     return [showBasicTutorial, endBasicTutorial];
 }
 
-export function useResetTutorial() {
-    const maxRelevantResets = 3;
-    const [resetCount, setResetCount] = useLocalStorage("reset-count", 0);
-    function canShowReset(level, numDroplets) {
-        if (resetCount > maxRelevantResets) {
-            return false;
-        }
-        if (level < 60) {
-            return numDroplets > 20;
-        }
-        return numDroplets > 40;
-    }
-
-    function onResetColors() {
-        if (resetCount > maxRelevantResets) {
+export function useResetTutorial(numDroplets) {
+    const [allow, onUsed] = useOneOffTutorial("tutorial-reset");
+    const reallyAllow = allow && numDroplets > 10;
+    const onUsedCallback = useCallback(() => {
+        if (!reallyAllow) {
             return;
         }
-        setResetCount((prev) => prev + 1);
-    }
-    return [canShowReset, onResetColors];
+        onUsed();
+    }, [onUsed, reallyAllow]);
+    console.log({reallyAllow}, {allow})
+    return [reallyAllow, onUsedCallback];
 }
 
 export function useSkipLevelTutorial() {

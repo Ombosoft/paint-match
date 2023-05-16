@@ -232,7 +232,7 @@ function Game({ autoPlayMusic }) {
                     <UndoButton enabled={enableUndo} onClick={undo} />
                     <ResetButton
                         level={curLevel}
-                        allowReset={
+                        enabled={
                             components !== zeroComponents && allowResetWhen
                         }
                         resetColors={resetColors}

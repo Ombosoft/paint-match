@@ -8,16 +8,16 @@ import { useResetSound } from "./Sfx";
 import { useResetTutorial } from "./Tutorial";
 
 // Start over button in the main game screen and tutorial for it
-function ResetButton({ level, allowReset, resetColors }) {
+function ResetButton({ level, enabled, resetColors }) {
     const numDroplets = useContext(NumDropletsContext);
     const resetSound = useResetSound();
-    const [canShowReset, onResetColors] = useResetTutorial();
-    const showTutorial = useDisappearingState(canShowReset(level, numDroplets));
-    const enableReset = showTutorial || allowReset;
+    const [allowTutorial, onUsed] = useResetTutorial(numDroplets);
+    const showTutorial = useDisappearingState(allowTutorial && enabled);
+    const enableReset = showTutorial || enabled;
 
     function handleClick() {
         resetSound();
-        onResetColors();
+        onUsed();
         resetColors();
     }
 
@@ -42,7 +42,7 @@ function ResetButton({ level, allowReset, resetColors }) {
 
 ResetButton.propTypes = {
     level: PropTypes.number.isRequired,
-    allowReset: PropTypes.bool.isRequired,
+    enabled: PropTypes.bool.isRequired,
     resetColors: PropTypes.func.isRequired,
 };
 
