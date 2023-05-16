@@ -22,7 +22,6 @@ export function useResetTutorial(numDroplets) {
         }
         onUsed();
     }, [onUsed, reallyAllow]);
-    console.log({reallyAllow}, {allow})
     return [reallyAllow, onUsedCallback];
 }
 
