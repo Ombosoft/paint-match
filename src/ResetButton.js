@@ -25,7 +25,7 @@ function ResetButton({ level, allowReset, resetColors }) {
         <NiceButton
             title={
                 showTutorial ? (
-                    <h1>Stuck? Press here to reset</h1>
+                    <h1>Starting fresh can help</h1>
                 ) : (
                     "Start over"
                 )
