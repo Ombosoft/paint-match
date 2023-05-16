@@ -1,3 +1,8 @@
+## 2
+
+2023-05-16
+
+* Reworked gameplay and levels
 * Background music
 * Sound effects
 * Improved UI
@@ -5,6 +10,7 @@
 * Improved color difference calculation (CIEDE2000)
 
 ## 1
+
 2023-05-008
 
 * Initial release
