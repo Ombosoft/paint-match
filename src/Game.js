@@ -305,7 +305,7 @@ function Game({ autoPlayMusic }) {
                 level={curLevel}
                 color={targetColorRGB()}
                 levelName={targetLevel.name}
-                isVictory={victory}
+                isVictory={victory && !levelsPanelOpen}
                 onNextLevel={nextLevel}
                 onReset={resetColors}
             />
