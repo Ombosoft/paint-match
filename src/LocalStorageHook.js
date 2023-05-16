@@ -1,12 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // Custom hook to manage localStorage data with fallback.
 export function useLocalStorage(key, defaultValue) {
-    const [value, setValue] = useState(
-        JSON.parse(localStorage.getItem(key)) ?? defaultValue
-    );
-    useEffect(() => {
-        localStorage.setItem(key, JSON.stringify(value));
-    }, [value, key]);
-    return [value, setValue];
+    const [value, setValue] = useState(() => {
+        try {
+            const storedValue = localStorage.getItem(key);
+            return storedValue ? JSON.parse(storedValue) : defaultValue;
+        } catch {
+            return defaultValue;
+        }
+    });
+    
+    const setValueAndStore = (newValue) => {
+        setValue(newValue);
+        localStorage.setItem(key, JSON.stringify(newValue));
+    };
+
+    return [value, setValueAndStore];
 }
