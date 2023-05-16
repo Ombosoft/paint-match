@@ -6,16 +6,14 @@ import {
     DialogContent,
     DialogTitle,
     IconButton,
-    Slide,
-    Stack,
+    Stack
 } from "@mui/material";
 import PropTypes from "prop-types";
 import React, {
-    forwardRef,
     useContext,
     useEffect,
     useRef,
-    useState,
+    useState
 } from "react";
 import LevelsButton from "./LevelsButton.js";
 import { NumDropletsContext } from "./NumDropletsContext.js";
@@ -39,9 +37,6 @@ function VictoryPanel({
         prevLevel.current = level;
         toast.current = randElement(toasts);
     }
-    const Transition = forwardRef(function Transition(props, ref) {
-        return <Slide direction="up" ref={ref} {...props} timeout={500} />;
-    });
     const [dialogOpen, setDialogOpen] = useState(false);
     // Delay opening dialog
     useEffect(() => {
@@ -60,12 +55,12 @@ function VictoryPanel({
     }, [isVictory, victorySound]);
 
     if (!isVictory) {
+        // TODO remove this hack. I needed it to fix broken transition
         return <></>;
     }
     return (
         <Dialog
             open={dialogOpen}
-            TransitionComponent={Transition}
             PaperProps={{
                 sx: {
                     borderColor: `#${color}`,
