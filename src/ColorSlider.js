@@ -24,7 +24,7 @@ function ColorSlider({ color, components, onSetComponentValue }) {
 
 ColorSlider.propTypes = {
     color: PropTypes.string.isRequired,
-    components: PropTypes.array.isRequired,
+    components: PropTypes.object.isRequired,
     onSetComponentValue: PropTypes.func.isRequired,
 };
 
