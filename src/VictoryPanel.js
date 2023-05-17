@@ -54,10 +54,6 @@ function VictoryPanel({
         }
     }, [isVictory, victorySound]);
 
-    if (!isVictory) {
-        // TODO remove this hack. I needed it to fix broken transition
-        return <></>;
-    }
     return (
         <Dialog
             open={dialogOpen}
