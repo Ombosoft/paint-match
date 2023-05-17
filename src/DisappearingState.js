@@ -6,7 +6,7 @@ const timeout = 3000;
 export default function useDisappearingState(initial) {
     const [state, setState] = useState(false);
     useEffect(() => {
-        if (initial) {
+        if (initial || state) {
             setState(true);
             const timerId = setTimeout(() => {
                 setState(false);
@@ -16,6 +16,6 @@ export default function useDisappearingState(initial) {
                 clearTimeout(timerId);
             };
         }
-    }, [initial]);
+    }, []);
     return state;
 }
