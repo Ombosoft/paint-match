@@ -16,6 +16,6 @@ export default function useDisappearingState(initial) {
                 clearTimeout(timerId);
             };
         }
-    }, []);
+    }, [initial, state]);
     return state;
 }
