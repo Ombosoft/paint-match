@@ -22,7 +22,7 @@ Resources
 Credits
 ---
 
-The game idea and code: [Shurik](https://twitter.com/ombosoft) ([Ombosoft](https://ombosoft.itch.io))
+Game design and coding: [Shurik](https://twitter.com/ombosoft) ([Ombosoft](https://ombosoft.itch.io))
 
 Music: [sulosounds](https://sulosounds.itch.io/100-songs)
 
