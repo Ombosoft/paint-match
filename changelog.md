@@ -1,3 +1,5 @@
+* Use all available screen space
+
 ## 2
 
 2023-05-16
