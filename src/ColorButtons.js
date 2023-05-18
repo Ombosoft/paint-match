@@ -5,7 +5,7 @@ import ColorButton from "./ColorButton";
 
 function ColorButtons({ cmykColors, level, components, onClick, showTooltip }) {
     return (
-        <Stack direction="column" spacing={1} sx={{ marginTop: "1em" }}>
+        <Stack direction="column" spacing={1}>
             <>
                 {cmykColors.map(
                     (color) =>

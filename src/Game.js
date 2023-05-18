@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import convert from "color-convert";
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useState } from "react";
@@ -226,77 +226,81 @@ function Game({ autoPlayMusic }) {
             <LevelsPanelContext.Provider
                 value={{ setLevelsPanelOpen: setLevelsPanelOpen }}
             >
-                <Stack direction="row">
-                    <LevelsButton />
-                    <AppTitle onDebug={handleDebug} level={curLevel} />
-                    <UndoButton enabled={enableUndo} onClick={undo} />
-                    <ResetButton
-                        level={curLevel}
-                        enabled={
-                            components !== zeroComponents && allowResetWhen
-                        }
-                        resetColors={resetColors}
-                    />
-                    <SkipLevelButton
-                        enabled={enableSkip}
-                        goodEnough={goodEnough(distance)}
-                        nextLevel={nextLevel}
-                    />
-                    <SlidersButton
-                        enabled={enableSliders}
-                        onClick={() => setBottle((prev) => !prev)}
-                    />
-                </Stack>
-                <Stack direction="row">
-                    <ColorSquare
-                        color={targetRGB}
-                        label={
-                            debug
-                                ? `${targetLevel.name}  (${targetLevel.cmyk})`
-                                : targetLevel.name
-                        }
-                        showColor={debug}
-                        tooltip="Target color"
-                        showTooltip={showBasicTutorial}
-                    />
-                    <ColorSquare
-                        color={currentRGB}
-                        label={
-                            debug
-                                ? `d${distance} (${getCurrentComponents(
-                                      components
-                                  )})`
-                                : `${distanceToPercentMatch(
-                                      distance,
-                                      victory
-                                  )}%`
-                        }
-                        showColor={debug}
-                        dropletColor={dropletColor}
-                        showDroplet
-                        tooltip="Current Mix"
-                        showTooltip={showBasicTutorial}
-                    />
-                </Stack>
+                <Stack direction="column" alignItems="center" sx={{ height: "100vh" }}>
+                    <Stack direction="row">
+                        <LevelsButton />
+                        <AppTitle onDebug={handleDebug} level={curLevel} />
+                        <UndoButton enabled={enableUndo} onClick={undo} />
+                        <ResetButton
+                            level={curLevel}
+                            enabled={
+                                components !== zeroComponents && allowResetWhen
+                            }
+                            resetColors={resetColors}
+                        />
+                        <SkipLevelButton
+                            enabled={enableSkip}
+                            goodEnough={goodEnough(distance)}
+                            nextLevel={nextLevel}
+                        />
+                        <SlidersButton
+                            enabled={enableSliders}
+                            onClick={() => setBottle((prev) => !prev)}
+                        />
+                    </Stack>
+                    <Stack direction="row" flexGrow={1}>
+                        <ColorSquare
+                            color={targetRGB}
+                            label={
+                                debug
+                                    ? `${targetLevel.name}  (${targetLevel.cmyk})`
+                                    : targetLevel.name
+                            }
+                            showColor={debug}
+                            tooltip="Target color"
+                            showTooltip={showBasicTutorial}
+                        />
+                        <ColorSquare
+                            color={currentRGB}
+                            label={
+                                debug
+                                    ? `d${distance} (${getCurrentComponents(
+                                          components
+                                      )})`
+                                    : `${distanceToPercentMatch(
+                                          distance,
+                                          victory
+                                      )}%`
+                            }
+                            showColor={debug}
+                            dropletColor={dropletColor}
+                            showDroplet
+                            tooltip="Current Mix"
+                            showTooltip={showBasicTutorial}
+                        />
+                    </Stack>
 
-                {!bottle && (
-                    <ColorSliders
-                        cmykColors={cmykColors}
-                        level={curLevel}
-                        components={components}
-                        onSetComponentValue={setComponentValue}
-                    />
-                )}
+                    <Box sx={{ marginTop: "1em", marginBottom: "1em" }}>
+                        {!bottle && (
+                            <ColorSliders
+                                cmykColors={cmykColors}
+                                level={curLevel}
+                                components={components}
+                                onSetComponentValue={setComponentValue}
+                            />
+                        )}
 
-                {bottle && (
-                    <ColorButtons
-                        cmykColors={cmykColors}
-                        level={curLevel}
-                        components={components}
-                        onClick={handleClick}
-                        showTooltip={showBasicTutorial}
-                    />
-                )}
+                        {bottle && (
+                            <ColorButtons
+                                cmykColors={cmykColors}
+                                level={curLevel}
+                                components={components}
+                                onClick={handleClick}
+                                showTooltip={showBasicTutorial}
+                            />
+                        )}
+                    </Box>
+                </Stack>
                 <VictoryPanel
                     level={curLevel}
                     color={targetColorRGB()}
