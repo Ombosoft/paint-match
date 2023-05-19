@@ -1,3 +1,4 @@
+import { Stack } from "@mui/material";
 import "./App.css";
 import Game from "./Game";
 import useMusic from "./Music";
@@ -13,12 +14,14 @@ function App() {
         <div className="App">
             <header className="App-header">
                 <SoundsMutedContext.Provider value={soundsMuted}>
-                    <Game autoPlayMusic={autoPlay} />
-                    <MuteButtons
-                        musicMuted={musicMuted}
-                        toggleMuteMusic={toggleMuteMusic}
-                        toggleMuteSounds={toggleMuteSounds}
-                    />
+                    <Stack direction="column" sx={{ height: "100vh" }}>
+                        <Game autoPlayMusic={autoPlay} />
+                        <MuteButtons
+                            musicMuted={musicMuted}
+                            toggleMuteMusic={toggleMuteMusic}
+                            toggleMuteSounds={toggleMuteSounds}
+                        />
+                    </Stack>
                 </SoundsMutedContext.Provider>
             </header>
         </div>
