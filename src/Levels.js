@@ -30,7 +30,7 @@ export const colorTable = [
     { name: "nectarine", cmyk: [0, 80, 100, 0], tolerance: 3 }, // level=31, complexity=12
     { name: "ralph yellow", cmyk: [0, 0, 100, 20], tolerance: 4 }, // level=32, complexity=12
     { name: "light teal", cmyk: [100, 0, 20, 0], tolerance: 5 }, // level=34, complexity=12
-    { name: "cyanish", cmyk: [100, 0, 0, 20], tolerance: 4 }, // level=35, complexity=12
+    { name: "deep cyan", cmyk: [100, 0, 0, 20], tolerance: 4 }, // level=35, complexity=12
     { name: "grape", cmyk: [20, 100, 0, 0], tolerance: 5 }, // level=38, complexity=12
     { name: "cornflower", cmyk: [80, 100, 0, 0], tolerance: 1 }, // level=37, complexity=12
     { name: "dark cherry red", cmyk: [0, 100, 100, 80], tolerance: 3 }, // level=42, complexity=14
