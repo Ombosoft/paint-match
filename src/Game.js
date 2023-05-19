@@ -267,10 +267,10 @@ function Game({ autoPlayMusic }) {
                                     ? `d${distance} (${getCurrentComponents(
                                           components
                                       )})`
-                                    : `${distanceToPercentMatch(
+                                    : (numDroplets > 0 ? `${distanceToPercentMatch(
                                           distance,
                                           victory
-                                      )}%`
+                                      )}%` : '')
                             }
                             showColor={debug}
                             dropletColor={dropletColor}
