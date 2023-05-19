@@ -26,7 +26,7 @@ import SkipLevelButton from "./SkipLevelButton";
 import SlidersButton from "./SlidersButton";
 import { useTutorial } from "./Tutorial";
 import UndoButton from "./UndoButton";
-import { distanceToPercentMatch, randomLevel } from "./Utils";
+import { distanceToPercentMatch, randomLevel } from "./Util/Utils";
 import {
     matCompSum,
     matScaleByVec,
@@ -34,7 +34,7 @@ import {
     vecNormalize,
     vecRound,
     vecScale,
-} from "./Vec";
+} from "./Util/Vec";
 import VictoryPanel from "./VictoryPanel";
 
 function Game({ autoPlayMusic }) {

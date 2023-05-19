@@ -1,10 +1,10 @@
 import FastForwardIcon from "@mui/icons-material/FastForward";
 import PropTypes from "prop-types";
 import React from "react";
-import useDisappearingState from "./DisappearingState";
-import NiceButton from "./NiceButton";
 import { useSkipSound } from "./Sfx";
 import { useSkipLevelTutorial } from "./Tutorial";
+import useDisappearingState from "./Util/DisappearingState";
+import NiceButton from "./Util/NiceButton";
 
 // Button and tutorial
 function SkipLevelButton({ enabled, goodEnough, nextLevel }) {

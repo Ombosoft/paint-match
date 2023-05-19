@@ -6,8 +6,8 @@ import {
     useEffect,
     useState,
 } from "react";
-import { useLocalStorage } from "./LocalStorageHook";
-import { randElement } from "./Utils";
+import { useLocalStorage } from "./Util/LocalStorageHook";
+import { randElement } from "./Util/Utils";
 
 export const SoundsMutedContext = createContext(false);
 

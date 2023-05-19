@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useLocalStorage } from "./LocalStorageHook";
+import { useLocalStorage } from "./Util/LocalStorageHook";
 
 export default function useLevelStatus() {
     const [curLevel, setCurLevel] = useLocalStorage("level", 0);

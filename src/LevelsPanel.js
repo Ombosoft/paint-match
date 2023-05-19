@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogContent } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
-import { range } from "./Utils";
+import { range } from "./Util/Utils";
 
 // Choose level dialog
 function LevelsPanel({ open, onClose, curLevel, unlockedLevel }) {

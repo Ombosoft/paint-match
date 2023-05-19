@@ -1,6 +1,6 @@
 import UndoIcon from "@mui/icons-material/Undo";
-import NiceButton from "./NiceButton";
 import { useUndoSound } from "./Sfx";
+import NiceButton from "./Util/NiceButton";
 
 export default function UndoButton({ enabled, onClick }) {
     const undoSound = useUndoSound();

@@ -1,7 +1,7 @@
 import { Howl } from "howler";
 import { useCallback, useEffect, useRef } from "react";
 import { musicFadeDurationMs, musicVolume } from "./Constants";
-import { useLocalStorage } from "./LocalStorageHook";
+import { useLocalStorage } from "./Util/LocalStorageHook";
 
 // Music hook, returns mute button and autoplay callback to be called
 // when interaction with the app started.

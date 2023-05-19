@@ -14,7 +14,7 @@ import LevelsButton from "./LevelsButton.js";
 import { NumDropletsContext } from "./NumDropletsContext.js";
 import { useVictorySound } from "./Sfx.js";
 import { toasts } from "./Toasts.js";
-import { randElement, simplePlural } from "./Utils.js";
+import { randElement, simplePlural } from "./Util/Utils.js";
 
 function VictoryPanel({
     level,
