@@ -6,15 +6,10 @@ import {
     DialogContent,
     DialogTitle,
     IconButton,
-    Stack
+    Stack,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import React, {
-    useContext,
-    useEffect,
-    useRef,
-    useState
-} from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import LevelsButton from "./LevelsButton.js";
 import { NumDropletsContext } from "./NumDropletsContext.js";
 import { useVictorySound } from "./Sfx.js";
@@ -28,6 +23,7 @@ function VictoryPanel({
     isVictory,
     onReset,
     onNextLevel,
+    showDroplets,
 }) {
     const numDroplets = useContext(NumDropletsContext);
     const victorySound = useVictorySound();
@@ -44,7 +40,7 @@ function VictoryPanel({
             victorySound();
             const timerId = setTimeout(() => {
                 setDialogOpen(true);
-            }, 600); 
+            }, 600);
 
             return () => {
                 clearTimeout(timerId);
@@ -88,14 +84,18 @@ function VictoryPanel({
                         marginRight: "1em",
                     }}
                 >
-                    <h4>
-                        You used {numDroplets}{" "}
-                        {simplePlural(numDroplets, "droplet")}
-                    </h4>
+                    {showDroplets && (
+                        <h4>
+                            You used {numDroplets}{" "}
+                            {simplePlural(numDroplets, "droplet")}
+                        </h4>
+                    )}
                     <h3>{toast.current}</h3>
                     <DialogActions>
                         <Stack direction="row">
-                            <LevelsButton onClick={() => setDialogOpen(false)}/>
+                            <LevelsButton
+                                onClick={() => setDialogOpen(false)}
+                            />
                             <IconButton
                                 onClick={onReset}
                                 color="secondary"
@@ -125,6 +125,7 @@ VictoryPanel.propTypes = {
     isVictory: PropTypes.bool.isRequired,
     onReset: PropTypes.func.isRequired,
     onNextLevel: PropTypes.func.isRequired,
+    showDroplets: PropTypes.bool.isRequired,
 };
 
 export default VictoryPanel;

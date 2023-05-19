@@ -308,6 +308,7 @@ function Game({ autoPlayMusic }) {
                     isVictory={victory && !levelsPanelOpen}
                     onNextLevel={nextLevel}
                     onReset={resetColors}
+                    showDroplets={bottle}
                 />
                 <LevelsPanel
                     open={levelsPanelOpen}
