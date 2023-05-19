@@ -1,4 +1,13 @@
 import { createTheme } from "@mui/material/styles";
+import { defaultWinTolerance } from "./Constants";
+import {
+    matCompSum,
+    matScaleByVec,
+    vecCompSum,
+    vecNormalize,
+    vecRound,
+    vecScale,
+} from "./Util/Vec";
 
 export const theme = createTheme({
     palette: {
@@ -56,3 +65,39 @@ export const cmykColors = [
     { color: "green", minLevel: 12 },
     { color: "blue", minLevel: 15 },
 ];
+
+// Object -> CMYK
+export function blendPaints(cs) {
+    let compWeights = [
+        cs.cyan,
+        cs.magenta,
+        cs.yellow,
+        cs.black,
+        cs.red,
+        cs.green,
+        cs.blue,
+    ];
+    const cyan = [100, 0, 0, 0];
+    const magenta = [0, 100, 0, 0];
+    const yellow = [0, 0, 100, 0];
+    const black = [100, 100, 100, 0];
+    const red = [0, 100, 100, 0];
+    const green = [100, 0, 100, 0];
+    const blue = [100, 100, 0, 0];
+    const basis = [cyan, magenta, yellow, black, red, green, blue];
+    const blendResult = matCompSum(matScaleByVec(basis, compWeights));
+    const nonWhiteScale = vecCompSum(blendResult) / 100;
+    const scaleWithWhite =
+        nonWhiteScale + cs.white > 0
+            ? nonWhiteScale / (nonWhiteScale + 3 * cs.white)
+            : 0;
+    const normalized = vecScale(
+        vecNormalize(blendResult),
+        100 * scaleWithWhite
+    );
+    return vecRound(normalized);
+}
+
+export function getWinTolerance(levelDef) {
+    return defaultWinTolerance + (levelDef.extraWinTolerance ?? 0.0);
+}

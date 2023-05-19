@@ -7,14 +7,19 @@ import ColorButtons from "./ColorButtons";
 import colorDistance from "./ColorDistance";
 import ColorSliders from "./ColorSliders";
 import ColorSquare from "./ColorSquare";
-import { cmykColors, zeroComponents } from "./Colors";
+import {
+    blendPaints,
+    cmykColors,
+    getWinTolerance,
+    zeroComponents,
+} from "./Colors";
 import {
     animationDurationMs,
-    defaultWinTolerance,
     dropletBlendDelay,
     dropletsUntilReset,
     extraCommitDelay,
 } from "./Constants";
+import optimalPath from "./GameAI";
 import useLevelStatus from "./LevelStatus";
 import { colorTable } from "./Levels";
 import LevelsButton from "./LevelsButton";
@@ -27,14 +32,7 @@ import SlidersButton from "./SlidersButton";
 import { useTutorial } from "./Tutorial";
 import UndoButton from "./UndoButton";
 import { distanceToPercentMatch, randomLevel } from "./Util/Utils";
-import {
-    matCompSum,
-    matScaleByVec,
-    vecCompSum,
-    vecNormalize,
-    vecRound,
-    vecScale,
-} from "./Util/Vec";
+import { vecCompSum } from "./Util/Vec";
 import VictoryPanel from "./VictoryPanel";
 
 function Game({ autoPlayMusic }) {
@@ -77,12 +75,11 @@ function Game({ autoPlayMusic }) {
             }
             const newDistance = colorDistance(
                 targetLevel.cmyk,
-                getCurrentComponents(cs)
+                blendPaints(cs)
             );
             setDistance(newDistance);
             setDistanceGotWorse(distanceGotWorse || newDistance > distance);
-            const winTolerance =
-                defaultWinTolerance + (targetLevel.extraWinTolerance ?? 0.0);
+            const winTolerance = getWinTolerance(targetLevel);
             console.log("wintol", winTolerance, "newDist:", newDistance);
             if (newDistance <= winTolerance) {
                 setVictory(true);
@@ -118,38 +115,6 @@ function Game({ autoPlayMusic }) {
         };
     }, [checkCommit, components]);
 
-    // Returns CMYK
-    function getCurrentComponents(cs) {
-        let compWeights = [
-            cs.cyan,
-            cs.magenta,
-            cs.yellow,
-            cs.black,
-            cs.red,
-            cs.green,
-            cs.blue,
-        ];
-        const cyan = [100, 0, 0, 0];
-        const magenta = [0, 100, 0, 0];
-        const yellow = [0, 0, 100, 0];
-        const black = [100, 100, 100, 0];
-        const red = [0, 100, 100, 0];
-        const green = [100, 0, 100, 0];
-        const blue = [100, 100, 0, 0];
-        const basis = [cyan, magenta, yellow, black, red, green, blue];
-        const blendResult = matCompSum(matScaleByVec(basis, compWeights));
-        const nonWhiteScale = vecCompSum(blendResult) / 100;
-        const scaleWithWhite =
-            nonWhiteScale + cs.white > 0
-                ? nonWhiteScale / (nonWhiteScale + 3 * cs.white)
-                : 0;
-        const normalized = vecScale(
-            vecNormalize(blendResult),
-            100 * scaleWithWhite
-        );
-        return vecRound(normalized);
-    }
-
     function resetColors() {
         saveUndo();
         setComponents(zeroComponents);
@@ -182,6 +147,14 @@ function Game({ autoPlayMusic }) {
         setTargetLevel(newTarget);
         setResetCount(0);
         setBottle(true);
+        const optimal = optimalPath(
+            zeroComponents,
+            newTarget.cmyk,
+            getWinTolerance(newTarget)
+        );
+        console.log(
+            Object.fromEntries(Object.entries(optimal).filter(([_, val]) => val > 0))
+        );
     }
 
     function handleClick(color) {
@@ -219,7 +192,7 @@ function Game({ autoPlayMusic }) {
     const targetRGB = targetColorRGB();
     const currentRGB = victory
         ? targetRGB
-        : convert.cmyk.hex(getCurrentComponents(components));
+        : convert.cmyk.hex(blendPaints(components));
 
     return (
         <NumDropletsContext.Provider value={numDroplets}>
@@ -264,13 +237,15 @@ function Game({ autoPlayMusic }) {
                             color={currentRGB}
                             label={
                                 debug
-                                    ? `d${distance} (${getCurrentComponents(
+                                    ? `d${distance} (${blendPaints(
                                           components
                                       )})`
-                                    : (numDroplets > 0 ? `${distanceToPercentMatch(
+                                    : numDroplets > 0
+                                    ? `${distanceToPercentMatch(
                                           distance,
                                           victory
-                                      )}%` : '')
+                                      )}%`
+                                    : ""
                             }
                             showColor={debug}
                             dropletColor={dropletColor}
