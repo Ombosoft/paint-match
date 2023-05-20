@@ -88,7 +88,15 @@ function Game({ autoPlayMusic }) {
                 unlockLevel(curLevel + 1);
             }
         },
-        [curLevel, distance, distanceGotWorse, goodEnough, targetLevel, unlockLevel, victory]
+        [
+            curLevel,
+            distance,
+            distanceGotWorse,
+            goodEnough,
+            targetLevel,
+            unlockLevel,
+            victory,
+        ]
     );
 
     useEffect(() => {
@@ -138,14 +146,18 @@ function Game({ autoPlayMusic }) {
         setTargetLevel(newTarget);
         setResetCount(0);
         setBottle(true);
-        const optimal = optimalPath(
-            newTarget.cmyk,
-            getWinTolerance(newTarget),
-            9,
-        );
-        console.log(
-            Object.fromEntries(Object.entries(optimal).filter(([_, val]) => val > 0))
-        );
+        if (debug) {
+            const optimal = optimalPath(
+                newTarget.cmyk,
+                getWinTolerance(newTarget),
+                30
+            );
+            console.log(
+                Object.fromEntries(
+                    Object.entries(optimal).filter(([_, val]) => val > 0)
+                )
+            );
+        }
     }
 
     function handleClick(color) {
@@ -280,7 +292,7 @@ function Game({ autoPlayMusic }) {
                     open={levelsPanelOpen}
                     onClose={handleLevelChoice}
                     curLevel={curLevel}
-                    unlockedLevel={unlockedLevel}
+                    unlockedLevel={debug ? colorTable.length : unlockedLevel}
                 />
             </LevelsPanelContext.Provider>
         </NumDropletsContext.Provider>

@@ -26,7 +26,7 @@ function prune(buf, requiredSize) {
 }
 
 // source: array[CMYK] -> dest: array[CMYK] -> eps: number -> object{components}
-export function optimalPath(dest, eps, maxCost = 60) {
+export function optimalPath(dest, eps, maxCost = 50) {
     const pruneThreshold = 1000;
     const pruneTarget = 100;
     const source = [0, 0, 0, 0];
