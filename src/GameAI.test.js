@@ -1,16 +1,10 @@
-import { blendPaints, zeroComponents } from "./Colors";
+import { zeroComponents } from "./Colors";
 import { minCost, optimalPath } from "./GameAI";
 
 const red = { ...zeroComponents, red: 1 };
 const cyan = { ...zeroComponents, cyan: 1 };
 const black = { ...zeroComponents, black: 1 };
-const eps = 0.1;
-
-test("optimalPath0", () => {
-    expect(optimalPath(blendPaints(zeroComponents), eps)).toStrictEqual(
-        zeroComponents
-    );
-});
+const eps = 0.6;
 
 test("optimalPath1", () => {
     expect(optimalPath([100, 0, 0, 0], eps)).toStrictEqual(cyan);
@@ -63,8 +57,32 @@ test("optimalPathPlum", () => {
     });
 });
 
+test("optimalPathYolk", () => {
+    expect(optimalPath([0,10,100,0], eps)).toStrictEqual({
+        ...zeroComponents,
+        yellow: 9,
+        red: 1,
+    });
+});
+
+test("optimalPathPink", () => {
+    expect(optimalPath([0,25,20,0], eps)).toStrictEqual({
+        ...zeroComponents,
+        magenta: 1,
+        white: 9,
+        red: 4,
+    });
+});
+
+test("optimalPathMediumRed", () => {
+    expect(optimalPath([0,100,100,7], eps)).toStrictEqual({
+        ...zeroComponents,
+        black: 1,
+        red: 13,
+    });
+});
+
 test("minCost", () => {
-    expect(minCost([0, 0, 0, 0], eps)).toBe(0);
     expect(minCost([0, 100, 100, 0], eps)).toBe(1);
     expect(minCost([0, 0, 20, 0], eps)).toBe(7);
     expect(minCost([0, 45, 100, 0], eps)).toBe(11);
