@@ -14,4 +14,4 @@ for (const level of colorTable.slice(0, 90)) {
     index += 1;
 }
 code += "];\n";
-fs.writeFileSync("src/Levels.js", code);
+fs.writeFileSync("src/Levels1.js", code);
