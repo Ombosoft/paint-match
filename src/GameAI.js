@@ -26,7 +26,7 @@ function prune(buf, requiredSize) {
 }
 
 // source: array[CMYK] -> dest: array[CMYK] -> eps: number -> object{components}
-export function optimalPath(dest, eps, maxCost = 15) {
+export function optimalPath(dest, eps, maxCost = 100) {
     const pruneThreshold = 1000;
     const pruneTarget = 100;
     const source = [0, 0, 0, 0];
@@ -60,7 +60,7 @@ export function optimalPath(dest, eps, maxCost = 15) {
             visited[nextCompsKey] = true;
             const nextColorDistance = colorDistance(nextCMYK, dest);
             if (nextColorDistance < eps) {
-                console.log({maxBufLen});
+                // console.log({maxBufLen});
                 return nextComps;
             }
             buf.push({ cmyk: nextCMYK, comps: nextComps, colorDistance: nextColorDistance });

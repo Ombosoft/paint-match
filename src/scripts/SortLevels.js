@@ -5,7 +5,7 @@ const fs = require("fs");
 
 let code = "export const colorTable = [\n";
 let index = 0;
-for (const level of colorTable.slice(0, 100)) {
+for (const level of colorTable) {
     const cmyk = JSON.stringify(level.cmyk);
     const ewt = level.extraWinTolerance ? `, extraWinTolerance: ${level.extraWinTolerance}` : '';
     const cost = minCost(level.cmyk, getWinTolerance(level));
@@ -14,4 +14,4 @@ for (const level of colorTable.slice(0, 100)) {
     index += 1;
 }
 code += "];\n";
-fs.writeFileSync("src/Levels1.js", code);
+fs.writeFileSync("src/Levels.js", code);
