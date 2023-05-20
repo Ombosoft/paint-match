@@ -1,11 +1,11 @@
 import ReplayIcon from "@mui/icons-material/Replay";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
-import useDisappearingState from "../Components/Aux/DisappearingState";
-import { NumDropletsContext } from "../NumDropletsContext";
+import { NumDropletsContext } from "../Context/NumDropletsContext";
 import { useResetSound } from "../Sfx";
 import { useResetTutorial } from "../Tutorial";
-import NiceButton from "./Aux/NiceButton";
+import useDisappearingState from "../Util/DisappearingState";
+import NiceButton from "./NiceButton";
 
 // Start over button in the main game screen and tutorial for it
 function ResetButton({ level, enabled, resetColors }) {

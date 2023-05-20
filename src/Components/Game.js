@@ -15,11 +15,11 @@ import {
     dropletsUntilReset,
     extraCommitDelay,
 } from "../Constants";
+import { LevelsPanelContext } from "../Context/LevelsPanelContext";
+import { NumDropletsContext } from "../Context/NumDropletsContext";
 import optimalPath from "../GameAI";
 import useLevelStatus from "../LevelStatus";
 import { colorTable } from "../Levels";
-import { LevelsPanelContext } from "../LevelsPanelContext";
-import { NumDropletsContext } from "../NumDropletsContext";
 import { useTutorial } from "../Tutorial";
 import { distanceToPercentMatch, randomLevel } from "../Util/Utils";
 import { vecCompSum } from "../Util/Vec";
