@@ -68,7 +68,7 @@ export const colorTable = [
     }, // level=67, complexity=15
     { name: "light cyan", cmyk: [12, 0, 0, 0], tolerance: 4 }, // level=69, complexity=15
     { name: "dark magenta", cmyk: [0, 100, 0, 45], tolerance: 4 }, // level=71, complexity=15
-    { name: "plum", cmyk: [0, 27, 0, 0], tolerance: 4 }, // level=72, complexity=15
+    { name: "plum", cmyk: [0, 27, 0, 0], tolerance: 4, extraWinTolerance: 0.3 }, // level=72, complexity=15
     { name: "thistle", cmyk: [0, 12, 0, 0], tolerance: 4 }, // level=73, complexity=15
     { name: "dark orange", cmyk: [0, 50, 100, 20], tolerance: 4 }, // level=76, complexity=16
     { name: "dirty green", cmyk: [0, 0, 100, 45], tolerance: 4 }, // level=62, complexity=15

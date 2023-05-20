@@ -3,11 +3,10 @@ import { blendPaints, zeroComponents } from "./Colors";
 import { objectValueSum } from "./Util/Vec";
 
 // source: array[CMYK] -> dest: array[CMYK] -> eps: number -> object{components}
-export default function optimalPath(dest, eps) {
+export function optimalPath(dest, eps, maxCost = 13) {
     const source = [0, 0, 0, 0];
     console.assert(Array.isArray(dest));
     const componentNames = Object.keys(zeroComponents);
-    let maxCost = 10;
     let buf = [{ cmyk: source, comps: zeroComponents }];
     // comps (path) -> bool
     let visited = {};
@@ -40,4 +39,8 @@ export default function optimalPath(dest, eps) {
     }
     // todo get closest anyway
     return zeroComponents;
+}
+
+export function minCost(dest, eps) {
+    return objectValueSum(optimalPath(dest, eps));
 }
