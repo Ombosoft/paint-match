@@ -1,9 +1,9 @@
 import { Stack } from "@mui/material";
+import useMusic from "../Music";
+import { SoundsMutedContext, useSoundControl } from "../Sfx";
 import "./App.css";
 import Game from "./Game";
-import useMusic from "./Music";
 import { MuteButtons } from "./MuteButtons";
-import { SoundsMutedContext, useSoundControl } from "./Sfx";
 
 // Main app component.
 function App() {

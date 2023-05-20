@@ -1,7 +1,7 @@
 import { Slider, ThemeProvider } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
-import { theme } from "./Colors";
+import { theme } from "../Colors";
 
 function ColorSlider({ color, components, onSetComponentValue }) {
     return (

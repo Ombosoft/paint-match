@@ -8,9 +8,9 @@ import {
 } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
-import { theme } from "./Colors";
-import { NumDropletsContext } from "./NumDropletsContext";
-import { useDropletSound } from "./Sfx";
+import { theme } from "../Colors";
+import { NumDropletsContext } from "../NumDropletsContext";
+import { useDropletSound } from "../Sfx";
 
 function ColorButton({ color, components, onClick, tooltip, showTooltip }) {
     const numDroplets = useContext(NumDropletsContext);

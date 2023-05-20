@@ -10,11 +10,11 @@ import {
 } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { NumDropletsContext } from "../NumDropletsContext.js";
+import { useVictorySound } from "../Sfx.js";
+import { toasts } from "../Toasts.js";
+import { randElement, simplePlural } from "../Util/Utils.js";
 import LevelsButton from "./LevelsButton.js";
-import { NumDropletsContext } from "./NumDropletsContext.js";
-import { useVictorySound } from "./Sfx.js";
-import { toasts } from "./Toasts.js";
-import { randElement, simplePlural } from "./Util/Utils.js";
 
 function VictoryPanel({
     level,

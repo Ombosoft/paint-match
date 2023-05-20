@@ -2,37 +2,37 @@ import { Box, Stack } from "@mui/material";
 import convert from "color-convert";
 import PropTypes from "prop-types";
 import React, { useCallback, useEffect, useState } from "react";
-import AppTitle from "./AppTitle";
-import ColorButtons from "./ColorButtons";
-import colorDistance from "./ColorDistance";
-import ColorSliders from "./ColorSliders";
-import ColorSquare from "./ColorSquare";
+import colorDistance from "../ColorDistance";
 import {
     blendPaints,
     cmykColors,
     getWinTolerance,
     zeroComponents,
-} from "./Colors";
+} from "../Colors";
 import {
     animationDurationMs,
     dropletBlendDelay,
     dropletsUntilReset,
     extraCommitDelay,
-} from "./Constants";
-import optimalPath from "./GameAI";
-import useLevelStatus from "./LevelStatus";
-import { colorTable } from "./Levels";
+} from "../Constants";
+import optimalPath from "../GameAI";
+import useLevelStatus from "../LevelStatus";
+import { colorTable } from "../Levels";
+import { LevelsPanelContext } from "../LevelsPanelContext";
+import { NumDropletsContext } from "../NumDropletsContext";
+import { useTutorial } from "../Tutorial";
+import { distanceToPercentMatch, randomLevel } from "../Util/Utils";
+import { vecCompSum } from "../Util/Vec";
+import AppTitle from "./AppTitle";
+import ColorButtons from "./ColorButtons";
+import ColorSliders from "./ColorSliders";
+import ColorSquare from "./ColorSquare";
 import LevelsButton from "./LevelsButton";
 import LevelsPanel from "./LevelsPanel";
-import { LevelsPanelContext } from "./LevelsPanelContext";
-import { NumDropletsContext } from "./NumDropletsContext";
 import ResetButton from "./ResetButton";
 import SkipLevelButton from "./SkipLevelButton";
 import SlidersButton from "./SlidersButton";
-import { useTutorial } from "./Tutorial";
 import UndoButton from "./UndoButton";
-import { distanceToPercentMatch, randomLevel } from "./Util/Utils";
-import { vecCompSum } from "./Util/Vec";
 import VictoryPanel from "./VictoryPanel";
 
 function Game({ autoPlayMusic }) {

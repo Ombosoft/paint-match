@@ -5,7 +5,7 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { Box, IconButton, Stack, Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
-import { SoundsMutedContext } from "./Sfx";
+import { SoundsMutedContext } from "../Sfx";
 
 export function MuteButtons({ musicMuted, toggleMuteMusic, toggleMuteSounds }) {
     const soundsMuted = useContext(SoundsMutedContext);

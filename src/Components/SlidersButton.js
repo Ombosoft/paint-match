@@ -1,8 +1,8 @@
 import TuneIcon from "@mui/icons-material/Tune";
 import PropTypes from "prop-types";
-import { useSlidersTutorial } from "./Tutorial";
-import useDisappearingState from "./Util/DisappearingState";
-import NiceButton from "./Util/NiceButton";
+import { useSlidersTutorial } from "../Tutorial";
+import useDisappearingState from "./Aux/DisappearingState";
+import NiceButton from "./Aux/NiceButton";
 
 function SlidersButton({ enabled, onClick }) {
     const [allowTutorial, onUsed] = useSlidersTutorial();

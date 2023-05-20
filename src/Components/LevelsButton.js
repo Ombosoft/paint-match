@@ -1,7 +1,7 @@
 import AppsIcon from "@mui/icons-material/Apps";
 import { IconButton } from "@mui/material";
 import { useContext } from "react";
-import { LevelsPanelContext } from "./LevelsPanelContext";
+import { LevelsPanelContext } from "../LevelsPanelContext";
 
 export default function LevelsButton({ onClick }) {
     const { setLevelsPanelOpen } = useContext(LevelsPanelContext);

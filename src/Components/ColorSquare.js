@@ -2,7 +2,7 @@ import OpacityIcon from "@mui/icons-material/Opacity";
 import { Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
-import { animationDurationMs, dropletBlendDelay } from "./Constants";
+import { animationDurationMs, dropletBlendDelay } from "../Constants";
 
 function ColorSquare({
     color,
