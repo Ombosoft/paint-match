@@ -39,7 +39,7 @@ export const colorTable = [
     { name: "rose", cmyk: [0, 100, 20, 0], tolerance: 3 }, // level=40, complexity=12
     { name: "medium red", cmyk: [0, 100, 100, 20], tolerance: 4 }, // level=43, complexity=14
     { name: "orange", cmyk: [0, 60, 100, 0], tolerance: 4 }, // level=44, complexity=14
-    { name: "green", cmyk: [100, 0, 100, 20], tolerance: 4 }, // level=47, complexity=14
+    { name: "deep green", cmyk: [100, 0, 100, 20], tolerance: 4 }, // level=47, complexity=14
     { name: "yolk", cmyk: [0, 10, 100, 0], tolerance: 4 }, // level=45, complexity=14
     { name: "pine green", cmyk: [100, 0, 100, 80], tolerance: 3 }, // level=46, complexity=14
     { name: "midnight blue", cmyk: [100, 100, 0, 80], tolerance: 4 }, // level=50, complexity=14
