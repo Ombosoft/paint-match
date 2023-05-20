@@ -5,7 +5,7 @@ const fs = require("fs");
 
 let code = "export const colorTable = [\n";
 let index = 0;
-for (const level of colorTable.slice(0, 90)) {
+for (const level of colorTable.slice(0, 100)) {
     const cmyk = JSON.stringify(level.cmyk);
     const ewt = level.extraWinTolerance ? `, extraWinTolerance: ${level.extraWinTolerance}` : '';
     const cost = minCost(level.cmyk, getWinTolerance(level));

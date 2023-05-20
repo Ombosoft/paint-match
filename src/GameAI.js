@@ -21,7 +21,7 @@ function basisComponents(dest) {
 }
 
 // source: array[CMYK] -> dest: array[CMYK] -> eps: number -> object{components}
-export function optimalPath(dest, eps, maxCost = 13) {
+export function optimalPath(dest, eps, maxCost = 15) {
     const source = [0, 0, 0, 0];
     console.assert(Array.isArray(dest));
     const componentNames = basisComponents(dest);
