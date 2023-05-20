@@ -1,7 +1,7 @@
 import {
-    matComponentWiseProduct,
     matCompSum,
     matScaleByVec,
+    objectValueSum,
     vecAdd,
     vecAdd2,
     vecComponentWiseProduct,
@@ -9,7 +9,7 @@ import {
     vecDistance,
     vecNormalize,
     vecRound,
-    vecScale,
+    vecScale
 } from "./Vec";
 
 test("vecAdd2", () => {
@@ -91,4 +91,9 @@ test("vecDistance", () => {
 test("vecCompSum", () => {
     const u = [1, 2, 3];
     expect(vecCompSum(u)).toStrictEqual(6);
+});
+
+test("objectValueSum", () => {
+    const u = {a: 1, b: 2, c: 3};
+    expect(objectValueSum(u)).toStrictEqual(6);
 });

@@ -88,16 +88,7 @@ function Game({ autoPlayMusic }) {
                 unlockLevel(curLevel + 1);
             }
         },
-        [
-            curLevel,
-            distance,
-            distanceGotWorse,
-            goodEnough,
-            targetLevel.cmyk,
-            targetLevel.extraWinTolerance,
-            unlockLevel,
-            victory,
-        ]
+        [curLevel, distance, distanceGotWorse, goodEnough, targetLevel, unlockLevel, victory]
     );
 
     useEffect(() => {
@@ -148,7 +139,6 @@ function Game({ autoPlayMusic }) {
         setResetCount(0);
         setBottle(true);
         const optimal = optimalPath(
-            zeroComponents,
             newTarget.cmyk,
             getWinTolerance(newTarget)
         );

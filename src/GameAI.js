@@ -1,25 +1,43 @@
 import colorDistance from "./ColorDistance";
-import { blendPaints } from "./Colors";
+import { blendPaints, zeroComponents } from "./Colors";
+import { objectValueSum } from "./Util/Vec";
 
-// source: object -> dest: array[CMYK] -> eps: number -> object
-export default function optimalPath(source, dest, eps) {
-    // TODO BFS not greedy
-    let stepsLeft = 10;
-    let result = {...source};
-    while (stepsLeft > 0 && colorDistance(blendPaints(result), dest) > eps) {
-        stepsLeft -= 1;
-        let minDistance = Number.MAX_SAFE_INTEGER;
-        let bestComponent = null;
-        for(const component of Object.keys(result)) {
-            result[component] += 1;
-            const distance = colorDistance(blendPaints(result), dest);
-            if (distance < minDistance) {
-                minDistance = distance;
-                bestComponent = component;
-            }
-            result[component] -= 1;
+// source: array[CMYK] -> dest: array[CMYK] -> eps: number -> object{components}
+export default function optimalPath(dest, eps) {
+    const source = [0, 0, 0, 0];
+    console.assert(Array.isArray(dest));
+    const componentNames = Object.keys(zeroComponents);
+    let maxCost = 10;
+    let buf = [{ cmyk: source, comps: zeroComponents }];
+    // comps (path) -> bool
+    let visited = {};
+    visited[JSON.stringify(zeroComponents)] = true;
+    while (buf.length > 0) {
+        const cur = buf.shift();
+        const curColorDistance = colorDistance(cur.cmyk, dest);
+        if (curColorDistance < eps) {
+            return cur.comps;
         }
-        result[bestComponent] += 1;
+        for (const componentName of componentNames) {
+            let nextComps = { ...cur.comps };
+            nextComps[componentName] += 1;
+            const cost = objectValueSum(nextComps);
+            if (cost > maxCost) {
+                continue;
+            }
+            const nextCMYK = blendPaints(nextComps);
+            const nextCompsKey = JSON.stringify(nextComps);
+            if (
+                visited[nextCompsKey]
+            ) {
+                // console.log('visited', nextComps);
+                continue;
+            }
+            // console.log(cur.comps, '=>', nextComps)
+            visited[nextCompsKey] = true;
+            buf.push({ cmyk: nextCMYK, comps: nextComps });
+        }
     }
-    return result;
+    // todo get closest anyway
+    return zeroComponents;
 }

@@ -39,6 +39,10 @@ export function vecCompSum(v) {
     return v.reduce((a, b) => a + b, 0);
 }
 
+export function objectValueSum(obj) {
+    return vecCompSum(Object.values(obj));
+}
+
 // Compute the sum of components in a matrix.
 export function matCompSum(m) {
     return m.reduce((a, b) => vecAdd2(a, b), vecScale(m[0], 0));
