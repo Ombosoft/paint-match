@@ -13,7 +13,7 @@ for (const level of colorTable) {
     if (cost === 0) {
         extraWinTolerance += 0.1;
     }
-    const ewt = extraWinTolerance ? `, extraWinTolerance: ${extraWinTolerance}` : '';
+    const ewt = extraWinTolerance ? `, extraWinTolerance: ${extraWinTolerance.toFixed(1)}` : '';
     code += `    { index: ${index}, name: "${level.name}", cmyk: ${cmyk}, cost: ${cost}, tolerance: ${level.tolerance}${ewt} },\n`;
     index += 1;
 }

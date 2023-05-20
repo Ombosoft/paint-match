@@ -228,7 +228,7 @@ function Game({ autoPlayMusic }) {
                             color={currentRGB}
                             label={
                                 debug
-                                    ? `d${distance} (${blendPaints(
+                                    ? `d${distance.toFixed(2)} (${blendPaints(
                                           components
                                       )})`
                                     : numDroplets > 0
