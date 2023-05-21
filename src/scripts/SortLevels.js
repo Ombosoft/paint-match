@@ -1,6 +1,7 @@
 import { cmykColors, getWinTolerance } from "../Colors.js";
 import { minCost } from "../GameAI.js";
 import { colorTable } from "../Levels.js";
+import { compareBy } from "../Util/Utils.js";
 const fs = require("fs");
 
 function save(levels) {
@@ -25,7 +26,7 @@ function count(levels) {
     }
 }
 
-const levels = colorTable.slice(0, 50);
+const levels = colorTable.slice(0, colorTable.length);
 for (const level of levels) {
     level.cmykStr = JSON.stringify(level.cmyk);
     const cost = minCost(level.cmyk, getWinTolerance(level));
@@ -45,7 +46,7 @@ for (const level of levels) {
 const firstDynamic = Math.max(...cmykColors.map((c) => c.minLevel)) + 1;
 const hardcodedLevels = levels.slice(0, firstDynamic);
 const dynamicLevels = levels.slice(firstDynamic, levels.length);
-// dynamicLevels.sort(level => )
+dynamicLevels.sort(compareBy(x => x.cost))
 const sortedLevels = [].concat(hardcodedLevels, dynamicLevels);
 
 count(sortedLevels);
