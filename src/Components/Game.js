@@ -86,17 +86,19 @@ function Game({ autoPlayMusic }) {
             );
             setDistance(newDistance);
             setDistanceGotWorse(distanceGotWorse || newDistance > distance);
-            setPercentMatchText(
-                numDroplets > 0
-                    ? `${distanceToPercentMatch(newDistance, victory)}%`
-                    : ""
-            );
             const winTolerance = getWinTolerance(targetLevel);
             console.log("wintol", winTolerance, "newDist:", newDistance);
+            let newVictory = victory;
             if (newDistance <= winTolerance) {
+                newVictory = true;
                 setVictory(true);
                 onLevelWon(curLevel);
             }
+            setPercentMatchText(
+                numDroplets > 0
+                    ? `${distanceToPercentMatch(newDistance, newVictory)}%`
+                    : ""
+            );
             if (goodEnough(newDistance)) {
                 unlockLevel(curLevel + 1);
             }
