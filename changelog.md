@@ -1,4 +1,5 @@
 * Use all available screen space
+* Reduce complexity and reorder levels
 
 ## 2
 
