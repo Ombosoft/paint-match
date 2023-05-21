@@ -15,6 +15,7 @@ import { useVictorySound } from "../Sfx.js";
 import { toasts } from "../Toasts.js";
 import { randElement, simplePlural } from "../Util/Utils.js";
 import LevelsButton from "./LevelsButton.js";
+import {victoryPanelDelay, victorySoundDelay} from "../Constants.js"
 
 function VictoryPanel({
     level,
@@ -37,13 +38,16 @@ function VictoryPanel({
     // Delay opening dialog
     useEffect(() => {
         if (isVictory) {
-            victorySound();
-            const timerId = setTimeout(() => {
+            const timerId1 = setTimeout(() => {
                 setDialogOpen(true);
-            }, 600);
+            }, victoryPanelDelay);
+            const timerId2 = setTimeout(() => {
+                victorySound();
+            }, victorySoundDelay);
 
             return () => {
-                clearTimeout(timerId);
+                clearTimeout(timerId1);
+                clearTimeout(timerId2);
             };
         } else {
             setDialogOpen(false);
