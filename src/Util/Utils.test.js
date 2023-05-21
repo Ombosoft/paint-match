@@ -1,4 +1,11 @@
-import { compareBy, randElement, randInt, range, simplePlural } from "./Utils";
+import {
+    compareBy,
+    groupBy,
+    randElement,
+    randInt,
+    range,
+    simplePlural,
+} from "./Utils";
 
 test("randInt", () => {
     for (let i = 0; i < 100; ++i) {
@@ -28,7 +35,36 @@ test("range", () => {
 });
 
 test("compareBy", () => {
-    let a = [{x:1, y:2}, {x:2, y:1}];
-    a.sort(compareBy(x => x.y))
-    expect(a).toStrictEqual([{x:2, y:1}, {x:1, y:2}])
-})
+    let a = [
+        { x: 1, y: 2 },
+        { x: 2, y: 1 },
+    ];
+    a.sort(compareBy((x) => x.y));
+    expect(a).toStrictEqual([
+        { x: 2, y: 1 },
+        { x: 1, y: 2 },
+    ]);
+});
+
+test("groupBy", () => {
+    expect(groupBy([3.14, 2.2, 2.3], (x) => Math.floor(x))).toStrictEqual({
+        3: [3.14],
+        2: [2.2, 2.3],
+    });
+    let xs = [
+        { x: 1, y: 2 },
+        { x: 1, y: 3 },
+        { x: 2, y: 1 },
+        { x: 2, y: 4 },
+    ];
+    expect(groupBy(xs, (x) => x.x)).toStrictEqual({
+        1: [
+            { x: 1, y: 2 },
+            { x: 1, y: 3 },
+        ],
+        2: [
+            { x: 2, y: 1 },
+            { x: 2, y: 4 },
+        ],
+    });
+});

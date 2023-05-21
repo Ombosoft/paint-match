@@ -44,7 +44,7 @@ export function range(upperExclusive) {
     return [...Array(upperExclusive).keys()];
 }
 
-// Easy compar function for sort, e.g. 
+// Easy compar function for sort, e.g.
 // xs.sort(compareBy(x => x.field));
 export function compareBy(getter) {
     return (a, b) => {
@@ -52,4 +52,12 @@ export function compareBy(getter) {
         const bv = getter(b);
         return av > bv ? 1 : bv > av ? -1 : 0;
     };
+}
+
+// [x] -> (x => y) -> {y: [xs]}
+export function groupBy(arr, getter) {
+    return arr.reduce(
+        (r, val, i, a, key = getter(val)) => ((r[key] || (r[key] = [])).push(val), r),
+        {}
+    );
 }
