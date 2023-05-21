@@ -56,7 +56,7 @@ export function compareBy(getter) {
 
 // [x] -> (x => y) -> {y: [xs]}
 export function groupBy(arr, keyGetter) {
-    const reducer = (acc, val, i, a) => {
+    const reducer = (acc, val) => {
         const key = keyGetter(val);
         (acc[key] || (acc[key] = [])).push(val)
         return acc;
