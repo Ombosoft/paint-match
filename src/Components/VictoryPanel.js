@@ -10,12 +10,13 @@ import {
 } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { victoryPanelDelay, victorySoundDelay } from "../Constants.js";
 import { NumDropletsContext } from "../Context/NumDropletsContext.js";
+import { colorTable } from "../Levels.js";
 import { useVictorySound } from "../Sfx.js";
 import { toasts } from "../Toasts.js";
 import { randElement, simplePlural } from "../Util/Utils.js";
 import LevelsButton from "./LevelsButton.js";
-import {victoryPanelDelay, victorySoundDelay} from "../Constants.js"
 
 function VictoryPanel({
     level,
@@ -29,10 +30,10 @@ function VictoryPanel({
     const numDroplets = useContext(NumDropletsContext);
     const victorySound = useVictorySound();
     const prevLevel = useRef(0);
-    const toast = useRef(randElement(toasts));
+    const toast = useRef(getToast(level));
     if (isVictory && level !== prevLevel.current) {
         prevLevel.current = level;
-        toast.current = randElement(toasts);
+        toast.current = getToast(level);
     }
     const [dialogOpen, setDialogOpen] = useState(false);
     // Delay opening dialog
@@ -121,6 +122,11 @@ function VictoryPanel({
         </Dialog>
     );
 }
+
+function getToast(level) {
+    return colorTable[level].toast ?? randElement(toasts);
+}
+
 
 VictoryPanel.propTypes = {
     level: PropTypes.number.isRequired,

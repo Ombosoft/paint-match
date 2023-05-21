@@ -61,9 +61,9 @@ export const cmykColors = [
     { color: "yellow", minLevel: 0 },
     { color: "black", minLevel: 5 },
     { color: "white", minLevel: 4 },
-    { color: "red", minLevel: 11 },
-    { color: "green", minLevel: 15 },
-    { color: "blue", minLevel: 19 },
+    { color: "red", minLevel: 13 },
+    { color: "green", minLevel: 17 },
+    { color: "blue", minLevel: 22 },
 ];
 
 // Object -> CMYK
