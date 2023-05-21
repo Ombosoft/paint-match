@@ -1,6 +1,5 @@
 import colorDistance from "../ColorDistance.js";
-import { cmykColors, getWinTolerance } from "../Colors.js";
-import { minCost } from "../GameAI.js";
+import { cmykColors } from "../Colors.js";
 import { colorTable } from "../Levels.js";
 import { compareBy, groupBy, mapValues } from "../Util/Utils.js";
 const fs = require("fs");
@@ -14,7 +13,7 @@ function save(levels) {
         levels
             .map(
                 (level) =>
-                    `    { index: ${level.index}, name: "${level.name}", cmyk: ${level.cmykStr}, ` +
+                    `    { name: "${level.name}", cmyk: ${level.cmykStr}, ` +
                     `cost: ${level.cost}, tolerance: ${level.tolerance}${level.ewt} },\n`
             )
             .join("") +
@@ -64,7 +63,8 @@ function sortGroup(levels) {
 const levels = colorTable.slice(0, limit);
 for (const level of levels) {
     level.cmykStr = JSON.stringify(level.cmyk);
-    const cost = minCost(level.cmyk, getWinTolerance(level));
+    const cost = level.cost;
+    //const cost = minCost(level.cmyk, getWinTolerance(level));
     console.log(level.index, cost);
     let extraWinTolerance = level.extraWinTolerance ?? 0;
     if (cost === 0) {
