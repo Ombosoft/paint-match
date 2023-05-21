@@ -1,6 +1,7 @@
 import {
     compareBy,
     groupBy,
+    mapValues,
     randElement,
     randInt,
     range,
@@ -68,3 +69,7 @@ test("groupBy", () => {
         ],
     });
 });
+
+test("mapValues", () => {
+    expect(mapValues({ x: 1, y: 2, z: 3 }, x => x*x)).toStrictEqual({ x: 1, y: 4, z: 9 })
+})

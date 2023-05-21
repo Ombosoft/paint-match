@@ -57,7 +57,16 @@ export function compareBy(getter) {
 // [x] -> (x => y) -> {y: [xs]}
 export function groupBy(arr, getter) {
     return arr.reduce(
-        (r, val, i, a, key = getter(val)) => ((r[key] || (r[key] = [])).push(val), r),
+        (r, val, i, a, key = getter(val)) => (
+            (r[key] || (r[key] = [])).push(val), r
+        ),
         {}
+    );
+}
+
+// Map values of an object
+export function mapValues(obj, mapper) {
+    return Object.fromEntries(
+        Object.entries(obj).map(([key, val]) => [key, mapper(val)])
     );
 }

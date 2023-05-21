@@ -1,7 +1,7 @@
 import { cmykColors, getWinTolerance } from "../Colors.js";
 import { minCost } from "../GameAI.js";
 import { colorTable } from "../Levels.js";
-import { compareBy } from "../Util/Utils.js";
+import { compareBy, groupBy } from "../Util/Utils.js";
 const fs = require("fs");
 
 function save(levels) {
@@ -46,6 +46,7 @@ for (const level of levels) {
 const firstDynamic = Math.max(...cmykColors.map((c) => c.minLevel)) + 1;
 const hardcodedLevels = levels.slice(0, firstDynamic);
 const dynamicLevels = levels.slice(firstDynamic, levels.length);
+const groupByCost = groupBy(dynamicLevels, level => level.cost)
 dynamicLevels.sort(compareBy(x => x.cost))
 const sortedLevels = [].concat(hardcodedLevels, dynamicLevels);
 
