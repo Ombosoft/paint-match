@@ -1,4 +1,4 @@
-import { randElement, randInt, range, simplePlural } from "./Utils";
+import { compareBy, randElement, randInt, range, simplePlural } from "./Utils";
 
 test("randInt", () => {
     for (let i = 0; i < 100; ++i) {
@@ -26,3 +26,9 @@ test("range", () => {
     expect(range(1)).toEqual([0]);
     expect(range(5)).toEqual([0, 1, 2, 3, 4]);
 });
+
+test("compareBy", () => {
+    let a = [{x:1, y:2}, {x:2, y:1}];
+    a.sort(compareBy(x => x.y))
+    expect(a).toStrictEqual([{x:2, y:1}, {x:1, y:2}])
+})

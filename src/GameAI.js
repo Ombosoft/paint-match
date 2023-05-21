@@ -1,6 +1,6 @@
 import colorDistance from "./ColorDistance";
 import { blendPaints, zeroComponents } from "./Colors";
-import { range } from "./Util/Utils";
+import { compareBy, range } from "./Util/Utils";
 import { objectValueSum } from "./Util/Vec";
 
 function basisComponents(dest) {
@@ -21,7 +21,7 @@ function basisComponents(dest) {
 }
 
 function prune(buf, requiredSize) {
-    buf.sort((a, b) => (a.colorDistance > b.colorDistance) ? 1 : ((b.colorDistance > a.colorDistance) ? -1 : 0));
+    buf.sort(compareBy(x => x.colorDistance));
     return buf.slice(0, requiredSize);
 }
 

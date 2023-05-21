@@ -43,3 +43,13 @@ export function simplePlural(count, singular) {
 export function range(upperExclusive) {
     return [...Array(upperExclusive).keys()];
 }
+
+// Easy compar function for sort, e.g. 
+// xs.sort(compareBy(x => x.field));
+export function compareBy(getter) {
+    return (a, b) => {
+        const av = getter(a);
+        const bv = getter(b);
+        return av > bv ? 1 : bv > av ? -1 : 0;
+    };
+}
