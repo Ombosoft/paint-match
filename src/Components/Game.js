@@ -43,8 +43,14 @@ function Game({ autoPlayMusic }) {
     const [prevComponents, setPrevComponents] = useState(zeroComponents);
     const [dropletColor, setDropletColor] = useState();
 
-    const [curLevel, setCurLevel, unlockedLevel, unlockLevel] =
-        useLevelStatus();
+    const [
+        curLevel,
+        setCurLevel,
+        unlockedLevel,
+        unlockLevel,
+        levelAchievements,
+        onLevelWon,
+    ] = useLevelStatus();
     const [showBasicTutorial, endBasicTutorial] = useTutorial();
     const [targetLevel, setTargetLevel] = useState(colorTable[curLevel]);
     const maxDistance = 400;
@@ -89,6 +95,7 @@ function Game({ autoPlayMusic }) {
             console.log("wintol", winTolerance, "newDist:", newDistance);
             if (newDistance <= winTolerance) {
                 setVictory(true);
+                onLevelWon(curLevel);
             }
             if (goodEnough(newDistance)) {
                 unlockLevel(curLevel + 1);
@@ -100,6 +107,7 @@ function Game({ autoPlayMusic }) {
             distanceGotWorse,
             goodEnough,
             numDroplets,
+            onLevelWon,
             targetLevel,
             unlockLevel,
             victory,
@@ -295,6 +303,7 @@ function Game({ autoPlayMusic }) {
                     onClose={handleLevelChoice}
                     curLevel={curLevel}
                     unlockedLevel={debug ? colorTable.length : unlockedLevel}
+                    levelAchievements={levelAchievements}
                 />
             </LevelsPanelContext.Provider>
         </NumDropletsContext.Provider>

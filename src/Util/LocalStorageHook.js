@@ -10,10 +10,14 @@ export function useLocalStorage(key, defaultValue) {
             return defaultValue;
         }
     });
-    
+
     const setValueAndStore = (newValue) => {
-        setValue(newValue);
-        localStorage.setItem(key, JSON.stringify(newValue));
+        setValue((prevValue) => {
+            const result =
+                newValue instanceof Function ? newValue(prevValue) : newValue;
+            localStorage.setItem(key, JSON.stringify(result));
+            return result;
+        });
     };
 
     return [value, setValueAndStore];
