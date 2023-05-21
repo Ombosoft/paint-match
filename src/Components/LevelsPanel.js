@@ -1,4 +1,5 @@
-import { Button, Dialog, DialogContent } from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
+import { Button, Dialog, DialogContent, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
 import { range } from "../Util/Utils";
@@ -6,7 +7,14 @@ import { range } from "../Util/Utils";
 // Choose level dialog
 function LevelsPanel({ open, onClose, curLevel, unlockedLevel }) {
     function PickLevelButton({ level }) {
-        return <Button onClick={() => onClose(level)}>{level}</Button>;
+        return (
+            <Button onClick={() => onClose(level)} sx={{ minWidth: "6em" }}>
+                <Typography variant="h6" fontWeight="bold" color="secondary">
+                    {level}
+                </Typography>
+                <StarIcon sx={{ color: "gold" }} />
+            </Button>
+        );
     }
     return (
         <Dialog open={open} onClose={() => onClose(curLevel)}>
