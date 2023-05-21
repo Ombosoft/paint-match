@@ -2,14 +2,20 @@ import { useEffect, useState } from "react";
 
 const timeout = 3000;
 
+const Unused = 0;
+const On = 1;
+const Off = 2;
+
 // Boolean state that resets to false after a timeout
 export default function useDisappearingState(initial) {
-    const [state, setState] = useState(false);
+    const [state, setState] = useState(Unused);
     useEffect(() => {
-        if (initial || state) {
-            setState(true);
+        if (initial && state !== Off) {
+            if (state === Unused) {
+                setState(On);
+            }
             const timerId = setTimeout(() => {
-                setState(false);
+                setState(Off);
             }, timeout);
 
             return () => {
@@ -17,5 +23,5 @@ export default function useDisappearingState(initial) {
             };
         }
     }, [initial, state]);
-    return state;
+    return state === On;
 }

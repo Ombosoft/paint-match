@@ -8,7 +8,7 @@ import useDisappearingState from "../Util/DisappearingState";
 import NiceButton from "./NiceButton";
 
 // Start over button in the main game screen and tutorial for it
-function ResetButton({ level, enabled, resetColors }) {
+function ResetButton({ enabled, resetColors }) {
     const numDroplets = useContext(NumDropletsContext);
     const resetSound = useResetSound();
     const [allowTutorial, onUsed] = useResetTutorial(numDroplets);
@@ -24,11 +24,7 @@ function ResetButton({ level, enabled, resetColors }) {
     return (
         <NiceButton
             title={
-                showTutorial ? (
-                    <h1>Starting fresh can help</h1>
-                ) : (
-                    "Start over"
-                )
+                showTutorial ? <h1>Starting fresh can help</h1> : "Start over"
             }
             enabled={enableReset}
             onClick={handleClick}
@@ -41,7 +37,6 @@ function ResetButton({ level, enabled, resetColors }) {
 }
 
 ResetButton.propTypes = {
-    level: PropTypes.number.isRequired,
     enabled: PropTypes.bool.isRequired,
     resetColors: PropTypes.func.isRequired,
 };

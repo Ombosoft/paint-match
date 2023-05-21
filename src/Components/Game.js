@@ -225,7 +225,6 @@ function Game({ autoPlayMusic }) {
                         <AppTitle onDebug={handleDebug} level={curLevel} />
                         <UndoButton enabled={enableUndo} onClick={undo} />
                         <ResetButton
-                            level={curLevel}
                             enabled={
                                 components !== zeroComponents && allowResetWhen
                             }
