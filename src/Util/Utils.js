@@ -55,13 +55,13 @@ export function compareBy(getter) {
 }
 
 // [x] -> (x => y) -> {y: [xs]}
-export function groupBy(arr, getter) {
-    return arr.reduce(
-        (r, val, i, a, key = getter(val)) => (
-            (r[key] || (r[key] = [])).push(val), r
-        ),
-        {}
-    );
+export function groupBy(arr, keyGetter) {
+    const reducer = (acc, val, i, a) => {
+        const key = keyGetter(val);
+        (acc[key] || (acc[key] = [])).push(val)
+        return acc;
+    };
+    return arr.reduce(reducer, {});
 }
 
 // Map values of an object
