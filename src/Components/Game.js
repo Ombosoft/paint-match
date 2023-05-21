@@ -49,6 +49,7 @@ function Game({ autoPlayMusic }) {
     const [targetLevel, setTargetLevel] = useState(colorTable[curLevel]);
     const maxDistance = 400;
     const [distance, setDistance] = useState(maxDistance);
+    const [percentMatchText, setPercentMatchText] = useState("");
     const [distanceGotWorse, setDistanceGotWorse] = useState(false);
     const [resetCount, setResetCount] = useState(0);
     const [debug, setDebug] = useState(false);
@@ -79,6 +80,11 @@ function Game({ autoPlayMusic }) {
             );
             setDistance(newDistance);
             setDistanceGotWorse(distanceGotWorse || newDistance > distance);
+            setPercentMatchText(
+                numDroplets > 0
+                    ? `${distanceToPercentMatch(newDistance, victory)}%`
+                    : ""
+            );
             const winTolerance = getWinTolerance(targetLevel);
             console.log("wintol", winTolerance, "newDist:", newDistance);
             if (newDistance <= winTolerance) {
@@ -93,6 +99,7 @@ function Game({ autoPlayMusic }) {
             distance,
             distanceGotWorse,
             goodEnough,
+            numDroplets,
             targetLevel,
             unlockLevel,
             victory,
@@ -243,12 +250,7 @@ function Game({ autoPlayMusic }) {
                                     ? `d${distance.toFixed(2)} (${blendPaints(
                                           components
                                       )})`
-                                    : numDroplets > 0
-                                    ? `${distanceToPercentMatch(
-                                          distance,
-                                          victory
-                                      )}%`
-                                    : ""
+                                    : percentMatchText
                             }
                             showColor={debug}
                             dropletColor={dropletColor}
