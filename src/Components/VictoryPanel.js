@@ -29,11 +29,26 @@ function VictoryPanel({
 }) {
     const numDroplets = useContext(NumDropletsContext);
     const victorySound = useVictorySound();
+    // Sticky content
+    const contentProps = useRef({
+        showDroplets: showDroplets,
+        toast: getToast(level),
+        color: color,
+        numDroplets: numDroplets,
+        level: level,
+        levelName: levelName,
+    });
     const prevLevel = useRef(0);
-    const toast = useRef(getToast(level));
-    if (isVictory && level !== prevLevel.current) {
-        prevLevel.current = level;
-        toast.current = getToast(level);
+    if (isVictory) {
+        if (level !== prevLevel.current) {
+            prevLevel.current = level;
+            contentProps.current.toast = getToast(level);
+        }
+        contentProps.current.showDroplets = !colorTable[level].toast && showDroplets;
+        contentProps.current.color = color;
+        contentProps.current.numDroplets = numDroplets;
+        contentProps.current.level = level;
+        contentProps.current.levelName = levelName;
     }
     const [dialogOpen, setDialogOpen] = useState(false);
     // Delay opening dialog
@@ -55,31 +70,25 @@ function VictoryPanel({
         }
     }, [isVictory, victorySound]);
 
+    function handleNextLevel() {
+        setDialogOpen(false);
+        if (isVictory) {
+            onNextLevel();
+        }
+    }
+
     return (
         <Dialog
             open={dialogOpen}
             PaperProps={{
                 sx: {
-                    borderColor: `#${color}`,
+                    borderColor: `#${contentProps.current.color}`,
                     borderWidth: "1em",
                     borderStyle: "outset",
                 },
             }}
         >
-            <DialogTitle
-                sx={{
-                    fontWeight: "bold",
-                    textTransform: "capitalize",
-                    textShadow:
-                        "4px 4px 10px white, -1px -1px 1px #FFFFFFB0, 1px 1px 1px #FFFFFFB0, -1px 0px 1px #FFFFFFB0, 1px 0px 1px #FFFFFFB0",
-                    backgroundColor: `#${color}`,
-                    borderWidth: "2px",
-                    borderStyle: "solid",
-                    borderColor: "white",
-                }}
-            >
-                {level} {levelName}
-            </DialogTitle>
+            <VictoryTitle contentProps={contentProps.current} />
             <DialogContent>
                 <Stack
                     direction={"column"}
@@ -89,13 +98,7 @@ function VictoryPanel({
                         marginRight: "1em",
                     }}
                 >
-                    {showDroplets && (
-                        <h4>
-                            You used {numDroplets}{" "}
-                            {simplePlural(numDroplets, "droplet")}
-                        </h4>
-                    )}
-                    <h3>{toast.current}</h3>
+                    <VictoryMessage contentProps={contentProps.current} />
                     <DialogActions>
                         <Stack direction="row">
                             <LevelsButton
@@ -109,7 +112,7 @@ function VictoryPanel({
                                 <ReplayIcon fontSize="large" />
                             </IconButton>
                             <IconButton
-                                onClick={onNextLevel}
+                                onClick={handleNextLevel}
                                 color="secondary"
                                 size="large"
                             >
@@ -123,10 +126,44 @@ function VictoryPanel({
     );
 }
 
+function VictoryTitle({ contentProps }) {
+    const { color, level, levelName } = contentProps;
+    return (
+        <DialogTitle
+            sx={{
+                fontWeight: "bold",
+                textTransform: "capitalize",
+                textShadow:
+                    "4px 4px 10px white, -1px -1px 1px #FFFFFFB0, 1px 1px 1px #FFFFFFB0, -1px 0px 1px #FFFFFFB0, 1px 0px 1px #FFFFFFB0",
+                backgroundColor: `#${color}`,
+                borderWidth: "2px",
+                borderStyle: "solid",
+                borderColor: "white",
+            }}
+        >
+            {level} {levelName}
+        </DialogTitle>
+    );
+}
+
+function VictoryMessage({ contentProps }) {
+    const { showDroplets, numDroplets, toast } = contentProps;
+    return (
+        <>
+            {" "}
+            {showDroplets && (
+                <h4>
+                    {numDroplets} {simplePlural(numDroplets, "droplet")} used
+                </h4>
+            )}
+            <h3>{toast}</h3>
+        </>
+    );
+}
+
 function getToast(level) {
     return colorTable[level].toast ?? randElement(toasts);
 }
-
 
 VictoryPanel.propTypes = {
     level: PropTypes.number.isRequired,
