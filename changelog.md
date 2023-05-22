@@ -1,5 +1,6 @@
 * Use all available screen space
 * Reduce complexity and reorder levels
+* Better tutorial
 
 ## 2
 
