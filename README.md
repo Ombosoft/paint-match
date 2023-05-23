@@ -24,7 +24,7 @@ Credits
 
 Game design and coding: [Shurik](https://twitter.com/ombosoft) ([Ombosoft](https://ombosoft.itch.io))
 
-Music: [sulosounds](https://sulosounds.itch.io/100-songs)
+Music: Pribyslavitz
 
 Sounds:
 * [paronamixxe](https://freesound.org/people/paronamixxe/sounds/178907/)
@@ -37,5 +37,4 @@ Licensing
 This project is licensed under multiple licenses:
 
 - The source code is licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for the full license text.
-- The music is licensed under the [Creative Commons CC0](https://creativecommons.org/share-your-work/public-domain/cc0/).
 - The sound effects are licensed under the [Creative Commons CC0](https://creativecommons.org/share-your-work/public-domain/cc0/).
