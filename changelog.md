@@ -1,3 +1,7 @@
+## 3
+
+2023-05-23
+
 * Use all available screen space
 * Reduce complexity and reorder levels
 * Better tutorial
