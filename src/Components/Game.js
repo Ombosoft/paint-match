@@ -35,7 +35,7 @@ import SlidersButton from "./SlidersButton";
 import UndoButton from "./UndoButton";
 import VictoryPanel from "./VictoryPanel";
 
-function Game({ autoPlayMusic }) {
+function Game({ autoPlayMusic, onChangeLevel }) {
     const [victory, setVictory] = useState(false);
     const [bottle, setBottle] = useState(true);
 
@@ -163,6 +163,7 @@ function Game({ autoPlayMusic }) {
         setTargetLevel(newTarget);
         setResetCount(0);
         setBottle(true);
+        onChangeLevel(newLevel);
         if (debug) {
             const optimal = optimalPath(
                 newTarget.cmyk,
@@ -313,6 +314,7 @@ function Game({ autoPlayMusic }) {
 
 Game.propTypes = {
     autoPlayMusic: PropTypes.func.isRequired,
+    onChangeLevel: PropTypes.func.isRequired,
 };
 
 export default Game;

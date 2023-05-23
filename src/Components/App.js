@@ -7,7 +7,7 @@ import { MuteButtons } from "./MuteButtons";
 
 // Main app component.
 function App() {
-    const [musicMuted, toggleMuteMusic, autoPlay] = useMusic();
+    const [musicMuted, toggleMuteMusic, autoPlay, onChangeLevel] = useMusic();
     const [soundsMuted, toggleMuteSounds] = useSoundControl();
 
     return (
@@ -15,7 +15,7 @@ function App() {
             <header className="App-header">
                 <SoundsMutedContext.Provider value={soundsMuted}>
                     <Stack direction="column" sx={{ height: "100vh" }}>
-                        <Game autoPlayMusic={autoPlay} />
+                        <Game autoPlayMusic={autoPlay} onChangeLevel={onChangeLevel} />
                         <MuteButtons
                             musicMuted={musicMuted}
                             toggleMuteMusic={toggleMuteMusic}
