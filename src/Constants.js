@@ -1,6 +1,6 @@
 export const extraCommitDelay = -500;
 export const animationDurationMs = 1000;
-export const dropletBlendDelay = 150;
+export const dropletBlendDelay = 300;
 export const victoryPanelDelay = animationDurationMs + dropletBlendDelay + 300;
 export const victorySoundDelay = animationDurationMs - 200;
 

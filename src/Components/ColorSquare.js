@@ -26,16 +26,23 @@ function ColorSquare({
                     transitionProperty: "background-color",
                     transitionDuration: `${animationDurationMs}ms`,
                     transitionTimingFunction: "ease-in-out",
+                    position: "relative",
                 }}
             >
                 {showDroplet && (
                     <OpacityIcon
-                        fontSize="large"
                         style={{
                             color: `${dColor}`,
                             transitionDuration: `${dDelay}ms`,
                             transitionProperty: "color",
                             transitionTimingFunction: "ease-in-out",
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                            zIndex: "0",
+                            width: "60%",
+                            height: "60%",
                         }}
                     />
                 )}
@@ -46,7 +53,13 @@ function ColorSquare({
                         arrow
                         placement="top"
                     >
-                        <div>{label}</div>
+                        <div
+                            style={{
+                                zIndex: "1",
+                            }}
+                        >
+                            {label}
+                        </div>
                     </Tooltip>
                 )}
 
