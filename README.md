@@ -24,7 +24,7 @@ Credits
 
 Game design and coding: [Shurik](https://twitter.com/ombosoft) ([Ombosoft](https://ombosoft.itch.io))
 
-Music: Pribyslavitz
+Music: [Kiwami Alex](https://kiwamialex.my.canva.site/)
 
 Sounds:
 * [paronamixxe](https://freesound.org/people/paronamixxe/sounds/178907/)
