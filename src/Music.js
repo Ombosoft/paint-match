@@ -9,7 +9,7 @@ const trackFiles = {
     0: "paint_match_1.mp3",
     6: "paint_match_2.mp3",
     14: "paint_match_3.mp3",
-    27: "paint_match_4.mp3",
+    19: "paint_match_4.mp3",
 };
 
 // Music hook, returns mute button and autoplay callback to be called
