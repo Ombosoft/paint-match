@@ -40,7 +40,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     const [bottle, setBottle] = useState(true);
 
     const [components, setComponents] = useState(zeroComponents);
-    const [prevComponents, setPrevComponents] = useState(zeroComponents);
+    const [prevComponents, setPrevComponents] = useState([]);
     const [dropletColor, setDropletColor] = useState();
 
     const [
@@ -142,11 +142,15 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     }
 
     function saveUndo() {
-        setPrevComponents(components);
+        setPrevComponents((prev) => [...prev, components]);
     }
 
     function undo() {
-        setComponents(prevComponents);
+        if (prevComponents.length === 0) {
+            return;
+        }
+        setComponents(prevComponents.at(-1));
+        setPrevComponents((prev) => [...prev.slice(0, -1)]);
     }
 
     function nextLevel() {
@@ -156,7 +160,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     function setLevel(newLevel) {
         setVictory(false);
         resetColors();
-        setPrevComponents(zeroComponents);
+        setPrevComponents([]);
         setCurLevel(newLevel);
         const newTarget =
             colorTable.length > newLevel ? colorTable[newLevel] : randomLevel();
@@ -204,7 +208,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
 
     const allowResetWhen =
         victory || distanceGotWorse || numDroplets > dropletsUntilReset;
-    const enableUndo = components !== prevComponents && !victory;
+    const enableUndo = prevComponents.length > 0 && !victory;
     const enableSkip =
         debug ||
         (resetCount >= 3 && !victory) ||
