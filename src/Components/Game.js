@@ -1,3 +1,4 @@
+import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 import { Box, Stack } from "@mui/material";
 import convert from "color-convert";
 import PropTypes from "prop-types";
@@ -29,6 +30,7 @@ import ColorSliders from "./ColorSliders";
 import ColorSquare from "./ColorSquare";
 import LevelsButton from "./LevelsButton";
 import LevelsPanel from "./LevelsPanel";
+import NiceButton from "./NiceButton";
 import ResetButton from "./ResetButton";
 import SkipLevelButton from "./SkipLevelButton";
 import SlidersButton from "./SlidersButton";
@@ -60,6 +62,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     const [resetCount, setResetCount] = useState(0);
     const [debug, setDebug] = useState(false);
     const [levelsPanelOpen, setLevelsPanelOpen] = useState(false);
+    const [hint, setHint] = useState(null);
 
     const numDroplets = vecCompSum(Object.values(components));
 
@@ -190,6 +193,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         });
         setDropletColor(color);
         endBasicTutorial();
+        setHint(null);
     }
 
     function setComponentValue(colorName, value) {
@@ -204,6 +208,10 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     function handleLevelChoice(newLevel) {
         setLevelsPanelOpen(false);
         setLevel(newLevel);
+    }
+
+    function showHint() {
+        setHint('Keep going!');
     }
 
     const allowResetWhen =
@@ -244,6 +252,10 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             enabled={enableSliders}
                             onClick={() => setBottle((prev) => !prev)}
                         />
+                        <NiceButton
+                            enabled={numDroplets > 0}
+                            onClick={showHint}
+                        ><TipsAndUpdatesIcon/></NiceButton>
                     </Stack>
                     <Stack direction="row" flexGrow={1}>
                         <ColorSquare
@@ -269,8 +281,8 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             showColor={debug}
                             dropletColor={dropletColor}
                             showDroplet
-                            tooltip="Current Mix"
-                            showTooltip={showBasicTutorial}
+                            tooltip={hint}
+                            showTooltip={hint !== null}
                         />
                     </Stack>
 
