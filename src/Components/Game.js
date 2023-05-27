@@ -1,4 +1,4 @@
-import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
+import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import { Box, Stack } from "@mui/material";
 import convert from "color-convert";
 import PropTypes from "prop-types";
@@ -211,7 +211,11 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     }
 
     function showHint() {
-        setHint('Keep going!');
+        if (curLevel > 0 && colorTable[curLevel - 1].toast) {
+            setHint(colorTable[curLevel - 1].toast);
+        } else {
+            setHint("Keep going!");
+        }
     }
 
     const allowResetWhen =
@@ -253,9 +257,14 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             onClick={() => setBottle((prev) => !prev)}
                         />
                         <NiceButton
-                            enabled={numDroplets > 0}
+                            enabled={
+                                numDroplets > 0 &&
+                                (curLevel > 0 && colorTable[curLevel - 1].toast)
+                            }
                             onClick={showHint}
-                        ><TipsAndUpdatesIcon/></NiceButton>
+                        >
+                            <TipsAndUpdatesIcon />
+                        </NiceButton>
                     </Stack>
                     <Stack direction="row" flexGrow={1}>
                         <ColorSquare
