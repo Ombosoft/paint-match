@@ -7,6 +7,7 @@ export const victorySoundDelay = animationDurationMs - 200;
 export const dropletsUntilReset = 4;
 
 export const musicVolume = 1;
+export const musicRate = 1;
 export const musicFadeDurationMs = 500;
 
 export const defaultWinTolerance = 0.6;

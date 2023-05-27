@@ -1,15 +1,27 @@
 import { Howl } from "howler";
 import { useCallback, useEffect, useRef } from "react";
-import { musicFadeDurationMs, musicVolume } from "./Constants";
+import { musicFadeDurationMs, musicRate, musicVolume } from "./Constants";
 import { useLocalStorage } from "./Util/LocalStorageHook";
 import { mapValues } from "./Util/Utils";
 
 const musicPrefix = process.env.PUBLIC_URL + "/music/";
-const trackFiles = {
-    0: "paint_match_1.mp3",
-    6: "paint_match_2.mp3",
-    14: "paint_match_3.mp3",
-    19: "paint_match_4.mp3",
+const trackConfig = {
+    0: {
+        loop: "paint_match_1.mp3",
+    },
+    6: {
+        loop: "paint_match_2.mp3",
+    },
+    14: {
+        loop: "paint_match_3.mp3",
+    },
+    19: {
+        loop: "paint_match_4.mp3",
+    },
+    24: {
+        transition: "paint_match_4.5.mp3",
+        loop: "paint_match_5.mp3",
+    },
 };
 
 // Music hook, returns mute button and autoplay callback to be called
@@ -17,7 +29,7 @@ const trackFiles = {
 function useMusic() {
     const [muted, setMuted] = useLocalStorage("muteMusic", false);
     // persist Howl sound instance between renders
-    const sound = useRef();
+    const jukebox = useRef();
     const tracks = useRef();
     const mutedRef = useRef(muted);
     const curLevel = useRef(0);
@@ -26,64 +38,80 @@ function useMusic() {
         mutedRef.current = muted; // refresh muted flag so it's visible in onend callback
     }, [muted]);
 
+    // State machine
     const onEnd = useCallback(() => {
         if (mutedRef.current) {
             return;
         }
-        const nextTrackKey = maxLessThanOrEquals(Object.keys(trackFiles), curLevel.current);
-        const nextTrack = tracks.current[nextTrackKey];
+        const nextTrackKey = maxLessThanOrEquals(
+            Object.keys(trackConfig),
+            curLevel.current
+        );
+        const nextTrack = tracks.current[nextTrackKey].loop;
         if (!nextTrack) {
             console.warn("no next track for level", curLevel.current);
             return;
         }
-        sound.current = nextTrack;
-        sound.current.play();
-        console.log("play", sound.current._src);
+        jukebox.current.sound = nextTrack;
+        jukebox.current.sound.play();
+        console.log("play", jukebox.current.sound._src, {nextTrackKey});
     }, []);
 
+    // Initialize everything
     useEffect(() => {
         if (!tracks.current) {
-            tracks.current = mapValues(
-                trackFiles,
-                (fileName) =>
-                    new Howl({
-                        src: [musicPrefix + fileName],
-                        onend: onEnd,
-                        volume: musicVolume,
-                    })
+            tracks.current = mapValues(trackConfig, (item) =>
+                mapValues(
+                    item,
+                    (fileName) =>
+                        new Howl({
+                            src: [musicPrefix + fileName],
+                            onend: onEnd,
+                            volume: musicVolume,
+                            rate: musicRate,
+                        })
+                )
             );
         }
-        if (!sound.current) {
-            sound.current = tracks.current[0];
+        if (!jukebox.current) {
+            jukebox.current = {
+                sound: tracks.current[0].loop,
+            };
         }
-    }, [onEnd, sound]);
+    }, [onEnd, jukebox]);
+
+    // Callback exposed to the mute button
     const toggleMute = useCallback(() => {
         const newMuted = !muted;
         setMuted(newMuted);
         if (newMuted) {
-            sound.current.fade(musicVolume, 0, musicFadeDurationMs);
+            jukebox.current.sound.fade(musicVolume, 0, musicFadeDurationMs);
         } else {
-            if (!sound.current.playing()) {
-                sound.current.play();
+            if (!jukebox.current.sound.playing()) {
+                jukebox.current.sound.play();
             }
-            sound.current.fade(0, musicVolume, musicFadeDurationMs);
+            jukebox.current.sound.fade(0, musicVolume, musicFadeDurationMs);
         }
     }, [muted, setMuted]);
+
     // Callback that starts music when the app is ready
     const autoPlay = useCallback(() => {
-        if (muted || sound.current.playing()) {
+        if (muted || jukebox.current.sound.playing()) {
             return;
         }
-        sound.current.play();
-    }, [muted, sound]);
+        jukebox.current.sound.play();
+    }, [muted, jukebox]);
+
+    // Game story control
     const onChangeLevel = (level) => {
+        console.log({level})
         curLevel.current = level;
     };
     return [muted, toggleMute, autoPlay, onChangeLevel];
 }
 
 function maxLessThanOrEquals(arr, val) {
-    return Math.max(...arr.filter(x => x <= val))
+    return Math.max(...arr.filter((x) => x <= val));
 }
 
 export default useMusic;
