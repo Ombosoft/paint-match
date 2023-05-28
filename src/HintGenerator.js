@@ -12,5 +12,16 @@ export default function generateHint(components, targetLevel) {
     }
     const maxDiff = objectMaxComponent(path);
     const component = Object.keys(maxDiff)[0];
-    return `Add a little ${component}`;
+    const amount = vagueAmount(maxDiff[component])
+    return `Add ${amount} ${component}`;
+}
+
+function vagueAmount(x) {
+    if (x < 3) {
+        return 'a little';
+    }
+    if (x < 5) {
+        return 'some';
+    }
+    return 'lots of'
 }
