@@ -13,7 +13,7 @@ export const colorTable = [
     { name: "orchid icing", cmyk: [0,25,0,0], cost: 7, tolerance: 5, toast: "What if I mix two primary colors?" },
     { name: "red", cmyk: [0,100,100,0], cost: 2, tolerance: 4, toast: "Very red. What if I darken it?" },
     { name: "maroon", cmyk: [0,100,100,50], cost: 2, tolerance: 4, toast: "How about mixing red and another primary?" },
-    { name: "orange red", cmyk: [0,100,50,0], cost: 2, tolerance: 4, toast: "Keep playing with red" },
+    { name: "deep pink", cmyk: [0,100,50,0], cost: 2, tolerance: 4, toast: "Keep playing with red" },
     { name: "orange", cmyk: [0,50,100,0], cost: 2, tolerance: 4, toast: "I like oranges! Can I get another fruit?" },
     { name: "lime", cmyk: [100,0,100,0], cost: 2, tolerance: 4, toast: "So bright! Let's darken it" },
     { name: "deep green", cmyk: [100,0,100,50], cost: 2, tolerance: 4, toast: "Now add white instead" },
