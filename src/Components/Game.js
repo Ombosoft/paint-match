@@ -1,3 +1,4 @@
+import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 import { Box, Stack } from "@mui/material";
 import convert from "color-convert";
 import PropTypes from "prop-types";
@@ -29,6 +30,7 @@ import ColorSliders from "./ColorSliders";
 import ColorSquare from "./ColorSquare";
 import LevelsButton from "./LevelsButton";
 import LevelsPanel from "./LevelsPanel";
+import NiceButton from "./NiceButton";
 import ResetButton from "./ResetButton";
 import SkipLevelButton from "./SkipLevelButton";
 import SlidersButton from "./SlidersButton";
@@ -254,7 +256,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             enabled={enableSliders}
                             onClick={() => setBottle((prev) => !prev)}
                         />
-                        {/* <NiceButton
+                        <NiceButton
                             title="Hint"
                             enabled={
                                 debug ||
@@ -265,7 +267,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             onClick={showHint}
                         >
                             <TipsAndUpdatesIcon />
-                        </NiceButton> */}
+                        </NiceButton>
                     </Stack>
                     <Stack direction="row" flexGrow={1}>
                         <ColorSquare
