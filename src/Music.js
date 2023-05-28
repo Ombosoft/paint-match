@@ -9,16 +9,16 @@ const trackConfig = {
     0: {
         loop: "paint_match_1.mp3",
     },
-    6: {
+    12: {
         loop: "paint_match_2.mp3",
     },
-    14: {
+    24: {
         loop: "paint_match_3.mp3",
     },
-    19: {
+    36: {
         loop: "paint_match_4.mp3",
     },
-    24: {
+    50: {
         transition: "paint_match_4.5.mp3",
         loop: "paint_match_5.mp3",
     },
@@ -47,12 +47,13 @@ function useMusic() {
             Object.keys(trackConfig),
             curLevel.current
         );
-        const nextTrack = tracks.current[nextTrackKey].loop;
+        const nextTrack = tracks.current[nextTrackKey];
         if (!nextTrack) {
             console.warn("no next track for level", curLevel.current);
             return;
         }
-        jukebox.current.sound = nextTrack;
+        jukebox.current.sound = nextTrackKey !== jukebox.current.trackId ? (nextTrack.transition ?? nextTrack.loop) : nextTrack.loop;
+        jukebox.current.trackId = nextTrackKey;
         jukebox.current.sound.play();
         console.log("play", jukebox.current.sound._src, {nextTrackKey});
     }, []);
@@ -76,7 +77,7 @@ function useMusic() {
         if (!jukebox.current) {
             jukebox.current = {
                 sound: tracks.current[0].loop,
-                // TODO cur index, hasPlayedTransition
+                trackId: 0,
             };
         }
     }, [onEnd, jukebox]);
