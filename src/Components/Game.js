@@ -262,7 +262,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                                 debug ||
                                 (numDroplets > 0 &&
                                     curLevel > 0 &&
-                                    colorTable[curLevel - 1].toast)
+                                    colorTable[curLevel - 1].toast !== null)
                             }
                             onClick={showHint}
                         >
