@@ -90,7 +90,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
             setDistance(newDistance);
             setDistanceGotWorse(distanceGotWorse || newDistance > distance);
             const winTolerance = getWinTolerance(targetLevel);
-            console.log("wintol", winTolerance, "newDist:", newDistance);
+            // console.log("wintol", winTolerance, "newDist:", newDistance);
             let newVictory = victory;
             if (newDistance <= winTolerance) {
                 newVictory = true;
@@ -258,8 +258,10 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                         />
                         <NiceButton
                             enabled={
-                                numDroplets > 0 &&
-                                (curLevel > 0 && colorTable[curLevel - 1].toast)
+                                debug ||
+                                (numDroplets > 0 &&
+                                    curLevel > 0 &&
+                                    colorTable[curLevel - 1].toast)
                             }
                             onClick={showHint}
                         >

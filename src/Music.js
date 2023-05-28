@@ -76,6 +76,7 @@ function useMusic() {
         if (!jukebox.current) {
             jukebox.current = {
                 sound: tracks.current[0].loop,
+                // TODO cur index, hasPlayedTransition
             };
         }
     }, [onEnd, jukebox]);
@@ -104,7 +105,7 @@ function useMusic() {
 
     // Game story control
     const onChangeLevel = (level) => {
-        console.log({level})
+        // console.log({level})
         curLevel.current = level;
     };
     return [muted, toggleMute, autoPlay, onChangeLevel];
