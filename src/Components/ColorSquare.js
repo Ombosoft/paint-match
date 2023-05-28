@@ -59,11 +59,11 @@ function ColorSquare({
                             }}
                         >
                             {label}
+                            <div>{showColor && color}</div>
                         </div>
                     </Tooltip>
                 )}
 
-                <div>{showColor && color}</div>
             </span>
         </>
     );
