@@ -18,7 +18,7 @@ import {
 } from "../Constants";
 import { LevelsPanelContext } from "../Context/LevelsPanelContext";
 import { NumDropletsContext } from "../Context/NumDropletsContext";
-import { optimalSolution } from "../GameAI";
+import { optimalPath, optimalSolution } from "../GameAI";
 import useLevelStatus from "../LevelStatus";
 import { colorTable } from "../Levels";
 import { useTutorial } from "../Tutorial";
@@ -214,7 +214,8 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         if (curLevel > 0 && colorTable[curLevel - 1].toast) {
             setHint(colorTable[curLevel - 1].toast);
         } else {
-            setHint("Keep going!");
+            const path = optimalPath(components, targetLevel.cmyk, getWinTolerance(targetLevel));
+            setHint(JSON.stringify(path));
         }
     }
 

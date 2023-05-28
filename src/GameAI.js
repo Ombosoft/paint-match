@@ -1,7 +1,7 @@
 import colorDistance from "./ColorDistance";
 import { blendPaints, zeroComponents } from "./Colors";
-import { compareBy, range } from "./Util/Utils";
-import { objectValueSum } from "./Util/Vec";
+import { compareBy, isObject, range } from "./Util/Utils";
+import { objectSubstract2, objectValueSum } from "./Util/Vec";
 
 function basisComponents(dest) {
     let result = ['white', 'black'];
@@ -27,19 +27,19 @@ function prune(buf, requiredSize) {
 
 // source: array[CMYK] -> dest: array[CMYK] -> eps: number -> object{components}
 export function optimalSolution(dest, eps, maxCost = 50) {
-    const source = [0, 0, 0, 0];
-    return optimalPath(source, dest, eps, maxCost);
+    return optimalPath(zeroComponents, dest, eps, maxCost);
 }
 
-export function optimalPath(source, dest, eps, maxAddedCost = 50) {
-    const maxCost = maxAddedCost + objectValueSum(source);
+export function optimalPath(sourceComponents, dest, eps, maxAddedCost = 50) {
+    const maxCost = maxAddedCost + objectValueSum(sourceComponents);
     const pruneThreshold = 1000;
     const pruneTarget = 100;
     let maxBufLen = 0;
-    console.assert(Array.isArray(source));
+    console.assert(isObject(sourceComponents));
     console.assert(Array.isArray(dest));
     const componentNames = basisComponents(dest);
-    let buf = [{ cmyk: source, comps: zeroComponents, colorDistance: Number.MAX_SAFE_INTEGER }];
+    const source = blendPaints(sourceComponents);
+    let buf = [{ cmyk: source, comps: sourceComponents, colorDistance: Number.MAX_SAFE_INTEGER }];
     // comps (path) -> bool
     let visited = {};
     visited[JSON.stringify(zeroComponents)] = true;
@@ -65,7 +65,7 @@ export function optimalPath(source, dest, eps, maxAddedCost = 50) {
             visited[nextCompsKey] = true;
             const nextColorDistance = colorDistance(nextCMYK, dest);
             if (nextColorDistance < eps) {
-                return nextComps;
+                return objectSubstract2(nextComps, sourceComponents);
             }
             buf.push({ cmyk: nextCMYK, comps: nextComps, colorDistance: nextColorDistance });
         }

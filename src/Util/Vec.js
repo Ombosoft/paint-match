@@ -1,3 +1,5 @@
+import { isObject, mapValues } from "./Utils";
+
 // Add two vectors element-wise.
 export function vecAdd2(u, v) {
     return u.map((c, index) => c + v[index]);
@@ -26,6 +28,7 @@ export function vecRound(v) {
 
 // Scale a vector by a scalar value.
 export function vecScale(v, scalar) {
+    console.assert(Number.isFinite(scalar));
     return v.map((c) => c * scalar);
 }
 
@@ -39,8 +42,31 @@ export function vecCompSum(v) {
     return v.reduce((a, b) => a + b, 0);
 }
 
+// Add up all values in the object
 export function objectValueSum(obj) {
     return vecCompSum(Object.values(obj));
+}
+
+// Return object with all values multiplied by a factor
+export function objectValueScale(obj, factor) {
+    console.assert(Number.isFinite(factor));
+    return mapValues(obj, (x) => factor * x);
+}
+
+// Return new object with values formed by adding u and v values
+export function objectAdd2(u, v) {
+    console.assert(isObject(u));
+    console.assert(isObject(v));
+    let result = { ...u };
+    Object.entries(v).forEach(([key, x]) => {
+        result[key] = (result[key] ?? 0) + x;
+    });
+    return result;
+}
+
+// Return new object with values formed by substracting u and v values
+export function objectSubstract2(u, v) {
+    return objectAdd2(u, objectValueScale(v, -1));
 }
 
 // Compute the sum of components in a matrix.

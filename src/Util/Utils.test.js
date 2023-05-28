@@ -1,6 +1,7 @@
 import {
     compareBy,
     groupBy,
+    isObject,
     mapValues,
     randElement,
     randInt,
@@ -73,3 +74,11 @@ test("groupBy", () => {
 test("mapValues", () => {
     expect(mapValues({ x: 1, y: 2, z: 3 }, x => x*x)).toStrictEqual({ x: 1, y: 4, z: 9 })
 })
+
+test("isObject", () => {
+    expect(isObject({})).toBeTruthy();
+    expect(isObject({a: 1})).toBeTruthy();
+    expect(isObject(true)).toBeFalsy();
+    expect(isObject(1)).toBeFalsy();
+    expect(isObject([])).toBeFalsy();
+});

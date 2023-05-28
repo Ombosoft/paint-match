@@ -58,7 +58,7 @@ export function compareBy(getter) {
 export function groupBy(arr, keyGetter) {
     const reducer = (acc, val) => {
         const key = keyGetter(val);
-        (acc[key] || (acc[key] = [])).push(val)
+        (acc[key] || (acc[key] = [])).push(val);
         return acc;
     };
     return arr.reduce(reducer, {});
@@ -69,4 +69,8 @@ export function mapValues(obj, mapper) {
     return Object.fromEntries(
         Object.entries(obj).map(([key, val]) => [key, mapper(val)])
     );
+}
+
+export function isObject(x) {
+    return typeof x === "object" && x !== null && !Array.isArray(x);
 }

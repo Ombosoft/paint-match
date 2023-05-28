@@ -1,5 +1,5 @@
 import { zeroComponents } from "./Colors";
-import { minCost, optimalSolution } from "./GameAI";
+import { minCost, optimalPath, optimalSolution } from "./GameAI";
 
 const red = { ...zeroComponents, red: 1 };
 const cyan = { ...zeroComponents, cyan: 1 };
@@ -58,7 +58,7 @@ test("optimalSolutionPlum", () => {
 });
 
 test("optimalSolutionYolk", () => {
-    expect(optimalSolution([0,10,100,0], eps)).toStrictEqual({
+    expect(optimalSolution([0, 10, 100, 0], eps)).toStrictEqual({
         ...zeroComponents,
         yellow: 9,
         red: 1,
@@ -66,7 +66,7 @@ test("optimalSolutionYolk", () => {
 });
 
 test("optimalSolutionPink", () => {
-    expect(optimalSolution([0,25,20,0], eps)).toStrictEqual({
+    expect(optimalSolution([0, 25, 20, 0], eps)).toStrictEqual({
         ...zeroComponents,
         magenta: 1,
         white: 9,
@@ -75,7 +75,7 @@ test("optimalSolutionPink", () => {
 });
 
 test("optimalSolutionMediumRed", () => {
-    expect(optimalSolution([0,100,100,7], eps)).toStrictEqual({
+    expect(optimalSolution([0, 100, 100, 7], eps)).toStrictEqual({
         ...zeroComponents,
         black: 1,
         red: 13,
@@ -86,4 +86,71 @@ test("minCost", () => {
     expect(minCost([0, 100, 100, 0], eps)).toBe(1);
     expect(minCost([0, 0, 20, 0], eps)).toBe(7);
     expect(minCost([0, 45, 100, 0], eps)).toBe(11);
+});
+
+test("optimalPathTrivial", () => {
+    expect(optimalPath(zeroComponents, [100, 0, 0, 0], eps)).toStrictEqual(
+        cyan
+    );
+});
+
+test("optimalPathImpossible", () => {
+    expect(optimalPath(cyan, [0, 100, 0, 0], eps, 10)).toStrictEqual(
+        zeroComponents
+    );
+});
+
+test("optimalPath1", () => {
+    expect(
+        optimalPath(
+            {
+                ...zeroComponents,
+                red: 1,
+            },
+            [0, 50, 100, 0],
+            eps
+        )
+    ).toStrictEqual({
+        ...zeroComponents,
+        yellow: 1,
+    });
+    expect(
+        optimalPath(
+            {
+                ...zeroComponents,
+                yellow: 1,
+            },
+            [0, 50, 100, 0],
+            eps
+        )
+    ).toStrictEqual({
+        ...zeroComponents,
+        red: 1,
+    });
+    expect(
+        optimalPath(
+            {
+                ...zeroComponents,
+                magenta: 1,
+            },
+            [50, 100, 0, 0],
+            eps
+        )
+    ).toStrictEqual({
+        ...zeroComponents,
+        blue: 1,
+    });
+    expect(
+        optimalPath(
+            {
+                ...zeroComponents,
+                blue: 1,
+            },
+            [50, 100, 0, 0],
+            eps
+        )
+    ).toStrictEqual({
+        ...zeroComponents,
+        magenta: 1,
+    });
 });
