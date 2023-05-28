@@ -26,11 +26,17 @@ function prune(buf, requiredSize) {
 }
 
 // source: array[CMYK] -> dest: array[CMYK] -> eps: number -> object{components}
-export function optimalPath(dest, eps, maxCost = 50) {
+export function optimalSolution(dest, eps, maxCost = 50) {
+    const source = [0, 0, 0, 0];
+    return optimalPath(source, dest, eps, maxCost);
+}
+
+export function optimalPath(source, dest, eps, maxAddedCost = 50) {
+    const maxCost = maxAddedCost + objectValueSum(source);
     const pruneThreshold = 1000;
     const pruneTarget = 100;
-    const source = [0, 0, 0, 0];
     let maxBufLen = 0;
+    console.assert(Array.isArray(source));
     console.assert(Array.isArray(dest));
     const componentNames = basisComponents(dest);
     let buf = [{ cmyk: source, comps: zeroComponents, colorDistance: Number.MAX_SAFE_INTEGER }];
@@ -53,24 +59,21 @@ export function optimalPath(dest, eps, maxCost = 50) {
             const nextCMYK = blendPaints(nextComps);
             const nextCompsKey = JSON.stringify(nextComps);
             if (visited[nextCompsKey]) {
-                // console.log('visited', nextComps);
                 continue;
             }
             // console.log(cur.comps, '=>', nextComps)
             visited[nextCompsKey] = true;
             const nextColorDistance = colorDistance(nextCMYK, dest);
             if (nextColorDistance < eps) {
-                // console.log({maxBufLen});
                 return nextComps;
             }
             buf.push({ cmyk: nextCMYK, comps: nextComps, colorDistance: nextColorDistance });
         }
     }
     // todo get closest anyway
-    console.log({maxBufLen});
     return zeroComponents;
 }
 
 export function minCost(dest, eps) {
-    return objectValueSum(optimalPath(dest, eps));
+    return objectValueSum(optimalSolution(dest, eps));
 }

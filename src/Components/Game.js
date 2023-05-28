@@ -18,7 +18,7 @@ import {
 } from "../Constants";
 import { LevelsPanelContext } from "../Context/LevelsPanelContext";
 import { NumDropletsContext } from "../Context/NumDropletsContext";
-import { optimalPath } from "../GameAI";
+import { optimalSolution } from "../GameAI";
 import useLevelStatus from "../LevelStatus";
 import { colorTable } from "../Levels";
 import { useTutorial } from "../Tutorial";
@@ -172,7 +172,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         setBottle(true);
         onChangeLevel(newLevel);
         if (debug) {
-            const optimal = optimalPath(
+            const optimal = optimalSolution(
                 newTarget.cmyk,
                 getWinTolerance(newTarget),
                 30
