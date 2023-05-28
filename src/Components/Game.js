@@ -143,6 +143,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         setDistance(maxDistance);
         setDistanceGotWorse(false);
         setVictory(false);
+        setHint(null);
     }
 
     function saveUndo() {
@@ -155,6 +156,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         }
         setComponents(prevComponents.at(-1));
         setPrevComponents((prev) => [...prev.slice(0, -1)]);
+        setHint(null);
     }
 
     function nextLevel() {
@@ -212,7 +214,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     }
 
     function showHint() {
-        if (curLevel > 0 && colorTable[curLevel - 1].toast) {
+        if (curLevel > 0 && colorTable[curLevel - 1].toast && numDroplets < 4) {
             setHint(colorTable[curLevel - 1].toast);
         } else {
             setHint(generateHint(components, targetLevel));

@@ -25,3 +25,15 @@ test("generateHintFix", () => {
         "Add lots of yellow"
     );
 });
+
+test("generateHintNegative", () => {
+    expect(generateHint({...zeroComponents, white: 4 }, { cmyk: [51, 0, 100, 1], extraWinTolerance: 0.1 })).toStrictEqual(
+        "It's easier to start over. You don't need white."
+    );
+});
+
+test("generateHintHelpless", () => {
+    expect(generateHint({...zeroComponents, blue: 15 }, { cmyk: [100, 25, 0, 20] })).toStrictEqual(
+        "It's easier to start over"
+    );
+});
