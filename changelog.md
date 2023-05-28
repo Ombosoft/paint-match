@@ -1,3 +1,5 @@
+* Automated in-game hints
+
 ## 4
 
 * Music by Kiwami Alex
