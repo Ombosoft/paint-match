@@ -96,7 +96,7 @@ test("optimalPathTrivial", () => {
 
 test("optimalPathImpossible", () => {
     expect(optimalPath(cyan, [0, 100, 0, 0], eps, 10)).toStrictEqual(
-        zeroComponents
+        null
     );
 });
 

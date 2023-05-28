@@ -71,7 +71,7 @@ export function optimalPath(sourceComponents, dest, eps, maxAddedCost = 50) {
         }
     }
     // todo get closest anyway
-    return zeroComponents;
+    return null;
 }
 
 export function minCost(dest, eps) {

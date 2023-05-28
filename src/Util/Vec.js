@@ -69,6 +69,21 @@ export function objectSubstract2(u, v) {
     return objectAdd2(u, objectValueScale(v, -1));
 }
 
+// Returns key: value for the biggest value on obj
+export function objectMaxComponent(obj) {
+    let maxKey = null;
+    let maxVal = Number.MIN_SAFE_INTEGER;
+    for (const [key, x] of Object.entries(obj)) {
+        if (x > maxVal) {
+            maxVal = x;
+            maxKey = key;
+        }
+    };
+    let result = {};
+    result[maxKey] = maxVal;
+    return result;
+}
+
 // Compute the sum of components in a matrix.
 export function matCompSum(m) {
     return m.reduce((a, b) => vecAdd2(a, b), vecScale(m[0], 0));

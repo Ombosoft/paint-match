@@ -1,4 +1,4 @@
-import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
+import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import { Box, Stack } from "@mui/material";
 import convert from "color-convert";
 import PropTypes from "prop-types";
@@ -18,7 +18,8 @@ import {
 } from "../Constants";
 import { LevelsPanelContext } from "../Context/LevelsPanelContext";
 import { NumDropletsContext } from "../Context/NumDropletsContext";
-import { optimalPath, optimalSolution } from "../GameAI";
+import { optimalSolution } from "../GameAI";
+import generateHint from "../HintGenerator";
 import useLevelStatus from "../LevelStatus";
 import { colorTable } from "../Levels";
 import { useTutorial } from "../Tutorial";
@@ -214,8 +215,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         if (curLevel > 0 && colorTable[curLevel - 1].toast) {
             setHint(colorTable[curLevel - 1].toast);
         } else {
-            const path = optimalPath(components, targetLevel.cmyk, getWinTolerance(targetLevel));
-            setHint(JSON.stringify(path));
+            setHint(generateHint(components, targetLevel));
         }
     }
 
@@ -261,7 +261,8 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             title="Hint"
                             enabled={
                                 debug ||
-                                (numDroplets > 0 &&
+                                (!victory &&
+                                    numDroplets > 0 &&
                                     curLevel > 0 &&
                                     colorTable[curLevel - 1].toast !== null)
                             }

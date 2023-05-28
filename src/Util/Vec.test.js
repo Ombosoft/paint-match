@@ -2,6 +2,7 @@ import {
     matCompSum,
     matScaleByVec,
     objectAdd2,
+    objectMaxComponent,
     objectSubstract2,
     objectValueScale,
     objectValueSum,
@@ -122,4 +123,11 @@ test("objectSubstract2", () => {
     expect(objectSubstract2(u, v)).toStrictEqual({a: 2, b: -3});
     expect(objectSubstract2(z, v)).toStrictEqual({a: 11, b: 19});
     expect(objectSubstract2(v, z)).toStrictEqual({a: -11, b: -19});
+});
+
+test("objectMaxComponent", () => {
+    const u = {a: 2};
+    const v = {a: 11, b: 22};
+    expect(objectMaxComponent(u)).toStrictEqual(u);
+    expect(objectMaxComponent(v)).toStrictEqual({b: 22});
 });
