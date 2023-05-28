@@ -257,6 +257,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             onClick={() => setBottle((prev) => !prev)}
                         />
                         <NiceButton
+                            title="Hint"
                             enabled={
                                 debug ||
                                 (numDroplets > 0 &&
