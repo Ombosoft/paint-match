@@ -55,7 +55,7 @@ export const colorTable = [
     { name: "light blue", cmyk: [34,0,0,15], cost: 5, tolerance: 4, toast: "What else can I mix lightgray with?"  },
     { name: "dark periwinkle", cmyk: [60, 60, 15, 0], cost: 5, tolerance: 4, toast: "Another pastel?"  },
     { name: "hematite", cmyk: [0,64,64,11], cost: 8, tolerance: 4, toast: "Well done!" },
-    { name: "chocolate", cmyk: [0,67,100,40], cost: 5, tolerance: 4},
+    { name: "chocoholic", cmyk: [0,67,100,40], cost: 5, tolerance: 4},
     { name: "blood red", cmyk: [0,100,100,60], cost: 5, tolerance: 1 },
     { name: "neon avocado", cmyk: [100,0,60,0], cost: 5, tolerance: 5 },
     { name: "broadway pink", cmyk: [0,100,60,0], cost: 5, tolerance: 4 },
