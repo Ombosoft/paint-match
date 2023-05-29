@@ -137,6 +137,10 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         };
     }, [checkCommit, components]);
 
+    useEffect(() => {
+        onChangeLevel(curLevel);
+    }, [curLevel, onChangeLevel]);
+
     function resetColors() {
         saveUndo();
         setComponents(zeroComponents);
@@ -175,7 +179,6 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         setTargetLevel(newTarget);
         setResetCount(0);
         setBottle(true);
-        onChangeLevel(newLevel);
         if (debug) {
             const optimal = optimalSolution(
                 newTarget.cmyk,

@@ -43,9 +43,10 @@ function useMusic() {
         if (mutedRef.current) {
             return;
         }
-        const nextTrackKey = maxLessThanOrEquals(
+        const nextTrackKey = chooseNextTrack(
             Object.keys(trackConfig),
-            curLevel.current
+            jukebox.current.trackId,
+            curLevel.current,
         );
         const nextTrack = tracks.current[nextTrackKey];
         if (!nextTrack) {
@@ -106,14 +107,18 @@ function useMusic() {
 
     // Game story control
     const onChangeLevel = (level) => {
-        // console.log({level})
+        console.log({level})
         curLevel.current = level;
     };
     return [muted, toggleMute, autoPlay, onChangeLevel];
 }
 
-function maxLessThanOrEquals(arr, val) {
-    return Math.max(...arr.filter((x) => x <= val));
+function chooseNextTrack(trackIds, curId, levelNum) {
+    const desiredId = Math.max(...trackIds.filter((x) => x <= levelNum))
+    if (curId >= desiredId) {
+        return desiredId;
+    }
+    return Math.min(...trackIds.filter((x) => x <= desiredId && x > curId));
 }
 
 export default useMusic;
