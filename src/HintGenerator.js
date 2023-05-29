@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { getWinTolerance, zeroComponents } from "./Colors";
 import { optimalPath, optimalSolution } from "./GameAI";
 import { objectMaxComponent } from "./Util/Vec";
@@ -9,7 +10,7 @@ export function generateHint(components, targetLevel) {
         const solution = optimalSolution(targetLevel.cmyk, winTolerance);
         const mostUnnecessary = getMostUnnecessary(components, solution);
         if (mostUnnecessary) {
-            return `It's easier to start over. You don't need [${mostUnnecessary}].`;
+            return `It's easier to start over. You don't need [${mostUnnecessary}]`;
         }
         return "It's easier to start over";
     }
@@ -22,7 +23,34 @@ export function generateHint(components, targetLevel) {
     return `Add ${amount} [${component}]`;
 }
 
+const colorRe = /\[(\w+)\]/;
+
 export function formatHint(str) {
+    const colorMatch = str.match(colorRe);
+    const parts = str.split(colorRe);
+    if (colorMatch === null || colorMatch.length < 2 || parts.length < 3) {
+        return tokenize(str);
+    }
+    const color = colorMatch[1];
+    return (
+        <>
+            {tokenize(parts[0])}{" "}
+            <Box component="span" sx={{ color: substituteColor(color) }}>
+                {color}
+            </Box>{" "}
+            {tokenize(parts[2])}
+        </>
+    );
+}
+
+function substituteColor(color) {
+    if (color === 'green') {
+        return 'lightgreen';
+    }
+    return color;
+}
+
+function tokenize(str) {
     return <span>{str}</span>;
 }
 

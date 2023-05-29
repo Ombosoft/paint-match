@@ -28,7 +28,7 @@ test("generateHintFix", () => {
 
 test("generateHintNegative", () => {
     expect(generateHint({...zeroComponents, white: 4 }, { cmyk: [51, 0, 100, 1], extraWinTolerance: 0.1 })).toStrictEqual(
-        "It's easier to start over. You don't need [white]."
+        "It's easier to start over. You don't need [white]"
     );
 });
 
