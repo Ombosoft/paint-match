@@ -23,24 +23,23 @@ export function generateHint(components, targetLevel) {
     return `Add ${amount} [${component}]`;
 }
 
-const colorRe = /\[(\w+)\]/;
+const colorRe = / \[(\w+)\]/;
+const wordRe = /\s/;
 
 export function formatHint(str) {
     const colorMatch = str.match(colorRe);
     const parts = str.split(colorRe);
     if (colorMatch === null || colorMatch.length < 2 || parts.length < 3) {
-        return tokenize(str);
+        return [tokenize(str)];
     }
     const color = colorMatch[1];
-    return (
-        <>
-            {tokenize(parts[0])}{" "}
-            <Box component="span" sx={{ color: substituteColor(color) }}>
+    return [
+            ...tokenize(parts[0]),
+            <Box component="span" key={color} sx={{ color: substituteColor(color) }}>
                 {color}
-            </Box>{" "}
-            {tokenize(parts[2])}
-        </>
-    );
+            </Box>,
+            ...tokenize(parts[2]),
+    ];
 }
 
 function substituteColor(color) {
@@ -51,7 +50,7 @@ function substituteColor(color) {
 }
 
 function tokenize(str) {
-    return <span>{str}</span>;
+    return str.split(wordRe).map(word => <span key={'i' + word}>{word + " "}</span>);
 }
 
 function vagueAmount(x) {

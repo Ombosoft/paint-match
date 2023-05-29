@@ -29,6 +29,7 @@ import AppTitle from "./AppTitle";
 import ColorButtons from "./ColorButtons";
 import ColorSliders from "./ColorSliders";
 import ColorSquare from "./ColorSquare";
+import { HintBox } from "./HintBox";
 import HintButton from "./HintButton";
 import LevelsButton from "./LevelsButton";
 import LevelsPanel from "./LevelsPanel";
@@ -301,7 +302,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             showColor={debug}
                             dropletColor={dropletColor}
                             showDroplet
-                            tooltip={hint}
+                            tooltip={<HintBox hint={hint}/>}
                             showTooltip={hint !== null}
                         />
                     </Stack>
