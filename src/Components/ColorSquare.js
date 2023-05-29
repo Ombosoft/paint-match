@@ -75,7 +75,7 @@ ColorSquare.propTypes = {
     showColor: PropTypes.bool,
     showDroplet: PropTypes.bool,
     dropletColor: PropTypes.string,
-    tooltip: PropTypes.string,
+    tooltip: PropTypes.any,
     showTooltip: PropTypes.bool,
 };
 

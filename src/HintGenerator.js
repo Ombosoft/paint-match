@@ -2,14 +2,14 @@ import { getWinTolerance, zeroComponents } from "./Colors";
 import { optimalPath, optimalSolution } from "./GameAI";
 import { objectMaxComponent } from "./Util/Vec";
 
-export default function generateHint(components, targetLevel) {
+export function generateHint(components, targetLevel) {
     const winTolerance = getWinTolerance(targetLevel);
     const path = optimalPath(components, targetLevel.cmyk, winTolerance);
     if (path === null) {
         const solution = optimalSolution(targetLevel.cmyk, winTolerance);
         const mostUnnecessary = getMostUnnecessary(components, solution);
         if (mostUnnecessary) {
-            return `It's easier to start over. You don't need ${mostUnnecessary}.`;
+            return `It's easier to start over. You don't need [${mostUnnecessary}].`;
         }
         return "It's easier to start over";
     }
@@ -19,7 +19,11 @@ export default function generateHint(components, targetLevel) {
     const maxDiff = objectMaxComponent(path);
     const component = Object.keys(maxDiff)[0];
     const amount = vagueAmount(maxDiff[component]);
-    return `Add ${amount} ${component}`;
+    return `Add ${amount} [${component}]`;
+}
+
+export function formatHint(str) {
+    return <span>{str}</span>;
 }
 
 function vagueAmount(x) {

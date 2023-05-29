@@ -19,7 +19,7 @@ import {
 import { LevelsPanelContext } from "../Context/LevelsPanelContext";
 import { NumDropletsContext } from "../Context/NumDropletsContext";
 import { optimalSolution } from "../GameAI";
-import generateHint from "../HintGenerator";
+import { formatHint, generateHint } from "../HintGenerator";
 import useLevelStatus from "../LevelStatus";
 import { colorTable } from "../Levels";
 import { useTutorial } from "../Tutorial";
@@ -215,7 +215,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     }
 
     function showHint() {
-        setHint(generateHint(components, targetLevel));
+        setHint(formatHint(generateHint(components, targetLevel)));
     }
 
     const allowResetWhen =
