@@ -64,7 +64,7 @@ export const colorTable = [
     { name: "concord grape", cmyk: [33,99,0,40], cost: 5, tolerance: 4 },
     { name: "cadmium yellow", cmyk: [0,40,93,0], cost: 5, tolerance: 4 },
     { name: "starbucks", cmyk: [100,0,50,60], cost: 5, tolerance: 4 },
-    { name: "indiGlo", cmyk: [98,9,0,0], cost: 11, tolerance: 4 },
+    { name: "indiGLO", cmyk: [98,9,0,0], cost: 11, tolerance: 4 },
     { name: "irish flag", cmyk: [100,0,100,40], cost: 5, tolerance: 4 },
     { name: "true purple", cmyk: [0,100,0,40], cost: 5, tolerance: 4 },
     { name: "chartreuse", cmyk: [50,0,100,20], cost: 5, tolerance: 4 },
