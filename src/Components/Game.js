@@ -264,6 +264,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             enabled={
                                 debug ||
                                 (!victory &&
+                                    resetCount > 0 &&
                                     numDroplets > 0 &&
                                     curLevel > 0 &&
                                     colorTable[curLevel - 1].toast !== null)
