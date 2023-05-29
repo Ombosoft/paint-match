@@ -33,6 +33,14 @@ export function useSlidersTutorial() {
     return useOneOffTutorial("tutorial-sliders");
 }
 
+export function useHintTutorial() {
+    return useOneOffTutorial("tutorial-hint");
+}
+
+export function useNotesTutorial() {
+    return useOneOffTutorial("tutorial-notes");
+}
+
 function useOneOffTutorial(key) {
     const [allow, setAllow] = useLocalStorage(key, true);
     function onUsed() {

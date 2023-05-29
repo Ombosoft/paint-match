@@ -65,6 +65,8 @@ export const cmykColors = [
     { color: "green", minLevel: 17 },
     { color: "blue", minLevel: 22 },
 ];
+export const firstLevelWithAllColors = Math.max(...cmykColors.map((c) => c.minLevel)) + 1;
+
 
 // Object -> CMYK
 export function blendPaints(cs) {

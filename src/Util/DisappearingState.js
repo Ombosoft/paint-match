@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const timeout = 3000;
+const timeout = 4000;
 
 const Unused = 0;
 const On = 1;

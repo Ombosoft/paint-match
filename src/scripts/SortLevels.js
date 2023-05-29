@@ -1,11 +1,11 @@
 import colorDistance from "../ColorDistance.js";
-import { cmykColors } from "../Colors.js";
+import { firstLevelWithAllColors } from "../Colors.js";
 import { colorTable } from "../Levels.js";
 import { compareBy, groupBy, mapValues } from "../Util/Utils.js";
 const fs = require("fs");
 
 // const limit = 200;
-const limit = colorTable.length
+const limit = colorTable.length;
 
 function save(levels) {
     let code =
@@ -77,9 +77,8 @@ for (const level of levels) {
     level.ewt = ewt;
 }
 
-const firstDynamic = Math.max(...cmykColors.map((c) => c.minLevel)) + 1;
-const hardcodedLevels = levels.slice(0, firstDynamic);
-const dynamicLevels = levels.slice(firstDynamic, levels.length);
+const hardcodedLevels = levels.slice(0, firstLevelWithAllColors);
+const dynamicLevels = levels.slice(firstLevelWithAllColors, levels.length);
 const groupByCost = groupBy(dynamicLevels, (level) => level.cost);
 const sortedGroups = Object.entries(
     mapValues(groupByCost, (xs) => sortGroup(xs))

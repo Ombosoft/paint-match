@@ -1,4 +1,3 @@
-import TipsAndUpdatesIcon from "@mui/icons-material/TipsAndUpdates";
 import { Box, Stack } from "@mui/material";
 import convert from "color-convert";
 import PropTypes from "prop-types";
@@ -7,6 +6,7 @@ import colorDistance from "../ColorDistance";
 import {
     blendPaints,
     cmykColors,
+    firstLevelWithAllColors,
     getWinTolerance,
     zeroComponents,
 } from "../Colors";
@@ -29,9 +29,10 @@ import AppTitle from "./AppTitle";
 import ColorButtons from "./ColorButtons";
 import ColorSliders from "./ColorSliders";
 import ColorSquare from "./ColorSquare";
+import HintButton from "./HintButton";
 import LevelsButton from "./LevelsButton";
 import LevelsPanel from "./LevelsPanel";
-import NiceButton from "./NiceButton";
+import NotesButton from "./NotesButton";
 import ResetButton from "./ResetButton";
 import SkipLevelButton from "./SkipLevelButton";
 import SlidersButton from "./SlidersButton";
@@ -214,11 +215,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     }
 
     function showHint() {
-        if (curLevel > 0 && colorTable[curLevel - 1].toast && numDroplets < 4) {
-            setHint(colorTable[curLevel - 1].toast);
-        } else {
-            setHint(generateHint(components, targetLevel));
-        }
+        setHint(generateHint(components, targetLevel));
     }
 
     const allowResetWhen =
@@ -228,11 +225,22 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         debug ||
         (resetCount >= 3 && !victory) ||
         (goodEnough(distance) && !victory);
+    const enableHints =
+        debug ||
+        (!victory &&
+            resetCount > 0 &&
+            numDroplets > 0 &&
+            curLevel > 0 &&
+            colorTable[curLevel - 1].toast !== null);
     const enableSliders = debug || (resetCount >= 3 && !victory);
     const targetRGB = targetColorRGB();
     const currentRGB = victory
         ? targetRGB
         : convert.cmyk.hex(blendPaints(components));
+    const levelNotes =
+        curLevel > 2 && colorTable[curLevel - 1].toast
+            ? colorTable[curLevel - 1].toast
+            : null;
 
     return (
         <NumDropletsContext.Provider value={numDroplets}>
@@ -259,20 +267,15 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             enabled={enableSliders}
                             onClick={() => setBottle((prev) => !prev)}
                         />
-                        <NiceButton
-                            title="Hint"
-                            enabled={
-                                debug ||
-                                (!victory &&
-                                    resetCount > 0 &&
-                                    numDroplets > 0 &&
-                                    curLevel > 0 &&
-                                    colorTable[curLevel - 1].toast !== null)
-                            }
-                            onClick={showHint}
-                        >
-                            <TipsAndUpdatesIcon />
-                        </NiceButton>
+                        {levelNotes !== null && (
+                            <NotesButton notes={levelNotes} />
+                        )}
+                        {curLevel >= firstLevelWithAllColors && (
+                            <HintButton
+                                enabled={enableHints}
+                                onClick={showHint}
+                            />
+                        )}
                     </Stack>
                     <Stack direction="row" flexGrow={1}>
                         <ColorSquare
