@@ -64,3 +64,24 @@
     display: flex;
     align-items: center;
 }
+
+.cursor {
+    height: 1em;
+    width: 0.1em;
+    background: black;
+    display: inline-block;
+    vertical-align: middle;
+    animation: blink ease-in-out 900ms infinite;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
