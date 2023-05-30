@@ -223,7 +223,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     }
 
     const allowResetWhen =
-        victory || distanceGotWorse || numDroplets > dropletsUntilReset;
+        distanceGotWorse || numDroplets > dropletsUntilReset;
     const enableUndo = prevComponents.length > 0 && !victory;
     const enableSkip =
         debug ||
@@ -258,7 +258,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                         <UndoButton enabled={enableUndo} onClick={undo} />
                         <ResetButton
                             enabled={
-                                components !== zeroComponents && allowResetWhen
+                                (components !== zeroComponents) && allowResetWhen
                             }
                             resetColors={resetColors}
                         />

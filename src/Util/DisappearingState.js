@@ -10,6 +10,9 @@ const Off = 2;
 export default function useDisappearingState(initial) {
     const [state, setState] = useState(Unused);
     useEffect(() => {
+        if (!initial && state === On) {
+            setState(Off);
+        }
         if (initial && state !== Off) {
             if (state === Unused) {
                 setState(On);
