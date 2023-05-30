@@ -22,7 +22,7 @@ export function useSoundControl() {
 
 export function useVictorySound() {
     return useHowl({
-        src: "/sfx/victory.webm",
+        src: "/sfx/victory.mp3",
         volume: 0.4,
         rate: 1.0,
         sprite: null,
@@ -39,7 +39,7 @@ export function useUndoSound() {
 
 function useResetSfx(rate) {
     return useHowl({
-        src: "/sfx/reset.webm",
+        src: "/sfx/reset.mp3",
         volume: 0.3,
         rate: rate,
     });
@@ -60,7 +60,7 @@ export function useSkipSound() {
         9: [23931, 681],
     };
     return useHowl({
-        src: "/sfx/skip.webm",
+        src: "/sfx/skip.mp3",
         volume: 1.0,
         sprite: skipSprites,
     });
@@ -97,7 +97,7 @@ export function useDropletSound(numDroplets) {
         15: [13253, 375],
     };
     return useHowl({
-        src: "/sfx/droplet.webm",
+        src: "/sfx/droplet.mp3",
         volume: 0.6,
         rate: playbackRate(numDroplets),
         sprite: dropletSprites,
