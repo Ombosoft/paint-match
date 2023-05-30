@@ -223,7 +223,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     }
 
     const allowResetWhen =
-        distanceGotWorse || numDroplets > dropletsUntilReset;
+        !victory && (distanceGotWorse || numDroplets > dropletsUntilReset);
     const enableUndo = prevComponents.length > 0 && !victory;
     const enableSkip =
         debug ||
@@ -242,7 +242,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         ? targetRGB
         : convert.cmyk.hex(blendPaints(components));
     const levelNotes =
-        curLevel > 2 && colorTable[curLevel - 1].toast && !victory
+        curLevel > 2 && colorTable[curLevel - 1].toast
             ? colorTable[curLevel - 1].toast
             : null;
 
@@ -272,7 +272,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             onClick={() => setBottle((prev) => !prev)}
                         />
                         {levelNotes !== null && (
-                            <NotesButton notes={levelNotes} />
+                            <NotesButton notes={levelNotes} enabled={!victory} />
                         )}
                         {curLevel >= firstLevelWithAllColors && (
                             <HintButton

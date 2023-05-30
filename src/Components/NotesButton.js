@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useNotesTutorial } from "../Tutorial";
 import useDisappearingState from "../Util/DisappearingState";
 
-function NotesButton({ notes }) {
+function NotesButton({ notes, enabled }) {
     const [allowTutorial, onUsed] = useNotesTutorial();
     const showTutorial = useDisappearingState(allowTutorial);
     const [openTooltip, setOpenTooltip] = useState(false);
@@ -35,6 +35,13 @@ function NotesButton({ notes }) {
         onUsed();
         setOpenTooltip(true);
     }
+    if (!enabled) {
+        return (
+            <IconButton color="secondary" size="medium" disabled>
+                <FormatQuoteIcon />
+            </IconButton>
+        );
+    }
 
     return (
         <Tooltip
@@ -42,7 +49,10 @@ function NotesButton({ notes }) {
                 allowTutorial ? (
                     <h1>See the hint again</h1>
                 ) : (
-                    <Card sx={{margin: '4px 0px'}} onClick={() => setOpenTooltip(false)}>
+                    <Card
+                        sx={{ margin: "4px 0px" }}
+                        onClick={() => setOpenTooltip(false)}
+                    >
                         <FormatQuoteIcon />
                         <Box margin="2em">
                             <h2>{notes}</h2>
@@ -76,6 +86,7 @@ function NotesButton({ notes }) {
 
 NotesButton.propTypes = {
     notes: PropTypes.string.isRequired,
+    enabled: PropTypes.bool.isRequired,
 };
 
 export default NotesButton;
