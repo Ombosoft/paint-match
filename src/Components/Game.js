@@ -242,7 +242,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         ? targetRGB
         : convert.cmyk.hex(blendPaints(components));
     const levelNotes =
-        curLevel > 2 && colorTable[curLevel - 1].toast
+        curLevel > 2 && colorTable[curLevel - 1].toast && !victory
             ? colorTable[curLevel - 1].toast
             : null;
 

@@ -107,7 +107,6 @@ function useMusic() {
 
     // Game story control
     const onChangeLevel = (level) => {
-        console.log({level})
         curLevel.current = level;
     };
     return [muted, toggleMute, autoPlay, onChangeLevel];
