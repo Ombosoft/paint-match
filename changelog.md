@@ -1,3 +1,5 @@
+* Display what colors were used in victory panel
+
 ## 5
 
 * Automated in-game hints
