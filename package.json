@@ -50,6 +50,9 @@
     "tabWidth": 4,
     "printWidth": 80
   },
+  "jest": {
+    "transformIgnorePatterns": ["/node_modules/(?!d3|d3-array|internmap|delaunator|robust-predicates)"]
+  },
   "devDependencies": {
     "@babel/cli": "^7.21.5",
     "@babel/node": "^7.20.7"
