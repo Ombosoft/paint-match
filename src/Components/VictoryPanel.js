@@ -6,7 +6,7 @@ import {
     DialogContent,
     DialogTitle,
     IconButton,
-    Stack,
+    Stack
 } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useContext, useEffect, useRef, useState } from "react";
@@ -17,6 +17,7 @@ import { useVictorySound } from "../Sfx.js";
 import { toasts } from "../Toasts.js";
 import { randElement, simplePlural } from "../Util/Utils.js";
 import LevelsButton from "./LevelsButton.js";
+import PaletteChart from "./PaletteChart.js";
 
 function VictoryPanel({
     level,
@@ -26,6 +27,7 @@ function VictoryPanel({
     onReset,
     onNextLevel,
     showDroplets,
+    components,
 }) {
     const numDroplets = useContext(NumDropletsContext);
     const victorySound = useVictorySound();
@@ -44,7 +46,8 @@ function VictoryPanel({
             prevLevel.current = level;
             contentProps.current.toast = getToast(level);
         }
-        contentProps.current.showDroplets = !colorTable[level].toast && showDroplets;
+        contentProps.current.showDroplets =
+            !colorTable[level].toast && showDroplets;
         contentProps.current.color = color;
         contentProps.current.numDroplets = numDroplets;
         contentProps.current.level = level;
@@ -98,6 +101,7 @@ function VictoryPanel({
                         marginRight: "1em",
                     }}
                 >
+                    <PaletteChart width="300px" height="200px" components={components}/>
                     <VictoryMessage contentProps={contentProps.current} />
                     <DialogActions>
                         <Stack direction="row">
@@ -161,6 +165,7 @@ function VictoryMessage({ contentProps }) {
     );
 }
 
+
 function getToast(level) {
     return colorTable[level].toast ?? randElement(toasts);
 }
@@ -173,6 +178,7 @@ VictoryPanel.propTypes = {
     onReset: PropTypes.func.isRequired,
     onNextLevel: PropTypes.func.isRequired,
     showDroplets: PropTypes.bool.isRequired,
+    components: PropTypes.object.isRequired,
 };
 
 export default VictoryPanel;
