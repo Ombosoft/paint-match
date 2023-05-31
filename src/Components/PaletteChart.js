@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import { linearGradientDef } from "@nivo/core";
 import { ResponsivePie } from "@nivo/pie";
 import PropTypes from "prop-types";
+import { themePalette } from "../Colors";
 
 const theme = {
     background: "#ffffff",
@@ -125,7 +126,7 @@ function PaletteChart({ width, height, components }) {
         .map(([color, num]) => ({
             id: color,
             label: color,
-            color: color,
+            color: themePalette[color].main,
             value: num,
             textColor: color === "black" ? "white" : "black",
         }));
@@ -169,18 +170,7 @@ function PaletteChart({ width, height, components }) {
                     }
                 ),
                 linearGradientDef(
-                    "gradientWhite",
-                    [
-                        { offset: 0, color: "#d0d0d0" },
-                        { offset: 50, color: "#f7f7f7" },
-                        { offset: 100, color: "inherit" },
-                    ],
-                    {
-                        gradientTransform: "rotate(135 0.5 0.5)",
-                    }
-                ),
-                linearGradientDef(
-                    "gradientYellow",
+                    "gradientStrong",
                     [
                         { offset: 0, color: "inherit", opacity: 1 },
                         { offset: 100, color: "inherit", opacity: 0.1 },
@@ -193,15 +183,15 @@ function PaletteChart({ width, height, components }) {
             fill={[
                 {
                     match: {
-                        id: "white",
+                        id: "yellow",
                     },
-                    id: "gradientWhite",
+                    id: "gradientStrong",
                 },
                 {
                     match: {
-                        id: "yellow",
+                        id: "white",
                     },
-                    id: "gradientYellow",
+                    id: "gradientStrong",
                 },
                 {
                     match: {
