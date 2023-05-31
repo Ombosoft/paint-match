@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import { linearGradientDef } from "@nivo/core";
 import { ResponsivePie } from "@nivo/pie";
 import PropTypes from "prop-types";
 
@@ -70,13 +71,19 @@ const theme = {
             },
         },
     },
+    labels: {
+        text: {
+            fontSize: "1em",
+            fill: "#333333",
+            outlineWidth: 20,
+            outlineColor: "#ffffff",
+            outlineOpacity: 1,
+        },
+    },
     annotations: {
         text: {
             fontSize: 13,
             fill: "#333333",
-            outlineWidth: 2,
-            outlineColor: "#ffffff",
-            outlineOpacity: 1,
         },
         link: {
             stroke: "#000000",
@@ -120,9 +127,8 @@ function PaletteChart({ width, height, components }) {
             label: color,
             color: color,
             value: num,
-            textColor: color === 'black' ? 'white' : 'black',
+            textColor: color === "black" ? "white" : "black",
         }));
-    console.log({ components }, { data });
     const Pie = ({ data }) => (
         <ResponsivePie
             data={data}
@@ -131,8 +137,9 @@ function PaletteChart({ width, height, components }) {
             startAngle={285}
             padAngle={0.5}
             sortByValue={false}
-            innerRadius={0.6}
-            cornerRadius={15}
+            tooltip={() => <></>}
+            innerRadius={0.65}
+            cornerRadius={10}
             activeOuterRadiusOffset={8}
             colors={(x) => {
                 return x.data.color;
@@ -151,31 +158,56 @@ function PaletteChart({ width, height, components }) {
                 return x.data.textColor;
             }}
             defs={[
-                {
-                    id: "dots",
-                    type: "patternDots",
-                    background: "inherit",
-                    color: "rgba(255, 255, 255, 0.3)",
-                    size: 4,
-                    padding: 1,
-                    stagger: true,
-                },
-                {
-                    id: "lines",
-                    type: "patternLines",
-                    background: "inherit",
-                    color: "rgba(255, 255, 255, 0.3)",
-                    rotation: -45,
-                    lineWidth: 6,
-                    spacing: 10,
-                },
+                linearGradientDef(
+                    "gradientAll",
+                    [
+                        { offset: 0, color: "inherit" },
+                        { offset: 100, color: "inherit", opacity: 0.4 },
+                    ],
+                    {
+                        gradientTransform: "rotate(135 0.5 0.5)",
+                    }
+                ),
+                linearGradientDef(
+                    "gradientWhite",
+                    [
+                        { offset: 0, color: "#d0d0d0" },
+                        { offset: 50, color: "#f7f7f7" },
+                        { offset: 100, color: "inherit" },
+                    ],
+                    {
+                        gradientTransform: "rotate(135 0.5 0.5)",
+                    }
+                ),
+                linearGradientDef(
+                    "gradientYellow",
+                    [
+                        { offset: 0, color: "inherit", opacity: 1 },
+                        { offset: 100, color: "inherit", opacity: 0.1 },
+                    ],
+                    {
+                        gradientTransform: "rotate(135 0.5 0.5)",
+                    }
+                ),
             ]}
             fill={[
                 {
                     match: {
-                        id: "black",
+                        id: "white",
                     },
-                    id: "lines",
+                    id: "gradientWhite",
+                },
+                {
+                    match: {
+                        id: "yellow",
+                    },
+                    id: "gradientYellow",
+                },
+                {
+                    match: {
+                        // id: "green",
+                    },
+                    id: "gradientAll",
                 },
             ]}
             legends={[]}
