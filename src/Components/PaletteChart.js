@@ -120,7 +120,7 @@ const theme = {
     },
 };
 
-function PaletteChart({ width, height, components }) {
+function PaletteChart({ width, height, bottomShift, components }) {
     const data = Object.entries(components)
         .filter(([_, num]) => num > 0)
         .map(([color, num]) => ({
@@ -133,7 +133,7 @@ function PaletteChart({ width, height, components }) {
     const Pie = ({ data }) => (
         <ResponsivePie
             data={data}
-            margin={{ top: 5, right: 60, bottom: -50, left: 50 }}
+            margin={{ top: 5, right: 60, bottom: -bottomShift, left: 50 }}
             theme={theme}
             startAngle={285}
             padAngle={0.5}
@@ -211,8 +211,9 @@ function PaletteChart({ width, height, components }) {
 }
 
 PaletteChart.propTypes = {
-    width: PropTypes.number.isRequired,
+    width: PropTypes.string.isRequired,
     height: PropTypes.string.isRequired,
+    bottomShift: PropTypes.number.isRequired,
     components: PropTypes.object.isRequired,
 };
 

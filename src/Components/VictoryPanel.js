@@ -101,7 +101,7 @@ function VictoryPanel({
                         marginRight: "1em",
                     }}
                 >
-                    <PaletteChart width="300px" height="200px" components={components}/>
+                    <PaletteChart width="300px" height="150px" bottomShift={30} components={components}/>
                     <VictoryMessage contentProps={contentProps.current} />
                     <DialogActions>
                         <Stack direction="row">
