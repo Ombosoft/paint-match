@@ -133,7 +133,7 @@ function PaletteChart({ width, height, bottomShift, components }) {
     const Pie = ({ data }) => (
         <ResponsivePie
             data={data}
-            margin={{ top: 5, right: 60, bottom: -bottomShift, left: 50 }}
+            margin={{ top: 9, right: 60, bottom: -bottomShift, left: 50 }}
             theme={theme}
             startAngle={285}
             padAngle={0.5}
