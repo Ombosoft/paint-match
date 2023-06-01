@@ -1,5 +1,5 @@
 import StarIcon from "@mui/icons-material/Star";
-import { Button, Dialog, DialogContent, Typography } from "@mui/material";
+import { Box, Button, Dialog, DialogContent, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
 import { range } from "../Util/Utils";
@@ -14,12 +14,40 @@ function LevelsPanel({
 }) {
     function PickLevelButton({ level, won }) {
         return (
-            <Button onClick={() => onClose(level)} sx={{ minWidth: "6em" }}>
-                <Typography variant="h6" fontWeight="bold" color="secondary">
-                    {level}
-                </Typography>
-                {won && <StarIcon sx={{ color: "gold" }} />}
-            </Button>
+            <Box component="span" sx={{position: "relative"}}>
+                <Button
+                    onClick={() => onClose(level)}
+                    sx={{
+                        width: "5em",
+                        height: "4em",
+                        border: "solid",
+                        borderColor: "gray",
+                        margin: "1em",
+                        borderRadius: "1em",
+                        boxShadow: "0px 1em 1px 1px",
+                    }}
+                >
+                    <Typography
+                        variant="h6"
+                        fontWeight="bold"
+                        color="secondary"
+                    >
+                        {level}
+                    </Typography>
+                </Button>
+                {won && (
+                    <StarIcon
+                        sx={{
+                            color: "gold",
+                            position: "absolute",
+                            top: "100%",
+                            left: "50%",
+                            transform: "translate(-50%, 1.2em)",
+                            fontSize: "1em",
+                        }}
+                    />
+                )}
+            </Box>
         );
     }
     return (
