@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { rgbToString } from "../Colors.js";
 import { victoryPanelDelay, victorySoundDelay } from "../Constants.js";
 import { NumDropletsContext } from "../Context/NumDropletsContext.js";
 import { colorTable } from "../Levels.js";
@@ -85,7 +86,7 @@ function VictoryPanel({
             open={dialogOpen}
             PaperProps={{
                 sx: {
-                    borderColor: `#${contentProps.current.color}`,
+                    borderColor: rgbToString(contentProps.current.color),
                     borderWidth: "1em",
                     borderStyle: "outset",
                 },
@@ -139,7 +140,7 @@ function VictoryTitle({ contentProps }) {
                 textTransform: "capitalize",
                 textShadow:
                     "4px 4px 10px white, -1px -1px 1px #FFFFFFB0, 1px 1px 1px #FFFFFFB0, -1px 0px 1px #FFFFFFB0, 1px 0px 1px #FFFFFFB0",
-                backgroundColor: `#${color}`,
+                backgroundColor: rgbToString(color),
                 borderWidth: "2px",
                 borderStyle: "solid",
                 borderColor: "white",

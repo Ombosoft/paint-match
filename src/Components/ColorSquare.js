@@ -2,6 +2,7 @@ import OpacityIcon from "@mui/icons-material/Opacity";
 import { Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
+import { rgbToString } from "../Colors";
 import { animationDurationMs, dropletBlendDelay } from "../Constants";
 
 function ColorSquare({
@@ -13,7 +14,7 @@ function ColorSquare({
     tooltip,
     showTooltip,
 }) {
-    const dColor = dropletColor ? `${dropletColor}` : `#${color}`;
+    const dColor = dropletColor ? `${dropletColor}` : rgbToString(color);
     const dDelay = dropletColor
         ? dropletBlendDelay
         : animationDurationMs - dropletBlendDelay;
@@ -22,7 +23,7 @@ function ColorSquare({
             <span
                 className="Picker-square"
                 style={{
-                    backgroundColor: `#${color}`,
+                    backgroundColor: rgbToString(color),
                     transitionProperty: "background-color",
                     transitionDuration: `${animationDurationMs}ms`,
                     transitionTimingFunction: "ease-in-out",

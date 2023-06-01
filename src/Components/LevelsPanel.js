@@ -1,7 +1,16 @@
 import StarIcon from "@mui/icons-material/Star";
-import { Box, Button, Dialog, DialogContent, Typography } from "@mui/material";
+import {
+    Box,
+    Button,
+    Dialog,
+    DialogContent,
+    Tooltip,
+    Typography,
+} from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
+import { levelRGB, rgbToString, textColor } from "../Colors";
+import { colorTable } from "../Levels";
 import { range } from "../Util/Utils";
 
 // Choose level dialog
@@ -13,28 +22,47 @@ function LevelsPanel({
     levelAchievements,
 }) {
     function PickLevelButton({ level, won }) {
+        const levelDef = colorTable[level];
         return (
-            <Box component="span" sx={{position: "relative"}}>
-                <Button
-                    onClick={() => onClose(level)}
-                    sx={{
-                        width: "5em",
-                        height: "4em",
-                        border: "solid",
-                        borderColor: "gray",
-                        margin: "1em",
-                        borderRadius: "1em",
-                        boxShadow: "0px 1em 1px 1px",
+            <Box component="span" sx={{ position: "relative" }}>
+                <Tooltip
+                    title={<Typography>{levelDef.name}</Typography>}
+                    placement="top"
+                    PopperProps={{
+                        modifiers: [
+                            {
+                                name: "offset",
+                                options: {
+                                    offset: [0, -30],
+                                },
+                            },
+                        ],
                     }}
                 >
-                    <Typography
-                        variant="h6"
-                        fontWeight="bold"
-                        color="secondary"
+                    <Button
+                        onClick={() => onClose(level)}
+                        sx={{
+                            width: "5em",
+                            height: "4em",
+                            border: "solid",
+                            borderColor: "gray",
+                            margin: "1em",
+                            borderRadius: "1em",
+                            boxShadow: "0px 1em 1px 1px",
+                            backgroundImage: `linear-gradient(135deg, white, ${rgbToString(
+                                levelRGB(levelDef)
+                            )})`,
+                        }}
                     >
-                        {level}
-                    </Typography>
-                </Button>
+                        <Typography
+                            variant="h6"
+                            fontWeight="bold"
+                            color={textColor(levelDef)}
+                        >
+                            {level}
+                        </Typography>
+                    </Button>
+                </Tooltip>
                 {won && (
                     <StarIcon
                         sx={{

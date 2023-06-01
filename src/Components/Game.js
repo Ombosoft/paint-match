@@ -8,6 +8,7 @@ import {
     cmykColors,
     firstLevelWithAllColors,
     getWinTolerance,
+    levelRGB,
     zeroComponents,
 } from "../Colors";
 import {
@@ -210,7 +211,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     }
 
     function targetColorRGB() {
-        return convert.cmyk.hex(targetLevel.cmyk);
+        return levelRGB(targetLevel);
     }
 
     function handleLevelChoice(newLevel) {

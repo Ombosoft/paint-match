@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material/styles";
+import convert from "color-convert";
 import { defaultWinTolerance } from "./Constants";
 import {
     matCompSum,
@@ -8,6 +9,7 @@ import {
     vecRound,
     vecScale,
 } from "./Util/Vec";
+
 
 export const themePalette = {
     red: {
@@ -105,4 +107,20 @@ export function blendPaints(cs) {
 
 export function getWinTolerance(levelDef) {
     return defaultWinTolerance + (levelDef.extraWinTolerance ?? 0.0);
+}
+
+export function levelRGB(levelDef) {
+    return convert.cmyk.hex(levelDef.cmyk);
+}
+
+export function rgbToString(rgb) {
+    return `#${rgb}`;
+}
+
+export function textColor(levelDef) {
+    const [l] = convert.cmyk.lab(levelDef.cmyk);
+    if (l > 53) {
+        return 'black';
+    }
+    return 'white';
 }
