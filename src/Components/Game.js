@@ -55,7 +55,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         unlockedLevel,
         unlockLevel,
         levelAchievements,
-        onLevelWon,
+        onLevelAchievement,
     ] = useLevelStatus();
     const [showBasicTutorial, endBasicTutorial] = useTutorial();
     const [targetLevel, setTargetLevel] = useState(colorTable[curLevel]);
@@ -99,7 +99,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
             if (newDistance <= winTolerance) {
                 newVictory = true;
                 setVictory(true);
-                onLevelWon(curLevel);
+                onLevelAchievement(curLevel);
             }
             setPercentMatchText(
                 numDroplets > 0
@@ -116,7 +116,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
             distanceGotWorse,
             goodEnough,
             numDroplets,
-            onLevelWon,
+            onLevelAchievement,
             targetLevel,
             unlockLevel,
             victory,

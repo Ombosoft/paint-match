@@ -1,6 +1,10 @@
 import { useCallback } from "react";
 import { useLocalStorage } from "./Util/LocalStorageHook";
 
+export const levelAchievementThreshold = 1;
+export const levelAchievementWon = 2;
+export const levelAchievementPerfect = 3;
+
 export default function useLevelStatus() {
     const [curLevel, setCurLevel] = useLocalStorage("level", 0);
     const [unlockedLevelRaw, setUnlockedLevel] = useLocalStorage(
@@ -36,15 +40,18 @@ export default function useLevelStatus() {
         [setCurLevel, unlockLevel]
     );
 
-    const onLevelWon = useCallback(
-        (level) => {
+    const onLevelAchievement = useCallback(
+        (level, levelAchievement) => {
+            if (levelAchievement <= stars(levelAchievements[level])) {
+                return;
+            }
             setLevelAchievements((prev) => {
                 let newState = { ...prev };
                 newState[level] = { won: true };
                 return newState;
             });
         },
-        [setLevelAchievements]
+        [levelAchievements, setLevelAchievements]
     );
 
     return [
@@ -53,6 +60,18 @@ export default function useLevelStatus() {
         unlockedLevel,
         unlockLevel,
         levelAchievements,
-        onLevelWon,
+        onLevelAchievement,
     ];
+}
+
+// TODO use this in getter
+function stars(levelAchievements) {
+    if (levelAchievements.stars) {
+        return levelAchievements.stars;
+    }
+    if (levelAchievements.won) {
+        // migration
+        return 2;
+    }
+    return 0;
 }
