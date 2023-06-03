@@ -74,7 +74,7 @@ function LevelsPanel({
                         left: "50%",
                         transform: "translate(-50%, 1.2em)",
                     }}
-                    fontSize={1}
+                    fontSize={0.9}
                 />
             </Box>
         );
