@@ -49,7 +49,7 @@ StarRack.propTypes = {
     stars: PropTypes.number.isRequired,
     stackSx: PropTypes.object.isRequired,
     fontSize: PropTypes.number.isRequired,
-    decoration: PropTypes.bool.isRequired,
+    decoration: PropTypes.bool,
 };
 
 export default StarRack;

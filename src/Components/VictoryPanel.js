@@ -31,6 +31,7 @@ function VictoryPanel({
     onNextLevel,
     showDroplets,
     components,
+    stars,
 }) {
     const numDroplets = useContext(NumDropletsContext);
     const victorySound = useVictorySound();
@@ -47,7 +48,7 @@ function VictoryPanel({
     if (isVictory) {
         if (level !== prevLevel.current) {
             prevLevel.current = level;
-            contentProps.current.toast = getToast(level);
+            contentProps.current.toast = getToast(level, stars);
         }
         contentProps.current.showDroplets =
             !colorTable[level].toast && showDroplets;
@@ -55,6 +56,7 @@ function VictoryPanel({
         contentProps.current.numDroplets = numDroplets;
         contentProps.current.level = level;
         contentProps.current.levelName = levelName;
+        contentProps.current.stars = stars;
     }
     const [dialogOpen, setDialogOpen] = useState(false);
     // Delay opening dialog
@@ -159,7 +161,11 @@ function VictoryTitle({ contentProps }) {
                 >
                     {level} {levelName}
                 </Typography>
-                <StarRack stars={3} fontSize={1.5} decoration/>
+                <StarRack
+                    stars={contentProps.stars}
+                    fontSize={1.5}
+                    decoration
+                />
             </Stack>
         </DialogTitle>
     );
@@ -180,8 +186,11 @@ function VictoryMessage({ contentProps }) {
     );
 }
 
-function getToast(level) {
-    return colorTable[level].toast ?? randElement(toasts);
+function getToast(level, stars) {
+    return (
+        colorTable[level].toast ??
+        (stars === 3 ? randElement(toasts) : "Well done!")
+    );
 }
 
 VictoryPanel.propTypes = {
@@ -193,6 +202,7 @@ VictoryPanel.propTypes = {
     onNextLevel: PropTypes.func.isRequired,
     showDroplets: PropTypes.bool.isRequired,
     components: PropTypes.object.isRequired,
+    stars: PropTypes.number.isRequired,
 };
 
 export default VictoryPanel;

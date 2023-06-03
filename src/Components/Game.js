@@ -76,6 +76,9 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     const [usedHint, setUsedHint] = useState(false);
 
     const numDroplets = vecCompSum(Object.values(components));
+    const curStars = isPerfectVictory(curLevel, numDroplets, usedHint)
+        ? levelAchievementPerfect
+        : levelAchievementWon;
 
     // Callback for handling debug mode changes
     function handleDebug(newDebug) {
@@ -106,12 +109,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
             if (newDistance <= winTolerance) {
                 newVictory = true;
                 setVictory(true);
-                onLevelAchievement(
-                    curLevel,
-                    isPerfectVictory(curLevel, numDroplets, usedHint)
-                        ? levelAchievementPerfect
-                        : levelAchievementWon
-                );
+                onLevelAchievement(curLevel, curStars);
             }
             setPercentMatchText(
                 numDroplets > 0
@@ -127,6 +125,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         },
         [
             curLevel,
+            curStars,
             distance,
             distanceGotWorse,
             goodEnough,
@@ -134,7 +133,6 @@ function Game({ autoPlayMusic, onChangeLevel }) {
             onLevelAchievement,
             targetLevel,
             unlockLevel,
-            usedHint,
             victory,
         ]
     );
@@ -362,6 +360,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                     onReset={resetColors}
                     showDroplets={bottle}
                     components={components}
+                    stars={curStars}
                 />
                 <LevelsPanel
                     open={levelsPanelOpen}
