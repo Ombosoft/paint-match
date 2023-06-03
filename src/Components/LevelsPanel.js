@@ -71,11 +71,11 @@ function LevelsPanel({
                     stars={stars}
                     stackSx={{
                         position: "absolute",
-                        top: "3.1em",
+                        top: "3.05em",
                         left: "50%",
                         transform: "translate(-50%, 1.2em)",
                     }}
-                    fontSize={0.9}
+                    fontSize={0.85}
                 />
             </Box>
         );

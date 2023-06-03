@@ -1,5 +1,4 @@
-import StarIcon from "@mui/icons-material/Star";
-import { Stack, Tooltip } from "@mui/material";
+import { Box, Stack, Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
 import { range } from "../Util/Utils";
 
@@ -21,44 +20,16 @@ function StarRack({ stars, stackSx, fontSize, decoration }) {
                 sx={{
                     ...stackSx,
                 }}
-                spacing={fontSize/4}
+                spacing={fontSize / 4}
             >
-                <svg width={0} height={0}>
-                    <linearGradient
-                        id="linearColors"
-                        x1={0}
-                        y1={0}
-                        x2={1}
-                        y2={1}
-                    >
-                        <stop offset={0} stopColor="#e1b605" />
-                        <stop offset={1} stopColor="#f0de43" />
-                    </linearGradient>
-                </svg>
                 {range(stars).map((id) => (
-                    <span style={{ position: "relative", display: "inline-flex" }}>
-                        {/* External stroke */}
-                        <StarIcon
-                            key={id}
-                            sx={{
-                                stroke: "#f7931e",
-                                strokeWidth: "1.5px",
-                                fontSize: `${fontSize}em`,
-                                filter: filter,
-                            }}
+                    <Box sx={{ width: `${fontSize}em` }}>
+                        <img
+                            width="100%"
+                            src={process.env.PUBLIC_URL + "/img/star.svg"}
+                            alt="star"
                         />
-                        {/* Internal stroke and fill */}
-                        <StarIcon
-                            key={id}
-                            sx={{
-                                position: 'absolute',
-                                fill: "url(#linearColors)",
-                                stroke: "#f9cd0d",
-                                strokeWidth: "0.5px",
-                                fontSize: `${fontSize}em`,
-                            }}
-                        />
-                    </span>
+                    </Box>
                 ))}
             </Stack>
         </Tooltip>
