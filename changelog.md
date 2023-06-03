@@ -1,10 +1,16 @@
 * Display what colors were used in victory panel
+* Level info in level selector
+* More granular level achievements
 
 ## 5
+
+2023-05-30
 
 * Automated in-game hints
 
 ## 4
+
+2023-05-28
 
 * Music by Kiwami Alex
 * Unbounded undo
