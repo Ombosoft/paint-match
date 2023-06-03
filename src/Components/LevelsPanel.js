@@ -3,6 +3,7 @@ import {
     Button,
     Dialog,
     DialogContent,
+    Stack,
     Tooltip,
     Typography,
 } from "@mui/material";
@@ -12,6 +13,7 @@ import { levelRGB, rgbToString, textColor } from "../Colors";
 import { colorTable } from "../Levels";
 import { range } from "../Util/Utils";
 import StarRack from "./StarRack";
+
 
 // Choose level dialog
 function LevelsPanel({
@@ -28,12 +30,13 @@ function LevelsPanel({
                 <Tooltip
                     title={<Typography>{levelDef.name}</Typography>}
                     placement="top"
+                    disableInteractive
                     PopperProps={{
                         modifiers: [
                             {
                                 name: "offset",
                                 options: {
-                                    offset: [0, -15],
+                                    offset: [0, -13],
                                 },
                             },
                         ],
@@ -67,7 +70,7 @@ function LevelsPanel({
                     stars={stars}
                     stackSx={{
                         position: "absolute",
-                        top: "100%",
+                        top: "58%",
                         left: "50%",
                         transform: "translate(-50%, 1.2em)",
                     }}
@@ -79,13 +82,15 @@ function LevelsPanel({
     return (
         <Dialog open={open} onClose={() => onClose(curLevel)}>
             <DialogContent>
-                {range(unlockedLevel + 1).map((level) => (
-                    <PickLevelButton
-                        key={level}
-                        level={level}
-                        stars={levelAchievements[level] ?? 0}
-                    />
-                ))}
+                <Stack direction="row" flexWrap="wrap" justifyContent="center">
+                    {range(unlockedLevel + 1).map((level) => (
+                        <PickLevelButton
+                            key={level}
+                            level={level}
+                            stars={levelAchievements[level] ?? 0}
+                        />
+                    ))}
+                </Stack>
             </DialogContent>
         </Dialog>
     );
