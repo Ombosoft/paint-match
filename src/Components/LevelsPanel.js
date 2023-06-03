@@ -1,10 +1,8 @@
-import StarIcon from "@mui/icons-material/Star";
 import {
     Box,
     Button,
     Dialog,
     DialogContent,
-    Stack,
     Tooltip,
     Typography,
 } from "@mui/material";
@@ -13,6 +11,7 @@ import React from "react";
 import { levelRGB, rgbToString, textColor } from "../Colors";
 import { colorTable } from "../Levels";
 import { range } from "../Util/Utils";
+import StarRack from "./StarRack";
 
 // Choose level dialog
 function LevelsPanel({
@@ -64,23 +63,16 @@ function LevelsPanel({
                         </Typography>
                     </Button>
                 </Tooltip>
-                <Stack direction="row"                         sx={{
-                            position: "absolute",
-                            top: "100%",
-                            left: "50%",
-                            transform: "translate(-50%, 1.2em)",
-                        }}
->
-                {range(stars).map((id) => (
-                    <StarIcon
-                        key={id}
-                        sx={{
-                            color: "gold",
-                            fontSize: "1em",
-                        }}
-                    />
-                ))}
-                </Stack>
+                <StarRack
+                    stars={stars}
+                    stackSx={{
+                        position: "absolute",
+                        top: "100%",
+                        left: "50%",
+                        transform: "translate(-50%, 1.2em)",
+                    }}
+                    fontSize={1}
+                />
             </Box>
         );
     }

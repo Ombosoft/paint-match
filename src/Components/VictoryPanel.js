@@ -6,7 +6,8 @@ import {
     DialogContent,
     DialogTitle,
     IconButton,
-    Stack
+    Stack,
+    Typography,
 } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useContext, useEffect, useRef, useState } from "react";
@@ -19,6 +20,7 @@ import { toasts } from "../Toasts.js";
 import { randElement, simplePlural } from "../Util/Utils.js";
 import LevelsButton from "./LevelsButton.js";
 import PaletteChart from "./PaletteChart.js";
+import StarRack from "./StarRack.js";
 
 function VictoryPanel({
     level,
@@ -102,7 +104,12 @@ function VictoryPanel({
                         marginRight: "1em",
                     }}
                 >
-                    <PaletteChart width="300px" height="150px" bottomShift={30} components={components}/>
+                    <PaletteChart
+                        width="300px"
+                        height="150px"
+                        bottomShift={30}
+                        components={components}
+                    />
                     <VictoryMessage contentProps={contentProps.current} />
                     <DialogActions>
                         <Stack direction="row">
@@ -136,8 +143,6 @@ function VictoryTitle({ contentProps }) {
     return (
         <DialogTitle
             sx={{
-                fontWeight: "bold",
-                textTransform: "capitalize",
                 textShadow:
                     "4px 4px 10px white, -1px -1px 1px #FFFFFFB0, 1px 1px 1px #FFFFFFB0, -1px 0px 1px #FFFFFFB0, 1px 0px 1px #FFFFFFB0",
                 backgroundColor: rgbToString(color),
@@ -146,7 +151,16 @@ function VictoryTitle({ contentProps }) {
                 borderColor: "white",
             }}
         >
-            {level} {levelName}
+            <Stack direction="row" justifyContent="space-between">
+                <Typography
+                    fontWeight="bold"
+                    textTransform="capitalize"
+                    fontSize="1.25rem"
+                >
+                    {level} {levelName}
+                </Typography>
+                <StarRack stars={3} fontSize={1.5} decoration/>
+            </Stack>
         </DialogTitle>
     );
 }
@@ -165,7 +179,6 @@ function VictoryMessage({ contentProps }) {
         </>
     );
 }
-
 
 function getToast(level) {
     return colorTable[level].toast ?? randElement(toasts);
