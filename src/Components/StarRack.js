@@ -20,9 +20,6 @@ function StarRack({ stars, stackSx, fontSize, decoration }) {
                 direction="row"
                 sx={{
                     ...stackSx,
-                    backgroundImage: "linear-gradient(to right, red , yellow)",
-                    backgroundClip: "text",
-                    display: "inline",
                 }}
                 spacing={fontSize/4}
             >

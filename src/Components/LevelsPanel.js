@@ -48,10 +48,11 @@ function LevelsPanel({
                             width: "5em",
                             height: "4em",
                             border: "solid",
+                            borderWidth: "thin",
                             borderColor: "gray",
                             margin: "1em",
                             borderRadius: "1em",
-                            boxShadow: "0px 1em 1px 1px",
+                            boxShadow: "0px 1em 0px 0px",
                             backgroundImage: `linear-gradient(135deg, white, ${rgbToString(
                                 levelRGB(levelDef)
                             )})`,
@@ -70,7 +71,7 @@ function LevelsPanel({
                     stars={stars}
                     stackSx={{
                         position: "absolute",
-                        top: "58%",
+                        top: "3.1em",
                         left: "50%",
                         transform: "translate(-50%, 1.2em)",
                     }}
