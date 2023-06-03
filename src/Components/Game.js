@@ -8,6 +8,7 @@ import {
     cmykColors,
     firstLevelWithAllColors,
     getWinTolerance,
+    isPerfectVictory,
     levelRGB,
     zeroComponents,
 } from "../Colors";
@@ -21,7 +22,12 @@ import { LevelsPanelContext } from "../Context/LevelsPanelContext";
 import { NumDropletsContext } from "../Context/NumDropletsContext";
 import { optimalSolution } from "../GameAI";
 import { formatHint, generateHint } from "../HintGenerator";
-import useLevelStatus from "../LevelStatus";
+import {
+    levelAchievementPerfect,
+    levelAchievementThreshold,
+    levelAchievementWon,
+    useLevelStatus,
+} from "../LevelStatus";
 import { colorTable } from "../Levels";
 import { useTutorial } from "../Tutorial";
 import { distanceToPercentMatch, randomLevel } from "../Util/Utils";
@@ -67,6 +73,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     const [debug, setDebug] = useState(false);
     const [levelsPanelOpen, setLevelsPanelOpen] = useState(false);
     const [hint, setHint] = useState(null);
+    const [usedHint, setUsedHint] = useState(false);
 
     const numDroplets = vecCompSum(Object.values(components));
 
@@ -99,7 +106,12 @@ function Game({ autoPlayMusic, onChangeLevel }) {
             if (newDistance <= winTolerance) {
                 newVictory = true;
                 setVictory(true);
-                onLevelAchievement(curLevel);
+                onLevelAchievement(
+                    curLevel,
+                    isPerfectVictory(curLevel, numDroplets, usedHint)
+                        ? levelAchievementPerfect
+                        : levelAchievementWon
+                );
             }
             setPercentMatchText(
                 numDroplets > 0
@@ -108,6 +120,9 @@ function Game({ autoPlayMusic, onChangeLevel }) {
             );
             if (goodEnough(newDistance)) {
                 unlockLevel(curLevel + 1);
+                if (!newVictory) {
+                    onLevelAchievement(curLevel, levelAchievementThreshold);
+                }
             }
         },
         [
@@ -119,6 +134,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
             onLevelAchievement,
             targetLevel,
             unlockLevel,
+            usedHint,
             victory,
         ]
     );
@@ -151,6 +167,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         setDistanceGotWorse(false);
         setVictory(false);
         setHint(null);
+        setUsedHint(false);
     }
 
     function saveUndo() {
@@ -221,6 +238,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
 
     function showHint() {
         setHint(formatHint(generateHint(components, targetLevel)));
+        setUsedHint(true);
     }
 
     const allowResetWhen =
@@ -259,7 +277,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                         <UndoButton enabled={enableUndo} onClick={undo} />
                         <ResetButton
                             enabled={
-                                (components !== zeroComponents) && allowResetWhen
+                                components !== zeroComponents && allowResetWhen
                             }
                             resetColors={resetColors}
                         />
@@ -273,7 +291,10 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             onClick={() => setBottle((prev) => !prev)}
                         />
                         {levelNotes !== null && (
-                            <NotesButton notes={levelNotes} enabled={!victory} />
+                            <NotesButton
+                                notes={levelNotes}
+                                enabled={!victory}
+                            />
                         )}
                         {curLevel >= firstLevelWithAllColors && (
                             <HintButton
@@ -306,7 +327,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             showColor={debug}
                             dropletColor={dropletColor}
                             showDroplet
-                            tooltip={<HintBox hint={hint}/>}
+                            tooltip={<HintBox hint={hint} />}
                             showTooltip={hint !== null}
                         />
                     </Stack>

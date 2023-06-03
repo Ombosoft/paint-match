@@ -9,6 +9,7 @@ import {
     vecRound,
     vecScale,
 } from "./Util/Vec";
+import { colorTable } from "./Levels";
 
 
 export const themePalette = {
@@ -108,6 +109,14 @@ export function blendPaints(cs) {
 export function getWinTolerance(levelDef) {
     return defaultWinTolerance + (levelDef.extraWinTolerance ?? 0.0);
 }
+
+export function isPerfectVictory(curLevel, numDroplets, usedHint) {
+    if (usedHint) {
+        return false;
+    }
+    return (numDroplets <= colorTable[curLevel].cost);
+}
+
 
 export function levelRGB(levelDef) {
     return convert.cmyk.hex(levelDef.cmyk);

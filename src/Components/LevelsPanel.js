@@ -4,6 +4,7 @@ import {
     Button,
     Dialog,
     DialogContent,
+    Stack,
     Tooltip,
     Typography,
 } from "@mui/material";
@@ -21,7 +22,7 @@ function LevelsPanel({
     unlockedLevel,
     levelAchievements,
 }) {
-    function PickLevelButton({ level, won }) {
+    function PickLevelButton({ level, stars }) {
         const levelDef = colorTable[level];
         return (
             <Box component="span" sx={{ position: "relative" }}>
@@ -63,18 +64,23 @@ function LevelsPanel({
                         </Typography>
                     </Button>
                 </Tooltip>
-                {won && (
-                    <StarIcon
-                        sx={{
-                            color: "gold",
+                <Stack direction="row"                         sx={{
                             position: "absolute",
                             top: "100%",
                             left: "50%",
                             transform: "translate(-50%, 1.2em)",
+                        }}
+>
+                {range(stars).map((id) => (
+                    <StarIcon
+                        key={id}
+                        sx={{
+                            color: "gold",
                             fontSize: "1em",
                         }}
                     />
-                )}
+                ))}
+                </Stack>
             </Box>
         );
     }
@@ -85,7 +91,7 @@ function LevelsPanel({
                     <PickLevelButton
                         key={level}
                         level={level}
-                        won={levelAchievements[level]?.won}
+                        stars={levelAchievements[level] ?? 0}
                     />
                 ))}
             </DialogContent>
