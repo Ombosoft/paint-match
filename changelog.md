@@ -1,3 +1,7 @@
+## 6
+
+2023-06-03
+
 * Display what colors were used in victory panel
 * Level info in level selector
 * More granular level achievements
