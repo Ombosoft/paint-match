@@ -164,7 +164,7 @@ function VictoryTitle({ contentProps }) {
                 <StarRack
                     stars={contentProps.stars}
                     fontSize={1.5}
-                    decoration
+                    dropShadow
                 />
             </Stack>
         </DialogTitle>

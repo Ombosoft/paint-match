@@ -2,17 +2,11 @@ import { Box, Stack, Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
 import { range } from "../Util/Utils";
 
-function StarRack({ stars, stackSx, fontSize, decoration }) {
+function StarRack({ stars, stackSx, fontSize, dropShadow}) {
     if (stars === 0) {
         return <></>;
     }
-    const starBorderColor = "#f7931e";
-    const starBorderWidth = "0.1px";
-    const starBorderBlur = "0.5px";
-    const shadow = "drop-shadow(2px 4px 2px rgb(0 0 0 / 0.2))";
-    const filter = decoration
-        ? `drop-shadow(${starBorderWidth} 0px ${starBorderBlur} ${starBorderColor}) drop-shadow(-${starBorderWidth} 0px  ${starBorderBlur} ${starBorderColor}) drop-shadow(0px ${starBorderWidth}  ${starBorderBlur} ${starBorderColor}) drop-shadow(0px -${starBorderWidth}  ${starBorderBlur} ${starBorderColor}) ${shadow}`
-        : shadow;
+    const iconStype = dropShadow ? {filter: "drop-shadow(2px 4px 2px rgb(0 0 0 / 0.2))"} : {};
     return (
         <Tooltip title={explanationMessage(stars)}>
             <Stack
@@ -28,6 +22,7 @@ function StarRack({ stars, stackSx, fontSize, decoration }) {
                             width="100%"
                             src={process.env.PUBLIC_URL + "/img/star.svg"}
                             alt="star"
+                            style={iconStype}
                         />
                     </Box>
                 ))}
@@ -53,7 +48,7 @@ StarRack.propTypes = {
     stars: PropTypes.number.isRequired,
     stackSx: PropTypes.object,
     fontSize: PropTypes.number.isRequired,
-    decoration: PropTypes.bool,
+    dropShadow: PropTypes.bool,
 };
 
 export default StarRack;
