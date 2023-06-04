@@ -136,7 +136,7 @@ function PaletteChart({ width, height, bottomShift, components }) {
             margin={{ top: 9, right: 60, bottom: -bottomShift, left: 50 }}
             theme={theme}
             startAngle={285}
-            padAngle={0.55}
+            padAngle={0.7}
             sortByValue={false}
             tooltip={() => <></>}
             innerRadius={0.65}
