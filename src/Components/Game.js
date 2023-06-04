@@ -46,6 +46,7 @@ import SkipLevelButton from "./SkipLevelButton";
 import SlidersButton from "./SlidersButton";
 import UndoButton from "./UndoButton";
 import VictoryPanel from "./VictoryPanel";
+import MixPlate from "./MixPlate";
 
 function Game({ autoPlayMusic, onChangeLevel }) {
     const [victory, setVictory] = useState(false);
@@ -301,34 +302,18 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             />
                         )}
                     </Stack>
-                    <Stack direction="row" flexGrow={1}>
-                        <ColorSquare
-                            color={targetRGB}
-                            label={
-                                debug
-                                    ? `${targetLevel.name}  (${targetLevel.cmyk})`
-                                    : targetLevel.name
-                            }
-                            showColor={debug}
-                            tooltip="Target color"
-                            showTooltip={showBasicTutorial}
-                        />
-                        <ColorSquare
-                            color={currentRGB}
-                            label={
-                                debug
-                                    ? `d${distance.toFixed(2)} (${blendPaints(
-                                          components
-                                      )})`
-                                    : percentMatchText
-                            }
-                            showColor={debug}
-                            dropletColor={dropletColor}
-                            showDroplet
-                            tooltip={<HintBox hint={hint} />}
-                            showTooltip={hint !== null}
-                        />
-                    </Stack>
+                    <MixPlate
+                        debug={debug}
+                        currentRGB={currentRGB}
+                        targetRGB={targetRGB}
+                        targetLevel={targetLevel}
+                        hint={hint}
+                        showBasicTutorial={showBasicTutorial}
+                        dropletColor={dropletColor}
+                        components={components}
+                        percentMatchText={percentMatchText}
+                        distance={distance}
+                    />
 
                     <Box sx={{ marginTop: "1em", marginBottom: "1em" }}>
                         {!bottle && (
