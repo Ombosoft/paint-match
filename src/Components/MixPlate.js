@@ -17,8 +17,9 @@ function MixPlate({
     distance,
 }) {
     return (
-        <Stack direction="row" flexGrow={1}>
+        <Stack direction="row" flexGrow={1} sx={{position: "relative"}}>
             <ColorSquare
+                isInner={false}
                 color={targetRGB}
                 label={
                     debug
@@ -30,6 +31,7 @@ function MixPlate({
                 showTooltip={showBasicTutorial}
             />
             <ColorSquare
+                isInner={true}
                 color={currentRGB}
                 label={
                     debug

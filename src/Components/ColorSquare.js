@@ -6,6 +6,7 @@ import { rgbToString } from "../Colors";
 import { animationDurationMs, dropletBlendDelay } from "../Constants";
 
 function ColorSquare({
+    isInner,
     color,
     label,
     showColor,
@@ -18,6 +19,9 @@ function ColorSquare({
     const dDelay = dropletColor
         ? dropletBlendDelay
         : animationDurationMs - dropletBlendDelay;
+    const diameter = isInner ? "calc(50vh)" : "calc(60vh)";
+    const offset = isInner ? "50%" : "inherit";
+    const transform = isInner ? "translate(-50%, -50%)" : "inherit";
     return (
         <>
             <span
@@ -27,8 +31,13 @@ function ColorSquare({
                     transitionProperty: "background-color",
                     transitionDuration: `${animationDurationMs}ms`,
                     transitionTimingFunction: "ease-in-out",
-                    position: "relative",
-                }}
+                    width: diameter,
+                    height: diameter,
+                    position: isInner ? "absolute" : "relative",
+                    top: offset,
+                    left: offset,
+                    transform: transform,
+            }}
             >
                 {showDroplet && (
                     <OpacityIcon
@@ -64,13 +73,13 @@ function ColorSquare({
                         </div>
                     </Tooltip>
                 )}
-
             </span>
         </>
     );
 }
 
 ColorSquare.propTypes = {
+    isInner: PropTypes.bool.isRequired,
     color: PropTypes.string.isRequired,
     label: PropTypes.string,
     showColor: PropTypes.bool,

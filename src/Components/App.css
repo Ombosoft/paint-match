@@ -20,7 +20,6 @@
 
 .Picker-square {
     background-color: #61dafb;
-    width: calc(50vw - 2em);
     padding-left: 1vh;
     padding-right: 1vh;
     display: flex;
@@ -33,6 +32,7 @@
     text-transform: capitalize;
     margin-top: 2vh;
     margin-bottom: 1vh;
+    border-radius: 50%;
 }
 
 .Picker-slider {
