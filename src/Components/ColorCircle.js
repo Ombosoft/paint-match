@@ -5,7 +5,7 @@ import React from "react";
 import { rgbToString } from "../Colors";
 import { animationDurationMs, dropletBlendDelay } from "../Constants";
 
-function ColorSquare({
+function ColorCircle({
     isInner,
     color,
     label,
@@ -78,7 +78,7 @@ function ColorSquare({
     );
 }
 
-ColorSquare.propTypes = {
+ColorCircle.propTypes = {
     isInner: PropTypes.bool.isRequired,
     color: PropTypes.string.isRequired,
     label: PropTypes.string,
@@ -89,4 +89,4 @@ ColorSquare.propTypes = {
     showTooltip: PropTypes.bool,
 };
 
-export default ColorSquare;
+export default ColorCircle;

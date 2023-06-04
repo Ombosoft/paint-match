@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 import PropTypes from "prop-types";
 import { blendPaints } from "../Colors";
-import ColorSquare from "./ColorSquare";
+import ColorCircle from "./ColorCircle";
 import { HintBox } from "./HintBox";
 
 function MixPlate({
@@ -18,7 +18,7 @@ function MixPlate({
 }) {
     return (
         <Stack direction="row" flexGrow={1} sx={{position: "relative"}}>
-            <ColorSquare
+            <ColorCircle
                 isInner={false}
                 color={targetRGB}
                 label={
@@ -30,7 +30,7 @@ function MixPlate({
                 tooltip="Target color"
                 showTooltip={showBasicTutorial}
             />
-            <ColorSquare
+            <ColorCircle
                 isInner={true}
                 color={currentRGB}
                 label={

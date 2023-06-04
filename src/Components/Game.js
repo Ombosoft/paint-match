@@ -35,18 +35,16 @@ import { vecCompSum } from "../Util/Vec";
 import AppTitle from "./AppTitle";
 import ColorButtons from "./ColorButtons";
 import ColorSliders from "./ColorSliders";
-import ColorSquare from "./ColorSquare";
-import { HintBox } from "./HintBox";
 import HintButton from "./HintButton";
 import LevelsButton from "./LevelsButton";
 import LevelsPanel from "./LevelsPanel";
+import MixPlate from "./MixPlate";
 import NotesButton from "./NotesButton";
 import ResetButton from "./ResetButton";
 import SkipLevelButton from "./SkipLevelButton";
 import SlidersButton from "./SlidersButton";
 import UndoButton from "./UndoButton";
 import VictoryPanel from "./VictoryPanel";
-import MixPlate from "./MixPlate";
 
 function Game({ autoPlayMusic, onChangeLevel }) {
     const [victory, setVictory] = useState(false);
