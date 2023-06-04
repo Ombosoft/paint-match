@@ -17,7 +17,7 @@ function StarRack({ stars, stackSx, fontSize, dropShadow}) {
                 spacing={fontSize / 4}
             >
                 {range(stars).map((id) => (
-                    <Box sx={{ width: `${fontSize}em` }}>
+                    <Box sx={{ width: `${fontSize}em` }} key={id}>
                         <img
                             width="100%"
                             src={process.env.PUBLIC_URL + "/img/star.svg"}
