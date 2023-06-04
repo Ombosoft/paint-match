@@ -1,5 +1,5 @@
 import convert from "color-convert";
-const { diff } = require("color-diff");
+import { diff } from "color-diff";
 
 function lab(cs) {
     return {
