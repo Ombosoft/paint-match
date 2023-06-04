@@ -20,7 +20,6 @@ function MixPlate({
     return (
         <Stack
             direction="row"
-            flexGrow={1}
             sx={{ position: "relative", width: diameter, height: diameter }}
         >
             <ColorCircle
