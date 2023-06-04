@@ -66,6 +66,8 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     const [targetLevel, setTargetLevel] = useState(colorTable[curLevel]);
     const maxDistance = 400;
     const [distance, setDistance] = useState(maxDistance);
+    //  TODO
+    // eslint-disable-next-line no-unused-vars
     const [percentMatchText, setPercentMatchText] = useState("");
     const [distanceGotWorse, setDistanceGotWorse] = useState(false);
     const [resetCount, setResetCount] = useState(0);
@@ -214,7 +216,9 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         setComponents((prevState) => {
             return { ...prevState, [color]: prevState[color] + 1 };
         });
-        setDropletColor(color);
+        let dropletComponents = {...zeroComponents};
+        dropletComponents[color] = 1;
+        setDropletColor(convert.cmyk.hex(blendPaints(dropletComponents)));
         endBasicTutorial();
         setHint(null);
     }
@@ -307,9 +311,6 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                         hint={hint}
                         showBasicTutorial={showBasicTutorial}
                         dropletColor={dropletColor}
-                        components={components}
-                        percentMatchText={percentMatchText}
-                        distance={distance}
                     />
 
                     <Box sx={{ marginTop: "1em", marginBottom: "1em" }}>

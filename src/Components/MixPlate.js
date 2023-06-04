@@ -1,5 +1,6 @@
 import { Stack } from "@mui/material";
 import PropTypes from "prop-types";
+import { animationDurationMs, dropletBlendDelay } from "../Constants";
 import ColorCircle from "./ColorCircle";
 import { HintBox } from "./HintBox";
 
@@ -10,9 +11,6 @@ function MixPlate({
     hint,
     showBasicTutorial,
     dropletColor,
-    components,
-    percentMatchText,
-    distance,
 }) {
     const diameter = "calc(50vh)";
     return (
@@ -21,19 +19,28 @@ function MixPlate({
             sx={{ position: "relative", width: diameter, height: diameter }}
         >
             <ColorCircle
-                isInner={false}
                 diameter="100%"
+                animationDuration={
+                    dropletColor !== undefined
+                        ? dropletBlendDelay
+                        : animationDurationMs - dropletBlendDelay
+                }
+                color={dropletColor !== undefined ? dropletColor : currentRGB}
+            />
+            <ColorCircle
+                inner
+                diameter="90%"
+                animationDuration={animationDurationMs}
                 color={currentRGB}
-                label={targetLevel.name}
-                dropletColor={dropletColor}
-                showDroplet
                 tooltip={<HintBox hint={hint} />}
                 showTooltip={hint !== null}
             />
             <ColorCircle
-                isInner={true}
+                inner
                 diameter="60%"
+                animationDuration={animationDurationMs}
                 color={targetRGB}
+                label={targetLevel.name}
                 tooltip="Target color"
                 showTooltip={showBasicTutorial}
             />
@@ -48,9 +55,6 @@ MixPlate.propTypes = {
     hint: PropTypes.string,
     showBasicTutorial: PropTypes.bool.isRequired,
     dropletColor: PropTypes.string,
-    components: PropTypes.object.isRequired,
-    percentMatchText: PropTypes.string.isRequired,
-    distance: PropTypes.number.isRequired,
 };
 
 export default MixPlate;
