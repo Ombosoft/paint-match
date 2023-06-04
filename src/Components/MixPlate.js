@@ -16,8 +16,13 @@ function MixPlate({
     percentMatchText,
     distance,
 }) {
+    const diameter = "calc(50vh)";
     return (
-        <Stack direction="row" flexGrow={1} sx={{position: "relative"}}>
+        <Stack
+            direction="row"
+            flexGrow={1}
+            sx={{ position: "relative", width: diameter, height: diameter }}
+        >
             <ColorCircle
                 isInner={false}
                 color={targetRGB}

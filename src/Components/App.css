@@ -20,8 +20,6 @@
 
 .Picker-square {
     background-color: #61dafb;
-    padding-left: 1vh;
-    padding-right: 1vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,8 +28,6 @@
     color: white;
     text-shadow: 1px 1px black;
     text-transform: capitalize;
-    margin-top: 2vh;
-    margin-bottom: 1vh;
     border-radius: 50%;
 }
 

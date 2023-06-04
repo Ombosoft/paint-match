@@ -19,9 +19,9 @@ function ColorCircle({
     const dDelay = dropletColor
         ? dropletBlendDelay
         : animationDurationMs - dropletBlendDelay;
-    const diameter = isInner ? "calc(50vh)" : "calc(60vh)";
     const offset = isInner ? "50%" : "inherit";
     const transform = isInner ? "translate(-50%, -50%)" : "inherit";
+    const diameter = isInner ? "70%" : "100%" ;
     return (
         <>
             <span
@@ -31,9 +31,9 @@ function ColorCircle({
                     transitionProperty: "background-color",
                     transitionDuration: `${animationDurationMs}ms`,
                     transitionTimingFunction: "ease-in-out",
+                    position: isInner ? "absolute" : "relative",
                     width: diameter,
                     height: diameter,
-                    position: isInner ? "absolute" : "relative",
                     top: offset,
                     left: offset,
                     transform: transform,
