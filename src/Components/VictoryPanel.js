@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { rgbToString } from "../Colors.js";
+import { rgbToString, textColor } from "../Colors.js";
 import { victoryPanelDelay, victorySoundDelay } from "../Constants.js";
 import { NumDropletsContext } from "../Context/NumDropletsContext.js";
 import { colorTable } from "../Levels.js";
@@ -145,8 +145,6 @@ function VictoryTitle({ contentProps }) {
     return (
         <DialogTitle
             sx={{
-                textShadow:
-                    "4px 4px 10px white, -1px -1px 1px #FFFFFFB0, 1px 1px 1px #FFFFFFB0, -1px 0px 1px #FFFFFFB0, 1px 0px 1px #FFFFFFB0",
                 backgroundColor: rgbToString(color),
                 borderWidth: "2px",
                 borderStyle: "solid",
@@ -158,6 +156,7 @@ function VictoryTitle({ contentProps }) {
                     fontWeight="bold"
                     textTransform="capitalize"
                     fontSize="1.25rem"
+                    color={textColor(colorTable[level].cmyk)}
                 >
                     {level} {levelName}
                 </Typography>

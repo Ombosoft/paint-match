@@ -61,7 +61,7 @@ function LevelsPanel({
                         <Typography
                             variant="h6"
                             fontWeight="bold"
-                            color={textColor(levelDef)}
+                            color={textColor(levelDef.cmyk)}
                         >
                             {level}
                         </Typography>

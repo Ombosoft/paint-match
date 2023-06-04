@@ -126,8 +126,8 @@ export function rgbToString(rgb) {
     return `#${rgb}`;
 }
 
-export function textColor(levelDef) {
-    const [l] = convert.cmyk.lab(levelDef.cmyk);
+export function textColor(backgroundCMYK) {
+    const [l] = convert.cmyk.lab(backgroundCMYK);
     if (l > 53) {
         return 'black';
     }
