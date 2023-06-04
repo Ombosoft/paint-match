@@ -301,7 +301,6 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                         )}
                     </Stack>
                     <MixPlate
-                        debug={debug}
                         currentRGB={currentRGB}
                         targetRGB={targetRGB}
                         targetLevel={targetLevel}

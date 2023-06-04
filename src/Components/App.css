@@ -26,8 +26,8 @@
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
-    text-shadow: 1px 1px black;
     text-transform: capitalize;
+    font-weight: bold;
     border-radius: 50%;
 }
 

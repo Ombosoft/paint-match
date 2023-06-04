@@ -2,18 +2,18 @@ import OpacityIcon from "@mui/icons-material/Opacity";
 import { Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
-import { rgbToString } from "../Colors";
+import { rgbToString, textColorFromRGB } from "../Colors";
 import { animationDurationMs, dropletBlendDelay } from "../Constants";
 
 function ColorCircle({
     isInner,
     color,
     label,
-    showColor,
     showDroplet,
     dropletColor,
     tooltip,
     showTooltip,
+    diameter,
 }) {
     const dColor = dropletColor ? `${dropletColor}` : rgbToString(color);
     const dDelay = dropletColor
@@ -21,7 +21,6 @@ function ColorCircle({
         : animationDurationMs - dropletBlendDelay;
     const offset = isInner ? "50%" : "inherit";
     const transform = isInner ? "translate(-50%, -50%)" : "inherit";
-    const diameter = isInner ? "70%" : "100%" ;
     return (
         <>
             <span
@@ -66,10 +65,10 @@ function ColorCircle({
                         <div
                             style={{
                                 zIndex: "1",
+                                color: textColorFromRGB(color)
                             }}
                         >
                             {label}
-                            <div>{showColor && color}</div>
                         </div>
                     </Tooltip>
                 )}
@@ -82,7 +81,6 @@ ColorCircle.propTypes = {
     isInner: PropTypes.bool.isRequired,
     color: PropTypes.string.isRequired,
     label: PropTypes.string,
-    showColor: PropTypes.bool,
     showDroplet: PropTypes.bool,
     dropletColor: PropTypes.string,
     tooltip: PropTypes.any,

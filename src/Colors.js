@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 import convert from "color-convert";
 import { defaultWinTolerance } from "./Constants";
+import { colorTable } from "./Levels";
 import {
     matCompSum,
     matScaleByVec,
@@ -9,7 +10,6 @@ import {
     vecRound,
     vecScale,
 } from "./Util/Vec";
-import { colorTable } from "./Levels";
 
 
 export const themePalette = {
@@ -126,10 +126,17 @@ export function rgbToString(rgb) {
     return `#${rgb}`;
 }
 
-export function textColor(backgroundCMYK) {
-    const [l] = convert.cmyk.lab(backgroundCMYK);
+function textColorImpl([l]) {
     if (l > 53) {
         return 'black';
     }
     return 'white';
+}
+
+export function textColor(backgroundCMYK) {
+    return textColorImpl(convert.cmyk.lab(backgroundCMYK));
+}
+
+export function textColorFromRGB(backgroundRGB) {
+    return textColorImpl(convert.hex.lab(backgroundRGB));
 }
