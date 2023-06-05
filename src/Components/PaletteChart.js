@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import { themePalette } from "../Colors";
 
 const theme = {
-    background: "#ffffff",
     border: "#000000",
     text: {
         fontSize: 36,
@@ -120,7 +119,91 @@ const theme = {
     },
 };
 
-function PaletteChart({ width, height, bottomShift, components }) {
+const Pie = ({ data, thisTheme, margin, startAngle, innerRadius }) => (
+    <ResponsivePie
+        data={data}
+        margin={margin}
+        theme={thisTheme}
+        background="#ff0000"
+        startAngle={startAngle}
+        padAngle={0.7}
+        sortByValue={false}
+        tooltip={() => <></>}
+        innerRadius={innerRadius}
+        cornerRadius={10}
+        activeOuterRadiusOffset={8}
+        colors={(x) => {
+            return x.data.color;
+        }}
+        borderWidth={1.5}
+        borderColor={{
+            from: "color",
+            modifiers: [["darker", 0.3]],
+        }}
+        enableArcLinkLabels={false}
+        arcLinkLabelsSkipAngle={10}
+        arcLinkLabelsTextColor="#333333"
+        arcLinkLabelsThickness={2}
+        arcLinkLabelsColor={{ from: "color" }}
+        arcLabelsTextColor={(x) => {
+            return x.data.textColor;
+        }}
+        defs={[
+            linearGradientDef(
+                "gradientAll",
+                [
+                    { offset: 0, color: "inherit" },
+                    { offset: 100, color: "inherit", opacity: 0.4 },
+                ],
+                {
+                    gradientTransform: "rotate(135 0.5 0.5)",
+                }
+            ),
+            linearGradientDef(
+                "gradientStrong",
+                [
+                    { offset: 0, color: "inherit", opacity: 1 },
+                    { offset: 100, color: "inherit", opacity: 0.1 },
+                ],
+                {
+                    gradientTransform: "rotate(135 0.5 0.5)",
+                }
+            ),
+        ]}
+        fill={[
+            {
+                match: {
+                    id: "yellow",
+                },
+                id: "gradientStrong",
+            },
+            {
+                match: {
+                    id: "white",
+                },
+                id: "gradientStrong",
+            },
+            {
+                match: {
+                    // id: "green",
+                },
+                id: "gradientAll",
+            },
+        ]}
+        legends={[]}
+    />
+);
+
+function PaletteChart({
+    width,
+    height,
+    margin,
+    startAngle,
+    background,
+    innerRadius,
+    components,
+}) {
+    const thisTheme = { ...theme, background: background };
     const data = Object.entries(components)
         .filter(([_, num]) => num > 0)
         .map(([color, num]) => ({
@@ -130,82 +213,15 @@ function PaletteChart({ width, height, bottomShift, components }) {
             value: num,
             textColor: color === "black" ? "white" : "black",
         }));
-    const Pie = ({ data }) => (
-        <ResponsivePie
-            data={data}
-            margin={{ top: 9, right: 60, bottom: -bottomShift, left: 50 }}
-            theme={theme}
-            startAngle={285}
-            padAngle={0.7}
-            sortByValue={false}
-            tooltip={() => <></>}
-            innerRadius={0.65}
-            cornerRadius={10}
-            activeOuterRadiusOffset={8}
-            colors={(x) => {
-                return x.data.color;
-            }}
-            borderWidth={1.5}
-            borderColor={{
-                from: "color",
-                modifiers: [["darker", 0.3]],
-            }}
-            enableArcLinkLabels={false}
-            arcLinkLabelsSkipAngle={10}
-            arcLinkLabelsTextColor="#333333"
-            arcLinkLabelsThickness={2}
-            arcLinkLabelsColor={{ from: "color" }}
-            arcLabelsTextColor={(x) => {
-                return x.data.textColor;
-            }}
-            defs={[
-                linearGradientDef(
-                    "gradientAll",
-                    [
-                        { offset: 0, color: "inherit" },
-                        { offset: 100, color: "inherit", opacity: 0.4 },
-                    ],
-                    {
-                        gradientTransform: "rotate(135 0.5 0.5)",
-                    }
-                ),
-                linearGradientDef(
-                    "gradientStrong",
-                    [
-                        { offset: 0, color: "inherit", opacity: 1 },
-                        { offset: 100, color: "inherit", opacity: 0.1 },
-                    ],
-                    {
-                        gradientTransform: "rotate(135 0.5 0.5)",
-                    }
-                ),
-            ]}
-            fill={[
-                {
-                    match: {
-                        id: "yellow",
-                    },
-                    id: "gradientStrong",
-                },
-                {
-                    match: {
-                        id: "white",
-                    },
-                    id: "gradientStrong",
-                },
-                {
-                    match: {
-                        // id: "green",
-                    },
-                    id: "gradientAll",
-                },
-            ]}
-            legends={[]}
-        />
-    );
     return (
         <Box sx={{ height: height, width: width }}>
-            <Pie data={data} />
+            <Pie
+                data={data}
+                thisTheme={thisTheme}
+                margin={margin}
+                startAngle={startAngle}
+                innerRadius={innerRadius}
+            />
         </Box>
     );
 }
@@ -213,7 +229,10 @@ function PaletteChart({ width, height, bottomShift, components }) {
 PaletteChart.propTypes = {
     width: PropTypes.string.isRequired,
     height: PropTypes.string.isRequired,
-    bottomShift: PropTypes.number.isRequired,
+    margin: PropTypes.object,
+    startAngle: PropTypes.number.isRequired,
+    background: PropTypes.string.isRequired,
+    innerRadius: PropTypes.number.isRequired,
     components: PropTypes.object.isRequired,
 };
 

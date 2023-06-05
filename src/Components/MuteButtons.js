@@ -13,6 +13,8 @@ export function MuteButtons({ musicMuted, toggleMuteMusic, toggleMuteSounds }) {
         <Stack
             direction="row"
             alignItems="center"
+            marginLeft="1em"
+            marginRight="1em"
         >
             <MuteButton
                 muted={musicMuted}

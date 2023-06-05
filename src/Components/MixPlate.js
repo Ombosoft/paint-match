@@ -5,6 +5,7 @@ import ColorCircle from "./ColorCircle";
 import { HintBox } from "./HintBox";
 
 function MixPlate({
+    diameter,
     currentRGB,
     targetRGB,
     targetLevel,
@@ -12,7 +13,6 @@ function MixPlate({
     showBasicTutorial,
     dropletColor,
 }) {
-    const diameter = "calc(50vh)";
     return (
         <Stack
             direction="row"
@@ -49,6 +49,7 @@ function MixPlate({
 }
 
 MixPlate.propTypes = {
+    diameter: PropTypes.string.isRequired,
     currentRGB: PropTypes.string.isRequired,
     targetRGB: PropTypes.string.isRequired,
     targetLevel: PropTypes.object.isRequired,

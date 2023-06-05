@@ -14,7 +14,7 @@ function App() {
         <div className="App">
             <header className="App-header">
                 <SoundsMutedContext.Provider value={soundsMuted}>
-                    <Stack direction="column" sx={{ height: "100vh" }}>
+                    <Stack direction="column" sx={{ height: "100vh", width: "100%" }}>
                         <Game autoPlayMusic={autoPlay} onChangeLevel={onChangeLevel} />
                         <MuteButtons
                             musicMuted={musicMuted}

@@ -109,7 +109,10 @@ function VictoryPanel({
                     <PaletteChart
                         width="300px"
                         height="150px"
-                        bottomShift={30}
+                        margin={{ top: 9, right: 60, bottom: -30, left: 50 }}
+                        startAngle={285}
+                        background="#ffffff"
+                        innerRadius={0.65}
                         components={components}
                     />
                     <VictoryMessage contentProps={contentProps.current} />

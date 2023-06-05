@@ -40,6 +40,7 @@ import LevelsButton from "./LevelsButton";
 import LevelsPanel from "./LevelsPanel";
 import MixPlate from "./MixPlate";
 import NotesButton from "./NotesButton";
+import RadiantButtons from "./RadiantButtons";
 import ResetButton from "./ResetButton";
 import SkipLevelButton from "./SkipLevelButton";
 import SlidersButton from "./SlidersButton";
@@ -216,7 +217,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         setComponents((prevState) => {
             return { ...prevState, [color]: prevState[color] + 1 };
         });
-        let dropletComponents = {...zeroComponents};
+        let dropletComponents = { ...zeroComponents };
         dropletComponents[color] = 1;
         setDropletColor(convert.cmyk.hex(blendPaints(dropletComponents)));
         endBasicTutorial();
@@ -304,14 +305,20 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             />
                         )}
                     </Stack>
-                    <MixPlate
-                        currentRGB={currentRGB}
-                        targetRGB={targetRGB}
-                        targetLevel={targetLevel}
-                        hint={hint}
-                        showBasicTutorial={showBasicTutorial}
-                        dropletColor={dropletColor}
-                    />
+                    <RadiantButtons
+                        components={components}
+                        diameter="calc(95vw)"
+                    >
+                        <MixPlate
+                            diameter="calc(60vw)"
+                            currentRGB={currentRGB}
+                            targetRGB={targetRGB}
+                            targetLevel={targetLevel}
+                            hint={hint}
+                            showBasicTutorial={showBasicTutorial}
+                            dropletColor={dropletColor}
+                        />
+                    </RadiantButtons>
 
                     <Box sx={{ marginTop: "1em", marginBottom: "1em" }}>
                         {!bottle && (
