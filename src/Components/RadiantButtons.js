@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import PropTypes from "prop-types";
 import PaletteChart from "./PaletteChart";
 
-function RadiantButtons({ components, diameter, children }) {
+function RadiantButtons({ components, diameter, onClick, children }) {
     return (
         <Box width="100%" height={diameter} sx={{ position: "relative" }}>
             <PaletteChart
@@ -13,6 +13,7 @@ function RadiantButtons({ components, diameter, children }) {
                 background="transparent"
                 innerRadius={0.7}
                 components={components}
+                onClick={onClick}
             />
             <Box
                 position="absolute"
@@ -29,6 +30,7 @@ function RadiantButtons({ components, diameter, children }) {
 RadiantButtons.propTypes = {
     components: PropTypes.object.isRequired,
     diameter: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
 };
 
 export default RadiantButtons;

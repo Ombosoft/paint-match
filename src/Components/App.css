@@ -70,6 +70,10 @@
     animation: blink ease-in-out 900ms infinite;
 }
 
+svg {
+    overflow: visible;
+}
+
 @keyframes blink {
     0% {
         opacity: 1;

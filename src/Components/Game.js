@@ -308,6 +308,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                     <RadiantButtons
                         components={components}
                         diameter="calc(95vw)"
+                        onClick={handleClick}
                     >
                         <MixPlate
                             diameter="calc(60vw)"

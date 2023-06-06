@@ -119,7 +119,7 @@ const theme = {
     },
 };
 
-const Pie = ({ data, thisTheme, margin, startAngle, innerRadius }) => (
+const Pie = ({ data, thisTheme, margin, startAngle, innerRadius, onClick }) => (
     <ResponsivePie
         data={data}
         margin={margin}
@@ -191,6 +191,9 @@ const Pie = ({ data, thisTheme, margin, startAngle, innerRadius }) => (
             },
         ]}
         legends={[]}
+        onClick={(node) => {
+            onClick(node.id);
+        }}
     />
 );
 
@@ -202,6 +205,7 @@ function PaletteChart({
     background,
     innerRadius,
     components,
+    onClick,
 }) {
     const thisTheme = { ...theme, background: background };
     const data = Object.entries(components)
@@ -221,6 +225,7 @@ function PaletteChart({
                 margin={margin}
                 startAngle={startAngle}
                 innerRadius={innerRadius}
+                onClick={onClick}
             />
         </Box>
     );
@@ -234,6 +239,7 @@ PaletteChart.propTypes = {
     background: PropTypes.string.isRequired,
     innerRadius: PropTypes.number.isRequired,
     components: PropTypes.object.isRequired,
+    onClick: PropTypes.func,
 };
 
 export default PaletteChart;
