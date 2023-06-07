@@ -135,7 +135,7 @@ const Pie = ({
         theme={thisTheme}
         background="#ff0000"
         startAngle={startAngle}
-        padAngle={0.7}
+        padAngle={0.9}
         sortByValue={false}
         tooltip={() => <></>}
         innerRadius={innerRadius}
