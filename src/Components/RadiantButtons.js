@@ -22,7 +22,10 @@ function RadiantButtons({ components, diameter, onClick, children }) {
                 position="absolute"
                 top="50%"
                 left="50%"
-                sx={{ transform: "translate(-50%, -50%)" }}
+                sx={{
+                    transform: "translate(-50%, -50%)",
+                    pointerEvents: "none",
+                }}
             >
                 {children}
             </Box>

@@ -16,7 +16,11 @@ function MixPlate({
     return (
         <Stack
             direction="row"
-            sx={{ position: "relative", width: diameter, height: diameter }}
+            sx={{
+                position: "relative",
+                width: diameter,
+                height: diameter,
+            }}
         >
             <ColorCircle
                 diameter="100%"
