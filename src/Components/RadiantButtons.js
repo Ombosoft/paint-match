@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import PropTypes from "prop-types";
+import { mapValues } from "../Util/Utils";
 import PaletteChart from "./PaletteChart";
 
 function RadiantButtons({ components, diameter, onClick, children }) {
@@ -12,8 +13,10 @@ function RadiantButtons({ components, diameter, onClick, children }) {
                 startAngle={0}
                 background="transparent"
                 innerRadius={0.7}
-                components={components}
+                activeInnerRadiusOffset={20}
+                components={mapValues(components, (x) => x + 1)}
                 onClick={onClick}
+                valueToLabelMapper={(x) => x - 1}
             />
             <Box
                 position="absolute"

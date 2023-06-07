@@ -33,7 +33,6 @@ import { useTutorial } from "../Tutorial";
 import { distanceToPercentMatch, randomLevel } from "../Util/Utils";
 import { vecCompSum } from "../Util/Vec";
 import AppTitle from "./AppTitle";
-import ColorButtons from "./ColorButtons";
 import ColorSliders from "./ColorSliders";
 import HintButton from "./HintButton";
 import LevelsButton from "./LevelsButton";
@@ -328,16 +327,6 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                                 level={curLevel}
                                 components={components}
                                 onSetComponentValue={setComponentValue}
-                            />
-                        )}
-
-                        {bottle && (
-                            <ColorButtons
-                                cmykColors={cmykColors}
-                                level={curLevel}
-                                components={components}
-                                onClick={handleClick}
-                                showTooltip={showBasicTutorial}
                             />
                         )}
                     </Box>

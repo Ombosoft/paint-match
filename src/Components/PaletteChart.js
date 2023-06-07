@@ -119,7 +119,16 @@ const theme = {
     },
 };
 
-const Pie = ({ data, thisTheme, margin, startAngle, innerRadius, onClick }) => (
+const Pie = ({
+    data,
+    thisTheme,
+    margin,
+    startAngle,
+    innerRadius,
+    activeInnerRadiusOffset,
+    onClick,
+    valueToLabelMapper,
+}) => (
     <ResponsivePie
         data={data}
         margin={margin}
@@ -132,6 +141,7 @@ const Pie = ({ data, thisTheme, margin, startAngle, innerRadius, onClick }) => (
         innerRadius={innerRadius}
         cornerRadius={10}
         activeOuterRadiusOffset={8}
+        activeInnerRadiusOffset={activeInnerRadiusOffset}
         colors={(x) => {
             return x.data.color;
         }}
@@ -148,6 +158,7 @@ const Pie = ({ data, thisTheme, margin, startAngle, innerRadius, onClick }) => (
         arcLabelsTextColor={(x) => {
             return x.data.textColor;
         }}
+        arcLabel={(x) => valueToLabelMapper(x.data.value)}
         defs={[
             linearGradientDef(
                 "gradientAll",
@@ -204,8 +215,10 @@ function PaletteChart({
     startAngle,
     background,
     innerRadius,
+    activeInnerRadiusOffset,
     components,
     onClick,
+    valueToLabelMapper,
 }) {
     const thisTheme = { ...theme, background: background };
     const data = Object.entries(components)
@@ -225,7 +238,9 @@ function PaletteChart({
                 margin={margin}
                 startAngle={startAngle}
                 innerRadius={innerRadius}
+                activeInnerRadiusOffset={activeInnerRadiusOffset}
                 onClick={onClick}
+                valueToLabelMapper={valueToLabelMapper ?? (x => x)}
             />
         </Box>
     );
@@ -238,8 +253,10 @@ PaletteChart.propTypes = {
     startAngle: PropTypes.number.isRequired,
     background: PropTypes.string.isRequired,
     innerRadius: PropTypes.number.isRequired,
+    activeInnerRadiusOffset: PropTypes.number,
     components: PropTypes.object.isRequired,
     onClick: PropTypes.func,
+    valueToLabelMapper: PropTypes.func,
 };
 
 export default PaletteChart;
