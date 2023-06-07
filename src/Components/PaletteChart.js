@@ -2,7 +2,9 @@ import { Box } from "@mui/material";
 import { linearGradientDef } from "@nivo/core";
 import { ResponsivePie } from "@nivo/pie";
 import PropTypes from "prop-types";
+import { useCallback, useRef } from "react";
 import { themePalette } from "../Colors";
+import useIsTouchScreen from "../Util/DeviceTypeDetector";
 
 const theme = {
     border: "#000000",
@@ -128,85 +130,127 @@ const Pie = ({
     activeInnerRadiusOffset,
     onClick,
     valueToLabelMapper,
-}) => (
-    <ResponsivePie
-        data={data}
-        margin={margin}
-        theme={thisTheme}
-        background="#ff0000"
-        startAngle={startAngle}
-        padAngle={0.9}
-        sortByValue={false}
-        tooltip={() => <></>}
-        innerRadius={innerRadius}
-        cornerRadius={10}
-        activeOuterRadiusOffset={8}
-        activeInnerRadiusOffset={activeInnerRadiusOffset}
-        colors={(x) => {
-            return x.data.color;
-        }}
-        borderWidth={1.5}
-        borderColor={{
-            from: "color",
-            modifiers: [["darker", 0.3]],
-        }}
-        enableArcLinkLabels={false}
-        arcLinkLabelsSkipAngle={10}
-        arcLinkLabelsTextColor="#333333"
-        arcLinkLabelsThickness={2}
-        arcLinkLabelsColor={{ from: "color" }}
-        arcLabelsTextColor={(x) => {
-            return x.data.textColor;
-        }}
-        arcLabel={(x) => valueToLabelMapper(x.data.value)}
-        defs={[
-            linearGradientDef(
-                "gradientAll",
-                [
-                    { offset: 0, color: "inherit" },
-                    { offset: 100, color: "inherit", opacity: 0.4 },
-                ],
+}) => {
+    const leaveTimerRef = useRef();
+    // Simulater hover on touch screens: auto release with delay after tap
+    const autoMouseLeave = useCallback(
+        (node, event) => {
+            if (leaveTimerRef.current) {
+                clearTimeout(leaveTimerRef.current);
+            }
+            leaveTimerRef.current = setTimeout(() => {
+                let leaveEvent = new MouseEvent("mouseout", {
+                    view: window,
+                    bubbles: true,
+                    cancelable: true,
+                });
+                event.target.dispatchEvent(leaveEvent);
+                leaveTimerRef.current = null;
+            }, 1000);
+        },
+        [leaveTimerRef]
+    );
+    // Simulater hover on touch screens: auto enter after second tap
+    const autoMouseEnter = useCallback(
+        (event) => {
+            if (leaveTimerRef.current) {
+                // already entered
+                return;
+            }
+            let enterEvent = new MouseEvent("mouseover", {
+                view: window,
+                bubbles: true,
+                cancelable: true,
+            });
+            event.target.dispatchEvent(enterEvent);
+        },
+        [leaveTimerRef]
+    );
+    const isTouchScreen = useIsTouchScreen();
+    const handleMouseEnter = isTouchScreen ? autoMouseLeave : () => {};
+    const handleMouseClick = isTouchScreen ? autoMouseEnter : () => {};
+    return (
+        <ResponsivePie
+            data={data}
+            margin={margin}
+            theme={thisTheme}
+            background="#ff0000"
+            startAngle={startAngle}
+            padAngle={0.9}
+            sortByValue={false}
+            tooltip={() => <></>}
+            innerRadius={innerRadius}
+            cornerRadius={10}
+            activeOuterRadiusOffset={8}
+            activeInnerRadiusOffset={activeInnerRadiusOffset}
+            colors={(x) => {
+                return x.data.color;
+            }}
+            borderWidth={1.5}
+            borderColor={{
+                from: "color",
+                modifiers: [["darker", 0.3]],
+            }}
+            enableArcLinkLabels={false}
+            arcLinkLabelsSkipAngle={10}
+            arcLinkLabelsTextColor="#333333"
+            arcLinkLabelsThickness={2}
+            arcLinkLabelsColor={{ from: "color" }}
+            arcLabelsTextColor={(x) => {
+                return x.data.textColor;
+            }}
+            arcLabel={(x) => valueToLabelMapper(x.data.value)}
+            defs={[
+                linearGradientDef(
+                    "gradientAll",
+                    [
+                        { offset: 0, color: "inherit" },
+                        { offset: 100, color: "inherit", opacity: 0.4 },
+                    ],
+                    {
+                        gradientTransform: "rotate(135 0.5 0.5)",
+                    }
+                ),
+                linearGradientDef(
+                    "gradientStrong",
+                    [
+                        { offset: 0, color: "inherit", opacity: 1 },
+                        { offset: 100, color: "inherit", opacity: 0.1 },
+                    ],
+                    {
+                        gradientTransform: "rotate(135 0.5 0.5)",
+                    }
+                ),
+            ]}
+            fill={[
                 {
-                    gradientTransform: "rotate(135 0.5 0.5)",
-                }
-            ),
-            linearGradientDef(
-                "gradientStrong",
-                [
-                    { offset: 0, color: "inherit", opacity: 1 },
-                    { offset: 100, color: "inherit", opacity: 0.1 },
-                ],
+                    match: {
+                        id: "yellow",
+                    },
+                    id: "gradientStrong",
+                },
                 {
-                    gradientTransform: "rotate(135 0.5 0.5)",
-                }
-            ),
-        ]}
-        fill={[
-            {
-                match: {
-                    id: "yellow",
+                    match: {
+                        id: "white",
+                    },
+                    id: "gradientStrong",
                 },
-                id: "gradientStrong",
-            },
-            {
-                match: {
-                    id: "white",
+                {
+                    match: {
+                        // id: "green",
+                    },
+                    id: "gradientAll",
                 },
-                id: "gradientStrong",
-            },
-            {
-                match: {
-                    // id: "green",
-                },
-                id: "gradientAll",
-            },
-        ]}
-        legends={[]}
-        onClick={(node) => {
-            onClick(node.id);
-        }}
-    />
-);
+            ]}
+            legends={[]}
+            onClick={(node, event) => {
+                handleMouseClick(event);
+                onClick && onClick(node.id);
+            }}
+            onMouseEnter={handleMouseEnter}
+        />
+    );
+};
 
 function PaletteChart({
     width,
@@ -240,7 +284,7 @@ function PaletteChart({
                 innerRadius={innerRadius}
                 activeInnerRadiusOffset={activeInnerRadiusOffset}
                 onClick={onClick}
-                valueToLabelMapper={valueToLabelMapper ?? (x => x)}
+                valueToLabelMapper={valueToLabelMapper ?? ((x) => x)}
             />
         </Box>
     );
