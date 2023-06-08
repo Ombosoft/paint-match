@@ -126,6 +126,7 @@ const Pie = ({
     thisTheme,
     margin,
     startAngle,
+    fit,
     innerRadius,
     activeInnerRadiusOffset,
     onClick,
@@ -176,6 +177,7 @@ const Pie = ({
             theme={thisTheme}
             background="#ff0000"
             startAngle={startAngle}
+            fit={fit}
             padAngle={0.9}
             sortByValue={false}
             tooltip={() => <></>}
@@ -257,6 +259,7 @@ function PaletteChart({
     height,
     margin,
     startAngle,
+    noFit,
     background,
     innerRadius,
     activeInnerRadiusOffset,
@@ -281,6 +284,7 @@ function PaletteChart({
                 thisTheme={thisTheme}
                 margin={margin}
                 startAngle={startAngle}
+                fit={!noFit}
                 innerRadius={innerRadius}
                 activeInnerRadiusOffset={activeInnerRadiusOffset}
                 onClick={onClick}
@@ -295,6 +299,7 @@ PaletteChart.propTypes = {
     height: PropTypes.string.isRequired,
     margin: PropTypes.object,
     startAngle: PropTypes.number.isRequired,
+    noFit: PropTypes.bool,
     background: PropTypes.string.isRequired,
     innerRadius: PropTypes.number.isRequired,
     activeInnerRadiusOffset: PropTypes.number,
