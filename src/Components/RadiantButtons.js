@@ -4,7 +4,15 @@ import { mapValues } from "../Util/Utils";
 import useViewportWidth from "../Util/ViewportDimensions";
 import PaletteChart from "./PaletteChart";
 
-function RadiantButtons({ components, diameter, innerExtendVW, onClick, children }) {
+const zeroValue = 2;
+
+function RadiantButtons({
+    components,
+    diameter,
+    innerExtendVW,
+    onClick,
+    children,
+}) {
     const viewportWidth = useViewportWidth();
     return (
         <Box width="100%" height={diameter} sx={{ position: "relative" }}>
@@ -15,10 +23,10 @@ function RadiantButtons({ components, diameter, innerExtendVW, onClick, children
                 startAngle={0}
                 background="transparent"
                 innerRadius={0.7}
-                activeInnerRadiusOffset={innerExtendVW * viewportWidth / 100}
-                components={mapValues(components, (x) => x + 1)}
+                activeInnerRadiusOffset={(innerExtendVW * viewportWidth) / 100}
+                components={mapValues(components, (x) => x + zeroValue)}
                 onClick={onClick}
-                valueToLabelMapper={(x) => x - 1}
+                valueToLabelMapper={(x) => x - zeroValue}
             />
             <Box
                 position="absolute"
