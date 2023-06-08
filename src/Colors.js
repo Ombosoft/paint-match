@@ -71,6 +71,7 @@ export const cmykColors = [
     { color: "green", minLevel: 17 },
     { color: "blue", minLevel: 22 },
 ];
+export const minLevels = Object.fromEntries(cmykColors.map(x => [x.color, x.minLevel]))
 export const firstLevelWithAllColors =
     Math.max(...cmykColors.map((c) => c.minLevel)) + 1;
 

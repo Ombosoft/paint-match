@@ -1,5 +1,6 @@
 import {
     compareBy,
+    filterKeys,
     groupBy,
     isObject,
     mapValues,
@@ -73,6 +74,10 @@ test("groupBy", () => {
 
 test("mapValues", () => {
     expect(mapValues({ x: 1, y: 2, z: 3 }, x => x*x)).toStrictEqual({ x: 1, y: 4, z: 9 })
+})
+
+test("filterKeys", () => {
+    expect(filterKeys({ x: 1, y: 2, z: 3 }, k => k !== "x")).toStrictEqual({ y: 2, z: 3 })
 })
 
 test("isObject", () => {

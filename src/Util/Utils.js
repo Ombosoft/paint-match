@@ -71,6 +71,12 @@ export function mapValues(obj, mapper) {
     );
 }
 
+export function filterKeys(obj, predicate) {
+    return Object.fromEntries(
+        Object.entries(obj).filter(([key, val]) => predicate(key))
+    );
+}
+
 export function isObject(x) {
     return typeof x === "object" && x !== null && !Array.isArray(x);
 }

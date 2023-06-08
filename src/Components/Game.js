@@ -306,6 +306,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                     </Stack>
                     <RadiantButtons
                         components={components}
+                        level={curLevel}
                         diameter="calc(95vw)"
                         innerExtendVW={2.5}
                         onClick={handleClick}
