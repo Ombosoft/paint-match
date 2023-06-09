@@ -307,12 +307,12 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                     <RadiantButtons
                         components={components}
                         level={curLevel}
-                        diameter="calc(95vw)"
+                        diameter="min(95vw, 80vh)"
                         innerExtendVW={2.5}
                         onClick={handleClick}
                     >
                         <MixPlate
-                            diameter="calc(60vw)"
+                            diameter="min(60vw, 49vh)"
                             currentRGB={currentRGB}
                             targetRGB={targetRGB}
                             targetLevel={targetLevel}
