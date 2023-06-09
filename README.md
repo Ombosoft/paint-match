@@ -3,11 +3,13 @@
 # Play online **>** [**here**](https://ombosoft.itch.io/paint-match) **<**
 
 This a color mixing game written in React.js.
-The objective of the game is to recreate the target color as precisely as possible using the provided droplets.
+The objective of the game is to recreate the target color as precisely as possible using the provided droplets of paint.
 
 About the game
 ---
-In each level, you are presented with a target color (for instance, chocolate) and a set of primary color paint droplets to mix. Your objective is to recreate the target color as precisely as possible using the provided droplets. As you progress, the difficulty increases, helping you to build up your intuition and color theory knowledge. 
+In each level, you are presented with a target color (for instance, chocolate) and a set of primary color paint droplets to mix. Your objective is to recreate the target color as precisely as possible using the provided droplets. As you progress, the difficulty increases, helping you to build up your intuition and knowledge of color theory. 
+
+You can apply these skills later in real life painting! 
 
 
 Local build
