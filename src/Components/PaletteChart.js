@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { linearGradientDef } from "@nivo/core";
 import { ResponsivePie } from "@nivo/pie";
+import { animated } from "@react-spring/web";
 import PropTypes from "prop-types";
 import { useCallback, useRef } from "react";
 import { themePalette } from "../Colors";
@@ -201,7 +202,51 @@ const Pie = ({
             arcLabelsTextColor={(x) => {
                 return x.data.textColor;
             }}
-            arcLabel={(x) => valueToLabelMapper(x.data.value)}
+            arcLabelsComponent={({ datum, label, style }) => {
+                const maxBoxSize = 200;
+                return (
+                    <animated.g
+                        transform={style.transform}
+                        style={{ pointerEvents: "none" }}
+                    >
+                        <g
+                            transform={`translate(-${maxBoxSize / 2}, -${
+                                maxBoxSize / 2
+                            })`}
+                        >
+                            <foreignObject
+                                width={maxBoxSize}
+                                height={maxBoxSize}
+                            >
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        height: "100%",
+                                        flexDirection: "column",
+                                    }}
+                                >
+                                    <div style={{ background: "transparent" }}>
+                                        {datum.label}
+                                    </div>
+                                    <div
+                                        style={{
+                                            background: "white",
+                                            color: "black",
+                                            borderRadius: "50%",
+                                            paddingLeft: "0.5em",
+                                            paddingRight: "0.5em",
+                                        }}
+                                    >
+                                        {valueToLabelMapper(datum.value)}
+                                    </div>
+                                </div>
+                            </foreignObject>
+                        </g>
+                    </animated.g>
+                );
+            }}
             defs={[
                 linearGradientDef(
                     "gradientAll",
