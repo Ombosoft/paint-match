@@ -124,6 +124,48 @@ const theme = {
     },
 };
 
+const ArcLabel = ({ datum, valueToLabelMapper }) => {
+    const viewportPercent = useViewportPercent();
+    return (
+        <div
+            style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "100%",
+                flexDirection: "column",
+            }}
+        >
+            <Tooltip
+                title={<h1>Press here</h1>}
+                open={true}
+                arrow
+                placement="top"
+                {...shiftPopper(0, viewportPercent(5))}
+            >
+                <div
+                    style={{
+                        background: "transparent",
+                    }}
+                >
+                    {datum.label}
+                </div>
+            </Tooltip>
+            <div
+                style={{
+                    background: "white",
+                    color: "black",
+                    borderRadius: "50%",
+                    paddingLeft: "0.5em",
+                    paddingRight: "0.5em",
+                }}
+            >
+                {valueToLabelMapper(datum.value)}
+            </div>
+        </div>
+    );
+};
+
 const Pie = ({
     data,
     thisTheme,
@@ -173,7 +215,6 @@ const Pie = ({
     const isTouchScreen = useIsTouchScreen();
     const handleMouseEnter = isTouchScreen ? autoMouseLeave : () => {};
     const handleMouseClick = isTouchScreen ? autoMouseEnter : () => {};
-    const viewportPercent = useViewportPercent();
 
     return (
         <ResponsivePie
@@ -222,42 +263,10 @@ const Pie = ({
                                 width={maxBoxSize}
                                 height={maxBoxSize}
                             >
-                                <div
-                                    style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        height: "100%",
-                                        flexDirection: "column",
-                                    }}
-                                >
-                                    <Tooltip
-                                        title={<h1>Press here</h1>}
-                                        open={true}
-                                        arrow
-                                        placement="top"
-                                        {...shiftPopper(0, viewportPercent(5))}
-                                    >
-                                        <div
-                                            style={{
-                                                background: "transparent",
-                                            }}
-                                        >
-                                            {datum.label}
-                                        </div>
-                                    </Tooltip>
-                                    <div
-                                        style={{
-                                            background: "white",
-                                            color: "black",
-                                            borderRadius: "50%",
-                                            paddingLeft: "0.5em",
-                                            paddingRight: "0.5em",
-                                        }}
-                                    >
-                                        {valueToLabelMapper(datum.value)}
-                                    </div>
-                                </div>
+                                <ArcLabel
+                                    datum={datum}
+                                    valueToLabelMapper={valueToLabelMapper}
+                                />
                             </foreignObject>
                         </g>
                     </animated.g>
