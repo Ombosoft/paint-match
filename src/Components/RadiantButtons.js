@@ -62,47 +62,76 @@ function RadiantButtons({
 
 function ArcLabel({ datum, valueToLabelMapper, tooltip }) {
     const viewportPercent = useViewportPercent();
-    const labelLabel = (
+    const colorName = (
         <div
             style={{
-                background: "transparent",
+                // background: "gray",
+                // border: "solid",
+                // borderColor: "white",
+                // borderWidth: "thin",
+                // borderRadius: "0.5em",
+                // paddingTop: "0em",
+                // paddingBottom: "0.1em",
+                // paddingLeft: "0.1em",
+                // paddingRight: "0.1em",
+                fontSize: "0.8em",
             }}
         >
             {datum.label}
         </div>
     );
+    const dropletNumber = (
+        <div
+            style={{
+                background: "gray",
+                border: "solid",
+                borderColor: "white",
+                borderRadius: "50%",
+                padding: "0.1em",
+                paddingLeft: "0.3em",
+                paddingRight: "0.3em",
+                fontSize: "0.5em",
+                marginLeft: "-0.1em",
+                marginTop: "-0.5em",
+            }}
+        >
+            {valueToLabelMapper(datum.value)}
+        </div>
+    );
     return (
+        // container
         <div
             style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 height: "100%",
-                flexDirection: "column",
+                flexDirection: "row",
+                color: "white",
             }}
         >
-            {tooltip && (
-                <Tooltip
-                    title={<h1>{tooltip}</h1>}
-                    open={true}
-                    arrow
-                    placement="top"
-                    {...shiftPopper(0, viewportPercent(5))}
-                >
-                    {labelLabel}
-                </Tooltip>
-            )}
-            {!tooltip && labelLabel}
             <div
                 style={{
-                    background: "white",
-                    color: "black",
-                    borderRadius: "50%",
-                    paddingLeft: "0.5em",
-                    paddingRight: "0.5em",
+                    display: "flex",
+                    alignItems: "start",
+                    justifyContent: "center",
+                    flexDirection: "row",
+                    color: "white",
                 }}
             >
-                {valueToLabelMapper(datum.value)}
+                {tooltip && (
+                    <Tooltip
+                        title={<h1>{tooltip}</h1>}
+                        open={true}
+                        arrow
+                        placement="top"
+                        {...shiftPopper(0, viewportPercent(5))}
+                    >
+                        {colorName}
+                    </Tooltip>
+                )}
+                {!tooltip && colorName}
+                {dropletNumber}
             </div>
         </div>
     );
