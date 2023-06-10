@@ -1,8 +1,9 @@
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
+import { colorTable } from "../Levels";
 
-function AppTitle({ onDebug, level }) {
+function LevelTitle({ onDebug, level }) {
     const [clickCount, setClickCount] = useState(0);
     const [debug, setDebug] = useState(false);
 
@@ -20,7 +21,15 @@ function AppTitle({ onDebug, level }) {
 
     return (
         <>
-            <p onClick={maybeTriggerDebug}>Level {level}</p>
+            <Box
+                onClick={maybeTriggerDebug}
+                style={{
+                    fontSize: "min(7vh, max(10px, 5vw))",
+                    textTransform: "capitalize",
+                }}
+            >
+                Level {level} {colorTable[level].name}
+            </Box>
             {debug && (
                 <Button size="small" onClick={clearLocalStorage}>
                     CLS
@@ -30,9 +39,9 @@ function AppTitle({ onDebug, level }) {
     );
 }
 
-AppTitle.propTypes = {
+LevelTitle.propTypes = {
     onDebug: PropTypes.func.isRequired,
     level: PropTypes.number.isRequired,
 };
 
-export default AppTitle;
+export default LevelTitle;

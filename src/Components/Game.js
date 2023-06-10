@@ -32,10 +32,10 @@ import { colorTable } from "../Levels";
 import { useTutorial } from "../Tutorial";
 import { distanceToPercentMatch, randomLevel } from "../Util/Utils";
 import { vecCompSum } from "../Util/Vec";
-import AppTitle from "./AppTitle";
 import ColorSliders from "./ColorSliders";
 import { HintBox } from "./HintBox";
 import HintButton from "./HintButton";
+import LevelTitle from "./LevelTitle";
 import LevelsButton from "./LevelsButton";
 import LevelsPanel from "./LevelsPanel";
 import MixPlate from "./MixPlate";
@@ -273,37 +273,42 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                 value={{ setLevelsPanelOpen: setLevelsPanelOpen }}
             >
                 <Stack direction="column" alignItems="center" flexGrow={1}>
-                    <Stack direction="row">
-                        <LevelsButton />
-                        <AppTitle onDebug={handleDebug} level={curLevel} />
-                        <UndoButton enabled={enableUndo} onClick={undo} />
-                        <ResetButton
-                            enabled={
-                                components !== zeroComponents && allowResetWhen
-                            }
-                            resetColors={resetColors}
-                        />
-                        <SkipLevelButton
-                            enabled={enableSkip}
-                            goodEnough={goodEnough(distance)}
-                            nextLevel={nextLevel}
-                        />
-                        <SlidersButton
-                            enabled={enableSliders}
-                            onClick={() => setBottle((prev) => !prev)}
-                        />
-                        {levelNotes !== null && (
-                            <NotesButton
-                                notes={levelNotes}
-                                enabled={!victory}
+                    <Stack direction="row" flexWrap="wrap" justifyContent="center">
+                        <Stack direction="row" alignItems="center">
+                            <LevelsButton />
+                            <LevelTitle onDebug={handleDebug} level={curLevel} />
+                        </Stack>
+                        <Stack direction="row">
+                            <UndoButton enabled={enableUndo} onClick={undo} />
+                            <ResetButton
+                                enabled={
+                                    components !== zeroComponents &&
+                                    allowResetWhen
+                                }
+                                resetColors={resetColors}
                             />
-                        )}
-                        {curLevel >= firstLevelWithAllColors && (
-                            <HintButton
-                                enabled={enableHints}
-                                onClick={showHint}
+                            <SkipLevelButton
+                                enabled={enableSkip}
+                                goodEnough={goodEnough(distance)}
+                                nextLevel={nextLevel}
                             />
-                        )}
+                            <SlidersButton
+                                enabled={enableSliders}
+                                onClick={() => setBottle((prev) => !prev)}
+                            />
+                            {levelNotes !== null && (
+                                <NotesButton
+                                    notes={levelNotes}
+                                    enabled={!victory}
+                                />
+                            )}
+                            {curLevel >= firstLevelWithAllColors && (
+                                <HintButton
+                                    enabled={enableHints}
+                                    onClick={showHint}
+                                />
+                            )}
+                        </Stack>
                     </Stack>
                     <HintBox hint={hint} />
                     <RadiantButtons
