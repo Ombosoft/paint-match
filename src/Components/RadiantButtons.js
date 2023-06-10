@@ -64,7 +64,7 @@ function RadiantButtons({
 
 function ArcLabel({ datum, valueToLabelMapper, tooltip, inFocus }) {
     const viewportPercent = useViewportPercent();
-    const colorName = inFocus && (
+    const colorName = (
         <div
             style={{
                 fontSize: "0.8em",
@@ -84,7 +84,7 @@ function ArcLabel({ datum, valueToLabelMapper, tooltip, inFocus }) {
                 paddingLeft: "0.3em",
                 paddingRight: "0.3em",
                 fontSize: "0.8em",
-                fontWeight: "bold"
+                fontWeight: "bold",
             }}
         >
             {valueToLabelMapper(datum.value)}
@@ -122,8 +122,8 @@ function ArcLabel({ datum, valueToLabelMapper, tooltip, inFocus }) {
                         {colorName}
                     </Tooltip>
                 )}
-                {!tooltip && colorName}
-                {dropletNumber}
+                {!tooltip && inFocus && colorName}
+                {!tooltip && dropletNumber}
             </div>
         </div>
     );
