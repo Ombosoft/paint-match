@@ -1,4 +1,4 @@
-import { Box, Fade, Stack, Tooltip } from "@mui/material";
+import { Box, Fade, Stack, Tooltip, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { hintTypingDelay, imgPath } from "../Constants";
 import shiftPopper from "../Util/TooltipUtils";
@@ -9,18 +9,25 @@ export function HintBox({ hint }) {
     return (
         <Stack direction="row" alignSelf="start" position="relative">
             <Fade in={open} timeout={500}>
-                <Box position="absolute" marginLeft="10px">
+                <Box position="absolute" marginLeft="10px" marginRight="10px">
                     <Tooltip
                         open={open}
                         placement="right"
                         arrow
-                        {...shiftPopper(0, -100)}
+                        {...shiftPopper(0, -110)}
                         title={<HintMessage hint={hint} />}
+                        componentsProps={{
+                            tooltip: {
+                                sx: {
+                                    maxWidth: "70vw",
+                                },
+                            },
+                        }}
                     >
                         <img
                             src={imgPath("AIPersona.png")}
                             alt="AI Persona"
-                            height="150px"
+                            height="130px"
                             style={{
                                 opacity: "60%",
                             }}
@@ -58,10 +65,10 @@ function HintMessage({ hint }) {
         return <></>;
     }
     return (
-        <h1>
-            <Box>
+        <Box>
+            <Typography fontSize="2em" fontWeight="bold">
                 {hint.slice(0, words)} {animationActive && <Cursor />}
-            </Box>
-        </h1>
+            </Typography>
+        </Box>
     );
 }
