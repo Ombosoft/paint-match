@@ -2,7 +2,6 @@ import { Stack } from "@mui/material";
 import PropTypes from "prop-types";
 import { animationDurationMs, dropletBlendDelay } from "../Constants";
 import ColorCircle from "./ColorCircle";
-import { HintBox } from "./HintBox";
 
 function MixPlate({
     diameter,
@@ -36,8 +35,6 @@ function MixPlate({
                 diameter="90%"
                 animationDuration={animationDurationMs}
                 color={currentRGB}
-                tooltip={<HintBox hint={hint} />}
-                showTooltip={hint !== null}
             />
             <ColorCircle
                 inner
@@ -57,7 +54,6 @@ MixPlate.propTypes = {
     currentRGB: PropTypes.string.isRequired,
     targetRGB: PropTypes.string.isRequired,
     targetLevel: PropTypes.object.isRequired,
-    hint: PropTypes.string,
     showBasicTutorial: PropTypes.bool.isRequired,
     dropletColor: PropTypes.string,
 };

@@ -1,12 +1,13 @@
 import { Box, Stack, Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
+import { imgPath } from "../Constants";
 import { range } from "../Util/Utils";
 
 function StarRack({ stars, stackSx, fontSize, dropShadow}) {
     if (stars === 0) {
         return <></>;
     }
-    const iconStype = dropShadow ? {filter: "drop-shadow(2px 4px 2px rgb(0 0 0 / 0.2))"} : {};
+    const iconStyle = dropShadow ? {filter: "drop-shadow(2px 4px 2px rgb(0 0 0 / 0.2))"} : {};
     return (
         <Tooltip title={explanationMessage(stars)}>
             <Stack
@@ -20,9 +21,9 @@ function StarRack({ stars, stackSx, fontSize, dropShadow}) {
                     <Box sx={{ width: `${fontSize}em` }} key={id}>
                         <img
                             width="100%"
-                            src={process.env.PUBLIC_URL + "/img/star.svg"}
+                            src={imgPath("star.svg")}
                             alt="star"
-                            style={iconStype}
+                            style={iconStyle}
                         />
                     </Box>
                 ))}

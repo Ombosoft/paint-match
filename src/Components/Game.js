@@ -16,7 +16,7 @@ import {
     animationDurationMs,
     dropletBlendDelay,
     dropletsUntilReset,
-    extraCommitDelay,
+    extraCommitDelay
 } from "../Constants";
 import { LevelsPanelContext } from "../Context/LevelsPanelContext";
 import { NumDropletsContext } from "../Context/NumDropletsContext";
@@ -34,6 +34,7 @@ import { distanceToPercentMatch, randomLevel } from "../Util/Utils";
 import { vecCompSum } from "../Util/Vec";
 import AppTitle from "./AppTitle";
 import ColorSliders from "./ColorSliders";
+import { HintBox } from "./HintBox";
 import HintButton from "./HintButton";
 import LevelsButton from "./LevelsButton";
 import LevelsPanel from "./LevelsPanel";
@@ -304,6 +305,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             />
                         )}
                     </Stack>
+                    <HintBox hint={hint}/>
                     <RadiantButtons
                         components={components}
                         level={curLevel}
@@ -317,7 +319,6 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             currentRGB={currentRGB}
                             targetRGB={targetRGB}
                             targetLevel={targetLevel}
-                            hint={hint}
                             showBasicTutorial={showBasicTutorial}
                             dropletColor={dropletColor}
                         />
