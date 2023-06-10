@@ -36,7 +36,7 @@ function ColorCircle({
                         title={<h1>{tooltip}</h1>}
                         open={showTooltip}
                         arrow
-                        placement="top"
+                        placement="bottom"
                     >
                         <div
                             style={{

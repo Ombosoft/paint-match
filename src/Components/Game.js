@@ -272,7 +272,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
             <LevelsPanelContext.Provider
                 value={{ setLevelsPanelOpen: setLevelsPanelOpen }}
             >
-                <Stack direction="column" alignItems="center">
+                <Stack direction="column" alignItems="center" flexGrow={1}>
                     <Stack direction="row">
                         <LevelsButton />
                         <AppTitle onDebug={handleDebug} level={curLevel} />
