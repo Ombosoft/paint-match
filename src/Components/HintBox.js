@@ -1,16 +1,17 @@
-import { Box, Stack, Tooltip } from "@mui/material";
+import { Box, Fade, Stack, Tooltip } from "@mui/material";
 import { useEffect, useState } from "react";
 import { hintTypingDelay, imgPath } from "../Constants";
 import shiftPopper from "../Util/TooltipUtils";
 import Cursor from "./Cursor";
 
 export function HintBox({ hint }) {
+    const open = hint !== null;
     return (
         <Stack direction="row" alignSelf="start" position="relative">
-            {hint && (
+            <Fade in={open} timeout={500}>
                 <Box position="absolute" marginLeft="10px">
                     <Tooltip
-                        open={true}
+                        open={open}
                         placement="right"
                         arrow
                         {...shiftPopper(0, -100)}
@@ -20,11 +21,13 @@ export function HintBox({ hint }) {
                             src={imgPath("AIPersona.png")}
                             alt="AI Persona"
                             height="150px"
-                            style={{ opacity: "60%" }}
+                            style={{
+                                opacity: "60%",
+                            }}
                         />
                     </Tooltip>
                 </Box>
-            )}
+            </Fade>
         </Stack>
     );
 }
