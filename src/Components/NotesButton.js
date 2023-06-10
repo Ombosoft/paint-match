@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useNotesTutorial } from "../Tutorial";
 import useDisappearingState from "../Util/DisappearingState";
+import shiftPopper from "../Util/TooltipUtils";
 
 function NotesButton({ notes, enabled }) {
     const [allowTutorial, onUsed] = useNotesTutorial();
@@ -66,16 +67,7 @@ function NotesButton({ notes, enabled }) {
             onOpen={handleOpen}
             placement="top-end"
             arrow
-            PopperProps={{
-                modifiers: [
-                    {
-                        name: "offset",
-                        options: {
-                            offset: [0, -18],
-                        },
-                    },
-                ],
-            }}
+            {...shiftPopper(0, -18)}
         >
             <IconButton onClick={handleClick} color="secondary" size="medium">
                 <DescriptionIcon />

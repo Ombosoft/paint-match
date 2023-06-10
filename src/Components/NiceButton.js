@@ -1,6 +1,7 @@
 import { IconButton, Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
+import shiftPopper from "../Util/TooltipUtils";
 
 // IconButton with tooltip that can be forced to show
 function NiceButton({
@@ -42,16 +43,7 @@ function NiceButton({
             onOpen={handleOpen}
             placement="top-end"
             arrow
-            PopperProps={{
-                modifiers: [
-                    {
-                        name: "offset",
-                        options: {
-                            offset: [xOffset, -18],
-                        },
-                    },
-                ],
-            }}
+            {...shiftPopper(xOffset, -18)}
         >
             <IconButton onClick={handleClick} color="secondary" size="medium">
                 {children}

@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { levelRGB, rgbToString, textColor } from "../Colors";
 import { colorTable } from "../Levels";
+shiftPopperimport shiftPopper from "../Util/TooltipUtils";
 import { range } from "../Util/Utils";
 import StarRack from "./StarRack";
 
@@ -31,16 +32,7 @@ function LevelsPanel({
                     title={<Typography>{levelDef.name}</Typography>}
                     placement="top"
                     disableInteractive
-                    PopperProps={{
-                        modifiers: [
-                            {
-                                name: "offset",
-                                options: {
-                                    offset: [0, -13],
-                                },
-                            },
-                        ],
-                    }}
+                    {...shiftPopper(0, -13)}
                 >
                     <Button
                         onClick={() => onClose(level)}
