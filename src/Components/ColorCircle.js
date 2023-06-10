@@ -11,6 +11,8 @@ function ColorCircle({
     tooltip,
     showTooltip,
     diameter,
+    labelWidth,
+    labelFontSize,
 }) {
     const offset = inner ? "50%" : "inherit";
     const transform = inner ? "translate(-50%, -50%)" : "inherit";
@@ -29,7 +31,7 @@ function ColorCircle({
                     top: offset,
                     left: offset,
                     transform: transform,
-            }}
+                }}
             >
                 {label && (
                     <Tooltip
@@ -40,8 +42,13 @@ function ColorCircle({
                     >
                         <div
                             style={{
+                                width: labelWidth,
                                 zIndex: "1",
-                                color: textColorFromRGB(color)
+                                color: textColorFromRGB(color),
+                                transitionProperty: "font-size",
+                                transitionDuration: "1s",
+                                position:"absolute",
+                                fontSize: labelFontSize,
                             }}
                         >
                             {label}
@@ -59,6 +66,9 @@ ColorCircle.propTypes = {
     label: PropTypes.string,
     tooltip: PropTypes.any,
     showTooltip: PropTypes.bool,
+    diameter: PropTypes.string,
+    labelWidth: PropTypes.string,
+    labelFontSize: PropTypes.string,
 };
 
 export default ColorCircle;

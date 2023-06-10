@@ -8,9 +8,9 @@ function MixPlate({
     currentRGB,
     targetRGB,
     targetLevel,
-    hint,
     showBasicTutorial,
     dropletColor,
+    victory,
 }) {
     return (
         <Stack
@@ -39,6 +39,8 @@ function MixPlate({
             <ColorCircle
                 inner
                 diameter="60%"
+                labelWidth={diameter}
+                labelFontSize={victory ? "9vmin" : "4vmin"}
                 animationDuration={animationDurationMs}
                 color={targetRGB}
                 label={targetLevel.name}
@@ -56,6 +58,7 @@ MixPlate.propTypes = {
     targetLevel: PropTypes.object.isRequired,
     showBasicTutorial: PropTypes.bool.isRequired,
     dropletColor: PropTypes.string,
+    victory: PropTypes.bool,
 };
 
 export default MixPlate;

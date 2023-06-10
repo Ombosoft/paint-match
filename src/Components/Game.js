@@ -326,6 +326,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             targetLevel={targetLevel}
                             showBasicTutorial={showBasicTutorial}
                             dropletColor={dropletColor}
+                            victory={victory}
                         />
                     </RadiantButtons>
 
