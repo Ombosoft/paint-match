@@ -1,5 +1,11 @@
 import { useSyncExternalStore } from "react";
 
+export function useViewportPercent() {
+    const viewportWidth = useViewportWidth();
+    const viewportHeight = useViewportHeight();
+    return (x) => x * Math.min(viewportWidth, viewportHeight) / 100
+}
+
 // returns width: px
 export function useViewportWidth() {
     return useSyncExternalStore(subscribe, getWidthSnapshot);

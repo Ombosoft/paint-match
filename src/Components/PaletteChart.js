@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 import { linearGradientDef } from "@nivo/core";
 import { ResponsivePie } from "@nivo/pie";
 import { animated } from "@react-spring/web";
@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 import { useCallback, useRef } from "react";
 import { themePalette } from "../Colors";
 import useIsTouchScreen from "../Util/DeviceTypeDetector";
+import shiftPopper from "../Util/TooltipUtils";
+import { useViewportPercent } from "../Util/ViewportDimensions";
 
 const theme = {
     border: "#000000",
@@ -171,6 +173,8 @@ const Pie = ({
     const isTouchScreen = useIsTouchScreen();
     const handleMouseEnter = isTouchScreen ? autoMouseLeave : () => {};
     const handleMouseClick = isTouchScreen ? autoMouseEnter : () => {};
+    const viewportPercent = useViewportPercent();
+
     return (
         <ResponsivePie
             data={data}
@@ -227,9 +231,21 @@ const Pie = ({
                                         flexDirection: "column",
                                     }}
                                 >
-                                    <div style={{ background: "transparent" }}>
-                                        {datum.label}
-                                    </div>
+                                    <Tooltip
+                                        title={<h1>Press here</h1>}
+                                        open={true}
+                                        arrow
+                                        placement="top"
+                                        {...shiftPopper(0, viewportPercent(5))}
+                                    >
+                                        <div
+                                            style={{
+                                                background: "transparent",
+                                            }}
+                                        >
+                                            {datum.label}
+                                        </div>
+                                    </Tooltip>
                                     <div
                                         style={{
                                             background: "white",

@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import PropTypes from "prop-types";
 import { minLevels } from "../Colors";
 import { filterKeys, mapValues } from "../Util/Utils";
-import { useViewportHeight, useViewportWidth } from "../Util/ViewportDimensions";
+import { useViewportPercent } from "../Util/ViewportDimensions";
 import PaletteChart from "./PaletteChart";
 
 const zeroValue = 2;
@@ -15,8 +15,7 @@ function RadiantButtons({
     onClick,
     children,
 }) {
-    const viewportWidth = useViewportWidth();
-    const viewportHeight = useViewportHeight();
+    const viewportPercent = useViewportPercent();
     const filtered = filterKeys(components, color => level >= minLevels[color])
     const data = mapValues(filtered, (x) => x + zeroValue);
     return (
@@ -29,7 +28,7 @@ function RadiantButtons({
                 noFit
                 background="transparent"
                 innerRadius={0.7}
-                activeInnerRadiusOffset={(innerExtendVW * Math.min(viewportWidth, viewportHeight)) / 100}
+                activeInnerRadiusOffset={viewportPercent(innerExtendVW)}
                 components={data}
                 onClick={onClick}
                 valueToLabelMapper={(x) => x - zeroValue}
