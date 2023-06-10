@@ -111,7 +111,6 @@ function VictoryPanel({
                         height="150px"
                         margin={{ top: 9, right: 60, bottom: -30, left: 50 }}
                         startAngle={285}
-                        background="#ffffff"
                         borderWidth={1.5}
                         innerRadius={0.65}
                         components={components}

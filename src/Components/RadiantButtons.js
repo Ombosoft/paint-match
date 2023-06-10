@@ -37,7 +37,6 @@ function RadiantButtons({
                 margin={{ top: 0, bottom: 0, right: 0, left: 0 }}
                 startAngle={((8 - Object.keys(data).length) * 360) / 8}
                 noFit
-                background="transparent"
                 borderWidth={2}
                 innerRadius={0.7}
                 activeInnerRadiusOffset={viewportPercent(innerExtendVW)}

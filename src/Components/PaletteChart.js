@@ -8,6 +8,7 @@ import { themePalette } from "../Colors";
 import useIsTouchScreen from "../Util/DeviceTypeDetector";
 
 const theme = {
+    background: "transparent",
     border: "#000000",
     text: {
         fontSize: 36,
@@ -119,7 +120,6 @@ function PaletteChart({
     ArcLabel,
 }) {
     const [focusedId, setFocusedId] = useState();
-    const thisTheme = { ...theme, background: background };
     const data = Object.entries(components)
         .filter(([_, num]) => num > 0)
         .map(([color, num]) => ({
@@ -127,7 +127,7 @@ function PaletteChart({
             label: color,
             color: themePalette[color].main,
             value: num,
-            textColor: color === "black" ? "white" : "black",
+            textColor: (color === "black" || color === "blue") ? "white" : "black",
         }));
     const leaveTimerRef = useRef();
     // Simulates hover on touch screens: auto release with delay after tap
@@ -180,7 +180,7 @@ function PaletteChart({
             <ResponsivePie
                 data={data}
                 margin={margin}
-                theme={thisTheme}
+                theme={theme}
                 startAngle={startAngle}
                 fit={!noFit}
                 padAngle={0.9}
