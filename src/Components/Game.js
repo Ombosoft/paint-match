@@ -16,7 +16,7 @@ import {
     animationDurationMs,
     dropletBlendDelay,
     dropletsUntilReset,
-    extraCommitDelay
+    extraCommitDelay,
 } from "../Constants";
 import { LevelsPanelContext } from "../Context/LevelsPanelContext";
 import { NumDropletsContext } from "../Context/NumDropletsContext";
@@ -272,7 +272,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
             <LevelsPanelContext.Provider
                 value={{ setLevelsPanelOpen: setLevelsPanelOpen }}
             >
-                <Stack direction="column" alignItems="center" flexGrow={1}>
+                <Stack direction="column" alignItems="center">
                     <Stack direction="row">
                         <LevelsButton />
                         <AppTitle onDebug={handleDebug} level={curLevel} />
@@ -305,7 +305,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             />
                         )}
                     </Stack>
-                    <HintBox hint={hint}/>
+                    <HintBox hint={hint} />
                     <RadiantButtons
                         components={components}
                         level={curLevel}
@@ -324,16 +324,16 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                         />
                     </RadiantButtons>
 
-                    <Box sx={{ marginTop: "1em", marginBottom: "1em" }}>
-                        {!bottle && (
+                    {!bottle && (
+                        <Box sx={{ marginTop: "1em", marginBottom: "1em" }}>
                             <ColorSliders
                                 cmykColors={cmykColors}
                                 level={curLevel}
                                 components={components}
                                 onSetComponentValue={setComponentValue}
                             />
-                        )}
-                    </Box>
+                        </Box>
+                    )}
                 </Stack>
                 <VictoryPanel
                     level={curLevel}
@@ -350,7 +350,14 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                     open={levelsPanelOpen}
                     onClose={handleLevelChoice}
                     curLevel={curLevel}
-                    unlockedLevel={debug ? Math.min(colorTable.length-1, unlockedLevel + 100) : unlockedLevel}
+                    unlockedLevel={
+                        debug
+                            ? Math.min(
+                                  colorTable.length - 1,
+                                  unlockedLevel + 100
+                              )
+                            : unlockedLevel
+                    }
                     levelAchievements={levelAchievements}
                 />
             </LevelsPanelContext.Provider>
