@@ -122,53 +122,41 @@ const theme = {
     },
 };
 
+const gradientOptions = {
+    gradientTransform: "rotate(135 0.5 0.5)",
+};
+
+function gradientId(color) {
+    return `gradient_${color}`;
+}
+
+function gradientDef(color) {
+    return linearGradientDef(
+        gradientId(color),
+        [
+            { offset: 0, color: themePalette[color].main },
+            { offset: 100, color: themePalette[color].light },
+        ],
+        gradientOptions
+    );
+}
+
+function gradientMatch(color) {
+    return {
+        match: {
+            id: color,
+        },
+        id: gradientId(color),
+    };
+}
+
 const defs = {
     sortByValue: false,
     tooltip: () => <></>,
     cornerRadius: 10,
     borderWidth: 1.5,
-    defs: [
-        linearGradientDef(
-            "gradientAll",
-            [
-                { offset: 0, color: "inherit" },
-                { offset: 100, color: "inherit", opacity: 0.4 },
-            ],
-            {
-                gradientTransform: "rotate(135 0.5 0.5)",
-            }
-        ),
-        linearGradientDef(
-            "gradientStrong",
-            [
-                { offset: 0, color: "inherit", opacity: 1 },
-                { offset: 100, color: "inherit", opacity: 0.1 },
-            ],
-            {
-                gradientTransform: "rotate(135 0.5 0.5)",
-            }
-        ),
-    ],
-    fill: [
-        {
-            match: {
-                id: "yellow",
-            },
-            id: "gradientStrong",
-        },
-        {
-            match: {
-                id: "white",
-            },
-            id: "gradientStrong",
-        },
-        {
-            match: {
-                // id: "green",
-            },
-            id: "gradientAll",
-        },
-    ],
+    defs: Object.keys(themePalette).map((color) => gradientDef(color)),
+    fill: Object.keys(themePalette).map((color) => gradientMatch(color)),
     enableArcLinkLabels: false,
     arcLinkLabelsSkipAngle: 10,
     arcLinkLabelsTextColor: "#333333",
@@ -271,7 +259,12 @@ function PaletteChart({
                 arcLabelsTextColor={(x) => {
                     return x.data.textColor;
                 }}
-                {...arcLabelsComponent(ArcLabel, valueToLabelMapper, tooltip, focusedId)}
+                {...arcLabelsComponent(
+                    ArcLabel,
+                    valueToLabelMapper,
+                    tooltip,
+                    focusedId
+                )}
                 {...defs}
                 onClick={(node, event) => {
                     handleMouseClick(event);

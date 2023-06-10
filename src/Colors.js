@@ -14,35 +14,43 @@ import {
 
 export const themePalette = {
     red: {
+        light: "#E01010",
         main: "#C01010",
         dark: "#D01010",
     },
     green: {
-        main: "#10C010",
+        light: "#10E010",
+        main: "#10B710",
         dark: "#10D010",
     },
     blue: {
+        light: "#1010F7",
         main: "#1010C0",
         dark: "#1010D0",
     },
     cyan: {
-        main: "#00D0D0",
+        light: "#00F7F7",
+        main: "#00C0C0",
         dark: "#00E0E0",
     },
     magenta: {
-        main: "#D000D0",
+        light: "#F000F0",
+        main: "#C000C0",
         dark: "#E000E0",
     },
     yellow: {
+        light: "#F0F000",
         main: "#D0D000",
         dark: "#E0E000",
     },
     black: {
-        main: "#181818",
+        light: "#383838",
+        main: "#080808",
         dark: "#000000",
     },
     white: {
-        main: "#D8D8D8",
+        light: "#F7F7F7",
+        main: "#C8C8C8",
         dark: "#E8E8E8",
     },
 };
