@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { levelRGB, rgbToString, textColor } from "../Colors";
 import { colorTable } from "../Levels";
-shiftPopperimport shiftPopper from "../Util/TooltipUtils";
+import shiftPopper from "../Util/TooltipUtils";
 import { range } from "../Util/Utils";
 import StarRack from "./StarRack";
 
