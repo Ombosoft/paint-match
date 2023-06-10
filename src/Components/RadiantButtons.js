@@ -23,6 +23,7 @@ function RadiantButtons({
         (color) => level >= minLevels[color]
     );
     const data = mapValues(filtered, (x) => x + zeroValue);
+
     return (
         <Box
             width={diameter}
@@ -60,27 +61,18 @@ function RadiantButtons({
     );
 }
 
-function ArcLabel({ datum, valueToLabelMapper, tooltip }) {
+function ArcLabel({ datum, valueToLabelMapper, tooltip, inFocus }) {
     const viewportPercent = useViewportPercent();
-    const colorName = (
+    const colorName = inFocus && (
         <div
             style={{
-                // background: "gray",
-                // border: "solid",
-                // borderColor: "white",
-                // borderWidth: "thin",
-                // borderRadius: "0.5em",
-                // paddingTop: "0em",
-                // paddingBottom: "0.1em",
-                // paddingLeft: "0.1em",
-                // paddingRight: "0.1em",
                 fontSize: "0.8em",
             }}
         >
             {datum.label}
         </div>
     );
-    const dropletNumber = (
+    const dropletNumber = !inFocus && (
         <div
             style={{
                 background: "gray",
@@ -90,9 +82,8 @@ function ArcLabel({ datum, valueToLabelMapper, tooltip }) {
                 padding: "0.1em",
                 paddingLeft: "0.3em",
                 paddingRight: "0.3em",
-                fontSize: "0.5em",
-                marginLeft: "-0.1em",
-                marginTop: "-0.5em",
+                fontSize: "0.8em",
+                fontWeight: "bold"
             }}
         >
             {valueToLabelMapper(datum.value)}
