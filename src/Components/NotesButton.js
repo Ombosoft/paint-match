@@ -3,6 +3,7 @@ import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import { Box, Card, IconButton, Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { hideTooltipDelay } from "../Constants";
 import { useNotesTutorial } from "../Tutorial";
 import useDisappearingState from "../Util/DisappearingState";
 import shiftPopper from "../Util/TooltipUtils";
@@ -16,7 +17,7 @@ function NotesButton({ notes, enabled }) {
         if (openTooltip) {
             const timerId = setTimeout(() => {
                 setOpenTooltip(false);
-            }, 5000);
+            }, hideTooltipDelay);
 
             return () => {
                 clearTimeout(timerId);
@@ -43,7 +44,6 @@ function NotesButton({ notes, enabled }) {
             </IconButton>
         );
     }
-
     return (
         <Tooltip
             title={
@@ -65,6 +65,7 @@ function NotesButton({ notes, enabled }) {
             open={openTooltip || showTutorial}
             onClose={handleClose}
             onOpen={handleOpen}
+            leaveTouchDelay={hideTooltipDelay}
             placement="top-end"
             arrow
             {...shiftPopper(0, -18)}

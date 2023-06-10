@@ -256,7 +256,6 @@ PaletteChart.propTypes = {
     margin: PropTypes.object,
     startAngle: PropTypes.number.isRequired,
     noFit: PropTypes.bool,
-    background: PropTypes.string.isRequired,
     borderWidth: PropTypes.number.isRequired,
     innerRadius: PropTypes.number.isRequired,
     activeInnerRadiusOffset: PropTypes.number,

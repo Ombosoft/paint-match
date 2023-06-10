@@ -4,6 +4,7 @@ export const dropletBlendDelay = 300;
 export const victoryPanelDelay = animationDurationMs + dropletBlendDelay + 300;
 export const victorySoundDelay = animationDurationMs - 200;
 export const hintTypingDelay = 600;
+export const hideTooltipDelay = 6000;
 
 export const dropletsUntilReset = 4;
 

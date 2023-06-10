@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-
-const timeout = 4000;
+import { hideTooltipDelay } from "../Constants";
 
 const Unused = 0;
 const On = 1;
@@ -19,7 +18,7 @@ export default function useDisappearingState(initial) {
             }
             const timerId = setTimeout(() => {
                 setState(Off);
-            }, timeout);
+            }, hideTooltipDelay);
 
             return () => {
                 clearTimeout(timerId);
