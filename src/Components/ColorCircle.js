@@ -1,4 +1,5 @@
 import { Tooltip } from "@mui/material";
+import { animated, config, useSpring } from "@react-spring/web";
 import PropTypes from "prop-types";
 import React from "react";
 import { rgbToString, textColorFromRGB } from "../Colors";
@@ -16,6 +17,10 @@ function ColorCircle({
 }) {
     const offset = inner ? "50%" : "inherit";
     const transform = inner ? "translate(-50%, -50%)" : "inherit";
+    const styles = useSpring({
+        fontSize: labelFontSize,
+        config: config.wobbly,
+    });
     return (
         <>
             <span
@@ -40,19 +45,17 @@ function ColorCircle({
                         arrow
                         placement="bottom"
                     >
-                        <div
+                        <animated.div
                             style={{
+                                ...styles,
                                 width: labelWidth,
                                 zIndex: "1",
                                 color: textColorFromRGB(color),
-                                transitionProperty: "font-size",
-                                transitionDuration: "1s",
-                                position:"absolute",
-                                fontSize: labelFontSize,
+                                position: "absolute",
                             }}
                         >
                             {label}
-                        </div>
+                        </animated.div>
                     </Tooltip>
                 )}
             </span>
