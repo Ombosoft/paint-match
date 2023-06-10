@@ -124,8 +124,17 @@ const theme = {
     },
 };
 
-const ArcLabel = ({ datum, valueToLabelMapper }) => {
+const ArcLabel = ({ datum, valueToLabelMapper, tooltip }) => {
     const viewportPercent = useViewportPercent();
+    const labelLabel = (
+        <div
+            style={{
+                background: "transparent",
+            }}
+        >
+            {datum.label}
+        </div>
+    );
     return (
         <div
             style={{
@@ -136,21 +145,18 @@ const ArcLabel = ({ datum, valueToLabelMapper }) => {
                 flexDirection: "column",
             }}
         >
-            <Tooltip
-                title={<h1>Press here</h1>}
-                open={true}
-                arrow
-                placement="top"
-                {...shiftPopper(0, viewportPercent(5))}
-            >
-                <div
-                    style={{
-                        background: "transparent",
-                    }}
+            {tooltip && (
+                <Tooltip
+                    title={<h1>{tooltip}</h1>}
+                    open={true}
+                    arrow
+                    placement="top"
+                    {...shiftPopper(0, viewportPercent(5))}
                 >
-                    {datum.label}
-                </div>
-            </Tooltip>
+                    {labelLabel}
+                </Tooltip>
+            )}
+            {!tooltip && labelLabel}
             <div
                 style={{
                     background: "white",
@@ -176,6 +182,7 @@ const Pie = ({
     activeInnerRadiusOffset,
     onClick,
     valueToLabelMapper,
+    tooltip,
 }) => {
     const leaveTimerRef = useRef();
     // Simulater hover on touch screens: auto release with delay after tap
@@ -266,6 +273,7 @@ const Pie = ({
                                 <ArcLabel
                                     datum={datum}
                                     valueToLabelMapper={valueToLabelMapper}
+                                    tooltip={tooltip}
                                 />
                             </foreignObject>
                         </g>
@@ -336,6 +344,7 @@ function PaletteChart({
     components,
     onClick,
     valueToLabelMapper,
+    tooltip,
 }) {
     const thisTheme = { ...theme, background: background };
     const data = Object.entries(components)
@@ -359,6 +368,7 @@ function PaletteChart({
                 activeInnerRadiusOffset={activeInnerRadiusOffset}
                 onClick={onClick}
                 valueToLabelMapper={valueToLabelMapper ?? ((x) => x)}
+                tooltip={tooltip}
             />
         </Box>
     );
@@ -376,6 +386,7 @@ PaletteChart.propTypes = {
     components: PropTypes.object.isRequired,
     onClick: PropTypes.func,
     valueToLabelMapper: PropTypes.func,
+    tooltip: PropTypes.string,
 };
 
 export default PaletteChart;

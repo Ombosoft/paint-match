@@ -14,17 +14,26 @@ function RadiantButtons({
     innerExtendVW,
     onClick,
     children,
+    showBasicTutorial,
 }) {
     const viewportPercent = useViewportPercent();
-    const filtered = filterKeys(components, color => level >= minLevels[color])
+    const filtered = filterKeys(
+        components,
+        (color) => level >= minLevels[color]
+    );
     const data = mapValues(filtered, (x) => x + zeroValue);
     return (
-        <Box width={diameter} height={diameter} sx={{ position: "relative" }} flexGrow={1}>
+        <Box
+            width={diameter}
+            height={diameter}
+            sx={{ position: "relative" }}
+            flexGrow={1}
+        >
             <PaletteChart
                 width="100%"
                 height="100%"
                 margin={{ top: 0, bottom: 0, right: 0, left: 0 }}
-                startAngle={(8-Object.keys(data).length) * 360 / 8}
+                startAngle={((8 - Object.keys(data).length) * 360) / 8}
                 noFit
                 background="transparent"
                 innerRadius={0.7}
@@ -32,6 +41,7 @@ function RadiantButtons({
                 components={data}
                 onClick={onClick}
                 valueToLabelMapper={(x) => x - zeroValue}
+                tooltip={showBasicTutorial ? "Press here" : null}
             />
             <Box
                 position="absolute"
@@ -54,6 +64,7 @@ RadiantButtons.propTypes = {
     diameter: PropTypes.string.isRequired,
     innerExtendVW: PropTypes.number.isRequired,
     onClick: PropTypes.func.isRequired,
+    showBasicTutorial: PropTypes.bool.isRequired,
 };
 
 export default RadiantButtons;

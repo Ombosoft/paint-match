@@ -310,6 +310,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                         diameter="min(95vw, 80vh)"
                         innerExtendVW={2.5}
                         onClick={handleClick}
+                        showBasicTutorial={showBasicTutorial}
                     >
                         <MixPlate
                             diameter="min(60vw, 49vh)"
