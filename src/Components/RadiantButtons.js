@@ -60,7 +60,7 @@ function RadiantButtons({
     );
 }
 
-const ArcLabel = ({ datum, valueToLabelMapper, tooltip }) => {
+function ArcLabel({ datum, valueToLabelMapper, tooltip }) {
     const viewportPercent = useViewportPercent();
     const labelLabel = (
         <div
@@ -106,8 +106,7 @@ const ArcLabel = ({ datum, valueToLabelMapper, tooltip }) => {
             </div>
         </div>
     );
-};
-
+}
 
 RadiantButtons.propTypes = {
     components: PropTypes.object.isRequired,

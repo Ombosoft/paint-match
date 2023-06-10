@@ -122,7 +122,7 @@ const theme = {
     },
 };
 
-const Pie = ({
+function Pie({
     data,
     thisTheme,
     margin,
@@ -134,7 +134,7 @@ const Pie = ({
     valueToLabelMapper,
     tooltip,
     ArcLabel,
-}) => {
+}) {
     const leaveTimerRef = useRef();
     // Simulater hover on touch screens: auto release with delay after tap
     const autoMouseLeave = useCallback(
@@ -286,7 +286,7 @@ const Pie = ({
             onMouseEnter={handleMouseEnter}
         />
     );
-};
+}
 
 function PaletteChart({
     width,
