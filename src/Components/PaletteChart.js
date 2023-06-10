@@ -1,4 +1,4 @@
-import { Box, Tooltip } from "@mui/material";
+import { Box } from "@mui/material";
 import { linearGradientDef } from "@nivo/core";
 import { ResponsivePie } from "@nivo/pie";
 import { animated } from "@react-spring/web";
@@ -6,8 +6,6 @@ import PropTypes from "prop-types";
 import { useCallback, useRef } from "react";
 import { themePalette } from "../Colors";
 import useIsTouchScreen from "../Util/DeviceTypeDetector";
-import shiftPopper from "../Util/TooltipUtils";
-import { useViewportPercent } from "../Util/ViewportDimensions";
 
 const theme = {
     border: "#000000",
@@ -124,54 +122,6 @@ const theme = {
     },
 };
 
-const ArcLabel = ({ datum, valueToLabelMapper, tooltip }) => {
-    const viewportPercent = useViewportPercent();
-    const labelLabel = (
-        <div
-            style={{
-                background: "transparent",
-            }}
-        >
-            {datum.label}
-        </div>
-    );
-    return (
-        <div
-            style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "100%",
-                flexDirection: "column",
-            }}
-        >
-            {tooltip && (
-                <Tooltip
-                    title={<h1>{tooltip}</h1>}
-                    open={true}
-                    arrow
-                    placement="top"
-                    {...shiftPopper(0, viewportPercent(5))}
-                >
-                    {labelLabel}
-                </Tooltip>
-            )}
-            {!tooltip && labelLabel}
-            <div
-                style={{
-                    background: "white",
-                    color: "black",
-                    borderRadius: "50%",
-                    paddingLeft: "0.5em",
-                    paddingRight: "0.5em",
-                }}
-            >
-                {valueToLabelMapper(datum.value)}
-            </div>
-        </div>
-    );
-};
-
 const Pie = ({
     data,
     thisTheme,
@@ -183,6 +133,7 @@ const Pie = ({
     onClick,
     valueToLabelMapper,
     tooltip,
+    ArcLabel,
 }) => {
     const leaveTimerRef = useRef();
     // Simulater hover on touch screens: auto release with delay after tap
@@ -222,6 +173,36 @@ const Pie = ({
     const isTouchScreen = useIsTouchScreen();
     const handleMouseEnter = isTouchScreen ? autoMouseLeave : () => {};
     const handleMouseClick = isTouchScreen ? autoMouseEnter : () => {};
+    const arcLabelsComponent = ArcLabel
+        ? {
+              arcLabelsComponent: ({ datum, label, style }) => {
+                  const maxBoxSize = 200;
+                  return (
+                      <animated.g
+                          transform={style.transform}
+                          style={{ pointerEvents: "none" }}
+                      >
+                          <g
+                              transform={`translate(-${maxBoxSize / 2}, -${
+                                  maxBoxSize / 2
+                              })`}
+                          >
+                              <foreignObject
+                                  width={maxBoxSize}
+                                  height={maxBoxSize}
+                              >
+                                  <ArcLabel
+                                      datum={datum}
+                                      valueToLabelMapper={valueToLabelMapper}
+                                      tooltip={tooltip}
+                                  />
+                              </foreignObject>
+                          </g>
+                      </animated.g>
+                  );
+              },
+          }
+        : {};
 
     return (
         <ResponsivePie
@@ -254,32 +235,7 @@ const Pie = ({
             arcLabelsTextColor={(x) => {
                 return x.data.textColor;
             }}
-            arcLabelsComponent={({ datum, label, style }) => {
-                const maxBoxSize = 200;
-                return (
-                    <animated.g
-                        transform={style.transform}
-                        style={{ pointerEvents: "none" }}
-                    >
-                        <g
-                            transform={`translate(-${maxBoxSize / 2}, -${
-                                maxBoxSize / 2
-                            })`}
-                        >
-                            <foreignObject
-                                width={maxBoxSize}
-                                height={maxBoxSize}
-                            >
-                                <ArcLabel
-                                    datum={datum}
-                                    valueToLabelMapper={valueToLabelMapper}
-                                    tooltip={tooltip}
-                                />
-                            </foreignObject>
-                        </g>
-                    </animated.g>
-                );
-            }}
+            {...arcLabelsComponent}
             defs={[
                 linearGradientDef(
                     "gradientAll",
@@ -345,6 +301,7 @@ function PaletteChart({
     onClick,
     valueToLabelMapper,
     tooltip,
+    ArcLabel,
 }) {
     const thisTheme = { ...theme, background: background };
     const data = Object.entries(components)
@@ -369,6 +326,7 @@ function PaletteChart({
                 onClick={onClick}
                 valueToLabelMapper={valueToLabelMapper ?? ((x) => x)}
                 tooltip={tooltip}
+                ArcLabel={ArcLabel}
             />
         </Box>
     );
@@ -387,6 +345,7 @@ PaletteChart.propTypes = {
     onClick: PropTypes.func,
     valueToLabelMapper: PropTypes.func,
     tooltip: PropTypes.string,
+    ArcLabel: PropTypes.element,
 };
 
 export default PaletteChart;

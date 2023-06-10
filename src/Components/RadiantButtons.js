@@ -1,6 +1,7 @@
-import { Box } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
 import { minLevels } from "../Colors";
+import shiftPopper from "../Util/TooltipUtils";
 import { filterKeys, mapValues } from "../Util/Utils";
 import { useViewportPercent } from "../Util/ViewportDimensions";
 import PaletteChart from "./PaletteChart";
@@ -42,6 +43,7 @@ function RadiantButtons({
                 onClick={onClick}
                 valueToLabelMapper={(x) => x - zeroValue}
                 tooltip={showBasicTutorial ? "Press here" : null}
+                ArcLabel={ArcLabel}
             />
             <Box
                 position="absolute"
@@ -57,6 +59,55 @@ function RadiantButtons({
         </Box>
     );
 }
+
+const ArcLabel = ({ datum, valueToLabelMapper, tooltip }) => {
+    const viewportPercent = useViewportPercent();
+    const labelLabel = (
+        <div
+            style={{
+                background: "transparent",
+            }}
+        >
+            {datum.label}
+        </div>
+    );
+    return (
+        <div
+            style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "100%",
+                flexDirection: "column",
+            }}
+        >
+            {tooltip && (
+                <Tooltip
+                    title={<h1>{tooltip}</h1>}
+                    open={true}
+                    arrow
+                    placement="top"
+                    {...shiftPopper(0, viewportPercent(5))}
+                >
+                    {labelLabel}
+                </Tooltip>
+            )}
+            {!tooltip && labelLabel}
+            <div
+                style={{
+                    background: "white",
+                    color: "black",
+                    borderRadius: "50%",
+                    paddingLeft: "0.5em",
+                    paddingRight: "0.5em",
+                }}
+            >
+                {valueToLabelMapper(datum.value)}
+            </div>
+        </div>
+    );
+};
+
 
 RadiantButtons.propTypes = {
     components: PropTypes.object.isRequired,
