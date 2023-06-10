@@ -154,7 +154,6 @@ const defs = {
     sortByValue: false,
     tooltip: () => <></>,
     cornerRadius: 10,
-    borderWidth: 1.5,
     defs: Object.keys(themePalette).map((color) => gradientDef(color)),
     fill: Object.keys(themePalette).map((color) => gradientMatch(color)),
     enableArcLinkLabels: false,
@@ -172,6 +171,7 @@ function PaletteChart({
     startAngle,
     noFit,
     background,
+    borderWidth,
     innerRadius,
     activeInnerRadiusOffset,
     components,
@@ -252,9 +252,10 @@ function PaletteChart({
                 colors={(x) => {
                     return x.data.color;
                 }}
+                borderWidth={borderWidth}
                 borderColor={{
                     from: "color",
-                    modifiers: [["darker", 0.3]],
+                    modifiers: [["darker", 0.5]],
                 }}
                 arcLabelsTextColor={(x) => {
                     return x.data.textColor;
@@ -318,6 +319,7 @@ PaletteChart.propTypes = {
     startAngle: PropTypes.number.isRequired,
     noFit: PropTypes.bool,
     background: PropTypes.string.isRequired,
+    borderWidth: PropTypes.number.isRequired,
     innerRadius: PropTypes.number.isRequired,
     activeInnerRadiusOffset: PropTypes.number,
     components: PropTypes.object.isRequired,
