@@ -122,19 +122,86 @@ const theme = {
     },
 };
 
-function Pie({
-    data,
-    thisTheme,
+const defs = {
+    sortByValue: false,
+    tooltip: () => <></>,
+    cornerRadius: 10,
+    borderWidth: 1.5,
+    defs: [
+        linearGradientDef(
+            "gradientAll",
+            [
+                { offset: 0, color: "inherit" },
+                { offset: 100, color: "inherit", opacity: 0.4 },
+            ],
+            {
+                gradientTransform: "rotate(135 0.5 0.5)",
+            }
+        ),
+        linearGradientDef(
+            "gradientStrong",
+            [
+                { offset: 0, color: "inherit", opacity: 1 },
+                { offset: 100, color: "inherit", opacity: 0.1 },
+            ],
+            {
+                gradientTransform: "rotate(135 0.5 0.5)",
+            }
+        ),
+    ],
+    fill: [
+        {
+            match: {
+                id: "yellow",
+            },
+            id: "gradientStrong",
+        },
+        {
+            match: {
+                id: "white",
+            },
+            id: "gradientStrong",
+        },
+        {
+            match: {
+                // id: "green",
+            },
+            id: "gradientAll",
+        },
+    ],
+    enableArcLinkLabels: false,
+    arcLinkLabelsSkipAngle: 10,
+    arcLinkLabelsTextColor: "#333333",
+    arcLinkLabelsThickness: 2,
+    arcLinkLabelsColor: { from: "color" },
+    legends: [],
+};
+
+function PaletteChart({
+    width,
+    height,
     margin,
     startAngle,
-    fit,
+    noFit,
+    background,
     innerRadius,
     activeInnerRadiusOffset,
+    components,
     onClick,
     valueToLabelMapper,
     tooltip,
     ArcLabel,
 }) {
+    const thisTheme = { ...theme, background: background };
+    const data = Object.entries(components)
+        .filter(([_, num]) => num > 0)
+        .map(([color, num]) => ({
+            id: color,
+            label: color,
+            color: themePalette[color].main,
+            value: num,
+            textColor: color === "black" ? "white" : "black",
+        }));
     const leaveTimerRef = useRef();
     // Simulater hover on touch screens: auto release with delay after tap
     const autoMouseLeave = useCallback(
@@ -193,7 +260,9 @@ function Pie({
                               >
                                   <ArcLabel
                                       datum={datum}
-                                      valueToLabelMapper={valueToLabelMapper}
+                                      valueToLabelMapper={
+                                          valueToLabelMapper ?? ((x) => x)
+                                      }
                                       tooltip={tooltip}
                                   />
                               </foreignObject>
@@ -203,130 +272,35 @@ function Pie({
               },
           }
         : {};
-
-    return (
-        <ResponsivePie
-            data={data}
-            margin={margin}
-            theme={thisTheme}
-            background="#ff0000"
-            startAngle={startAngle}
-            fit={fit}
-            padAngle={0.9}
-            sortByValue={false}
-            tooltip={() => <></>}
-            innerRadius={innerRadius}
-            cornerRadius={10}
-            activeOuterRadiusOffset={8}
-            activeInnerRadiusOffset={activeInnerRadiusOffset}
-            colors={(x) => {
-                return x.data.color;
-            }}
-            borderWidth={1.5}
-            borderColor={{
-                from: "color",
-                modifiers: [["darker", 0.3]],
-            }}
-            enableArcLinkLabels={false}
-            arcLinkLabelsSkipAngle={10}
-            arcLinkLabelsTextColor="#333333"
-            arcLinkLabelsThickness={2}
-            arcLinkLabelsColor={{ from: "color" }}
-            arcLabelsTextColor={(x) => {
-                return x.data.textColor;
-            }}
-            {...arcLabelsComponent}
-            defs={[
-                linearGradientDef(
-                    "gradientAll",
-                    [
-                        { offset: 0, color: "inherit" },
-                        { offset: 100, color: "inherit", opacity: 0.4 },
-                    ],
-                    {
-                        gradientTransform: "rotate(135 0.5 0.5)",
-                    }
-                ),
-                linearGradientDef(
-                    "gradientStrong",
-                    [
-                        { offset: 0, color: "inherit", opacity: 1 },
-                        { offset: 100, color: "inherit", opacity: 0.1 },
-                    ],
-                    {
-                        gradientTransform: "rotate(135 0.5 0.5)",
-                    }
-                ),
-            ]}
-            fill={[
-                {
-                    match: {
-                        id: "yellow",
-                    },
-                    id: "gradientStrong",
-                },
-                {
-                    match: {
-                        id: "white",
-                    },
-                    id: "gradientStrong",
-                },
-                {
-                    match: {
-                        // id: "green",
-                    },
-                    id: "gradientAll",
-                },
-            ]}
-            legends={[]}
-            onClick={(node, event) => {
-                handleMouseClick(event);
-                onClick && onClick(node.id);
-            }}
-            onMouseEnter={handleMouseEnter}
-        />
-    );
-}
-
-function PaletteChart({
-    width,
-    height,
-    margin,
-    startAngle,
-    noFit,
-    background,
-    innerRadius,
-    activeInnerRadiusOffset,
-    components,
-    onClick,
-    valueToLabelMapper,
-    tooltip,
-    ArcLabel,
-}) {
-    const thisTheme = { ...theme, background: background };
-    const data = Object.entries(components)
-        .filter(([_, num]) => num > 0)
-        .map(([color, num]) => ({
-            id: color,
-            label: color,
-            color: themePalette[color].main,
-            value: num,
-            textColor: color === "black" ? "white" : "black",
-        }));
     return (
         <Box sx={{ height: height, width: width }}>
-            <Pie
+            <ResponsivePie
                 data={data}
-                thisTheme={thisTheme}
                 margin={margin}
+                theme={thisTheme}
                 startAngle={startAngle}
                 fit={!noFit}
+                padAngle={0.9}
                 innerRadius={innerRadius}
+                activeOuterRadiusOffset={8}
                 activeInnerRadiusOffset={activeInnerRadiusOffset}
-                onClick={onClick}
-                valueToLabelMapper={valueToLabelMapper ?? ((x) => x)}
-                tooltip={tooltip}
-                ArcLabel={ArcLabel}
+                colors={(x) => {
+                    return x.data.color;
+                }}
+                borderColor={{
+                    from: "color",
+                    modifiers: [["darker", 0.3]],
+                }}
+                arcLabelsTextColor={(x) => {
+                    return x.data.textColor;
+                }}
+                {...arcLabelsComponent}
+                {...defs}
+                onClick={(node, event) => {
+                    handleMouseClick(event);
+                    onClick && onClick(node.id);
+                }}
+                onMouseEnter={handleMouseEnter}
             />
         </Box>
     );
