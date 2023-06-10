@@ -350,7 +350,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                     open={levelsPanelOpen}
                     onClose={handleLevelChoice}
                     curLevel={curLevel}
-                    unlockedLevel={debug ? colorTable.length : unlockedLevel}
+                    unlockedLevel={debug ? Math.min(colorTable.length-1, unlockedLevel + 100) : unlockedLevel}
                     levelAchievements={levelAchievements}
                 />
             </LevelsPanelContext.Provider>
