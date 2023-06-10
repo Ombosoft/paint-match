@@ -1,6 +1,6 @@
 import DescriptionIcon from "@mui/icons-material/Description";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
-import { Box, Card, IconButton, Tooltip } from "@mui/material";
+import { Box, Card, IconButton, Tooltip, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { hideTooltipDelay } from "../Constants";
@@ -56,7 +56,7 @@ function NotesButton({ notes, enabled }) {
                     >
                         <FormatQuoteIcon />
                         <Box margin="2em">
-                            <h2>{notes}</h2>
+                            <Typography fontSize="2em" fontWeight="bold">{notes}</Typography>
                         </Box>
                         <FormatQuoteIcon />
                     </Card>
