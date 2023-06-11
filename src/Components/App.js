@@ -12,10 +12,17 @@ function App() {
 
     return (
         <div className="App">
+            <div className="background" />
             <header className="App-header">
                 <SoundsMutedContext.Provider value={soundsMuted}>
-                    <Stack direction="column" sx={{ height: "100vh", width: "100%" }}>
-                        <Game autoPlayMusic={autoPlay} onChangeLevel={onChangeLevel} />
+                    <Stack
+                        direction="column"
+                        sx={{ height: "100vh", width: "100%" }}
+                    >
+                        <Game
+                            autoPlayMusic={autoPlay}
+                            onChangeLevel={onChangeLevel}
+                        />
                         <MuteButtons
                             musicMuted={musicMuted}
                             toggleMuteMusic={toggleMuteMusic}
