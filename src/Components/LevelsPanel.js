@@ -73,7 +73,13 @@ function LevelsPanel({
         );
     }
     return (
-        <Dialog open={open} onClose={() => onClose(curLevel)}>
+        <Dialog open={open} onClose={() => onClose(curLevel)}
+        PaperProps={{
+            sx: {
+                borderRadius: "21px",
+            },
+        }}
+>
             <DialogContent>
                 <Stack direction="row" flexWrap="wrap" justifyContent="center">
                     {range(unlockedLevel + 1).map((level) => (
