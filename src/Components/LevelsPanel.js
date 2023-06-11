@@ -35,15 +35,8 @@ function LevelsPanel({
                 >
                     <Button
                         onClick={() => onClose(level)}
+                        className="PickLevelButton"
                         sx={{
-                            width: "5em",
-                            height: "4em",
-                            border: "solid",
-                            borderWidth: "thin",
-                            borderColor: "gray",
-                            margin: "1em",
-                            borderRadius: "1em",
-                            boxShadow: "0px 1em 0px 0px",
                             backgroundImage: `linear-gradient(135deg, white, ${rgbToString(
                                 levelRGB(levelDef)
                             )})`,
@@ -73,14 +66,21 @@ function LevelsPanel({
         );
     }
     return (
-        <Dialog open={open} onClose={() => onClose(curLevel)}
-        PaperProps={{
-            sx: {
-                borderRadius: "21px",
-            },
-        }}
->
-            <DialogContent>
+        <Dialog
+            open={open}
+            onClose={() => onClose(curLevel)}
+            PaperProps={{
+                sx: {
+                    borderRadius: "21px",
+                    margin: "8px",
+                },
+            }}
+        >
+            <DialogContent
+                sx={{
+                    padding: "20px 14px",
+                }}
+            >
                 <Stack direction="row" flexWrap="wrap" justifyContent="center">
                     {range(unlockedLevel + 1).map((level) => (
                         <PickLevelButton
