@@ -156,12 +156,20 @@ function VictoryTitle({ contentProps }) {
         >
             <Stack direction="row" justifyContent="space-between">
                 <Typography
-                    fontWeight="bold"
                     textTransform="capitalize"
-                    fontSize="1.25rem"
+                    fontSize="2rem"
                     color={textColor(colorTable[level].cmyk)}
                 >
-                    {level} {levelName}
+                    {level}{" "}
+                    <Typography
+                    component="span"
+                        fontWeight="bold"
+                        textTransform="capitalize"
+                        fontSize="2rem"
+                        color={textColor(colorTable[level].cmyk)}
+                    >
+                        {levelName}
+                    </Typography>
                 </Typography>
                 <StarRack
                     stars={contentProps.stars}
