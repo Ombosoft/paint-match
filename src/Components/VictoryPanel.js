@@ -94,6 +94,7 @@ function VictoryPanel({
                     borderWidth: "1em",
                     borderStyle: "outset",
                     margin: "8px",
+                    borderRadius: "21px",
                 },
             }}
         >
@@ -160,6 +161,7 @@ function VictoryTitle({ contentProps }) {
                 borderWidth: "2px",
                 borderStyle: "solid",
                 borderColor: "white",
+                borderRadius: "6px",
             }}
         >
             <Stack direction="row" justifyContent="space-between">
