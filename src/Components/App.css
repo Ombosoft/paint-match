@@ -19,7 +19,7 @@
 
 .background {
     background: 
-        radial-gradient(circle at 50% 55%, black 30%, transparent 60%, black 85%),
+        radial-gradient(circle at 50% 55%, #404040 35%, transparent 60%, black 85%),
         url(/public/img/b1.jpg);
     background-position: center center;
     background-size: cover;
