@@ -15,7 +15,6 @@ import shiftPopper from "../Util/TooltipUtils";
 import { range } from "../Util/Utils";
 import StarRack from "./StarRack";
 
-
 // Choose level dialog
 function LevelsPanel({
     open,
@@ -52,6 +51,7 @@ function LevelsPanel({
                     >
                         <Typography
                             variant="h6"
+                            fontFamily="Nunito"
                             fontWeight="bold"
                             color={textColor(levelDef.cmyk)}
                         >

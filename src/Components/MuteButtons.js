@@ -31,7 +31,7 @@ export function MuteButtons({ musicMuted, toggleMuteMusic, toggleMuteSounds }) {
                 title="sounds"
             />
             <Box flexGrow={1}/>
-            <Box>Paint Match</Box>
+            <Box sx={{fontSize:"6vmin", fontWeight: "bold"}}>Paint Match</Box>
         </Stack>
     );
 }

@@ -24,11 +24,11 @@ function LevelTitle({ onDebug, level }) {
             <Box
                 onClick={maybeTriggerDebug}
                 style={{
-                    fontSize: "min(7vh, max(10px, 5vw))",
+                    fontSize: "min(6vh, max(10px, 5vw))",
                     textTransform: "capitalize",
                 }}
             >
-                Level {level} {colorTable[level].name}
+                Level {level} <span style={{fontWeight: "bold"}}>{colorTable[level].name}</span>
             </Box>
             {debug && (
                 <Button size="small" onClick={clearLocalStorage}>

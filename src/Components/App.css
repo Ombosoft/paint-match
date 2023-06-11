@@ -1,10 +1,15 @@
 .App {
     text-align: center;
     user-select: none;
+    font-family: "Nunito";
 }
 
 .MuiDialog-root {
     user-select: none;
+}
+
+.MuiTypography-root {
+    font-family: "Nunito";
 }
 
 .App-header {
@@ -18,8 +23,12 @@
 }
 
 .background {
-    background: 
-        radial-gradient(circle at 50% 55%, #404040 35%, transparent 60%, black 85%),
+    background: radial-gradient(
+            circle at 50% 55%,
+            #404040 35%,
+            transparent 60%,
+            black 85%
+        ),
         url(/public/img/b1.jpg);
     background-position: center center;
     background-size: cover;

@@ -20,6 +20,7 @@ const theme = {
         text: {
             fontSize: "1.5em",
             fontWeight: "bold",
+            fontFamily: "Nunito",
         },
     },
     annotations: {
