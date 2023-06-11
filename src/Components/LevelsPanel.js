@@ -63,7 +63,7 @@ function LevelsPanel({
                     stars={stars}
                     stackSx={{
                         position: "absolute",
-                        top: "3.05em",
+                        top: "3em",
                         left: "50%",
                         transform: "translate(-50%, 1.2em)",
                     }}
