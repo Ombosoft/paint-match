@@ -4,7 +4,7 @@ import { ResponsivePie } from "@nivo/pie";
 import { animated } from "@react-spring/web";
 import PropTypes from "prop-types";
 import { useCallback, useRef, useState } from "react";
-import { themePalette } from "../Colors";
+import { textColorFromName, themePalette } from "../Colors";
 import useIsTouchScreen from "../Util/DeviceTypeDetector";
 
 const theme = {
@@ -128,7 +128,7 @@ function PaletteChart({
             label: color,
             color: themePalette[color].main,
             value: num,
-            textColor: (color === "black" || color === "blue") ? "white" : "black",
+            textColor: textColorFromName(color),
         }));
     const leaveTimerRef = useRef();
     // Simulates hover on touch screens: auto release with delay after tap
@@ -194,7 +194,10 @@ function PaletteChart({
                 borderWidth={borderWidth}
                 borderColor={{
                     from: "color",
-                    modifiers: [["darker", 0.5], ["opacity", 0.5]],
+                    modifiers: [
+                        ["darker", 0.5],
+                        ["opacity", 0.5],
+                    ],
                 }}
                 arcLabelsTextColor={(x) => {
                     return x.data.textColor;

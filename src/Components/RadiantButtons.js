@@ -1,6 +1,6 @@
 import { Box, Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
-import { minLevels } from "../Colors";
+import { minLevels, textColorFromName } from "../Colors";
 import shiftPopper from "../Util/TooltipUtils";
 import { filterKeys, mapValues } from "../Util/Utils";
 import { useViewportPercent } from "../Util/ViewportDimensions";
@@ -62,6 +62,7 @@ function RadiantButtons({
 }
 
 function ArcLabel({ datum, valueToLabelMapper, tooltip, inFocus }) {
+    const color = datum.label;
     const viewportPercent = useViewportPercent();
     const colorName = (
         <div
@@ -69,7 +70,7 @@ function ArcLabel({ datum, valueToLabelMapper, tooltip, inFocus }) {
                 fontSize: "0.8em",
             }}
         >
-            {datum.label}
+            {color}
         </div>
     );
     const dropletNumber = !inFocus && (
@@ -91,7 +92,7 @@ function ArcLabel({ datum, valueToLabelMapper, tooltip, inFocus }) {
                 justifyContent: "center",
                 height: "100%",
                 flexDirection: "row",
-                color: "white",
+                color: textColorFromName(color),
             }}
         >
             <div
@@ -100,7 +101,6 @@ function ArcLabel({ datum, valueToLabelMapper, tooltip, inFocus }) {
                     alignItems: "start",
                     justifyContent: "center",
                     flexDirection: "row",
-                    color: "white",
                 }}
             >
                 {tooltip && (

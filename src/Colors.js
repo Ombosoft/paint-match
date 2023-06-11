@@ -11,7 +11,6 @@ import {
     vecScale,
 } from "./Util/Vec";
 
-
 export const themePalette = {
     red: {
         light: "#E01010",
@@ -79,7 +78,9 @@ export const cmykColors = [
     { color: "green", minLevel: 17 },
     { color: "blue", minLevel: 22 },
 ];
-export const minLevels = Object.fromEntries(cmykColors.map(x => [x.color, x.minLevel]))
+export const minLevels = Object.fromEntries(
+    cmykColors.map((x) => [x.color, x.minLevel])
+);
 export const firstLevelWithAllColors =
     Math.max(...cmykColors.map((c) => c.minLevel)) + 1;
 
@@ -123,9 +124,8 @@ export function isPerfectVictory(curLevel, numDroplets, usedHint) {
     if (usedHint) {
         return false;
     }
-    return (numDroplets <= colorTable[curLevel].cost);
+    return numDroplets <= colorTable[curLevel].cost;
 }
-
 
 export function levelRGB(levelDef) {
     return convert.cmyk.hex(levelDef.cmyk);
@@ -137,9 +137,9 @@ export function rgbToString(rgb) {
 
 function textColorImpl([l]) {
     if (l > 53) {
-        return 'black';
+        return "black";
     }
-    return 'white';
+    return "white";
 }
 
 export function textColor(backgroundCMYK) {
@@ -148,4 +148,8 @@ export function textColor(backgroundCMYK) {
 
 export function textColorFromRGB(backgroundRGB) {
     return textColorImpl(convert.hex.lab(backgroundRGB));
+}
+
+export function textColorFromName(color) {
+    return color === "black" || color === "blue" ? "white" : "black";
 }
