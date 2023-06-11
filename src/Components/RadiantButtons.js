@@ -75,13 +75,6 @@ function ArcLabel({ datum, valueToLabelMapper, tooltip, inFocus }) {
     const dropletNumber = !inFocus && (
         <div
             style={{
-                background: "gray",
-                border: "solid",
-                borderColor: "white",
-                borderRadius: "50%",
-                padding: "0.1em",
-                paddingLeft: "0.3em",
-                paddingRight: "0.3em",
                 fontSize: "0.8em",
                 fontWeight: "bold",
             }}
