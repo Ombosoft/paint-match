@@ -5,6 +5,7 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { Box, IconButton, Stack, Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
+import { textForeground } from "../Constants";
 import { SoundsMutedContext } from "../Sfx";
 
 export function MuteButtons({ musicMuted, toggleMuteMusic, toggleMuteSounds }) {
@@ -30,8 +31,16 @@ export function MuteButtons({ musicMuted, toggleMuteMusic, toggleMuteSounds }) {
                 offIcon={<VolumeOffIcon />}
                 title="sounds"
             />
-            <Box flexGrow={1}/>
-            <Box sx={{fontSize:"6vmin", fontWeight: "bold"}}>Paint Match</Box>
+            <Box flexGrow={1} />
+            <Box
+                sx={{
+                    fontSize: "6vmin",
+                    fontWeight: "bold",
+                    color: textForeground,
+                }}
+            >
+                Paint Match
+            </Box>
         </Stack>
     );
 }

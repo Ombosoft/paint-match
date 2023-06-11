@@ -1,6 +1,7 @@
 import { Box, Button } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
+import { textForeground } from "../Constants";
 import { colorTable } from "../Levels";
 
 function LevelTitle({ onDebug, level }) {
@@ -26,9 +27,13 @@ function LevelTitle({ onDebug, level }) {
                 style={{
                     fontSize: "min(6vh, max(10px, 5vw))",
                     textTransform: "capitalize",
+                    color: textForeground,
                 }}
             >
-                Level {level} <span style={{fontWeight: "bold"}}>{colorTable[level].name}</span>
+                Level {level}{" "}
+                <span style={{ fontWeight: "bold" }}>
+                    {colorTable[level].name}
+                </span>
             </Box>
             {debug && (
                 <Button size="small" onClick={clearLocalStorage}>

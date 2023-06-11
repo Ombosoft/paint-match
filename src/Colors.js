@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 import convert from "color-convert";
-import { defaultWinTolerance } from "./Constants";
+import { defaultWinTolerance, textForeground } from "./Constants";
 import { colorTable } from "./Levels";
 import {
     matCompSum,
@@ -139,7 +139,7 @@ function textColorImpl([l]) {
     if (l > 53) {
         return "black";
     }
-    return "white";
+    return textForeground;
 }
 
 export function textColor(backgroundCMYK) {
@@ -151,5 +151,5 @@ export function textColorFromRGB(backgroundRGB) {
 }
 
 export function textColorFromName(color) {
-    return color === "black" || color === "blue" ? "white" : "black";
+    return color === "black" || color === "blue" ? textForeground : "black";
 }
