@@ -183,6 +183,7 @@ function PaletteChart({
                 margin={margin}
                 theme={theme}
                 startAngle={startAngle}
+                endAngle={365}
                 fit={!noFit}
                 padAngle={0.9}
                 innerRadius={innerRadius}

@@ -93,6 +93,7 @@ function VictoryPanel({
                     borderColor: rgbToString(contentProps.current.color),
                     borderWidth: "1em",
                     borderStyle: "outset",
+                    margin: "8px",
                 },
             }}
         >
@@ -101,15 +102,22 @@ function VictoryPanel({
                 <Stack
                     direction={"column"}
                     alignItems="center"
-                    sx={{
-                        marginLeft: "1em",
-                        marginRight: "1em",
-                    }}
                 >
+                    <StarRack
+                        stars={contentProps.current.stars}
+                        fontSize={1.8}
+                        dropShadow
+                        stackSx={{
+                            position: "absolute",
+                            left: "0%",
+                            marginLeft: "1.5em",
+                            marginTop: "1em",
+                        }}
+                    />
                     <PaletteChart
                         width="300px"
                         height="150px"
-                        margin={{ top: 9, right: 60, bottom: -30, left: 50 }}
+                        margin={{ top: 9, right: 0, bottom: -30, left: 50 }}
                         startAngle={285}
                         borderWidth={1.5}
                         innerRadius={0.65}
@@ -162,7 +170,7 @@ function VictoryTitle({ contentProps }) {
                 >
                     {level}{" "}
                     <Typography
-                    component="span"
+                        component="span"
                         fontWeight="bold"
                         textTransform="capitalize"
                         fontSize="2rem"
@@ -171,11 +179,6 @@ function VictoryTitle({ contentProps }) {
                         {levelName}
                     </Typography>
                 </Typography>
-                <StarRack
-                    stars={contentProps.stars}
-                    fontSize={1.5}
-                    dropShadow
-                />
             </Stack>
         </DialogTitle>
     );
