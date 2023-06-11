@@ -18,14 +18,18 @@
 }
 
 .background {
+    background: 
+        radial-gradient(circle at 50% 55%, black 35%, transparent 60%, black 85%),
+        url(/public/img/b1.jpg);
+    background-position: center center;
+    background-size: cover;
+
     position: absolute;
     left: 0;
     top: 0;
     width: 100vw;
     height: 100vh;
-    background-image: url(/public/img/b1.jpg);
-    background-size: cover;
-    filter: saturate(1.1)  brightness(0.2) blur(0.5px);
+    filter: blur(0.5px) brightness(0.35);
     z-index: -1;
 }
 
