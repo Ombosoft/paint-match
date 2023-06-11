@@ -193,7 +193,7 @@ function PaletteChart({
                 borderWidth={borderWidth}
                 borderColor={{
                     from: "color",
-                    modifiers: [["darker", 0.5]],
+                    modifiers: [["darker", 0.5], ["opacity", 0.5]],
                 }}
                 arcLabelsTextColor={(x) => {
                     return x.data.textColor;
