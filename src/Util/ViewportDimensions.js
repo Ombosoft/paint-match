@@ -6,6 +6,14 @@ export function useViewportPercent() {
     return (x) => x * Math.min(viewportWidth, viewportHeight) / 100
 }
 
+export function useIsWide() {
+    const viewportWidth = useViewportWidth();
+    const viewportHeight = useViewportHeight();
+    const ratio = viewportWidth / viewportHeight;
+    console.log({ratio});
+    return ratio > 1.2;
+}
+
 // returns width: px
 export function useViewportWidth() {
     return useSyncExternalStore(subscribe, getWidthSnapshot);

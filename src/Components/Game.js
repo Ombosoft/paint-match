@@ -32,6 +32,7 @@ import { colorTable } from "../Levels";
 import { useTutorial } from "../Tutorial";
 import { distanceToPercentMatch, randomLevel } from "../Util/Utils";
 import { vecCompSum } from "../Util/Vec";
+import { useIsWide } from "../Util/ViewportDimensions";
 import ColorSliders from "./ColorSliders";
 import { HintBox } from "./HintBox";
 import HintButton from "./HintButton";
@@ -272,55 +273,65 @@ function Game({ autoPlayMusic, onChangeLevel }) {
             <LevelsPanelContext.Provider
                 value={{ setLevelsPanelOpen: setLevelsPanelOpen }}
             >
-                <Stack direction="column" alignItems="center" flexGrow={1}>
-                    <Stack direction="row" flexWrap="wrap" justifyContent="center">
-                        <Stack direction="row" alignItems="center">
-                            <LevelsButton />
-                            <LevelTitle onDebug={handleDebug} level={curLevel} />
-                        </Stack>
-                        <Stack direction="row">
-                            <UndoButton enabled={enableUndo} onClick={undo} />
-                            <ResetButton
-                                enabled={
-                                    components !== zeroComponents &&
-                                    allowResetWhen
-                                }
-                                resetColors={resetColors}
-                            />
-                            <SkipLevelButton
-                                enabled={enableSkip}
-                                goodEnough={goodEnough(distance)}
-                                nextLevel={nextLevel}
-                            />
-                            <SlidersButton
-                                enabled={enableSliders}
-                                onClick={() => setBottle((prev) => !prev)}
-                            />
-                            {levelNotes !== null && (
-                                <NotesButton
-                                    notes={levelNotes}
-                                    enabled={!victory}
+                <Stack
+                    direction="column"
+                    alignItems="center"
+                    flexGrow={1}
+                    paddingLeft="1em"
+                    paddingRight="1em"
+                >
+                    <OneOrTwoRows
+                        firstRow={
+                            <>
+                                {" "}
+                                <LevelsButton />
+                                <LevelTitle
+                                    onDebug={handleDebug}
+                                    level={curLevel}
                                 />
-                            )}
-                            {curLevel >= firstLevelWithAllColors && (
-                                <HintButton
-                                    enabled={enableHints}
-                                    onClick={showHint}
-                                />
-                            )}
-                        </Stack>
-                    </Stack>
+                            </>
+                        }
+                    >
+                        <UndoButton enabled={enableUndo} onClick={undo} />
+                        <ResetButton
+                            enabled={
+                                components !== zeroComponents && allowResetWhen
+                            }
+                            resetColors={resetColors}
+                        />
+                        <SkipLevelButton
+                            enabled={enableSkip}
+                            goodEnough={goodEnough(distance)}
+                            nextLevel={nextLevel}
+                        />
+                        <SlidersButton
+                            enabled={enableSliders}
+                            onClick={() => setBottle((prev) => !prev)}
+                        />
+                        {levelNotes !== null && (
+                            <NotesButton
+                                notes={levelNotes}
+                                enabled={!victory}
+                            />
+                        )}
+                        {curLevel >= firstLevelWithAllColors && (
+                            <HintButton
+                                enabled={enableHints}
+                                onClick={showHint}
+                            />
+                        )}
+                    </OneOrTwoRows>
                     <HintBox hint={hint} />
                     <RadiantButtons
                         components={components}
                         level={curLevel}
-                        diameter="min(95vw, 80vh)"
+                        diameter="min(95vw, 78vh)"
                         innerExtendVW={2.5}
                         onClick={handleClick}
                         showBasicTutorial={showBasicTutorial}
                     >
                         <MixPlate
-                            diameter="min(60vw, 49vh)"
+                            diameter="min(60vw, 48vh)"
                             currentRGB={currentRGB}
                             targetRGB={targetRGB}
                             targetLevel={targetLevel}
@@ -368,6 +379,37 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                 />
             </LevelsPanelContext.Provider>
         </NumDropletsContext.Provider>
+    );
+}
+
+function OneOrTwoRows({ firstRow, children }) {
+    const isWide = useIsWide();
+    return isWide ? (
+        <Stack
+            direction="row"
+            justifyContent="start"
+            alignItems="center"
+            alignSelf="start"
+            width="100%"
+        >
+            {firstRow}
+            <Box flexGrow={1} />
+            {children}
+        </Stack>
+    ) : (
+        <Stack
+            direction="column"
+            alignContent="start"
+            alignSelf="start"
+            width="100%"
+        >
+            <Stack direction="row" justifyContent="start" alignItems="center">
+                {firstRow}
+            </Stack>
+            <Stack direction="row" justifyContent="start" alignItems="center">
+                {children}
+            </Stack>
+        </Stack>
     );
 }
 
