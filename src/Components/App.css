@@ -56,6 +56,8 @@
 
 .Picker-slider {
     width: calc(100vw - 4em);
+    padding-left: 0.8em;
+    padding-right: 0.8em;
 }
 
 .Color-button {

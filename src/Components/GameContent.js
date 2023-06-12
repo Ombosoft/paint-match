@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import PropTypes from "prop-types";
 import { useTutorial } from "../Tutorial";
 import ColorSliders from "./ColorSliders";
@@ -22,37 +22,41 @@ function GameContent({
         endBasicTutorial();
         onClick(color);
     }
-    return (
-        <>
-            <RadiantButtons
-                components={components}
-                level={curLevel}
-                diameter="min(95vw, 78vh)"
-                innerExtendVW={2.5}
-                onClick={handleClick}
-                showBasicTutorial={showBasicTutorial}
-            >
-                <MixPlate
-                    diameter="min(60vw, 48vh)"
-                    currentRGB={currentRGB}
-                    targetRGB={targetRGB}
-                    targetLevel={targetLevel}
-                    showBasicTutorial={showBasicTutorial}
-                    dropletColor={dropletColor}
-                    victory={victory}
+    const plateProps = {
+        currentRGB: currentRGB,
+        targetRGB: targetRGB,
+        targetLevel: targetLevel,
+        showBasicTutorial: showBasicTutorial,
+        dropletColor: dropletColor,
+        victory: victory,
+    };
+    return sliderMode ? (
+        <Stack
+            flexGrow={1}
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+        >
+            <MixPlate diameter="min(45vw, 38vh)" {...plateProps} />
+            <Box sx={{ marginTop: "1em", marginBottom: "1em" }}>
+                <ColorSliders
+                    level={curLevel}
+                    components={components}
+                    onSetComponentValue={setComponentValue}
                 />
-            </RadiantButtons>
-
-            {sliderMode && (
-                <Box sx={{ marginTop: "1em", marginBottom: "1em" }}>
-                    <ColorSliders
-                        level={curLevel}
-                        components={components}
-                        onSetComponentValue={setComponentValue}
-                    />
-                </Box>
-            )}
-        </>
+            </Box>
+        </Stack>
+    ) : (
+        <RadiantButtons
+            components={components}
+            level={curLevel}
+            diameter="min(95vw, 78vh)"
+            innerExtendVW={2.5}
+            onClick={handleClick}
+            showBasicTutorial={showBasicTutorial}
+        >
+            <MixPlate diameter="min(60vw, 48vh)" {...plateProps} />
+        </RadiantButtons>
     );
 }
 
