@@ -213,6 +213,9 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     }
 
     function handleClick(color) {
+        if (victory) {
+            return;
+        }
         autoPlayMusic();
         saveUndo();
         setComponents((prevState) => {

@@ -10,7 +10,6 @@ export function useIsWide() {
     const viewportWidth = useViewportWidth();
     const viewportHeight = useViewportHeight();
     const ratio = viewportWidth / viewportHeight;
-    console.log({ratio});
     return ratio > 1.2;
 }
 
