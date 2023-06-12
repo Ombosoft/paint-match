@@ -103,22 +103,23 @@ function VictoryPanel({
                 <Stack
                     direction={"column"}
                     alignItems="center"
+                    position="relative"
                 >
                     <StarRack
                         stars={contentProps.current.stars}
-                        fontSize={1.8}
+                        fontSize={2}
                         dropShadow
                         stackSx={{
                             position: "absolute",
-                            left: "0%",
-                            marginLeft: "1.5em",
-                            marginTop: "1em",
+                            left: "50%",
+                            top: "calc(150px - 2.1em)",
+                            marginLeft: "30px",
                         }}
                     />
                     <PaletteChart
                         width="300px"
                         height="150px"
-                        margin={{ top: 9, right: 0, bottom: -30, left: 50 }}
+                        margin={{ top: 9, right: 50, bottom: -30, left: 50 }}
                         startAngle={285}
                         borderWidth={1.5}
                         innerRadius={0.65}
