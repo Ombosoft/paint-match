@@ -3,6 +3,7 @@ import { animated, config, useSpring } from "@react-spring/web";
 import PropTypes from "prop-types";
 import React from "react";
 import { rgbToString, textColorFromRGB } from "../Colors";
+import { tokenize } from "../Util/TokenizeString";
 
 function ColorCircle({
     inner,
@@ -54,7 +55,7 @@ function ColorCircle({
                                 position: "absolute",
                             }}
                         >
-                            {label}
+                            {tokenize(label, "div")}
                         </animated.div>
                     </Tooltip>
                 )}

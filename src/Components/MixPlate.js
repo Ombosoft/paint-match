@@ -12,7 +12,6 @@ function MixPlate({
     dropletColor,
     victory,
 }) {
-    const largeSize = targetLevel.name.length > 10 ? "5vmin" : "7.5vmin";
     return (
         <Stack
             direction="row"
@@ -41,7 +40,7 @@ function MixPlate({
                 inner
                 diameter="60%"
                 labelWidth={diameter}
-                labelFontSize={victory ? largeSize : "3.4vmin"}
+                labelFontSize={victory ? "9vmin" : "4.5vmin"}
                 animationDuration={animationDurationMs}
                 color={targetRGB}
                 label={targetLevel.name}

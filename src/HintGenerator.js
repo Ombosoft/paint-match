@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { getWinTolerance, zeroComponents } from "./Colors";
 import { optimalPath, optimalSolution } from "./GameAI";
+import { tokenize } from "./Util/TokenizeString";
 import { objectMaxComponent } from "./Util/Vec";
 
 export function generateHint(components, targetLevel) {
@@ -24,7 +25,6 @@ export function generateHint(components, targetLevel) {
 }
 
 const colorRe = / \[(\w+)\]/;
-const wordRe = /\s/;
 
 export function formatHint(str) {
     const colorMatch = str.match(colorRe);
@@ -47,10 +47,6 @@ function substituteColor(color) {
         return 'lightgreen';
     }
     return color;
-}
-
-function tokenize(str) {
-    return str.split(wordRe).map(word => <span key={'i' + word}>{word + " "}</span>);
 }
 
 function vagueAmount(x) {
