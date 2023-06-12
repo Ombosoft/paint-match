@@ -5,7 +5,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import colorDistance from "../ColorDistance";
 import {
     blendPaints,
-    cmykColors,
     firstLevelWithAllColors,
     getWinTolerance,
     isPerfectVictory,
@@ -29,19 +28,16 @@ import {
     useLevelStatus,
 } from "../LevelStatus";
 import { colorTable } from "../Levels";
-import { useTutorial } from "../Tutorial";
 import { distanceToPercentMatch, randomLevel } from "../Util/Utils";
 import { vecCompSum } from "../Util/Vec";
 import { useIsWide } from "../Util/ViewportDimensions";
-import ColorSliders from "./ColorSliders";
+import GameContent from "./GameContent";
 import { HintBox } from "./HintBox";
 import HintButton from "./HintButton";
 import LevelTitle from "./LevelTitle";
 import LevelsButton from "./LevelsButton";
 import LevelsPanel from "./LevelsPanel";
-import MixPlate from "./MixPlate";
 import NotesButton from "./NotesButton";
-import RadiantButtons from "./RadiantButtons";
 import ResetButton from "./ResetButton";
 import SkipLevelButton from "./SkipLevelButton";
 import SlidersButton from "./SlidersButton";
@@ -50,7 +46,7 @@ import VictoryPanel from "./VictoryPanel";
 
 function Game({ autoPlayMusic, onChangeLevel }) {
     const [victory, setVictory] = useState(false);
-    const [bottle, setBottle] = useState(true);
+    const [sliderMode, setSliderMode] = useState(false);
 
     const [components, setComponents] = useState(zeroComponents);
     const [prevComponents, setPrevComponents] = useState([]);
@@ -64,7 +60,6 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         levelAchievements,
         onLevelAchievement,
     ] = useLevelStatus();
-    const [showBasicTutorial, endBasicTutorial] = useTutorial();
     const [targetLevel, setTargetLevel] = useState(colorTable[curLevel]);
     const maxDistance = 400;
     const [distance, setDistance] = useState(maxDistance);
@@ -197,7 +192,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
             colorTable.length > newLevel ? colorTable[newLevel] : randomLevel();
         setTargetLevel(newTarget);
         setResetCount(0);
-        setBottle(true);
+        setSliderMode(false);
         if (debug) {
             const optimal = optimalSolution(
                 newTarget.cmyk,
@@ -224,7 +219,6 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         let dropletComponents = { ...zeroComponents };
         dropletComponents[color] = 1;
         setDropletColor(convert.cmyk.hex(blendPaints(dropletComponents)));
-        endBasicTutorial();
         setHint(null);
     }
 
@@ -309,7 +303,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                         />
                         <SlidersButton
                             enabled={enableSliders}
-                            onClick={() => setBottle((prev) => !prev)}
+                            onClick={() => setSliderMode((prev) => !prev)}
                         />
                         {levelNotes !== null && (
                             <NotesButton
@@ -325,35 +319,18 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                         )}
                     </OneOrTwoRows>
                     <HintBox hint={hint} />
-                    <RadiantButtons
+                    <GameContent
                         components={components}
-                        level={curLevel}
-                        diameter="min(95vw, 78vh)"
-                        innerExtendVW={2.5}
+                        curLevel={curLevel}
+                        victory={victory}
+                        sliderMode={sliderMode}
+                        targetLevel={targetLevel}
+                        currentRGB={currentRGB}
+                        targetRGB={targetRGB}
+                        dropletColor={dropletColor}
                         onClick={handleClick}
-                        showBasicTutorial={showBasicTutorial}
-                    >
-                        <MixPlate
-                            diameter="min(60vw, 48vh)"
-                            currentRGB={currentRGB}
-                            targetRGB={targetRGB}
-                            targetLevel={targetLevel}
-                            showBasicTutorial={showBasicTutorial}
-                            dropletColor={dropletColor}
-                            victory={victory}
-                        />
-                    </RadiantButtons>
-
-                    {!bottle && (
-                        <Box sx={{ marginTop: "1em", marginBottom: "1em" }}>
-                            <ColorSliders
-                                cmykColors={cmykColors}
-                                level={curLevel}
-                                components={components}
-                                onSetComponentValue={setComponentValue}
-                            />
-                        </Box>
-                    )}
+                        setComponentValue={setComponentValue}
+                    />
                 </Stack>
                 <VictoryPanel
                     level={curLevel}
@@ -362,7 +339,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                     isVictory={victory && !levelsPanelOpen}
                     onNextLevel={nextLevel}
                     onReset={resetColors}
-                    showDroplets={bottle}
+                    showDroplets={sliderMode}
                     components={components}
                     stars={curStars}
                 />

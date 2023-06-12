@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { cmykColors } from "../Colors";
 import ColorSlider from "./ColorSlider";
 
-function ColorSliders({ cmykColors, level, components, onSetComponentValue }) {
+function ColorSliders({ level, components, onSetComponentValue }) {
     return cmykColors.map(
         (color) =>
             level >= color.minLevel && (

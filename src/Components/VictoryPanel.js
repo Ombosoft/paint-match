@@ -43,6 +43,7 @@ function VictoryPanel({
         numDroplets: numDroplets,
         level: level,
         levelName: levelName,
+        stars: 0,
     });
     const prevLevel = useRef(0);
     if (isVictory) {
