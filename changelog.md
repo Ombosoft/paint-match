@@ -1,3 +1,7 @@
+## 7
+
+* Full redesign of the whole UI
+
 ## 6
 
 2023-06-03
