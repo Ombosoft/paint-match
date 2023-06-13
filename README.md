@@ -32,7 +32,7 @@ Resources
 Credits
 ---
 
-Game design and coding: [Shurik](https://twitter.com/ombosoft) ([Ombosoft](https://ombosoft.itch.io))
+Game design and coding: [Shurick](https://twitter.com/ombosoft) ([Ombosoft](https://ombosoft.itch.io))
 
 Music: [Kiwami Alex](https://kiwamialex.my.canva.site/)
 
