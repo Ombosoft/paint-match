@@ -10,7 +10,10 @@ export function randElement(arr) {
 
 // Convert color distance to percentage of match.
 // The closer the distance is to zero, the higher the percentage of match.
-export function distanceToPercentMatch(distance, victory) {
+export function percentMatch(distance, victory, numDroplets) {
+    if (numDroplets === 0) {
+        return 0;
+    }
     if (victory) {
         return 100;
     }

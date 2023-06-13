@@ -28,10 +28,11 @@ import {
     useLevelStatus,
 } from "../LevelStatus";
 import { colorTable } from "../Levels";
-import { distanceToPercentMatch, randomLevel } from "../Util/Utils";
+import { percentMatch, randomLevel } from "../Util/Utils";
 import { vecCompSum } from "../Util/Vec";
 import { useIsWide } from "../Util/ViewportDimensions";
 import GameContent from "./GameContent";
+import HealthBar from "./HealthBar";
 import { HintBox } from "./HintBox";
 import HintButton from "./HintButton";
 import LevelTitle from "./LevelTitle";
@@ -63,9 +64,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     const [targetLevel, setTargetLevel] = useState(colorTable[curLevel]);
     const maxDistance = 400;
     const [distance, setDistance] = useState(maxDistance);
-    //  TODO
-    // eslint-disable-next-line no-unused-vars
-    const [percentMatchText, setPercentMatchText] = useState("");
+    const [percentMatchVal, setPercentMatchVal] = useState(0);
     const [distanceGotWorse, setDistanceGotWorse] = useState(false);
     const [resetCount, setResetCount] = useState(0);
     const [debug, setDebug] = useState(false);
@@ -109,10 +108,8 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                 setVictory(true);
                 onLevelAchievement(curLevel, curStars);
             }
-            setPercentMatchText(
-                numDroplets > 0
-                    ? `${distanceToPercentMatch(newDistance, newVictory)}%`
-                    : ""
+            setPercentMatchVal(
+                percentMatch(newDistance, newVictory, numDroplets)
             );
             if (goodEnough(newDistance)) {
                 unlockLevel(curLevel + 1);
@@ -264,7 +261,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         curLevel > 2 && colorTable[curLevel - 1].toast
             ? colorTable[curLevel - 1].toast
             : null;
-
+            
     return (
         <NumDropletsContext.Provider value={numDroplets}>
             <LevelsPanelContext.Provider
@@ -319,6 +316,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                         )}
                     </OneOrTwoRows>
                     <HintBox hint={hint} />
+                    <HealthBar percent={percentMatchVal} />
                     <GameContent
                         components={components}
                         curLevel={curLevel}
