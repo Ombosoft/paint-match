@@ -60,7 +60,7 @@ function GameContent({
             onClick={handleClick}
             showBasicTutorial={showBasicTutorial}
         >
-            <MixPlate diameter="min(60vw, 46vh)" {...plateProps} />
+            <MixPlate diameter="min(60vw, 45vh)" {...plateProps} />
         </RadiantButtons>
     );
 }
