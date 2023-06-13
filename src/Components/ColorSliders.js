@@ -11,6 +11,7 @@ function ColorSliders({ level, components, onSetComponentValue }) {
                 borderRadius: "1em",
                 backgroundColor: "#505050a0",
                 paddingTop: "0.5em",
+                marginBottom: "4vmin",
             }}
         >
             {cmykColors.map(

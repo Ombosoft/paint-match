@@ -43,7 +43,7 @@ function GameContent({
                 flexDirection="column"
                 justifyContent="center"
             >
-                <MixPlate diameter="min(95vw, 23vh)" {...plateProps} />
+                <MixPlate diameter="min(95vw, calc(70vh - 20rem))" {...plateProps} />
             </Box>
             <ColorSliders
                 level={curLevel}
@@ -55,7 +55,7 @@ function GameContent({
         <RadiantButtons
             components={components}
             level={curLevel}
-            diameter="min(95vw, 75vh)"
+            diameter="min(95vw, 72vh)"
             innerExtendVW={2.5}
             onClick={handleClick}
             showBasicTutorial={showBasicTutorial}

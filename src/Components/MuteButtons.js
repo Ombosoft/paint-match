@@ -16,6 +16,7 @@ export function MuteButtons({ musicMuted, toggleMuteMusic, toggleMuteSounds }) {
             alignItems="center"
             marginLeft="1em"
             marginRight="1em"
+            marginTop="-5vmin"
         >
             <MuteButton
                 muted={musicMuted}
