@@ -8,6 +8,7 @@ function ColorSlider({ color, components, onSetComponentValue }) {
         <div className="Picker-slider">
             <ThemeProvider theme={theme}>
                 <Slider
+                    size="small"
                     value={components[color]}
                     min={0}
                     max={100}

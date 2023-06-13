@@ -13,6 +13,7 @@ function HealthBar({ percent }) {
                 borderColor: "#e7e7e7e0",
                 backgroundColor: "#80808090",
                 borderRadius: "1em",
+                boxShadow: "5px 5px 10px black"
             }}
         >
             <Box

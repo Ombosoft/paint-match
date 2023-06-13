@@ -14,6 +14,7 @@ function MixPlate({
 }) {
     return (
         <Stack
+            id="MixPlate"
             direction="row"
             sx={{
                 position: "relative",

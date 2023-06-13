@@ -37,25 +37,30 @@ function GameContent({
             justifyContent="center"
             alignItems="center"
         >
-            <MixPlate diameter="min(45vw, 38vh)" {...plateProps} />
-            <Box sx={{ marginTop: "1em", marginBottom: "1em" }}>
-                <ColorSliders
-                    level={curLevel}
-                    components={components}
-                    onSetComponentValue={setComponentValue}
-                />
+            <Box
+                display="flex"
+                flexGrow={1}
+                flexDirection="column"
+                justifyContent="center"
+            >
+                <MixPlate diameter="min(95vw, 23vh)" {...plateProps} />
             </Box>
+            <ColorSliders
+                level={curLevel}
+                components={components}
+                onSetComponentValue={setComponentValue}
+            />
         </Stack>
     ) : (
         <RadiantButtons
             components={components}
             level={curLevel}
-            diameter="min(95vw, 78vh)"
+            diameter="min(95vw, 75vh)"
             innerExtendVW={2.5}
             onClick={handleClick}
             showBasicTutorial={showBasicTutorial}
         >
-            <MixPlate diameter="min(60vw, 48vh)" {...plateProps} />
+            <MixPlate diameter="min(60vw, 46vh)" {...plateProps} />
         </RadiantButtons>
     );
 }
