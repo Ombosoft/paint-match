@@ -47,7 +47,7 @@ function HealthBar({ percent }) {
 }
 
 HealthBar.propTypes = {
-    percent: PropTypes.number.isRequired,
+    percent: PropTypes.any.isRequired,
 };
 
 export default HealthBar;
