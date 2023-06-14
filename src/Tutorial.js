@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { colorTable } from "./Levels";
 import { useLocalStorage } from "./Util/LocalStorageHook";
 
 export function useTutorial() {
@@ -13,9 +14,9 @@ export function useTutorial() {
     return [showBasicTutorial, endBasicTutorial];
 }
 
-export function useResetTutorial(numDroplets) {
+export function useResetTutorial(numDroplets, level) {
     const [allow, onUsed] = useOneOffTutorial("tutorial-reset");
-    const reallyAllow = allow && numDroplets > 10;
+    const reallyAllow = allow && numDroplets > colorTable[level].cost * 3;
     const onUsedCallback = useCallback(() => {
         if (!reallyAllow) {
             return;

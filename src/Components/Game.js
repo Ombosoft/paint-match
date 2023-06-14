@@ -292,6 +292,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             enabled={
                                 components !== zeroComponents && allowResetWhen
                             }
+                            level={curLevel}
                             resetColors={resetColors}
                         />
                         <SkipLevelButton
