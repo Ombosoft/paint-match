@@ -316,8 +316,8 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                             />
                         )}
                     </OneOrTwoRows>
-                    <HintBox hint={hint} />
                     <HealthBar percent={percentMatchVal} />
+                    <HintBox hint={hint} />
                     <GameContent
                         components={components}
                         curLevel={curLevel}
