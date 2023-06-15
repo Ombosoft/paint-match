@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import { linearGradientDef } from "@nivo/core";
 import { ResponsivePie } from "@nivo/pie";
 import { animated } from "@react-spring/web";
+import Bowser from "bowser";
 import PropTypes from "prop-types";
 import { useCallback, useRef, useState } from "react";
 import { textColorFromName, themePalette } from "../Colors";
@@ -90,12 +91,19 @@ function gradientMatch(color) {
     };
 }
 
+const browser = Bowser.getParser(window.navigator.userAgent);
+// Gradients are broken on iOS and in Safari when data changes dynamically
+const brokenGradients =
+    browser.getBrowserName() === "Safari" || browser.getOSName() === "iOS";
+const gradientFill = Object.keys(themePalette).map((color) =>
+    gradientMatch(color)
+);
+
 const defs = {
     sortByValue: false,
     tooltip: () => <></>,
     cornerRadius: 10,
     defs: Object.keys(themePalette).map((color) => gradientDef(color)),
-    fill: Object.keys(themePalette).map((color) => gradientMatch(color)),
     enableArcLinkLabels: false,
     arcLinkLabelsSkipAngle: 10,
     arcLinkLabelsTextColor: "#333333",
@@ -110,7 +118,6 @@ function PaletteChart({
     margin,
     startAngle,
     noFit,
-    background,
     borderWidth,
     innerRadius,
     activeInnerRadiusOffset,
@@ -119,6 +126,7 @@ function PaletteChart({
     valueToLabelMapper,
     tooltip,
     ArcLabel,
+    unbreakGradients,
 }) {
     const [focusedId, setFocusedId] = useState();
     const data = Object.entries(components)
@@ -210,6 +218,7 @@ function PaletteChart({
                     focusedId
                 )}
                 {...defs}
+                fill={brokenGradients && unbreakGradients ? [] : gradientFill}
                 onClick={(node, event) => {
                     handleMouseClick(event);
                     onClick && onClick(node.id);
@@ -269,6 +278,7 @@ PaletteChart.propTypes = {
     valueToLabelMapper: PropTypes.func,
     tooltip: PropTypes.string,
     ArcLabel: PropTypes.func,
+    unbreakGradients: PropTypes.bool,
 };
 
 export default PaletteChart;

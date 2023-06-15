@@ -45,6 +45,7 @@ function RadiantButtons({
                 valueToLabelMapper={(x) => x - zeroValue}
                 tooltip={showBasicTutorial ? "Press here" : null}
                 ArcLabel={ArcLabel}
+                unbreakGradients
             />
             <Box
                 position="absolute"
