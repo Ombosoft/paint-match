@@ -155,7 +155,7 @@ export const colorTable = [
     { name: "dark violet", cmyk: [30,100,0,17], cost: 12, tolerance: 4 },
     { name: "metallic mint", cmyk: [78,0,0,1], cost: 12, tolerance: 4 },
     { name: "tan", cmyk: [0,35,69,0], cost: 12, tolerance: 4 },
-    { name: "medium blue", cmyk: [100,100,0,7], cost: 12, tolerance: 4 },
+    { name: "medium blue", cmyk: [100,100,0,7], cost: 14, tolerance: 4 },
     { name: "dark slate gray", cmyk: [41,0,0,20], cost: 12, tolerance: 4 },
     { name: "aquamarine", cmyk: [50,0,17,0], cost: 12, tolerance: 4 },
     { name: "medium magenta", cmyk: [0,100,0,7], cost: 12, tolerance: 5 },
