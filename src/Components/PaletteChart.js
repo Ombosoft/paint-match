@@ -4,7 +4,7 @@ import { ResponsivePie } from "@nivo/pie";
 import { animated } from "@react-spring/web";
 import Bowser from "bowser";
 import PropTypes from "prop-types";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { textColorFromName, themePalette } from "../Colors";
 import useIsTouchScreen from "../Util/DeviceTypeDetector";
 
@@ -98,6 +98,8 @@ const brokenGradients =
 const gradientFill = Object.keys(themePalette).map((color) =>
     gradientMatch(color)
 );
+const isOldIOS =
+    browser.getOSName() === "iOS" && parseInt(browser.getOSVersion()) < 16;
 
 const defs = {
     sortByValue: false,
@@ -110,6 +112,14 @@ const defs = {
     arcLinkLabelsThickness: 2,
     arcLinkLabelsColor: { from: "color" },
     legends: [],
+};
+
+const borderColor = {
+    from: "color",
+    modifiers: [
+        ["darker", 0.5],
+        ["opacity", 0.5],
+    ],
 };
 
 function PaletteChart({
@@ -129,15 +139,19 @@ function PaletteChart({
     unbreakGradients,
 }) {
     const [focusedId, setFocusedId] = useState();
-    const data = Object.entries(components)
-        .filter(([_, num]) => num > 0)
-        .map(([color, num]) => ({
-            id: color,
-            label: color,
-            color: themePalette[color].main,
-            value: num,
-            textColor: textColorFromName(color),
-        }));
+    const data = useMemo(
+        () =>
+            Object.entries(components)
+                .filter(([_, num]) => num > 0)
+                .map(([color, num]) => ({
+                    id: color,
+                    label: color,
+                    color: themePalette[color].main,
+                    value: num,
+                    textColor: textColorFromName(color),
+                })),
+        [components]
+    );
     const leaveTimerRef = useRef();
     // Simulates hover on touch screens: auto release with delay after tap
     const autoMouseLeave = useCallback(
@@ -174,16 +188,42 @@ function PaletteChart({
         [leaveTimerRef]
     );
     const isTouchScreen = useIsTouchScreen();
-    const handleMouseEnter = (datum, target) => {
-        if (isTouchScreen) {
-            autoMouseLeave(datum, target);
-        }
-        setFocusedId(datum.id);
-    };
-    const handleMouseLeave = () => {
+    const handleMouseEnter = useCallback(
+        (datum, target) => {
+            if (isTouchScreen) {
+                autoMouseLeave(datum, target);
+            }
+            setFocusedId(datum.id);
+        },
+        [autoMouseLeave, isTouchScreen]
+    );
+    const handleMouseLeave = useCallback(() => {
         setFocusedId(null);
-    };
-    const handleMouseClick = isTouchScreen ? autoMouseEnter : () => {};
+    }, []);
+    const handleMouseClick = useCallback(
+        (node, event) => {
+            if (isTouchScreen) {
+                autoMouseEnter(event);
+            }
+            if (onClick) {
+                onClick(node.id);
+            }
+        },
+        [autoMouseEnter, isTouchScreen, onClick]
+    );
+    const colorChooser = useCallback((x) => {
+        return x.data.color;
+    }, []);
+    const arcLabelsTextColor = useCallback((x) => {
+        return x.data.textColor;
+    }, []);
+    // Active animations are very slow on old iOS
+    const activeOffsets = isOldIOS
+        ? {}
+        : {
+              activeOuterRadiusOffset: 8,
+              activeInnerRadiusOffset: activeInnerRadiusOffset,
+          };
     return (
         <Box sx={{ height: height, width: width }}>
             <ResponsivePie
@@ -195,22 +235,11 @@ function PaletteChart({
                 fit={!noFit}
                 padAngle={0.9}
                 innerRadius={innerRadius}
-                activeOuterRadiusOffset={8}
-                activeInnerRadiusOffset={activeInnerRadiusOffset}
-                colors={(x) => {
-                    return x.data.color;
-                }}
+                {...activeOffsets}
+                colors={colorChooser}
                 borderWidth={borderWidth}
-                borderColor={{
-                    from: "color",
-                    modifiers: [
-                        ["darker", 0.5],
-                        ["opacity", 0.5],
-                    ],
-                }}
-                arcLabelsTextColor={(x) => {
-                    return x.data.textColor;
-                }}
+                borderColor={borderColor}
+                arcLabelsTextColor={arcLabelsTextColor}
                 {...arcLabelsComponent(
                     ArcLabel,
                     valueToLabelMapper,
@@ -219,10 +248,7 @@ function PaletteChart({
                 )}
                 {...defs}
                 fill={brokenGradients && unbreakGradients ? [] : gradientFill}
-                onClick={(node, event) => {
-                    handleMouseClick(event);
-                    onClick && onClick(node.id);
-                }}
+                onClick={handleMouseClick}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
             />
