@@ -16,7 +16,7 @@ export function MuteButtons({ musicMuted, toggleMuteMusic, toggleMuteSounds }) {
             direction="row"
             alignItems="center"
             marginLeft="1em"
-            marginRight="1em"
+            marginRight="calc(1em + 15px)"
             marginTop="-5vmin"
         >
             <MuteButton
