@@ -25,9 +25,9 @@
 .background {
     background: radial-gradient(
             circle at 50% 55%,
-            #404040 35%,
+            #505050 45%,
             transparent 60%,
-            black 85%
+            #404040 85%
         ),
         url(/public/img/b1.jpg);
     background-position: center center;
@@ -38,7 +38,7 @@
     top: 0;
     width: 100vw;
     height: 100vh;
-    filter: blur(0.5px) brightness(0.35);
+    filter: blur(0.5px) brightness(0.3) saturate(0.9);
     z-index: -1;
 }
 
