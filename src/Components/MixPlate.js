@@ -41,7 +41,7 @@ function MixPlate({
                 inner
                 diameter="60%"
                 labelWidth={diameter}
-                labelFontSize={victory ? "8.5vmin" : "4vmin"}
+                labelFontSize={victory ? "7.5vmin" : "4vmin"}
                 animationDuration={animationDurationMs}
                 color={targetRGB}
                 label={targetLevel.name}

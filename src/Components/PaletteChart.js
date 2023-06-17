@@ -131,6 +131,7 @@ function PaletteChart({
     borderWidth,
     innerRadius,
     activeInnerRadiusOffset,
+    activeOuterRadiusOffset,
     components,
     onClick,
     valueToLabelMapper,
@@ -221,7 +222,7 @@ function PaletteChart({
     const activeOffsets = isOldIOS
         ? {}
         : {
-              activeOuterRadiusOffset: 8,
+              activeOuterRadiusOffset: activeOuterRadiusOffset,
               activeInnerRadiusOffset: activeInnerRadiusOffset,
           };
     return (
@@ -299,6 +300,7 @@ PaletteChart.propTypes = {
     borderWidth: PropTypes.number.isRequired,
     innerRadius: PropTypes.number.isRequired,
     activeInnerRadiusOffset: PropTypes.number,
+    activeOuterRadiusOffset: PropTypes.number,
     components: PropTypes.object.isRequired,
     onClick: PropTypes.func,
     valueToLabelMapper: PropTypes.func,
