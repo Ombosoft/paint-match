@@ -28,7 +28,7 @@ function LevelTitle({ onDebug, level }) {
             <Box
                 onClick={maybeTriggerDebug}
                 style={{
-                    fontSize: "min(6vh, max(10px, 5vw))",
+                    fontSize: "min(5vh, max(10px, 5vw))",
                     textTransform: "capitalize",
                     color: textForeground,
                 }}
