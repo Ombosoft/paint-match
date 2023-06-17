@@ -1,6 +1,9 @@
 ## 7
 
+2023-06-17
+
 * Full redesign of the whole UI
+* Improvements in gameplay and tutorials
 
 ## 6
 
