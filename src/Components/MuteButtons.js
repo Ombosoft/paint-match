@@ -6,6 +6,7 @@ import { Box, IconButton, Stack, Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { textForeground } from "../Constants";
+import { gaButton } from "../GA";
 import { SoundsMutedContext } from "../Sfx";
 
 export function MuteButtons({ musicMuted, toggleMuteMusic, toggleMuteSounds }) {
@@ -19,6 +20,7 @@ export function MuteButtons({ musicMuted, toggleMuteMusic, toggleMuteSounds }) {
             marginTop="-5vmin"
         >
             <MuteButton
+                id="mute_music"
                 muted={musicMuted}
                 toggleMute={toggleMuteMusic}
                 onIcon={<MusicNoteIcon />}
@@ -26,6 +28,7 @@ export function MuteButtons({ musicMuted, toggleMuteMusic, toggleMuteSounds }) {
                 title="music"
             />
             <MuteButton
+                id="mute_sounds"
                 muted={soundsMuted}
                 toggleMute={toggleMuteSounds}
                 onIcon={<VolumeUpIcon />}
@@ -46,7 +49,11 @@ export function MuteButtons({ musicMuted, toggleMuteMusic, toggleMuteSounds }) {
     );
 }
 
-function MuteButton({ muted, toggleMute, onIcon, offIcon, title }) {
+function MuteButton({ id, muted, toggleMute, onIcon, offIcon, title }) {
+    function handleClick() {
+        toggleMute();
+        gaButton(id);
+    }
     return (
         <>
             <Tooltip
@@ -55,7 +62,7 @@ function MuteButton({ muted, toggleMute, onIcon, offIcon, title }) {
                 arrow
             >
                 <IconButton
-                    onClick={toggleMute}
+                    onClick={handleClick}
                     color="secondary"
                     size="medium"
                 >

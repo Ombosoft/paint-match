@@ -22,6 +22,7 @@ function SkipLevelButton({ enabled, goodEnough, nextLevel }) {
 
     return (
         <NiceButton
+            id="skip"
             title={
                 allowSkipLevelTutorial && goodEnough ? (
                     <h1>Well done! Next level unlocked.</h1>

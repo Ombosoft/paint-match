@@ -19,6 +19,7 @@ import {
 } from "../Constants";
 import { LevelsPanelContext } from "../Context/LevelsPanelContext";
 import { NumDropletsContext } from "../Context/NumDropletsContext";
+import { gaLevelStart } from "../GA";
 import { optimalSolution } from "../GameAI";
 import { formatHint, generateHint } from "../HintGenerator";
 import {
@@ -202,6 +203,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                 )
             );
         }
+        gaLevelStart(newLevel);
     }
 
     function handleClick(color) {

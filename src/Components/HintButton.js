@@ -16,6 +16,7 @@ function HintButton({ enabled, onClick }) {
 
     return (
         <NiceButton
+            id="hint"
             title={allowTutorial ? <h1>Get advice</h1> : "Hint"}
             enabled={enabled}
             onClick={handleClick}

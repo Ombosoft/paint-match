@@ -23,6 +23,7 @@ function ResetButton({ enabled, level, resetColors }) {
 
     return (
         <NiceButton
+            id="reset"
             title={
                 showTutorial ? <h1>Starting fresh can help</h1> : "Start over"
             }

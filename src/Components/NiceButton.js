@@ -1,10 +1,12 @@
 import { IconButton, Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
+import { gaButton } from "../GA";
 import shiftPopper from "../Util/TooltipUtils";
 
 // IconButton with tooltip that can be forced to show
 function NiceButton({
+    id,
     title,
     enabled,
     onClick,
@@ -25,6 +27,7 @@ function NiceButton({
     function handleClick() {
         setOpenTooltip(false);
         onClick();
+        gaButton(id)
     }
 
     if (!enabled) {
@@ -58,6 +61,7 @@ NiceButton.defaultProps = {
 };
 
 NiceButton.propTypes = {
+    id: PropTypes.string.isRequired,
     title: PropTypes.any.isRequired,
     enabled: PropTypes.bool.isRequired,
     onClick: PropTypes.func.isRequired,

@@ -15,6 +15,7 @@ function SlidersButton({ enabled, onClick }) {
 
     return (
         <NiceButton
+            id="sliders"
             title={allowTutorial ? <h1>Try slider mode</h1> : "Sliders"}
             enabled={enabled}
             onClick={handleClick}

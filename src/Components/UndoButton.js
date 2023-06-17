@@ -11,7 +11,12 @@ export default function UndoButton({ enabled, onClick }) {
     }
 
     return (
-        <NiceButton title="Undo" enabled={enabled} onClick={handleClick}>
+        <NiceButton
+            id="undo"
+            title="Undo"
+            enabled={enabled}
+            onClick={handleClick}
+        >
             <UndoIcon fontSize="large" />
         </NiceButton>
     );

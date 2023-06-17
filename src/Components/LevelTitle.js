@@ -2,6 +2,7 @@ import { Box, Button } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { textForeground } from "../Constants";
+import { gaAction } from "../GA";
 import { colorTable } from "../Levels";
 
 function LevelTitle({ onDebug, level }) {
@@ -14,10 +15,12 @@ function LevelTitle({ onDebug, level }) {
         const newDebug = !debug;
         setDebug(newDebug);
         onDebug(newDebug);
+        gaAction("debug", newDebug ? "on" : "off");
     }
 
     function clearLocalStorage() {
         localStorage.clear();
+        gaAction("debug", "cls");
     }
 
     return (
