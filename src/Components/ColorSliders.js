@@ -1,18 +1,25 @@
-import { Box } from "@mui/material";
+import { Stack } from "@mui/material";
 import PropTypes from "prop-types";
 import React from "react";
 import { cmykColors } from "../Colors";
+import { useIsWide } from "../Util/ViewportDimensions";
 import ColorSlider from "./ColorSlider";
 
 function ColorSliders({ level, components, onSetComponentValue }) {
+    const isWide = useIsWide();
     return (
-        <Box
+        <Stack
             sx={{
-                borderRadius: "1em",
+                borderRadius: "0.8em",
                 backgroundColor: "#505050a0",
                 paddingTop: "0.5em",
                 marginBottom: "4vmin",
+                paddingLeft: "0.7em",
             }}
+            width="100%"
+            direction={isWide ? "row": "column"}
+            flexWrap="wrap"
+            justifyContent="space-between"
         >
             {cmykColors.map(
                 (color) =>
@@ -22,10 +29,11 @@ function ColorSliders({ level, components, onSetComponentValue }) {
                             color={color.color}
                             components={components}
                             onSetComponentValue={onSetComponentValue}
+                            width={isWide ? 50: 100 }
                         />
                     )
             )}
-        </Box>
+        </Stack>
     );
 }
 

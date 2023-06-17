@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import React from "react";
 import { theme } from "../Colors";
 
-function ColorSlider({ color, components, onSetComponentValue }) {
+function ColorSlider({ color, components, onSetComponentValue, width }) {
     return (
-        <div className="Picker-slider">
+        <div style={{ width: `calc(${width}vw - 2em)` }}>
             <ThemeProvider theme={theme}>
                 <Slider
                     size="small"
@@ -27,6 +27,7 @@ ColorSlider.propTypes = {
     color: PropTypes.string.isRequired,
     components: PropTypes.object.isRequired,
     onSetComponentValue: PropTypes.func.isRequired,
+    width: PropTypes.number.isRequired,
 };
 
 export default ColorSlider;
