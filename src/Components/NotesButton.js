@@ -4,6 +4,7 @@ import { Box, Card, IconButton, Tooltip, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { hideTooltipDelay } from "../Constants";
+import { gaButton } from "../GA";
 import { useNotesTutorial } from "../Tutorial";
 import useDisappearingState from "../Util/DisappearingState";
 import shiftPopper from "../Util/TooltipUtils";
@@ -36,6 +37,7 @@ function NotesButton({ notes, enabled }) {
     function handleClick() {
         onUsed();
         setOpenTooltip(true);
+        gaButton("notes");
     }
     if (!enabled) {
         return (
@@ -66,9 +68,8 @@ function NotesButton({ notes, enabled }) {
             onClose={handleClose}
             onOpen={handleOpen}
             leaveTouchDelay={hideTooltipDelay}
-            placement="top-end"
             arrow
-            {...shiftPopper(0, -18)}
+            {...shiftPopper(0, -10)}
         >
             <IconButton onClick={handleClick} color="secondary" size="medium">
                 <DescriptionIcon />

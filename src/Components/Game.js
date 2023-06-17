@@ -263,7 +263,6 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         curLevel > 2 && colorTable[curLevel - 1].toast
             ? colorTable[curLevel - 1].toast
             : null;
-
     return (
         <NumDropletsContext.Provider value={numDroplets}>
             <LevelsPanelContext.Provider
