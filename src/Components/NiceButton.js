@@ -46,7 +46,7 @@ function NiceButton({
             onOpen={handleOpen}
             placement="top-end"
             arrow
-            {...shiftPopper(xOffset, -18)}
+            {...shiftPopper(xOffset, -11)}
         >
             <IconButton onClick={handleClick} color="secondary" size="medium">
                 {children}

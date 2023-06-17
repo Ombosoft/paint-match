@@ -33,7 +33,6 @@ function SkipLevelButton({ enabled, goodEnough, nextLevel }) {
             enabled={enabled}
             onClick={handleClick}
             forceTooltip={showTutorial}
-            xOffset={allowSkipLevelTutorial && goodEnough ? 100 : 0}
         >
             <FastForwardIcon fontSize="large" />
         </NiceButton>
