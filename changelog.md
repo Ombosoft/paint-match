@@ -1,5 +1,11 @@
+
+## 8
+
+2023-06-18
+
 * Less distracting background and animations
 * Droplet sounds
+* Sentry
 
 ## 7
 
@@ -7,6 +13,7 @@
 
 * Full redesign of the whole UI
 * Improvements in gameplay and tutorials
+* GA
 
 ## 6
 
