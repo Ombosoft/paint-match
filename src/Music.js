@@ -80,6 +80,7 @@ function useMusic() {
                             onend: onEnd,
                             volume: musicVolume,
                             rate: musicRate,
+                            autoSuspend: false,
                         })
                 )
             );

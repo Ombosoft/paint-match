@@ -1,3 +1,5 @@
+* Pause music in background
+* Fix music clicking on Android
 
 ## 8
 

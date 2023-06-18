@@ -118,6 +118,7 @@ function useHowl({ src, volume, rate, sprite }) {
                     volume: volume,
                     rate: rate,
                     sprite: sprite,
+                    autoSuspend: false,
                 })
             );
             // console.log('Howl count', Howler._howls.length);
