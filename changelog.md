@@ -6,6 +6,7 @@
 * Less distracting background and animations
 * Droplet sounds
 * Sentry
+* Start ionic capacitor integration
 
 ## 7
 
