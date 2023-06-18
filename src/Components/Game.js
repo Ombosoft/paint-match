@@ -29,6 +29,7 @@ import {
     useLevelStatus,
 } from "../LevelStatus";
 import { colorTable } from "../Levels";
+import { useDropletSound } from "../Sfx";
 import { percentMatch, randomLevel } from "../Util/Utils";
 import { vecCompSum } from "../Util/Vec";
 import { useIsWide } from "../Util/ViewportDimensions";
@@ -72,6 +73,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     const [levelsPanelOpen, setLevelsPanelOpen] = useState(false);
     const [hint, setHint] = useState(null);
     const [usedHint, setUsedHint] = useState(false);
+    const dropletSound = useDropletSound();
 
     const numDroplets = vecCompSum(Object.values(components));
     const curStars = isPerfectVictory(curLevel, numDroplets, usedHint)
@@ -207,6 +209,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     }
 
     function handleClick(color) {
+        dropletSound(components[color]);
         if (victory) {
             return;
         }

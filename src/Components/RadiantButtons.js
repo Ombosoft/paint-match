@@ -64,6 +64,7 @@ function RadiantButtons({
 
 function ArcLabel({ datum, valueToLabelMapper, tooltip, inFocus }) {
     const color = datum.label;
+    const numDroplets = datum.value;
     const viewportPercent = useViewportPercent();
     const colorName = (
         <div
@@ -81,7 +82,7 @@ function ArcLabel({ datum, valueToLabelMapper, tooltip, inFocus }) {
                 fontWeight: "bold",
             }}
         >
-            {valueToLabelMapper(datum.value)}
+            {valueToLabelMapper(numDroplets)}
         </div>
     );
     return (

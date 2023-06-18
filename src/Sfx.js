@@ -76,7 +76,7 @@ function playbackRate(numDroplets) {
     return Math.min(2.6, playbackRate(50) + 0.003 * (numDroplets - 50));
 }
 
-export function useDropletSound(numDroplets) {
+export function useDropletSound() {
     // Start and duration, ms
     const dropletSprites = {
         0: [140, 340],
@@ -96,12 +96,14 @@ export function useDropletSound(numDroplets) {
         14: [12427, 438],
         15: [13253, 375],
     };
-    return useHowl({
+    const play = useHowl({
         src: "/sfx/droplet.mp3",
         volume: 0.6,
-        rate: playbackRate(numDroplets),
         sprite: dropletSprites,
     });
+    return (numDroplets) => {
+        play({rateOverride: playbackRate(numDroplets)});
+    }
 }
 
 function useHowl({ src, volume, rate, sprite }) {
@@ -123,7 +125,7 @@ function useHowl({ src, volume, rate, sprite }) {
         // There's no need to create more than one instance per sound.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    const play = useCallback(() => {
+    const play = useCallback(({rateOverride} = {}) => {
         if (!sound) {
             return;
         }
@@ -138,6 +140,9 @@ function useHowl({ src, volume, rate, sprite }) {
         }
         if (rate) {
             sound.rate(rate);
+        }
+        if (rateOverride) {
+            sound.rate(rateOverride);
         }
     }, [muted, sound, rate, sprite]);
     return play;
