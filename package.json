@@ -4,6 +4,8 @@
   "homepage": ".",
   "private": true,
   "dependencies": {
+    "@capacitor/android": "5.0.5",
+    "@capacitor/core": "^5.0.5",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
@@ -58,6 +60,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.21.5",
-    "@babel/node": "^7.22.1"
-  }
+    "@babel/node": "^7.22.1",
+    "@capacitor/cli": "^5.0.5"
+ }
 }

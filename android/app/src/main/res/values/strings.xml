@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Paint Match</string>
+    <string name="title_activity_main">Paint Match</string>
+    <string name="package_name">top.ombosoft.paintmatch</string>
+    <string name="custom_url_scheme">top.ombosoft.paintmatch</string>
+</resources>

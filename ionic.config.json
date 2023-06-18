@@ -1,0 +1,7 @@
+{
+    "name": "Paint Match",
+    "integrations": {
+        "capacitor": {}
+    },
+    "type": "react"
+}
