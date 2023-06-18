@@ -1,3 +1,6 @@
+* Less distracting background and animations
+* Droplet sounds
+
 ## 7
 
 2023-06-17
