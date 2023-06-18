@@ -2,6 +2,7 @@ import { Howl } from "howler";
 import { useCallback, useEffect, useRef } from "react";
 import { musicFadeDurationMs, musicRate, musicVolume } from "./Constants";
 import { useLocalStorage } from "./Util/LocalStorageHook";
+import { usePageVisibility } from "./Util/PageVisibility";
 import { mapValues } from "./Util/Utils";
 
 const musicPrefix = process.env.PUBLIC_URL + "/music/";
@@ -28,35 +29,43 @@ const trackConfig = {
 // when interaction with the app started.
 function useMusic() {
     const [muted, setMuted] = useLocalStorage("muteMusic", false);
+    const isVisible = usePageVisibility();
     // persist Howl sound instance between renders
     const jukebox = useRef();
     const tracks = useRef();
-    const mutedRef = useRef(muted);
+    const canPlay = useRef(isVisible && !muted);
     const curLevel = useRef(0);
 
     useEffect(() => {
-        mutedRef.current = muted; // refresh muted flag so it's visible in onend callback
-    }, [muted]);
+        const prev = canPlay.current;
+        canPlay.current = isVisible && !muted; // refresh muted flag so it's visible in onend callback
+        if (prev !== canPlay.current) {
+            playPause(canPlay.current);
+        }
+    }, [isVisible, muted]);
 
     // State machine
     const onEnd = useCallback(() => {
-        if (mutedRef.current) {
+        if (!canPlay.current) {
             return;
         }
         const nextTrackKey = chooseNextTrack(
             Object.keys(trackConfig),
             jukebox.current.trackId,
-            curLevel.current,
+            curLevel.current
         );
         const nextTrack = tracks.current[nextTrackKey];
         if (!nextTrack) {
             console.warn("no next track for level", curLevel.current);
             return;
         }
-        jukebox.current.sound = nextTrackKey !== jukebox.current.trackId ? (nextTrack.transition ?? nextTrack.loop) : nextTrack.loop;
+        jukebox.current.sound =
+            nextTrackKey !== jukebox.current.trackId
+                ? nextTrack.transition ?? nextTrack.loop
+                : nextTrack.loop;
         jukebox.current.trackId = nextTrackKey;
         jukebox.current.sound.play();
-        console.log("play", jukebox.current.sound._src, {nextTrackKey});
+        console.log("play", jukebox.current.sound._src, { nextTrackKey });
     }, []);
 
     // Initialize everything
@@ -83,18 +92,21 @@ function useMusic() {
         }
     }, [onEnd, jukebox]);
 
-    // Callback exposed to the mute button
-    const toggleMute = useCallback(() => {
-        const newMuted = !muted;
-        setMuted(newMuted);
-        if (newMuted) {
-            jukebox.current.sound.fade(musicVolume, 0, musicFadeDurationMs);
-        } else {
+    function playPause(shouldPlay) {
+        if (shouldPlay) {
             if (!jukebox.current.sound.playing()) {
                 jukebox.current.sound.play();
             }
             jukebox.current.sound.fade(0, musicVolume, musicFadeDurationMs);
+        } else {
+            jukebox.current.sound.fade(musicVolume, 0, musicFadeDurationMs);
         }
+    }
+
+    // Callback exposed to the mute button
+    const toggleMute = useCallback(() => {
+        const newMuted = !muted;
+        setMuted(newMuted);
     }, [muted, setMuted]);
 
     // Callback that starts music when the app is ready
@@ -113,7 +125,7 @@ function useMusic() {
 }
 
 function chooseNextTrack(trackIds, curId, levelNum) {
-    const desiredId = Math.max(...trackIds.filter((x) => x <= levelNum))
+    const desiredId = Math.max(...trackIds.filter((x) => x <= levelNum));
     if (curId >= desiredId) {
         return desiredId;
     }
