@@ -12,7 +12,7 @@ While using our Game, we may ask you to provide us with certain personally ident
 
 *Usage Data:*
 
-We may also collect information that your device sends whenever you use our Game ("Usage Data"). This Usage Data may include information such as your computer's Internet Protocol address (e.g. IP address), browser type, browser version, the sections of our Game that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers, and other diagnostic data.
+We may also collect information that your device sends whenever you use our Game ("Usage Data"). This Usage Data may include information such as your, browser type, browser version, the sections of our Game that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers, and other diagnostic data.
 
 **2. Use of Data**
 
