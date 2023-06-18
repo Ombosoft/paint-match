@@ -1,8 +1,7 @@
 import AppsIcon from "@mui/icons-material/Apps";
-import { IconButton } from "@mui/material";
 import { useContext } from "react";
 import { LevelsPanelContext } from "../Context/LevelsPanelContext";
-import { gaButton } from "../GA";
+import NiceButton from "./NiceButton";
 
 export default function LevelsButton({ onClick }) {
     const { setLevelsPanelOpen } = useContext(LevelsPanelContext);
@@ -11,11 +10,16 @@ export default function LevelsButton({ onClick }) {
             onClick();
         }
         setLevelsPanelOpen(true);
-        gaButton("levels");
     }
     return (
-        <IconButton color="secondary" onClick={handleClick}>
+        <NiceButton
+            id="levels"
+            title={"Choose level"}
+            enabled={true}
+            onClick={handleClick}
+            forceTooltip={false}
+        >
             <AppsIcon fontSize="large" />
-        </IconButton>
+        </NiceButton>
     );
 }
