@@ -282,7 +282,6 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                     <OneOrTwoRows
                         firstRow={
                             <>
-                                {" "}
                                 <LevelsButton />
                                 <LevelTitle
                                     onDebug={handleDebug}
