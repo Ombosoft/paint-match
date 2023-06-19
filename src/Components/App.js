@@ -4,6 +4,7 @@ import useMusic from "../Music";
 import { SoundsMutedContext, useSoundControl } from "../Sfx";
 import "./App.css";
 import Game from "./Game";
+import { LsOffDetector } from "./LsOffDetector";
 import { MuteButtons } from "./MuteButtons";
 
 // Main app component.
@@ -19,6 +20,7 @@ function App() {
     });
     return (
         <ThemeProvider theme={theme}>
+            <LsOffDetector/>
             <div className="App">
                 <div className="background" />
                 <header className="App-header">

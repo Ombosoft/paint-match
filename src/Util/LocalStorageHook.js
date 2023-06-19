@@ -6,7 +6,8 @@ export function useLocalStorage(key, defaultValue) {
         try {
             const storedValue = localStorage.getItem(key);
             return storedValue ? JSON.parse(storedValue) : defaultValue;
-        } catch {
+        } catch (ex) {
+            console.debug("Failed to read game state from local storage", ex);
             return defaultValue;
         }
     });
@@ -15,10 +16,22 @@ export function useLocalStorage(key, defaultValue) {
         setValue((prevValue) => {
             const result =
                 newValue instanceof Function ? newValue(prevValue) : newValue;
-            localStorage.setItem(key, JSON.stringify(result));
+            try {
+                localStorage.setItem(key, JSON.stringify(result));
+            } catch (ex) {
+                console.info("Failed to save game state to local storage", ex);
+            }
             return result;
         });
     };
-
     return [value, setValueAndStore];
+}
+
+export function useIsLocalStorageEnabled() {
+    try {
+        localStorage.setItem("test", "ok");
+    } catch {
+        return false;
+    }
+    return true;
 }
