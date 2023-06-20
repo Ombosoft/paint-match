@@ -149,7 +149,7 @@ export function textColor(backgroundCMYK, threshold = defaultContrastThreshold) 
 }
 
 export function textColorFromRGB(backgroundRGB, threshold = defaultContrastThreshold) {
-    return textColorImpl(convert.hex.lab(backgroundRGB));
+    return textColorImpl(convert.hex.lab(backgroundRGB), threshold);
 }
 
 export function textColorFromName(color) {
