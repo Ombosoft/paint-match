@@ -31,12 +31,26 @@ function LevelsPanel({
                 sx: {
                     borderRadius: "21px",
                     margin: "8px",
+                    position: "relative", 
+                    "::before": {
+                        content: '""',
+                        position: "absolute",
+                        left: 0,
+                        top: 0,
+                        width: "100%",
+                        height: "100%",
+                        background: `url(${process.env.PUBLIC_URL + "/img/b2.jpg"})`,
+                        backgroundPosition: "center center",
+                        backgroundSize: "cover",
+                        filter: "brightness(0.4)",
+                    },
                 },
             }}
         >
             <DialogContent
                 sx={{
-                    padding: "20px 14px",
+                    padding: "14px 14px",
+                    paddingRight: "0px",
                 }}
             >
                 <Stack direction="row" flexWrap="wrap" justifyContent="center">
@@ -71,9 +85,7 @@ function PickLevelButton({ level, stars, onClose }) {
                         backgroundColor: "black",
                         backgroundImage: `linear-gradient(135deg, ${rgbToString(
                             levelRGB(levelDef)
-                        )}, ${rgbToString(
-                            levelRGB(levelDef)
-                        )}70)`,
+                        )}, ${rgbToString(levelRGB(levelDef))}70)`,
                     }}
                 >
                     <Typography
@@ -100,7 +112,6 @@ function PickLevelButton({ level, stars, onClose }) {
         </Box>
     );
 }
-
 
 LevelsPanel.propTypes = {
     open: PropTypes.bool.isRequired,
