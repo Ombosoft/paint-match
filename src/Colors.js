@@ -135,18 +135,20 @@ export function rgbToString(rgb) {
     return `#${rgb}`;
 }
 
-function textColorImpl([l]) {
-    if (l > 53) {
+function textColorImpl([l], threshold) {
+    if (l > threshold) {
         return "black";
     }
     return textForeground;
 }
 
-export function textColor(backgroundCMYK) {
-    return textColorImpl(convert.cmyk.lab(backgroundCMYK));
+const defaultContrastThreshold = 53
+
+export function textColor(backgroundCMYK, threshold = defaultContrastThreshold) {
+    return textColorImpl(convert.cmyk.lab(backgroundCMYK), threshold);
 }
 
-export function textColorFromRGB(backgroundRGB) {
+export function textColorFromRGB(backgroundRGB, threshold = defaultContrastThreshold) {
     return textColorImpl(convert.hex.lab(backgroundRGB));
 }
 

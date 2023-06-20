@@ -37,16 +37,20 @@ function LevelsPanel({
                         onClick={() => onClose(level)}
                         className="PickLevelButton"
                         sx={{
-                            backgroundImage: `linear-gradient(135deg, white, ${rgbToString(
+                            backgroundColor: "black",
+                            backgroundImage: `linear-gradient(135deg, ${rgbToString(
                                 levelRGB(levelDef)
-                            )})`,
+                            )}, ${rgbToString(
+                                levelRGB(levelDef)
+                            )}70)`,
                         }}
                     >
                         <Typography
                             variant="h6"
                             fontFamily="Nunito"
                             fontWeight="bold"
-                            color={textColor(levelDef.cmyk)}
+                            // threshold depends on additional black gradient
+                            color={textColor(levelDef.cmyk, 62)}
                         >
                             {level}
                         </Typography>
