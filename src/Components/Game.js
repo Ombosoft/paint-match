@@ -171,7 +171,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     }
 
     function undo() {
-        if (prevComponents.length === 0) {
+        if (!Array.isArray(prevComponents) || prevComponents.length === 0) {
             return;
         }
         setComponents(prevComponents.at(-1));
@@ -245,7 +245,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
 
     const allowResetWhen =
         !victory && (distanceGotWorse || numDroplets > dropletsUntilReset);
-    const enableUndo = prevComponents.length > 0 && !victory;
+    const enableUndo = Array.isArray(prevComponents) && prevComponents.length > 0 && !victory;
     const enableSkip =
         debug ||
         (resetCount >= 3 && !victory) ||

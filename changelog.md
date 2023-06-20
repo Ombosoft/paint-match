@@ -1,5 +1,6 @@
 * Pause music in background
 * Fix music clicking on Android
+* Handle disabled local storage
 
 ## 8
 
