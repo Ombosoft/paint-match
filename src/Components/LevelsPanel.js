@@ -23,52 +23,6 @@ function LevelsPanel({
     unlockedLevel,
     levelAchievements,
 }) {
-    function PickLevelButton({ level, stars }) {
-        const levelDef = colorTable[level];
-        return (
-            <Box component="span" sx={{ position: "relative" }}>
-                <Tooltip
-                    title={<Typography>{levelDef.name}</Typography>}
-                    placement="top"
-                    disableInteractive
-                    {...shiftPopper(0, -13)}
-                >
-                    <Button
-                        onClick={() => onClose(level)}
-                        className="PickLevelButton"
-                        sx={{
-                            backgroundColor: "black",
-                            backgroundImage: `linear-gradient(135deg, ${rgbToString(
-                                levelRGB(levelDef)
-                            )}, ${rgbToString(
-                                levelRGB(levelDef)
-                            )}70)`,
-                        }}
-                    >
-                        <Typography
-                            variant="h6"
-                            fontFamily="Nunito"
-                            fontWeight="bold"
-                            // threshold depends on additional black gradient
-                            color={textColor(levelDef.cmyk, 62)}
-                        >
-                            {level}
-                        </Typography>
-                    </Button>
-                </Tooltip>
-                <StarRack
-                    stars={stars}
-                    stackSx={{
-                        position: "absolute",
-                        top: "3em",
-                        left: "50%",
-                        transform: "translate(-50%, 1.2em)",
-                    }}
-                    fontSize={0.85}
-                />
-            </Box>
-        );
-    }
     return (
         <Dialog
             open={open}
@@ -91,6 +45,7 @@ function LevelsPanel({
                             key={level}
                             level={level}
                             stars={levelAchievements[level] ?? 0}
+                            onClose={onClose}
                         />
                     ))}
                 </Stack>
@@ -98,6 +53,54 @@ function LevelsPanel({
         </Dialog>
     );
 }
+
+function PickLevelButton({ level, stars, onClose }) {
+    const levelDef = colorTable[level];
+    return (
+        <Box component="span" sx={{ position: "relative" }}>
+            <Tooltip
+                title={<Typography>{levelDef.name}</Typography>}
+                placement="top"
+                disableInteractive
+                {...shiftPopper(0, -13)}
+            >
+                <Button
+                    onClick={() => onClose(level)}
+                    className="PickLevelButton"
+                    sx={{
+                        backgroundColor: "black",
+                        backgroundImage: `linear-gradient(135deg, ${rgbToString(
+                            levelRGB(levelDef)
+                        )}, ${rgbToString(
+                            levelRGB(levelDef)
+                        )}70)`,
+                    }}
+                >
+                    <Typography
+                        variant="h6"
+                        fontFamily="Nunito"
+                        fontWeight="bold"
+                        // threshold depends on additional black gradient
+                        color={textColor(levelDef.cmyk, 62)}
+                    >
+                        {level}
+                    </Typography>
+                </Button>
+            </Tooltip>
+            <StarRack
+                stars={stars}
+                stackSx={{
+                    position: "absolute",
+                    top: "3em",
+                    left: "50%",
+                    transform: "translate(-50%, 1.2em)",
+                }}
+                fontSize={0.85}
+            />
+        </Box>
+    );
+}
+
 
 LevelsPanel.propTypes = {
     open: PropTypes.bool.isRequired,
