@@ -1,3 +1,7 @@
+## 9
+
+2023-06-20
+
 * Redesign the levels selector
 * Pause music in background
 * Fix music clicking on Android
