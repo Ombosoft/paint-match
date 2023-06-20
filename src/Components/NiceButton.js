@@ -48,7 +48,7 @@ function NiceButton({
             arrow
             {...shiftPopper(xOffset, -11)}
         >
-            <IconButton onClick={handleClick} color="secondary" size="medium">
+            <IconButton id={id} onClick={handleClick} color="secondary" size="medium">
                 {children}
             </IconButton>
         </Tooltip>
