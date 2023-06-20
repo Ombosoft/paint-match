@@ -50,7 +50,6 @@ function LevelsPanel({
             <DialogContent
                 sx={{
                     padding: "14px 14px",
-                    paddingRight: "0px",
                 }}
             >
                 <Stack direction="row" flexWrap="wrap" justifyContent="center">
