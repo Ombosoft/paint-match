@@ -55,7 +55,7 @@ export function useLevelStatus() {
         [levelAchievements, setLevelAchievements]
     );
 
-    const levelStars = mapValues(levelAchievements, la => stars(la));
+    const levelStars = levelAchievements ? mapValues(levelAchievements, la => stars(la)) : {};
 
     return [
         curLevel,
