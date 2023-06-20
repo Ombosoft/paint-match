@@ -36,13 +36,43 @@ function useMusic() {
     const canPlay = useRef(isVisible && !muted);
     const curLevel = useRef(0);
 
+    const playSafe = useCallback(
+        (fn) => {
+            try {
+                if (!jukebox.current || !jukebox.current.sound) {
+                    return;
+                }
+                fn(jukebox.current.sound);
+            } catch (ex) {
+                console.warn("Failed to call sound", ex);
+            }
+        },
+        [jukebox]
+    );
+    const playPause = useCallback(
+        (shouldPlay) => {
+            if (shouldPlay) {
+                if (!jukebox.current.sound.playing()) {
+                    playSafe((sound) => sound.play());
+                }
+                playSafe((sound) =>
+                    sound.fade(0, musicVolume, musicFadeDurationMs)
+                );
+            } else {
+                playSafe((sound) =>
+                    sound.fade(musicVolume, 0, musicFadeDurationMs)
+                );
+            }
+        },
+        [playSafe]
+    );
     useEffect(() => {
         const prev = canPlay.current;
         canPlay.current = isVisible && !muted; // refresh muted flag so it's visible in onend callback
         if (prev !== canPlay.current) {
             playPause(canPlay.current);
         }
-    }, [isVisible, muted]);
+    }, [isVisible, muted, playPause]);
 
     // State machine
     const onEnd = useCallback(() => {
@@ -64,25 +94,28 @@ function useMusic() {
                 ? nextTrack.transition ?? nextTrack.loop
                 : nextTrack.loop;
         jukebox.current.trackId = nextTrackKey;
-        jukebox.current.sound.play();
+        playSafe((sound) => sound.play());
         console.log("play", jukebox.current.sound._src, { nextTrackKey });
-    }, []);
+    }, [playSafe]);
 
     // Initialize everything
     useEffect(() => {
         if (!tracks.current) {
             tracks.current = mapValues(trackConfig, (item) =>
-                mapValues(
-                    item,
-                    (fileName) =>
-                        new Howl({
+                mapValues(item, (fileName) => {
+                    try {
+                        return new Howl({
                             src: [musicPrefix + fileName],
                             onend: onEnd,
                             volume: musicVolume,
                             rate: musicRate,
                             autoSuspend: false,
-                        })
-                )
+                        });
+                    } catch (ex) {
+                        console.warn("Failed to create Howl", ex);
+                        return null;
+                    }
+                })
             );
         }
         if (!jukebox.current) {
@@ -92,17 +125,6 @@ function useMusic() {
             };
         }
     }, [onEnd, jukebox]);
-
-    function playPause(shouldPlay) {
-        if (shouldPlay) {
-            if (!jukebox.current.sound.playing()) {
-                jukebox.current.sound.play();
-            }
-            jukebox.current.sound.fade(0, musicVolume, musicFadeDurationMs);
-        } else {
-            jukebox.current.sound.fade(musicVolume, 0, musicFadeDurationMs);
-        }
-    }
 
     // Callback exposed to the mute button
     const toggleMute = useCallback(() => {
@@ -115,8 +137,8 @@ function useMusic() {
         if (muted || jukebox.current.sound.playing()) {
             return;
         }
-        jukebox.current.sound.play();
-    }, [muted, jukebox]);
+        playSafe((sound) => sound.play());
+    }, [muted, playSafe]);
 
     // Game story control
     const onChangeLevel = (level) => {
