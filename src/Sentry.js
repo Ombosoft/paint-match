@@ -1,15 +1,13 @@
 import * as Sentry from "@sentry/react";
+const sentryDsn =
+    "https://7ba852b4802048b191a9deda0dc08547@o4505380972265472.ingest.sentry.io/4505380974886912";
 
 export default function sentryInit() {
     try {
-        const dsn = require("./conf/sentrydsn.conf.js");
-        if (!dsn) {
-            return;
-        }
         Sentry.init({
             environment: process.env.NODE_ENV,
             release: "v9.1",
-            dsn: dsn.sentryDsn,
+            dsn: sentryDsn,
             integrations: [
                 new Sentry.Replay({
                     maskAllText: false,
