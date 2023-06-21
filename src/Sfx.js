@@ -102,8 +102,8 @@ export function useDropletSound() {
         sprite: dropletSprites,
     });
     return (numDroplets) => {
-        play({rateOverride: playbackRate(numDroplets)});
-    }
+        play({ rateOverride: playbackRate(numDroplets) });
+    };
 }
 
 function useHowl({ src, volume, rate, sprite }) {
@@ -112,39 +112,50 @@ function useHowl({ src, volume, rate, sprite }) {
     // Have to use effect to prevent leaking. Howler keeps all created Howl instances.
     useEffect(() => {
         if (!sound) {
-            setSound(
-                new Howl({
-                    src: process.env.PUBLIC_URL + src,
-                    volume: volume,
-                    rate: rate,
-                    sprite: sprite,
-                    autoSuspend: false,
-                })
-            );
-            // console.log('Howl count', Howler._howls.length);
+            try {
+                setSound(
+                    new Howl({
+                        src: process.env.PUBLIC_URL + src,
+                        volume: volume,
+                        rate: rate,
+                        sprite: sprite,
+                        autoSuspend: false,
+                    })
+                );
+                // console.log('Howl count', Howler._howls.length);
+            } catch (ex) {
+                console.warn("Failed to create Howl for sfx", ex);
+            }
         }
         // There's no need to create more than one instance per sound.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    const play = useCallback(({rateOverride} = {}) => {
-        if (!sound) {
-            return;
-        }
-        sound.stop();
-        if (muted) {
-            return;
-        }
-        if (sprite) {
-            sound.play(randElement(Object.keys(sprite)));
-        } else {
-            sound.play();
-        }
-        if (rate) {
-            sound.rate(rate);
-        }
-        if (rateOverride) {
-            sound.rate(rateOverride);
-        }
-    }, [muted, sound, rate, sprite]);
+    const play = useCallback(
+        ({ rateOverride } = {}) => {
+            if (!sound) {
+                return;
+            }
+            try {
+                sound.stop();
+                if (muted) {
+                    return;
+                }
+                if (sprite) {
+                    sound.play(randElement(Object.keys(sprite)));
+                } else {
+                    sound.play();
+                }
+                if (rate) {
+                    sound.rate(rate);
+                }
+                if (rateOverride) {
+                    sound.rate(rateOverride);
+                }
+            } catch (ex) {
+                console.warn("Failed to do sfx", ex);
+            }
+        },
+        [muted, sound, rate, sprite]
+    );
     return play;
 }
