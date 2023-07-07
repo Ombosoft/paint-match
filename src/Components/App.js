@@ -3,6 +3,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import useMusic from "../Music";
 import { SoundsMutedContext, useSoundControl } from "../Sfx";
 import "./App.css";
+import ConsentDialog from "./ConsentDialog";
 import Game from "./Game";
 import { LsOffDetector } from "./LsOffDetector";
 import { MuteButtons } from "./MuteButtons";
@@ -41,6 +42,7 @@ function App() {
                         </Stack>
                     </SoundsMutedContext.Provider>
                 </header>
+                <ConsentDialog/>
             </div>
         </ThemeProvider>
     );

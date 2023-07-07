@@ -1,6 +1,6 @@
 **Privacy Policy**
 
-**Last Updated: 8th June 2023**
+**Last Updated: 7th July 2023**
 
 This Privacy Policy describes how Your personal data is collected, used, and shared when you download or use "Paint Match" (the "Game") provided by "Ombosoft" ("us", "we", or "our").
 
@@ -28,20 +28,19 @@ We use the collected data for various purposes:
 
 **3. Retention of Data**
 
-We will retain your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use your Personal Data to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.
+We will retain your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. 
 
 **4. Transfer of Data**
 
 Your information, including Personal Data, may be transferred to — and maintained on — computers located outside of your state, province, country, or other governmental jurisdiction where the data protection laws may differ from those of your jurisdiction.
+Data is encrypted in transit.
 
 **5. Disclosure of Data**
 
 We may disclose your Personal Data in the good faith belief that such action is necessary to:
 
 - To comply with a legal obligation
-- To protect and defend the rights or property of "Your Company Name"
-- To prevent or investigate possible wrongdoing in connection with the Game
-- To protect the personal safety of users of the Game or the public
+- To protect and defend the rights or property of Ombosoft
 - To protect against legal liability
 
 **6. Security of Data**

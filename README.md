@@ -48,3 +48,7 @@ This project is licensed under multiple licenses:
 
 - The source code is licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for the full license text.
 - The sound effects are licensed under the [Creative Commons CC0](https://creativecommons.org/share-your-work/public-domain/cc0/).
+
+Privacy Policy
+---
+See [Privacy Policy Page](https://ombosoft.github.io/paint-match/PrivacyPolicy)
