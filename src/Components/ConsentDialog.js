@@ -8,7 +8,6 @@ import React, { useState } from "react";
 import { useDataConsent } from "../DataConsent";
 import { gaInit } from "../GA";
 import { sentryDisable } from "../Sentry";
-import { getPlatform } from "../Util/DeviceTypeDetector";
 
 const ConsentDialog = () => {
     const [optIn, setOptIn] = useDataConsent();
@@ -25,8 +24,8 @@ const ConsentDialog = () => {
     };
 
     return (
-        <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Welcome, Gamer! {getPlatform()}</DialogTitle>
+        <Dialog open={open} onClose={handleClose} style={{ zIndex: 2000 }}>
+            <DialogTitle>Welcome, Gamer!</DialogTitle>
             <DialogContent>
                 <DialogContentText>
                     We'd love your consent to collect anonymized usage data.
