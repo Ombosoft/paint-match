@@ -1,5 +1,5 @@
 {
-    "appId": "top.ombosoft.paintmatch",
+    "appId": "com.ombosoft.paintmatch",
     "appName": "Paint Match",
     "bundledWebRuntime": false,
     "npmClient": "npm",

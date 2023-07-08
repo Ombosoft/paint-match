@@ -1,4 +1,4 @@
-package top.ombosoft.paintmatch;
+package com.ombosoft.paintmatch;
 
 import com.getcapacitor.BridgeActivity;
 

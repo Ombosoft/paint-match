@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "top.ombosoft.paintmatch"
+    namespace "com.ombosoft.paintmatch"
     compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "top.ombosoft.paintmatch"
+        applicationId "com.ombosoft.paintmatch"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -17,8 +17,13 @@ android {
         }
     }
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+            applicationIdSuffix ".debug"
+            signingConfig signingConfigs.debug
+        }
+        release {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
         }
