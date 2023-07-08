@@ -24,7 +24,7 @@ const ConsentDialog = () => {
     };
 
     return (
-        <Dialog open={open} onClose={handleClose} style={{ zIndex: 2000 }}>
+        <Dialog open={open} onClose={() => handleClose(false)} style={{ zIndex: 2000 }}>
             <DialogTitle>Welcome, Gamer!</DialogTitle>
             <DialogContent>
                 <DialogContentText>
