@@ -10,6 +10,14 @@ export function getPlatform() {
     return Capacitor.getPlatform();
 }
 
+export function isNative() {
+    return getPlatform() !== 'web';
+}
+
+export function isAndroidNative() {
+    return getPlatform() === 'android';
+}
+
 function subscribe() {
     return () => {};
 }
