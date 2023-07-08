@@ -15,7 +15,7 @@ export function nativeInit() {
 }
 
 function androidInit() {
-    StatusBar.setOverlaysWebView({ overlay: true });
+    StatusBar.setOverlaysWebView({ overlay: false });
     StatusBar.setStyle({ style: Style.Dark });
     StatusBar.setBackgroundColor({ color: "#141414" });
 }

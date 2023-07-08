@@ -1,4 +1,3 @@
-import { Capacitor } from "@capacitor/core";
 import { Box, Button } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
@@ -34,7 +33,7 @@ function LevelTitle({ onDebug, level }) {
                     color: textForeground,
                 }}
             >
-                Level {level}{" "}{Capacitor.getPlatform()}{" "}
+                Level {level}{" "}
                 <span style={{ fontWeight: "bold" }}>
                     {colorTable[level].name}
                 </span>
