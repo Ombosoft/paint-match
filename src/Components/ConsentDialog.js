@@ -5,37 +5,52 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import React, { useState } from "react";
+import { useDataConsent } from "../DataConsent";
+import { gaInit } from "../GA";
+import { sentryDisable } from "../Sentry";
+import { getPlatform } from "../Util/DeviceTypeDetector";
 
 const ConsentDialog = () => {
-    const [open, setOpen] = useState(true);
+    const [optIn, setOptIn] = useDataConsent();
+    const [open, setOpen] = useState(optIn === null);
 
-    const handleClose = () => {
+    const handleClose = (consent) => {
         setOpen(false);
-        // TODO Save user's consent decision to localStorage
-        // TODO Act on opt out
+        setOptIn(consent);
+        if (consent) {
+            gaInit();
+        } else {
+            sentryDisable();
+        }
     };
 
     return (
         <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Disclaimer</DialogTitle>
+            <DialogTitle>Welcome, Gamer! {getPlatform()}</DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    In order to improve this game and fix bugs, we collect
-                    anonymized usage data. Are you ok with that? (See{" "}
+                    We'd love your consent to collect anonymized usage data.
+                    This helps us improve gameplay and zap bugs. We'll always
+                    respect our{" "}
                     <a href="https://ombosoft.github.io/paint-match/PrivacyPolicy">
                         Privacy Policy
                     </a>{" "}
-                    for more details)
+                    when handling your info. No obligation - you can still play
+                    either way.
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} color="primary" autoFocus>
-                    I'm fine with that
+                <Button
+                    onClick={() => handleClose(true)}
+                    color="primary"
+                    autoFocus
+                >
+                    Sure, I'm in!
                 </Button>
-                <Button onClick={handleClose} color="secondary">
-                    No
+                <Button onClick={() => handleClose(false)} color="secondary">
+                    No thanks
                 </Button>
-            </DialogActions>
+            </DialogActions>{" "}
         </Dialog>
     );
 };
