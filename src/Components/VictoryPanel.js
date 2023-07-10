@@ -1,6 +1,7 @@
 import FastForwardIcon from "@mui/icons-material/FastForward";
 import ReplayIcon from "@mui/icons-material/Replay";
 import {
+    Box,
     Dialog,
     DialogActions,
     DialogContent,
@@ -128,24 +129,26 @@ function VictoryPanel({
                         components={components}
                     />
                     <VictoryMessage contentProps={contentProps.current} />
-                    <DialogActions>
-                        <Stack direction="row">
+                    <DialogActions sx={{width: "100%"}}>
+                        <Stack direction="row" alignItems="end" justifyContent="space-between" sx={{width: "100%"}}>
                             <LevelsButton
                                 onClick={() => setDialogOpen(false)}
+                                showCaption
                             />
-                            <IconButton
-                                onClick={onReset}
-                                color="secondary"
-                                size="large"
-                            >
-                                <ReplayIcon fontSize="large" />
-                            </IconButton>
                             <IconButton
                                 onClick={handleNextLevel}
                                 color="secondary"
-                                size="large"
                             >
-                                <FastForwardIcon fontSize="large" />
+                                <Stack direction="column" alignItems="center">
+                                <FastForwardIcon sx={{ fontSize: "3em" }} />
+                                <Box sx={{fontSize: "1rem"}}>Next</Box>
+                                </Stack>
+                            </IconButton>
+                            <IconButton onClick={onReset} color="secondary">
+                                <Stack direction="column" alignItems="center">
+                                    <ReplayIcon fontSize="large" />
+                                    <Box sx={{fontSize: "1rem"}}>Retry</Box>
+                                </Stack>
                             </IconButton>
                         </Stack>
                     </DialogActions>
