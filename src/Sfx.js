@@ -23,7 +23,7 @@ export function useSoundControl() {
 export function useVictorySound() {
     return useHowl({
         src: "/sfx/victory.mp3",
-        volume: 0.4,
+        volume: 0.3,
         rate: 1.0,
         sprite: null,
     });
