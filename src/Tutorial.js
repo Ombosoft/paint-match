@@ -38,6 +38,10 @@ export function useHintTutorial() {
     return useOneOffTutorial("tutorial-hint");
 }
 
+export function useHintTutorial2() {
+    return useOneOffTutorial("tutorial-hint-2");
+}
+
 export function useNotesTutorial() {
     return useOneOffTutorial("tutorial-notes");
 }

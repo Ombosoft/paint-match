@@ -30,7 +30,7 @@ function LevelsButton({ onClick, showCaption }) {
 }
 
 LevelsButton.propTypes = {
-    onClick: PropTypes.func.isRequired,
+    onClick: PropTypes.func,
     showCaption: PropTypes.bool,
 };
 

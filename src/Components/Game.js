@@ -257,6 +257,11 @@ function Game({ autoPlayMusic, onChangeLevel }) {
             numDroplets > 0 &&
             curLevel > 0 &&
             colorTable[curLevel - 1].toast !== null);
+    const secondHintTutorial =
+        (!victory &&
+            resetCount > 1 &&
+            numDroplets > 10 &&
+            curLevel > 60);
     const enableSliders = debug || (resetCount >= 3 && !victory);
     const targetRGB = targetColorRGB();
     const currentRGB = victory
@@ -316,6 +321,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                         {curLevel >= firstLevelWithAllColors && (
                             <HintButton
                                 enabled={enableHints}
+                                secondTutorial={secondHintTutorial}
                                 onClick={showHint}
                             />
                         )}
