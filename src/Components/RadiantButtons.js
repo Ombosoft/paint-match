@@ -6,7 +6,7 @@ import { filterKeys, mapValues } from "../Util/Utils";
 import { useViewportPercent } from "../Util/ViewportDimensions";
 import PaletteChart from "./PaletteChart";
 
-const zeroValue = 2;
+const zeroValue = 3;
 
 function RadiantButtons({
     components,
