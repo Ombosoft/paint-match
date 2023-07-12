@@ -1,3 +1,9 @@
+### 10
+
+* Victory panel improvements
+* Tune SFX and motion
+* More actively suggest hints to unblock progress
+
 ### 9.1
 
 Minor changes
