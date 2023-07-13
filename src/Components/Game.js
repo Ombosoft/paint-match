@@ -171,11 +171,11 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     }
 
     function undo() {
-        console.log("undo", {prevComponents});
+        console.log("undo", { prevComponents });
         if (!Array.isArray(prevComponents) || prevComponents.length === 0) {
             return;
         }
-        setComponents(prevComponents.at(-1));
+        setComponents(prevComponents[prevComponents.length - 1]);
         setPrevComponents((prev) => [...prev.slice(0, -1)]);
         setHint(null);
     }
@@ -246,7 +246,8 @@ function Game({ autoPlayMusic, onChangeLevel }) {
 
     const allowResetWhen =
         !victory && (distanceGotWorse || numDroplets > dropletsUntilReset);
-    const enableUndo = Array.isArray(prevComponents) && prevComponents.length > 0 && !victory;
+    const enableUndo =
+        Array.isArray(prevComponents) && prevComponents.length > 0 && !victory;
     const enableSkip =
         debug ||
         (resetCount >= 3 && !victory) ||
@@ -259,10 +260,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
             curLevel > 0 &&
             colorTable[curLevel - 1].toast !== null);
     const secondHintTutorial =
-        (!victory &&
-            resetCount > 1 &&
-            numDroplets > 10 &&
-            curLevel > 60);
+        !victory && resetCount > 1 && numDroplets > 10 && curLevel > 60;
     const enableSliders = debug || (resetCount >= 3 && !victory);
     const targetRGB = targetColorRGB();
     const currentRGB = victory
