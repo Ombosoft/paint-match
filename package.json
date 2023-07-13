@@ -30,7 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org ombosoft --project paint-match ./build && sentry-cli sourcemaps upload --org ombosoft --project paint-match ./build"
   },
   "eslintConfig": {
     "extends": [

@@ -26,3 +26,5 @@ yarn-error.log*
 
 .idea
 launch.json
+# Sentry Auth Token
+.sentryclirc
