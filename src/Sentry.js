@@ -21,7 +21,7 @@ export function sentryInit() {
             // Performance Monitoring
             tracesSampleRate: 0.5,
             // Session Replay
-            replaysSessionSampleRate: 0.01,
+            replaysSessionSampleRate: 1.0,
             replaysOnErrorSampleRate: 1.0,
         });
     } catch {}
