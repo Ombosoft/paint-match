@@ -41,7 +41,6 @@ import LevelTitle from "./LevelTitle";
 import LevelsButton from "./LevelsButton";
 import LevelsPanel from "./LevelsPanel";
 import NotesButton from "./NotesButton";
-import OptionsMenuButton from "./OptionsMenuButton";
 import ResetButton from "./ResetButton";
 import SkipLevelButton from "./SkipLevelButton";
 import SlidersButton from "./SlidersButton";
@@ -288,7 +287,6 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                     <OneOrTwoRows
                         firstRow={
                             <>
-                                <OptionsMenuButton />
                                 <LevelsButton />
                                 <LevelTitle
                                     onDebug={handleDebug}
