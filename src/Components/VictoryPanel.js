@@ -1,14 +1,12 @@
 import FastForwardIcon from "@mui/icons-material/FastForward";
 import ReplayIcon from "@mui/icons-material/Replay";
 import {
-    Box,
     Dialog,
     DialogActions,
     DialogContent,
     DialogTitle,
-    IconButton,
     Stack,
-    Typography,
+    Typography
 } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useContext, useEffect, useRef, useState } from "react";
@@ -19,6 +17,7 @@ import { colorTable } from "../Levels.js";
 import { useVictorySound } from "../Sfx.js";
 import { toasts } from "../Toasts.js";
 import { randElement, simplePlural } from "../Util/Utils.js";
+import CaptionButton from "./CaptionButton.js";
 import LevelsButton from "./LevelsButton.js";
 import PaletteChart from "./PaletteChart.js";
 import StarRack from "./StarRack.js";
@@ -140,21 +139,20 @@ function VictoryPanel({
                                 onClick={() => setDialogOpen(false)}
                                 showCaption
                             />
-                            <IconButton
+                            <CaptionButton
+                                id="next-victory"
                                 onClick={handleNextLevel}
-                                color="secondary"
+                                caption="Next"
                             >
-                                <Stack direction="column" alignItems="center">
-                                    <FastForwardIcon sx={{ fontSize: "3em" }} />
-                                    <Box sx={{ fontSize: "1rem" }}>Next</Box>
-                                </Stack>
-                            </IconButton>
-                            <IconButton onClick={onReset} color="secondary">
-                                <Stack direction="column" alignItems="center">
-                                    <ReplayIcon fontSize="large" />
-                                    <Box sx={{ fontSize: "1rem" }}>Retry</Box>
-                                </Stack>
-                            </IconButton>
+                                <FastForwardIcon sx={{ fontSize: "3em" }} />
+                            </CaptionButton>
+                            <CaptionButton
+                                id="retry-victory"
+                                onClick={onReset}
+                                caption="Retry"
+                            >
+                                <ReplayIcon fontSize="large" />
+                            </CaptionButton>
                         </Stack>
                     </DialogActions>
                 </Stack>
