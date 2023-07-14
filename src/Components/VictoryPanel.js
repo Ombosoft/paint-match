@@ -6,7 +6,7 @@ import {
     DialogContent,
     DialogTitle,
     Stack,
-    Typography
+    Typography,
 } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useContext, useEffect, useRef, useState } from "react";
@@ -143,13 +143,15 @@ function VictoryPanel({
                                 id="next-victory"
                                 onClick={handleNextLevel}
                                 caption="Next"
+                                captionColor="black"
                             >
-                                <FastForwardIcon sx={{ fontSize: "3em" }} />
+                                <FastForwardIcon sx={{ fontSize: "2em" }} />
                             </CaptionButton>
                             <CaptionButton
                                 id="retry-victory"
                                 onClick={onReset}
                                 caption="Retry"
+                                captionColor="black"
                             >
                                 <ReplayIcon fontSize="large" />
                             </CaptionButton>

@@ -13,6 +13,7 @@ import { levelRGB, rgbToString, textColor } from "../Colors";
 import { colorTable } from "../Levels";
 import shiftPopper from "../Util/TooltipUtils";
 import { range } from "../Util/Utils";
+import ExtraMenu from "./ExtraMenu";
 import StarRack from "./StarRack";
 
 // Choose level dialog
@@ -54,7 +55,7 @@ function LevelsPanel({
                     padding: "14px 14px",
                 }}
             >
-                <Stack direction="column">
+                <Stack direction="column" spacing={2}>
                     <Stack
                         direction="row"
                         flexWrap="wrap"
@@ -69,15 +70,7 @@ function LevelsPanel({
                             />
                         ))}
                     </Stack>
-                    <Stack direction="row"
-                        sx={{
-                            zIndex: 1,
-                            width: "100%",
-                            fontSize: "2em",
-                        }}
-                    >
-                        baabaedfedf
-                    </Stack>
+                    <ExtraMenu />
                 </Stack>
             </DialogContent>
         </Dialog>

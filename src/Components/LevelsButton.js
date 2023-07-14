@@ -1,8 +1,8 @@
 import AppsIcon from "@mui/icons-material/Apps";
-import { Box, Stack } from "@mui/material";
 import PropTypes from "prop-types";
 import { useContext } from "react";
 import { LevelsPanelContext } from "../Context/LevelsPanelContext";
+import CaptionButton from "./CaptionButton";
 import NiceButton from "./NiceButton";
 
 function LevelsButton({ onClick, showCaption }) {
@@ -13,7 +13,16 @@ function LevelsButton({ onClick, showCaption }) {
         }
         setLevelsPanelOpen(true);
     }
-    return (
+    return showCaption ? (
+        <CaptionButton
+            id="levels-victory"
+            onClick={handleClick}
+            caption="Levels"
+            captionColor="black"
+        >
+            <AppsIcon fontSize="large" />
+        </CaptionButton>
+    ) : (
         <NiceButton
             id="levels"
             title={"Choose level"}
@@ -21,10 +30,7 @@ function LevelsButton({ onClick, showCaption }) {
             onClick={handleClick}
             forceTooltip={false}
         >
-            <Stack direction="column" alignItems="center">
-                <AppsIcon fontSize="large" />
-                {showCaption && <Box sx={{ fontSize: "1rem" }}>Levels</Box>}
-            </Stack>
+            <AppsIcon fontSize="large" />
         </NiceButton>
     );
 }
@@ -32,6 +38,7 @@ function LevelsButton({ onClick, showCaption }) {
 LevelsButton.propTypes = {
     onClick: PropTypes.func,
     showCaption: PropTypes.bool,
+    captionButtonStyle: PropTypes.bool,
 };
 
 export default LevelsButton;
