@@ -33,7 +33,7 @@ test("generateHintNegative", () => {
 });
 
 test("generateHintHelpless", () => {
-    expect(generateHint({...zeroComponents, blue: 15 }, { cmyk: [100, 25, 0, 20] })).toStrictEqual(
-        "It's easier to start over"
+    expect(generateHint({...zeroComponents, red: 20 }, { cmyk: [100, 25, 0, 20] })).toStrictEqual(
+        "It's easier to start over. You don't need [red]"
     );
 });
