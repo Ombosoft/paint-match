@@ -31,7 +31,7 @@ function LevelsPanel({
                 sx: {
                     borderRadius: "21px",
                     margin: "8px",
-                    position: "relative", 
+                    position: "relative",
                     "::before": {
                         content: '""',
                         position: "absolute",
@@ -39,7 +39,9 @@ function LevelsPanel({
                         top: 0,
                         width: "100%",
                         height: "100%",
-                        background: `url(${process.env.PUBLIC_URL + "/img/b2.jpg"})`,
+                        background: `url(${
+                            process.env.PUBLIC_URL + "/img/b2.jpg"
+                        })`,
                         backgroundPosition: "center center",
                         backgroundSize: "cover",
                         filter: "brightness(0.4)",
@@ -52,15 +54,30 @@ function LevelsPanel({
                     padding: "14px 14px",
                 }}
             >
-                <Stack direction="row" flexWrap="wrap" justifyContent="center">
-                    {range(unlockedLevel + 1).map((level) => (
-                        <PickLevelButton
-                            key={level}
-                            level={level}
-                            stars={levelAchievements[level] ?? 0}
-                            onClose={onClose}
-                        />
-                    ))}
+                <Stack direction="column">
+                    <Stack
+                        direction="row"
+                        flexWrap="wrap"
+                        justifyContent="center"
+                    >
+                        {range(unlockedLevel + 1).map((level) => (
+                            <PickLevelButton
+                                key={level}
+                                level={level}
+                                stars={levelAchievements[level] ?? 0}
+                                onClose={onClose}
+                            />
+                        ))}
+                    </Stack>
+                    <Stack direction="row"
+                        sx={{
+                            zIndex: 1,
+                            width: "100%",
+                            fontSize: "2em",
+                        }}
+                    >
+                        baabaedfedf
+                    </Stack>
                 </Stack>
             </DialogContent>
         </Dialog>

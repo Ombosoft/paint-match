@@ -129,8 +129,13 @@ function VictoryPanel({
                         components={components}
                     />
                     <VictoryMessage contentProps={contentProps.current} />
-                    <DialogActions sx={{width: "100%"}}>
-                        <Stack direction="row" alignItems="end" justifyContent="space-between" sx={{width: "100%"}}>
+                    <DialogActions sx={{ width: "100%" }}>
+                        <Stack
+                            direction="row"
+                            alignItems="end"
+                            justifyContent="space-between"
+                            sx={{ width: "100%" }}
+                        >
                             <LevelsButton
                                 onClick={() => setDialogOpen(false)}
                                 showCaption
@@ -140,14 +145,14 @@ function VictoryPanel({
                                 color="secondary"
                             >
                                 <Stack direction="column" alignItems="center">
-                                <FastForwardIcon sx={{ fontSize: "3em" }} />
-                                <Box sx={{fontSize: "1rem"}}>Next</Box>
+                                    <FastForwardIcon sx={{ fontSize: "3em" }} />
+                                    <Box sx={{ fontSize: "1rem" }}>Next</Box>
                                 </Stack>
                             </IconButton>
                             <IconButton onClick={onReset} color="secondary">
                                 <Stack direction="column" alignItems="center">
                                     <ReplayIcon fontSize="large" />
-                                    <Box sx={{fontSize: "1rem"}}>Retry</Box>
+                                    <Box sx={{ fontSize: "1rem" }}>Retry</Box>
                                 </Stack>
                             </IconButton>
                         </Stack>
