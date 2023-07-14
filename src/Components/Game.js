@@ -171,7 +171,6 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     }
 
     function undo() {
-        console.log("undo", { prevComponents });
         if (!Array.isArray(prevComponents) || prevComponents.length === 0) {
             return;
         }
