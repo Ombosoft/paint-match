@@ -92,7 +92,7 @@ export const colorTable = [
     { name: "hot pink", cmyk: [0,59,29,0], cost: 8, tolerance: 4 },
     { name: "cadmium orange", cmyk: [0,62,99,0], cost: 8, tolerance: 4 },
     { name: "cobalt green", cmyk: [58,0,56,43], cost: 9, tolerance: 4 },
-    { name: "purple", cmyk: [39,81,0,20], cost: 9, tolerance: 4 },
+    { name: "purple", cmyk: [39,81,0,20], cost: 9, tolerance: 4, extraWinTolerance: 0.1 },
     { name: "cadmium lemon", cmyk: [0,11,99,0], cost: 9, tolerance: 4 },
     { name: "dark blue", cmyk: [100,100,0,45], cost: 9, tolerance: 5 },
     { name: "wales", cmyk: [63,0,64,21], cost: 9, tolerance: 4 },

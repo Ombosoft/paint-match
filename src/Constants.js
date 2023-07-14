@@ -12,7 +12,7 @@ export const musicVolume = 1;
 export const musicRate = 1;
 export const musicFadeDurationMs = 500;
 
-export const defaultWinTolerance = 0.6;
+export const defaultWinTolerance = 0.7;
 
 export const imgPath = (fileName) => process.env.PUBLIC_URL + `/img/${fileName}`
 
