@@ -30,6 +30,7 @@ import {
 } from "../LevelStatus";
 import { colorTable } from "../Levels";
 import { useDropletSound } from "../Sfx";
+import { useLocalStorage } from "../Util/LocalStorageHook";
 import { percentMatch, randomLevel } from "../Util/Utils";
 import { vecCompSum } from "../Util/Vec";
 import { useIsWide } from "../Util/ViewportDimensions";
@@ -65,6 +66,10 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         onLevelAchievement,
     ] = useLevelStatus();
     const [targetLevel, setTargetLevel] = useState(colorTable[curLevel]);
+    const [ctaDisplayed, setCtaDisplayed] = useLocalStorage(
+        "cta-displayed",
+        false
+    );
     const maxDistance = 400;
     const [distance, setDistance] = useState(maxDistance);
     const [percentMatchVal, setPercentMatchVal] = useState(0);
@@ -181,9 +186,16 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         setHint(null);
     }
 
+    function maybeDisplayCta() {
+        if (!ctaDisplayed && curLevel >= 50) {
+            setCtaDisplayed(true);
+            setCtaOpen(true);
+        }
+    }
+
     function nextLevel() {
         setLevel(curLevel + 1);
-        setCtaOpen(true);
+        maybeDisplayCta();
     }
 
     function setLevel(newLevel) {
@@ -367,7 +379,12 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                     }
                     levelAchievements={levelAchievements}
                 />
-                <CtaDialog open={ctaOpen} onClose={() => {setCtaOpen(false);}} />
+                <CtaDialog
+                    open={ctaOpen}
+                    onClose={() => {
+                        setCtaOpen(false);
+                    }}
+                />
             </LevelsPanelContext.Provider>
         </NumDropletsContext.Provider>
     );
