@@ -24,5 +24,5 @@ export function gaAction(actionType, actionId) {
 }
 
 export function gaLevelStart(level) {
-    ReactGA.event("level_start", { level_name: JSON.stringify(level) });
+    gaAction("level_start", JSON.stringify(level));
 }
