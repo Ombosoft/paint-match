@@ -33,6 +33,7 @@ import { useDropletSound } from "../Sfx";
 import { percentMatch, randomLevel } from "../Util/Utils";
 import { vecCompSum } from "../Util/Vec";
 import { useIsWide } from "../Util/ViewportDimensions";
+import CtaDialog from "./CtaDialog";
 import GameContent from "./GameContent";
 import HealthBar from "./HealthBar";
 import { HintBox } from "./HintBox";
@@ -71,6 +72,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     const [resetCount, setResetCount] = useState(0);
     const [debug, setDebug] = useState(false);
     const [levelsPanelOpen, setLevelsPanelOpen] = useState(false);
+    const [ctaOpen, setCtaOpen] = useState(false);
     const [hint, setHint] = useState(null);
     const [usedHint, setUsedHint] = useState(false);
     const dropletSound = useDropletSound();
@@ -181,6 +183,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
 
     function nextLevel() {
         setLevel(curLevel + 1);
+        setCtaOpen(true);
     }
 
     function setLevel(newLevel) {
@@ -364,6 +367,7 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                     }
                     levelAchievements={levelAchievements}
                 />
+                <CtaDialog open={ctaOpen} onClose={() => {setCtaOpen(false);}} />
             </LevelsPanelContext.Provider>
         </NumDropletsContext.Provider>
     );

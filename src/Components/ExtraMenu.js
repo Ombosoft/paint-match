@@ -1,25 +1,15 @@
-import { Browser } from '@capacitor/browser';
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import { Box, Snackbar, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { imgPath, textForeground } from "../Constants";
-import { isNative } from "../Util/DeviceTypeDetector";
+import { textForeground } from "../Constants";
 import CaptionButton from "./CaptionButton";
+import ItchSnackBar from "./ItchSnackBar";
+import RateButton from "./RateButton";
 
 function ExtraMenu({ onCredits, onFeedback }) {
     const [rateOpen, setRateOpen] = useState(false);
-    const native = isNative();
-    async function onRate() {
-        if (native) {
-            await Browser.open({ url: 'https://play.google.com/store/apps/details?id=com.ombosoft.paintmatch' });
-        } else {
-            setRateOpen(true);
-        }
-    }
     return (
         <>
             <Stack
@@ -35,14 +25,12 @@ function ExtraMenu({ onCredits, onFeedback }) {
                     paddingBottom: "0.3em",
                 }}
             >
-                <CaptionButton
-                    id="rate"
-                    caption="Rate Us"
-                    captionColor={textForeground}
-                    onClick={onRate}
-                >
-                    <ThumbUpIcon />
-                </CaptionButton>
+                <RateButton
+                    id="menu-rate"
+                    onClick={() => {
+                        setRateOpen(true);
+                    }}
+                />
                 <CaptionButton
                     id="feedback"
                     caption="Feedback"
@@ -60,24 +48,12 @@ function ExtraMenu({ onCredits, onFeedback }) {
                     <PersonPinIcon />
                 </CaptionButton>
             </Stack>
-            {!native && (
-                <Snackbar
-                    open={rateOpen}
-                    autoHideDuration={5000}
-                    onClose={() => {
-                        setRateOpen(false);
-                    }}
-                    message={
-                        <Stack direction="row" alignItems="center" spacing={1}>
-                            <Box fontSize="1.5em">
-                                Please rate us on itch.io
-                            </Box>
-                            <ArrowForwardIcon />
-                            <img src={imgPath("rate-itch.png")} alt="" />
-                        </Stack>
-                    }
-                ></Snackbar>
-            )}
+            <ItchSnackBar
+                open={rateOpen}
+                onClose={() => {
+                    setRateOpen(false);
+                }}
+            />
         </>
     );
 }
