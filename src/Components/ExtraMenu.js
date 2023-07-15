@@ -2,11 +2,11 @@ import BugReportIcon from "@mui/icons-material/BugReport";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { Stack } from "@mui/material";
+import PropTypes from "prop-types";
 import { textForeground } from "../Constants";
 import CaptionButton from "./CaptionButton";
 
-function ExtraMenu() {
-    function showCredits() {}
+function ExtraMenu({ onCredits }) {
     return (
         <Stack
             direction="row"
@@ -25,7 +25,7 @@ function ExtraMenu() {
                 id="rate"
                 caption="Rate Us"
                 captionColor={textForeground}
-                onClick={showCredits}
+                onClick={onCredits}
             >
                 <ThumbUpIcon />
             </CaptionButton>
@@ -33,7 +33,7 @@ function ExtraMenu() {
                 id="feedback"
                 caption="Feedback"
                 captionColor={textForeground}
-                onClick={showCredits}
+                onClick={onCredits}
             >
                 <BugReportIcon />
             </CaptionButton>
@@ -41,7 +41,7 @@ function ExtraMenu() {
                 id="credits"
                 caption="Credits"
                 captionColor={textForeground}
-                onClick={showCredits}
+                onClick={onCredits}
             >
                 <PersonPinIcon />
             </CaptionButton>
@@ -49,4 +49,7 @@ function ExtraMenu() {
     );
 }
 
+ExtraMenu.propTypes = {
+    onCredits: PropTypes.func.isRequired,
+};
 export default ExtraMenu;

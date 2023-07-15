@@ -8,11 +8,12 @@ import {
     Typography,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { levelRGB, rgbToString, textColor } from "../Colors";
 import { colorTable } from "../Levels";
 import shiftPopper from "../Util/TooltipUtils";
 import { range } from "../Util/Utils";
+import CreditsDialog from "./CreditsDialog";
 import ExtraMenu from "./ExtraMenu";
 import StarRack from "./StarRack";
 
@@ -24,56 +25,70 @@ function LevelsPanel({
     unlockedLevel,
     levelAchievements,
 }) {
+    const [creditsOpen, setCreditsOpen] = useState(false);
+    const closePanel = useCallback(() => {
+        onClose(curLevel);
+    }, [curLevel, onClose]);
+    const showCredits = useCallback(() => {
+        closePanel();
+        setCreditsOpen(true);
+    }, [closePanel]);
     return (
-        <Dialog
-            open={open}
-            onClose={() => onClose(curLevel)}
-            PaperProps={{
-                sx: {
-                    borderRadius: "21px",
-                    margin: "8px",
-                    position: "relative",
-                    "::before": {
-                        content: '""',
-                        position: "absolute",
-                        left: 0,
-                        top: 0,
-                        width: "100%",
-                        height: "100%",
-                        background: `url(${
-                            process.env.PUBLIC_URL + "/img/b2.jpg"
-                        })`,
-                        backgroundPosition: "center center",
-                        backgroundSize: "cover",
-                        filter: "brightness(0.4)",
+        <>
+            <Dialog
+                open={open}
+                onClose={closePanel}
+                PaperProps={{
+                    sx: {
+                        borderRadius: "21px",
+                        margin: "8px",
+                        position: "relative",
+                        "::before": {
+                            content: '""',
+                            position: "absolute",
+                            left: 0,
+                            top: 0,
+                            width: "100%",
+                            height: "100%",
+                            background: `url(${
+                                process.env.PUBLIC_URL + "/img/b2.jpg"
+                            })`,
+                            backgroundPosition: "center center",
+                            backgroundSize: "cover",
+                            filter: "brightness(0.4)",
+                        },
                     },
-                },
-            }}
-        >
-            <DialogContent
-                sx={{
-                    padding: "14px 14px",
                 }}
             >
-                <Stack direction="column" spacing={2}>
-                    <Stack
-                        direction="row"
-                        flexWrap="wrap"
-                        justifyContent="center"
-                    >
-                        {range(unlockedLevel + 1).map((level) => (
-                            <PickLevelButton
-                                key={level}
-                                level={level}
-                                stars={levelAchievements[level] ?? 0}
-                                onClose={onClose}
-                            />
-                        ))}
+                <DialogContent
+                    sx={{
+                        padding: "14px 14px",
+                    }}
+                >
+                    <Stack direction="column" spacing={2}>
+                        <Stack
+                            direction="row"
+                            flexWrap="wrap"
+                            justifyContent="center"
+                        >
+                            {range(unlockedLevel + 1).map((level) => (
+                                <PickLevelButton
+                                    key={level}
+                                    level={level}
+                                    stars={levelAchievements[level] ?? 0}
+                                    onClose={onClose}
+                                />
+                            ))}
+                        </Stack>
+                        <ExtraMenu onCredits={showCredits} />
                     </Stack>
-                    <ExtraMenu />
-                </Stack>
-            </DialogContent>
-        </Dialog>
+                </DialogContent>
+            </Dialog>
+            <CreditsDialog
+                open={creditsOpen}
+                onClose={() => setCreditsOpen(false)}
+            />
+        </>
     );
 }
 
