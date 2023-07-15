@@ -19,7 +19,7 @@ function FeedbackDialog({ open, onClose }) {
     const [feedbackText, setFeedbackText] = useState("");
     const [thanksOpen, setThanksOpen] = useState(false);
     function sendFeedback() {
-        const eventId = Sentry.captureMessage("User Feedback");
+        const eventId = Sentry.captureMessage(feedbackText);
         const userFeedback = {
             event_id: eventId,
             comments: feedbackText,
