@@ -1,4 +1,5 @@
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { Browser } from '@capacitor/browser';
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
@@ -6,12 +7,18 @@ import { Box, Snackbar, Stack } from "@mui/material";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { imgPath, textForeground } from "../Constants";
+import { isNative } from "../Util/DeviceTypeDetector";
 import CaptionButton from "./CaptionButton";
 
 function ExtraMenu({ onCredits, onFeedback }) {
     const [rateOpen, setRateOpen] = useState(false);
-    function onRate() {
-        setRateOpen(true);
+    const native = isNative();
+    async function onRate() {
+        if (native) {
+            await Browser.open({ url: 'https://play.google.com/store/apps/details?id=com.ombosoft.paintmatch' });
+        } else {
+            setRateOpen(true);
+        }
     }
     return (
         <>
@@ -53,20 +60,24 @@ function ExtraMenu({ onCredits, onFeedback }) {
                     <PersonPinIcon />
                 </CaptionButton>
             </Stack>
-            <Snackbar
-                open={rateOpen}
-                autoHideDuration={5000}
-                onClose={() => {
-                    setRateOpen(false);
-                }}
-                message={
-                    <Stack direction="row" alignItems="center" spacing={1}>
-                        <Box fontSize="1.5em">Please rate us on itch.io</Box>
-                        <ArrowForwardIcon/>
-                        <img src={imgPath("rate-itch.png")} alt="" />
-                    </Stack>
-                }
-            ></Snackbar>
+            {!native && (
+                <Snackbar
+                    open={rateOpen}
+                    autoHideDuration={5000}
+                    onClose={() => {
+                        setRateOpen(false);
+                    }}
+                    message={
+                        <Stack direction="row" alignItems="center" spacing={1}>
+                            <Box fontSize="1.5em">
+                                Please rate us on itch.io
+                            </Box>
+                            <ArrowForwardIcon />
+                            <img src={imgPath("rate-itch.png")} alt="" />
+                        </Stack>
+                    }
+                ></Snackbar>
+            )}
         </>
     );
 }
