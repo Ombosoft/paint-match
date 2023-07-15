@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { textForeground } from "../Constants";
 import CaptionButton from "./CaptionButton";
 
-function ExtraMenu({ onCredits }) {
+function ExtraMenu({ onCredits, onFeedback }) {
     return (
         <Stack
             direction="row"
@@ -33,7 +33,7 @@ function ExtraMenu({ onCredits }) {
                 id="feedback"
                 caption="Feedback"
                 captionColor={textForeground}
-                onClick={onCredits}
+                onClick={onFeedback}
             >
                 <BugReportIcon />
             </CaptionButton>

@@ -15,6 +15,7 @@ import shiftPopper from "../Util/TooltipUtils";
 import { range } from "../Util/Utils";
 import CreditsDialog from "./CreditsDialog";
 import ExtraMenu from "./ExtraMenu";
+import FeedbackDialog from "./FeedbackDialog";
 import StarRack from "./StarRack";
 
 // Choose level dialog
@@ -26,12 +27,17 @@ function LevelsPanel({
     levelAchievements,
 }) {
     const [creditsOpen, setCreditsOpen] = useState(false);
+    const [feedbackOpen, setFeedbackOpen] = useState(false);
     const closePanel = useCallback(() => {
         onClose(curLevel);
     }, [curLevel, onClose]);
     const showCredits = useCallback(() => {
         closePanel();
         setCreditsOpen(true);
+    }, [closePanel]);
+    const showFeedback = useCallback(() => {
+        closePanel();
+        setFeedbackOpen(true);
     }, [closePanel]);
     return (
         <>
@@ -80,13 +86,17 @@ function LevelsPanel({
                                 />
                             ))}
                         </Stack>
-                        <ExtraMenu onCredits={showCredits} />
+                        <ExtraMenu onCredits={showCredits} onFeedback={showFeedback} />
                     </Stack>
                 </DialogContent>
             </Dialog>
             <CreditsDialog
                 open={creditsOpen}
                 onClose={() => setCreditsOpen(false)}
+            />
+            <FeedbackDialog
+                open={feedbackOpen}
+                onClose={() => setFeedbackOpen(false)}
             />
         </>
     );
