@@ -28,3 +28,5 @@ yarn-error.log*
 launch.json
 # Sentry Auth Token
 .sentryclirc
+
+resources/android/**/*
