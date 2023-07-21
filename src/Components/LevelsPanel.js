@@ -8,14 +8,12 @@ import {
     Typography,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { levelRGB, rgbToString, textColor } from "../Colors";
 import { colorTable } from "../Levels";
 import shiftPopper from "../Util/TooltipUtils";
 import { range } from "../Util/Utils";
-import CreditsDialog from "./CreditsDialog";
 import ExtraMenu from "./ExtraMenu";
-import FeedbackDialog from "./FeedbackDialog";
 import StarRack from "./StarRack";
 
 // Choose level dialog
@@ -25,20 +23,12 @@ function LevelsPanel({
     curLevel,
     unlockedLevel,
     levelAchievements,
+    onCredits,
+    onFeedback,
 }) {
-    const [creditsOpen, setCreditsOpen] = useState(false);
-    const [feedbackOpen, setFeedbackOpen] = useState(false);
     const closePanel = useCallback(() => {
         onClose(curLevel);
     }, [curLevel, onClose]);
-    const showCredits = useCallback(() => {
-        closePanel();
-        setCreditsOpen(true);
-    }, [closePanel]);
-    const showFeedback = useCallback(() => {
-        closePanel();
-        setFeedbackOpen(true);
-    }, [closePanel]);
     return (
         <>
             <Dialog
@@ -86,18 +76,13 @@ function LevelsPanel({
                                 />
                             ))}
                         </Stack>
-                        <ExtraMenu onCredits={showCredits} onFeedback={showFeedback} />
+                        <ExtraMenu
+                            onCredits={onCredits}
+                            onFeedback={onFeedback}
+                        />
                     </Stack>
                 </DialogContent>
             </Dialog>
-            <CreditsDialog
-                open={creditsOpen}
-                onClose={() => setCreditsOpen(false)}
-            />
-            <FeedbackDialog
-                open={feedbackOpen}
-                onClose={() => setFeedbackOpen(false)}
-            />
         </>
     );
 }
@@ -150,6 +135,8 @@ function PickLevelButton({ level, stars, onClose }) {
 LevelsPanel.propTypes = {
     open: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
+    onCredits: PropTypes.func.isRequired,
+    onFeedback: PropTypes.func.isRequired,
     unlockedLevel: PropTypes.number.isRequired,
     levelAchievements: PropTypes.object.isRequired,
 };

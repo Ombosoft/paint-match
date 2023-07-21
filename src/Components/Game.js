@@ -34,7 +34,9 @@ import { useLocalStorage } from "../Util/LocalStorageHook";
 import { percentMatch, randomLevel } from "../Util/Utils";
 import { vecCompSum } from "../Util/Vec";
 import { useIsWide } from "../Util/ViewportDimensions";
+import CreditsDialog from "./CreditsDialog";
 import CtaDialog from "./CtaDialog";
+import FeedbackDialog from "./FeedbackDialog";
 import GameContent from "./GameContent";
 import HealthBar from "./HealthBar";
 import { HintBox } from "./HintBox";
@@ -81,6 +83,8 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     const [hint, setHint] = useState(null);
     const [usedHint, setUsedHint] = useState(false);
     const dropletSound = useDropletSound();
+    const [creditsOpen, setCreditsOpen] = useState(false);
+    const [feedbackOpen, setFeedbackOpen] = useState(false);
 
     const numDroplets = vecCompSum(Object.values(components));
     const curStars = isPerfectVictory(curLevel, numDroplets, usedHint)
@@ -258,6 +262,15 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         setUsedHint(true);
     }
 
+    const showCredits = useCallback(() => {
+        setLevelsPanelOpen(false);
+        setCreditsOpen(true);
+    }, []);
+    const showFeedback = useCallback(() => {
+        setLevelsPanelOpen(false);
+        setFeedbackOpen(true);
+    }, []);
+
     const allowResetWhen =
         !victory && (distanceGotWorse || numDroplets > dropletsUntilReset);
     const enableUndo =
@@ -365,26 +378,44 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                     components={components}
                     stars={curStars}
                 />
-                <LevelsPanel
-                    open={levelsPanelOpen}
-                    onClose={handleLevelChoice}
-                    curLevel={curLevel}
-                    unlockedLevel={
-                        debug
-                            ? Math.min(
-                                  colorTable.length - 1,
-                                  unlockedLevel + 100
-                              )
-                            : unlockedLevel
-                    }
-                    levelAchievements={levelAchievements}
-                />
-                <CtaDialog
-                    open={ctaOpen}
-                    onClose={() => {
-                        setCtaOpen(false);
-                    }}
-                />
+                {levelsPanelOpen && (
+                    <LevelsPanel
+                        open={levelsPanelOpen}
+                        onClose={handleLevelChoice}
+                        onCredits={showCredits}
+                        onFeedback={showFeedback}
+                        curLevel={curLevel}
+                        unlockedLevel={
+                            debug
+                                ? Math.min(
+                                      colorTable.length - 1,
+                                      unlockedLevel + 100
+                                  )
+                                : unlockedLevel
+                        }
+                        levelAchievements={levelAchievements}
+                    />
+                )}
+                {ctaOpen && (
+                    <CtaDialog
+                        open={ctaOpen}
+                        onClose={() => {
+                            setCtaOpen(false);
+                        }}
+                    />
+                )}
+                {creditsOpen && (
+                    <CreditsDialog
+                        open={creditsOpen}
+                        onClose={() => setCreditsOpen(false)}
+                    />
+                )}
+                {feedbackOpen && (
+                    <FeedbackDialog
+                        open={feedbackOpen}
+                        onClose={() => setFeedbackOpen(false)}
+                    />
+                )}
             </LevelsPanelContext.Provider>
         </NumDropletsContext.Provider>
     );
