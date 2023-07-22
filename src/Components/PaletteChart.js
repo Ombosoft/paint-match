@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { linearGradientDef } from "@nivo/core";
-import { ResponsivePie } from "@nivo/pie";
+import { ResponsivePie, ResponsivePieCanvas } from "@nivo/pie";
 import { animated } from "@react-spring/web";
 import Bowser from "bowser";
 import PropTypes from "prop-types";
@@ -19,7 +19,7 @@ const theme = {
     },
     labels: {
         text: {
-            fontSize: "1em",
+            fontSize: "25",
             fontWeight: "bold",
             fontFamily: "Nunito",
         },
@@ -92,8 +92,8 @@ function gradientMatch(color) {
 }
 
 const browser = Bowser.getParser(window.navigator.userAgent);
-// Gradients are broken on iOS and in Safari when data changes dynamically
-const brokenGradients =
+// Gradients and SVG are broken on iOS and in Safari when data changes dynamically
+const brokenSVG =
     browser.getBrowserName() === "Safari" || browser.getOSName() === "iOS";
 const gradientFill = Object.keys(themePalette).map((color) =>
     gradientMatch(color)
@@ -137,7 +137,6 @@ function PaletteChart({
     valueToLabelMapper,
     tooltip,
     ArcLabel,
-    unbreakGradients,
 }) {
     const [focusedId, setFocusedId] = useState();
     const data = useMemo(
@@ -227,32 +226,56 @@ function PaletteChart({
           };
     return (
         <Box sx={{ height: height, width: width }}>
-            <ResponsivePie
-                data={data}
-                margin={margin}
-                theme={theme}
-                startAngle={startAngle}
-                endAngle={365}
-                fit={!noFit}
-                padAngle={0.9}
-                innerRadius={innerRadius}
-                {...activeOffsets}
-                colors={colorChooser}
-                borderWidth={borderWidth}
-                borderColor={borderColor}
-                arcLabelsTextColor={arcLabelsTextColor}
-                {...arcLabelsComponent(
-                    ArcLabel,
-                    valueToLabelMapper,
-                    tooltip,
-                    focusedId
-                )}
-                {...defs}
-                fill={brokenGradients && unbreakGradients ? [] : gradientFill}
-                onClick={handleMouseClick}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-            />
+            {brokenSVG ? (
+                <ResponsivePieCanvas
+                    data={data}
+                    arcLabel={(v) => valueToLabelMapper ? valueToLabelMapper(v.value) : v.value}
+                    margin={margin}
+                    theme={theme}
+                    startAngle={startAngle}
+                    endAngle={365}
+                    fit={!noFit}
+                    padAngle={0.9}
+                    innerRadius={innerRadius}
+                    {...activeOffsets}
+                    colors={colorChooser}
+                    borderWidth={borderWidth}
+                    borderColor={borderColor}
+                    arcLabelsTextColor={arcLabelsTextColor}
+                    {...defs}
+                    fill={gradientFill}
+                    onClick={handleMouseClick}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                />
+            ) : (
+                <ResponsivePie
+                    data={data}
+                    margin={margin}
+                    theme={theme}
+                    startAngle={startAngle}
+                    endAngle={365}
+                    fit={!noFit}
+                    padAngle={0.9}
+                    innerRadius={innerRadius}
+                    {...activeOffsets}
+                    colors={colorChooser}
+                    borderWidth={borderWidth}
+                    borderColor={borderColor}
+                    arcLabelsTextColor={arcLabelsTextColor}
+                    {...arcLabelsComponent(
+                        ArcLabel,
+                        valueToLabelMapper,
+                        tooltip,
+                        focusedId
+                    )}
+                    {...defs}
+                    fill={gradientFill}
+                    onClick={handleMouseClick}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                />
+            )}
         </Box>
     );
 }
@@ -306,7 +329,6 @@ PaletteChart.propTypes = {
     valueToLabelMapper: PropTypes.func,
     tooltip: PropTypes.string,
     ArcLabel: PropTypes.func,
-    unbreakGradients: PropTypes.bool,
 };
 
 export default PaletteChart;
