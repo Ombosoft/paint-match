@@ -2,19 +2,20 @@ import {
     Box,
     Button,
     Dialog,
-    DialogContent,
     Stack,
     Typography
 } from "@mui/material";
 import PropTypes from "prop-types";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { levelRGB, rgbToString, textColor } from "../Colors";
 import { colorTable } from "../Levels";
 import shiftPopper from "../Util/TooltipUtils";
 import { range } from "../Util/Utils";
 import ExtraMenu from "./ExtraMenu";
 import LightTooltip from "./LightTooltip";
+import ScrollableDialogContent from "./ScrollableDialogContent";
 import StarRack from "./StarRack";
+
 
 // Choose level dialog
 function LevelsPanel({
@@ -29,6 +30,15 @@ function LevelsPanel({
     const closePanel = useCallback(() => {
         onClose(curLevel);
     }, [curLevel, onClose]);
+    const contentRef = useRef(null);
+    useEffect(() => {
+        if (open) {
+          const { current } = contentRef;
+          if (current) {
+            current.scrollTop = current.scrollHeight;
+          }
+        }
+      }, [open]);
     return (
         <>
             <Dialog
@@ -56,10 +66,11 @@ function LevelsPanel({
                     },
                 }}
             >
-                <DialogContent
+                <ScrollableDialogContent open={open}
                     sx={{
                         padding: "14px 14px",
                     }}
+                    ref={contentRef}
                 >
                     <Stack direction="column" spacing={2}>
                         <Stack
@@ -81,7 +92,7 @@ function LevelsPanel({
                             onFeedback={onFeedback}
                         />
                     </Stack>
-                </DialogContent>
+                </ScrollableDialogContent>
             </Dialog>
         </>
     );
