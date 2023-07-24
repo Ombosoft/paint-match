@@ -41,7 +41,7 @@ function NotesButton({ notes, enabled }) {
     }
     if (!enabled) {
         return (
-            <IconButton color="secondary" size="medium" disabled>
+            <IconButton color="secondary" size="large" disabled>
                 <FormatQuoteIcon />
             </IconButton>
         );

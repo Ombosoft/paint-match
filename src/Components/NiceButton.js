@@ -32,7 +32,7 @@ function NiceButton({
 
     if (!enabled) {
         return (
-            <IconButton color="secondary" size="medium" disabled>
+            <IconButton color="secondary" size="large" disabled>
                 {children}
             </IconButton>
         );
@@ -48,7 +48,7 @@ function NiceButton({
             arrow
             {...shiftPopper(xOffset, -11)}
         >
-            <IconButton id={id} onClick={handleClick} color="secondary" size="medium">
+            <IconButton id={id} onClick={handleClick} color="secondary" size="large">
                 {children}
             </IconButton>
         </Tooltip>

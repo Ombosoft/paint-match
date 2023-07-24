@@ -26,8 +26,9 @@ function HintButton({ enabled, onClick, secondTutorial }) {
             onClick={handleClick}
             forceTooltip={showTutorial}
             xOffset={tutorialAllowed ? 50 : 0}
+            size="large"
         >
-            <TipsAndUpdatesIcon fontSize="medium" />
+            <TipsAndUpdatesIcon fontSize="large"/>
         </NiceButton>
     );
 }
