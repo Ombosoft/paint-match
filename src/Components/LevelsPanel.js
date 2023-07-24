@@ -4,8 +4,7 @@ import {
     Dialog,
     DialogContent,
     Stack,
-    Tooltip,
-    Typography,
+    Typography
 } from "@mui/material";
 import PropTypes from "prop-types";
 import React, { useCallback } from "react";
@@ -14,6 +13,7 @@ import { colorTable } from "../Levels";
 import shiftPopper from "../Util/TooltipUtils";
 import { range } from "../Util/Utils";
 import ExtraMenu from "./ExtraMenu";
+import LightTooltip from "./LightTooltip";
 import StarRack from "./StarRack";
 
 // Choose level dialog
@@ -55,7 +55,6 @@ function LevelsPanel({
                         },
                     },
                 }}
-                transitionDuration={100}
             >
                 <DialogContent
                     sx={{
@@ -92,8 +91,8 @@ function PickLevelButton({ level, stars, onClose }) {
     const levelDef = colorTable[level];
     return (
         <Box component="span" sx={{ position: "relative" }}>
-            <Tooltip
-                title={<Typography>{levelDef.name}</Typography>}
+            <LightTooltip
+                title={levelDef.name}
                 placement="top"
                 disableInteractive
                 {...shiftPopper(0, -13)}
@@ -118,7 +117,7 @@ function PickLevelButton({ level, stars, onClose }) {
                         {level}
                     </Typography>
                 </Button>
-            </Tooltip>
+            </LightTooltip>
             <StarRack
                 stars={stars}
                 stackSx={{
