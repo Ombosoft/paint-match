@@ -55,6 +55,7 @@ function LevelsPanel({
                         },
                     },
                 }}
+                transitionDuration={100}
             >
                 <DialogContent
                     sx={{
