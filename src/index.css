@@ -7,4 +7,5 @@ body {
     -moz-osx-font-smoothing: grayscale;
     max-height: 100%;
     overflow-x: hidden;
+    background-color: black;
 }
