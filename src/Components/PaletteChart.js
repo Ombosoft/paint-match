@@ -2,11 +2,10 @@ import { Box } from "@mui/material";
 import { linearGradientDef } from "@nivo/core";
 import { ResponsivePie, ResponsivePieCanvas } from "@nivo/pie";
 import { animated } from "@react-spring/web";
-import Bowser from "bowser";
 import PropTypes from "prop-types";
 import { useCallback, useMemo, useRef, useState } from "react";
 import { textColorFromName, themePalette } from "../Colors";
-import useIsTouchScreen from "../Util/DeviceTypeDetector";
+import {useIsTouchScreen, isAppleOrOldAndroid} from "../Util/DeviceTypeDetector";
 
 const theme = {
     background: "transparent",
@@ -19,7 +18,7 @@ const theme = {
     },
     labels: {
         text: {
-            fontSize: "25",
+            fontSize: "20",
             fontWeight: "bold",
             fontFamily: "Nunito",
         },
@@ -91,15 +90,11 @@ function gradientMatch(color) {
     };
 }
 
-const browser = Bowser.getParser(window.navigator.userAgent);
 // Gradients and SVG are broken on iOS and in Safari when data changes dynamically
-const brokenSVG =
-    browser.getBrowserName() === "Safari" || browser.getOSName() === "iOS";
+const brokenSVG = isAppleOrOldAndroid()
 const gradientFill = Object.keys(themePalette).map((color) =>
     gradientMatch(color)
 );
-const isOldIOS =
-    browser.getOSName() === "iOS" && parseInt(browser.getOSVersion()) < 16;
 
 const defs = {
     sortByValue: false,
@@ -218,18 +213,16 @@ function PaletteChart({
         return x.data.textColor;
     }, []);
     // Active animations are very slow on old iOS
-    const activeOffsets = isOldIOS
-        ? {}
-        : {
-              activeOuterRadiusOffset: activeOuterRadiusOffset,
-              activeInnerRadiusOffset: activeInnerRadiusOffset,
-          };
     return (
         <Box sx={{ height: height, width: width }}>
             {brokenSVG ? (
                 <ResponsivePieCanvas
                     data={data}
-                    arcLabel={(v) => valueToLabelMapper ? valueToLabelMapper(v.value) : v.value}
+                    arcLabel={(v) =>
+                        valueToLabelMapper
+                            ? valueToLabelMapper(v.value)
+                            : v.value
+                    }
                     margin={margin}
                     theme={theme}
                     startAngle={startAngle}
@@ -237,7 +230,6 @@ function PaletteChart({
                     fit={!noFit}
                     padAngle={0.9}
                     innerRadius={innerRadius}
-                    {...activeOffsets}
                     colors={colorChooser}
                     borderWidth={borderWidth}
                     borderColor={borderColor}
@@ -258,7 +250,8 @@ function PaletteChart({
                     fit={!noFit}
                     padAngle={0.9}
                     innerRadius={innerRadius}
-                    {...activeOffsets}
+                    activeOuterRadiusOffset={activeOuterRadiusOffset}
+                    activeInnerRadiusOffset={activeInnerRadiusOffset}
                     colors={colorChooser}
                     borderWidth={borderWidth}
                     borderColor={borderColor}
