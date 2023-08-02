@@ -21,8 +21,10 @@ export function isAndroidNative() {
 
 export function isAppleOrOldAndroid() {
     const browser = Bowser.getParser(window.navigator.userAgent);
-    const apple = browser.satisfies({ safari: ">=0", ios: ">=0" });
-    const android = browser.getOSName() === "Android";
+    const browserName = browser.getBrowserName(true);
+    const osName = browser.getOSName(true);
+    const apple = browserName === "safari" || osName === "ios";
+    const android = osName === "android";
     return apple || (android && getMajorVersion(browser.getOSVersion()) < 10);
 }
 
