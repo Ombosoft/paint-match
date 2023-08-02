@@ -21,11 +21,17 @@ export function isAndroidNative() {
 
 export function isAppleOrOldAndroid() {
     const browser = Bowser.getParser(window.navigator.userAgent);
-    const apple = browser.satisfies({ safari: ">=0", ios: ">=0"});
+    const apple = browser.satisfies({ safari: ">=0", ios: ">=0" });
     const android = browser.getOSName() === "Android";
-    const osMajorVersionMatch = browser.getOSVersion().match(/^(\d+)\.?/);
-    const osMajorVersion = Number.parseInt(osMajorVersionMatch ? osMajorVersionMatch[1] : "0");
-    return apple || (android && osMajorVersion < 10);
+    return apple || (android && getMajorVersion(browser.getOSVersion()) < 10);
+}
+
+function getMajorVersion(version) {
+    if (!version) {
+        return 0;
+    }
+    const osMajorVersionMatch = version.match(/^(\d+)\.?/);
+    return Number.parseInt(osMajorVersionMatch ? osMajorVersionMatch[1] : "0");
 }
 
 function subscribe() {
