@@ -8,7 +8,7 @@ We use your data to provide and improve the Game. By using the Game, you agree t
 
 **1. Information We Collect**
 
-While using our Game, we employ the use of third-party services that collect information used to help us understand how our Game is being used and improve its quality. This collected information is anonymized and does not personally identify you.
+While using our Game, we employ the use of third-party services that collect information used to help us understand how our Game is being used and improve its quality, as well as to understand performance of marketing. This collected information is anonymized and does not personally identify you.
 
 *Usage Data:*
 
@@ -25,6 +25,7 @@ We use the collected data for various purposes:
 - To provide analysis or valuable information so that we can improve the Game
 - To monitor the usage of the Game
 - To detect, prevent and address technical issues
+- To understand performance of marketing
 
 **3. Retention of Data**
 
@@ -63,11 +64,15 @@ The data Sentry provides us is anonymized. It does not include personally identi
 
 You can learn more about Sentry's privacy practices by visiting their Privacy Policy: https://sentry.io/privacy/.
 
-**9. Changes to This Privacy Policy**
+**9. Meta API Integration
+
+We use the Meta API to understand the performance of our marketing efforts and track installation events related to our advertisements on Meta products. This helps us to measure the effectiveness of our advertising campaigns on Meta and understand how users are interacting with our Game after viewing our ads.
+
+**10. Changes to This Privacy Policy**
 
 We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
 
-**10. Contact Us**
+**11. Contact Us**
 
 If you have any questions about this Privacy Policy, please contact us:
 
