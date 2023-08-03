@@ -1,13 +1,8 @@
 package com.ombosoft.paintmatch;
 
-import static com.facebook.FacebookSdk.fullyInitialize;
-import static com.facebook.FacebookSdk.setAdvertiserIDCollectionEnabled;
-import static com.facebook.FacebookSdk.setAutoInitEnabled;
-import static com.facebook.FacebookSdk.setAutoLogAppEventsEnabled;
-
 import android.app.Activity;
+import android.util.Log;
 
-import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsConstants;
 import com.facebook.appevents.AppEventsLogger;
 import com.getcapacitor.BridgeActivity;
@@ -17,19 +12,12 @@ import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
-@CapacitorPlugin(name = "OmFb")
-public class OmFbPlugin extends Plugin {
-
-    @PluginMethod()
-    public void enable(PluginCall call) {
-        setAutoInitEnabled(true);
-        setAutoLogAppEventsEnabled(true);
-        setAdvertiserIDCollectionEnabled(true);
-        fullyInitialize();
-    }
+@CapacitorPlugin(name = "OmMeta")
+public class OmMetaPlugin extends Plugin {
 
     @PluginMethod()
     public void log(PluginCall call) {
+        Log.i("meta1", "called");
         String event = call.getString("event");
         JSObject ret = new JSObject();
 
@@ -39,6 +27,7 @@ public class OmFbPlugin extends Plugin {
                 AppEventsLogger logger = AppEventsLogger.newLogger(activity);
                 logger.logEvent(AppEventsConstants.EVENT_NAME_RATED);
                 ret.put("success", true);
+                Log.i("meta1", "success");
             } else {
                 ret.put("success", false);
                 ret.put("detail", "Unexpected event");
