@@ -1,3 +1,9 @@
+### 11.2
+
+2023-08-03
+
+* Perf improvements on old phones
+
 ### 11
 
 2023-07-15
