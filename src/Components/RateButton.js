@@ -2,17 +2,21 @@ import { Browser } from "@capacitor/browser";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import PropTypes from "prop-types";
 import { textForeground } from "../Constants";
-import { isNative } from "../Util/DeviceTypeDetector";
-import { rateMeta } from "../Util/Meta";
+import { isAndroidNative, isNative } from "../Util/DeviceTypeDetector";
+import { rateMeta, requestReview } from "../Util/Meta";
 import CaptionButton from "./CaptionButton";
 
 function RateButton({ id, onClick, captionColor }) {
     const native = isNative();
     async function onRate() {
         if (native) {
-            await Browser.open({
-                url: "https://play.google.com/store/apps/details?id=com.ombosoft.paintmatch",
-            });
+            if (isAndroidNative()) {
+                await Browser.open({
+                    url: "https://play.google.com/store/apps/details?id=com.ombosoft.paintmatch",
+                });
+            } else {
+                requestReview();
+            }
             await rateMeta();
         }
         onClick();
