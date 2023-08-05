@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,9 @@
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
 		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
+		FAB512B82A7E9E7800BD4779 /* FacebookAEM in Frameworks */ = {isa = PBXBuildFile; productRef = FAB512B72A7E9E7800BD4779 /* FacebookAEM */; };
+		FAB512BA2A7E9E7800BD4779 /* FacebookBasics in Frameworks */ = {isa = PBXBuildFile; productRef = FAB512B92A7E9E7800BD4779 /* FacebookBasics */; };
+		FAB512BC2A7E9E7800BD4779 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = FAB512BB2A7E9E7800BD4779 /* FacebookCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +40,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAB512BA2A7E9E7800BD4779 /* FacebookBasics in Frameworks */,
+				FAB512B82A7E9E7800BD4779 /* FacebookAEM in Frameworks */,
 				A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */,
+				FAB512BC2A7E9E7800BD4779 /* FacebookCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +118,11 @@
 			dependencies = (
 			);
 			name = App;
+			packageProductDependencies = (
+				FAB512B72A7E9E7800BD4779 /* FacebookAEM */,
+				FAB512B92A7E9E7800BD4779 /* FacebookBasics */,
+				FAB512BB2A7E9E7800BD4779 /* FacebookCore */,
+			);
 			productName = App;
 			productReference = 504EC3041FED79650016851F /* App.app */;
 			productType = "com.apple.product-type.application";
@@ -141,6 +152,9 @@
 				Base,
 			);
 			mainGroup = 504EC2FB1FED79650016851F;
+			packageReferences = (
+				FAB512B62A7E9E7800BD4779 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+			);
 			productRefGroup = 504EC3051FED79650016851F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -335,7 +349,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -350,7 +365,10 @@
 				DEVELOPMENT_TEAM = TH6DTVAG5C;
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 11.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ombosoft.paintmatch;
@@ -371,7 +389,10 @@
 				DEVELOPMENT_TEAM = TH6DTVAG5C;
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				MARKETING_VERSION = 11.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ombosoft.paintmatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -403,6 +424,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		FAB512B62A7E9E7800BD4779 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 16.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FAB512B72A7E9E7800BD4779 /* FacebookAEM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAB512B62A7E9E7800BD4779 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookAEM;
+		};
+		FAB512B92A7E9E7800BD4779 /* FacebookBasics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAB512B62A7E9E7800BD4779 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookBasics;
+		};
+		FAB512BB2A7E9E7800BD4779 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FAB512B62A7E9E7800BD4779 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 504EC2FC1FED79650016851F /* Project object */;
 }

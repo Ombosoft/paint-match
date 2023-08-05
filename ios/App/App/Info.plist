@@ -48,5 +48,24 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>fb1032819174550885</string>
+      </array>
+      </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>1032819174550885</string>
+    <key>FacebookClientToken</key>
+    <string>547addaf72490c4065fc50f5e9940884</string>
+    <key>FacebookDisplayName</key>
+    <string>Paint Match</string>
+    <key>FacebookAutoLogAppEventsEnabled</key>
+    <true/>
+    <key>FacebookAdvertiserIDCollectionEnabled</key>
+    <true/>
 </dict>
 </plist>
