@@ -1,6 +1,8 @@
 import { Stack } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { useEffect, useState } from "react";
 import useMusic from "../Music";
+import { getStatusBarHeight } from "../Native";
 import { SoundsMutedContext, useSoundControl } from "../Sfx";
 import "./App.css";
 import ConsentDialog from "./ConsentDialog";
@@ -19,16 +21,26 @@ function App() {
             },
         },
     });
+    const [statusBarHeight, setStatusBarHeight] = useState('0px');
+    useEffect(() => {
+        getStatusBarHeight().then((height) => {
+            setStatusBarHeight(`${height}px`);
+        });
+    }, [setStatusBarHeight]);
     return (
         <ThemeProvider theme={theme}>
-            <LsOffDetector/>
+            <LsOffDetector />
             <div className="App">
                 <div className="background" />
                 <header className="App-header">
                     <SoundsMutedContext.Provider value={soundsMuted}>
                         <Stack
                             direction="column"
-                            sx={{ height: "100vh", width: "100%" }}
+                            sx={{
+                                height: `calc(100vh - ${statusBarHeight})`,
+                                width: "100%",
+                                paddingTop: `${statusBarHeight}px`,
+                            }}
                         >
                             <Game
                                 autoPlayMusic={autoPlay}
@@ -42,7 +54,7 @@ function App() {
                         </Stack>
                     </SoundsMutedContext.Provider>
                 </header>
-                <ConsentDialog/>
+                <ConsentDialog />
             </div>
         </ThemeProvider>
     );

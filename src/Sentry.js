@@ -10,7 +10,7 @@ export function sentryInit() {
         }
         Sentry.init({
             environment: process.env.NODE_ENV,
-            release: "11.2",
+            release: "11.4",
             dsn: sentryDsn,
             integrations: [
                 new Sentry.Replay({
