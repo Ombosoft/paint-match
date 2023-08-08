@@ -93,6 +93,7 @@ function FeedbackDialog({ open, onClose }) {
                                 }}
                             />
                             <Button
+                                disabled={feedbackText.length===0}
                                 size="large"
                                 sx={{ alignSelf: "end" }}
                                 onClick={sendFeedback}

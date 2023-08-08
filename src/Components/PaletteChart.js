@@ -5,7 +5,7 @@ import { animated } from "@react-spring/web";
 import PropTypes from "prop-types";
 import { useCallback, useMemo, useRef, useState } from "react";
 import { textColorFromName, themePalette } from "../Colors";
-import {useIsTouchScreen, isAppleOrOldAndroid} from "../Util/DeviceTypeDetector";
+import { isAppleOrOldAndroid, useIsTouchScreen } from "../Util/DeviceTypeDetector";
 
 const theme = {
     background: "transparent",
@@ -18,7 +18,7 @@ const theme = {
     },
     labels: {
         text: {
-            fontSize: "20",
+            fontSize: "16",
             fontWeight: "bold",
             fontFamily: "Nunito",
         },
