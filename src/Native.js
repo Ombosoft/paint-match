@@ -1,7 +1,7 @@
 import { StatusBar } from "@capacitor/status-bar";
 import { Style } from "@mui/icons-material";
 import { SafeArea } from "capacitor-plugin-safe-area";
-import { isNative } from "./Util/DeviceTypeDetector";
+import { isAndroidNative, isNative } from "./Util/DeviceTypeDetector";
 
 export function nativeInit() {
     try {
@@ -15,9 +15,11 @@ export function nativeInit() {
 }
 
 function nativeInitImpl() {
-    StatusBar.setOverlaysWebView({ overlay: false });
-    StatusBar.setStyle({ style: Style.Dark });
-    StatusBar.setBackgroundColor({ color: "#141414" });
+    if (isAndroidNative()) {
+        StatusBar.setOverlaysWebView({ overlay: false });
+        StatusBar.setStyle({ style: Style.Dark });
+        StatusBar.setBackgroundColor({ color: "#141414" });
+    }
     document.addEventListener("ionBackButton", (ev) => {
         ev.detail.register(9999, (processNextHandler) => {
             console.log("Handler A was called!");
