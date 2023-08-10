@@ -2,7 +2,8 @@
 
 # Play in browser **>** [**here**](https://ombosoft.itch.io/paint-match) **<**
 
-<a href='https://play.google.com/store/apps/details?id=com.ombosoft.paintmatch&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+<a href='https://play.google.com/store/apps/details?id=com.ombosoft.paintmatch&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height='64'/></a>
+<a href='https://apple.co/3DPkmoT'><img alt='Download on the App Store' src='https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg' height='64'/></a>
 
 This a color mixing game written in React.js.
 The objective of the game is to recreate the target color as precisely as possible using the provided droplets of paint.
