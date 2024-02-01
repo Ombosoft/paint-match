@@ -2,6 +2,8 @@ import { isAppleOrOldAndroid } from "./Util/DeviceTypeDetector";
 
 const noAnimations = isAppleOrOldAndroid();
 
+export const isSimplified = true;
+
 export const extraCommitDelay = -500;
 export const animationDurationMs = noAnimations ? 0 : 800;
 export const dropletBlendDelay = noAnimations ? 0 : 300;

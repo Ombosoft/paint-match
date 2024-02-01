@@ -16,6 +16,7 @@ import {
     dropletBlendDelay,
     dropletsUntilReset,
     extraCommitDelay,
+    isSimplified,
 } from "../Constants";
 import { LevelsPanelContext } from "../Context/LevelsPanelContext";
 import { NumDropletsContext } from "../Context/NumDropletsContext";
@@ -191,6 +192,9 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     }
 
     function maybeDisplayCta() {
+        if (isSimplified) {
+            return;
+        }
         if (!ctaDisplayed && curLevel >= 50) {
             setCtaDisplayed(true);
             setCtaOpen(true);

@@ -3,7 +3,7 @@ import PersonPinIcon from "@mui/icons-material/PersonPin";
 import { Stack } from "@mui/material";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { textForeground } from "../Constants";
+import { isSimplified, textForeground } from "../Constants";
 import CaptionButton from "./CaptionButton";
 import ItchSnackBar from "./ItchSnackBar";
 import RateButton from "./RateButton";
@@ -25,20 +25,23 @@ function ExtraMenu({ onCredits, onFeedback }) {
                     paddingBottom: "0.3em",
                 }}
             >
-                <RateButton
-                    id="menu-rate"
-                    onClick={() => {
-                        setRateOpen(true);
-                    }}
-                />
-                <CaptionButton
-                    id="feedback"
-                    caption="Feedback"
-                    captionColor={textForeground}
-                    onClick={onFeedback}
-                >
-                    <BugReportIcon />
-                </CaptionButton>
+                {!isSimplified && (<>
+                    <RateButton
+                        id="menu-rate"
+                        onClick={() => {
+                            setRateOpen(true);
+                        }}
+                    />
+                    <CaptionButton
+                        id="feedback"
+                        caption="Feedback"
+                        captionColor={textForeground}
+                        onClick={onFeedback}
+                    >
+                        <BugReportIcon />
+                    </CaptionButton>
+                </>)
+                }
                 <CaptionButton
                     id="credits"
                     caption="Credits"
