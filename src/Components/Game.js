@@ -73,7 +73,6 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     const [resetCount, setResetCount] = useState(0);
     const [debug, setDebug] = useState(false);
     const [levelsPanelOpen, setLevelsPanelOpen] = useState(false);
-    const [ctaOpen, setCtaOpen] = useState(false);
     const [hint, setHint] = useState(null);
     const [usedHint, setUsedHint] = useState(false);
     const dropletSound = useDropletSound();
