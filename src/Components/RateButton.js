@@ -3,7 +3,6 @@ import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import PropTypes from "prop-types";
 import { textForeground } from "../Constants";
 import { isAndroidNative, isNative } from "../Util/DeviceTypeDetector";
-import { rateMeta, requestReview } from "../Util/Meta";
 import CaptionButton from "./CaptionButton";
 
 function RateButton({ id, onClick, captionColor }) {
@@ -14,10 +13,7 @@ function RateButton({ id, onClick, captionColor }) {
                 await Browser.open({
                     url: "https://play.google.com/store/apps/details?id=com.ombosoft.paintmatch",
                 });
-            } else {
-                requestReview();
             }
-            await rateMeta();
         }
         onClick();
     }
