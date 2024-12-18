@@ -15,7 +15,6 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.3",
     "@nivo/pie": "^0.83.0",
-    "@sentry/react": "^7.55.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
@@ -34,8 +33,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "sentry:sourcemaps": "sentry-cli sourcemaps inject --org ombosoft --project paint-match ./build && sentry-cli sourcemaps upload --org ombosoft --project paint-match ./build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
