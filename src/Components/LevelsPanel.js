@@ -25,7 +25,6 @@ function LevelsPanel({
     unlockedLevel,
     levelAchievements,
     onCredits,
-    onFeedback,
 }) {
     const closePanel = useCallback(() => {
         onClose(curLevel);
@@ -79,7 +78,6 @@ function LevelsPanel({
                         </Stack>
                         <ExtraMenu
                             onCredits={onCredits}
-                            onFeedback={onFeedback}
                         />
                     </Stack>
                 </ScrollableDialogContent>
@@ -137,7 +135,6 @@ LevelsPanel.propTypes = {
     open: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     onCredits: PropTypes.func.isRequired,
-    onFeedback: PropTypes.func.isRequired,
     unlockedLevel: PropTypes.number.isRequired,
     levelAchievements: PropTypes.object.isRequired,
 };

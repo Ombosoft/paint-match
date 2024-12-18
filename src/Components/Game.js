@@ -31,13 +31,10 @@ import {
 } from "../LevelStatus";
 import { colorTable } from "../Levels";
 import { useDropletSound } from "../Sfx";
-import { useLocalStorage } from "../Util/LocalStorageHook";
 import { percentMatch, randomLevel } from "../Util/Utils";
 import { vecCompSum } from "../Util/Vec";
 import { useIsWide } from "../Util/ViewportDimensions";
 import CreditsDialog from "./CreditsDialog";
-import CtaDialog from "./CtaDialog";
-import FeedbackDialog from "./FeedbackDialog";
 import GameContent from "./GameContent";
 import HealthBar from "./HealthBar";
 import { HintBox } from "./HintBox";
@@ -69,10 +66,6 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         onLevelAchievement,
     ] = useLevelStatus();
     const [targetLevel, setTargetLevel] = useState(colorTable[curLevel]);
-    const [ctaDisplayed, setCtaDisplayed] = useLocalStorage(
-        "cta-displayed",
-        false
-    );
     const maxDistance = 400;
     const [distance, setDistance] = useState(maxDistance);
     const [percentMatchVal, setPercentMatchVal] = useState(0);
@@ -85,7 +78,6 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     const [usedHint, setUsedHint] = useState(false);
     const dropletSound = useDropletSound();
     const [creditsOpen, setCreditsOpen] = useState(false);
-    const [feedbackOpen, setFeedbackOpen] = useState(false);
 
     const numDroplets = vecCompSum(Object.values(components));
     const curStars = isPerfectVictory(curLevel, numDroplets, usedHint)
@@ -195,10 +187,6 @@ function Game({ autoPlayMusic, onChangeLevel }) {
         if (isSimplified) {
             return;
         }
-        if (!ctaDisplayed && curLevel >= 50) {
-            setCtaDisplayed(true);
-            setCtaOpen(true);
-        }
     }
 
     function nextLevel() {
@@ -269,10 +257,6 @@ function Game({ autoPlayMusic, onChangeLevel }) {
     const showCredits = useCallback(() => {
         setLevelsPanelOpen(false);
         setCreditsOpen(true);
-    }, []);
-    const showFeedback = useCallback(() => {
-        setLevelsPanelOpen(false);
-        setFeedbackOpen(true);
     }, []);
 
     const allowResetWhen =
@@ -387,7 +371,6 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                         open={levelsPanelOpen}
                         onClose={handleLevelChoice}
                         onCredits={showCredits}
-                        onFeedback={showFeedback}
                         curLevel={curLevel}
                         unlockedLevel={
                             debug
@@ -400,24 +383,10 @@ function Game({ autoPlayMusic, onChangeLevel }) {
                         levelAchievements={levelAchievements}
                     />
                 )}
-                {ctaOpen && (
-                    <CtaDialog
-                        open={ctaOpen}
-                        onClose={() => {
-                            setCtaOpen(false);
-                        }}
-                    />
-                )}
                 {creditsOpen && (
                     <CreditsDialog
                         open={creditsOpen}
                         onClose={() => setCreditsOpen(false)}
-                    />
-                )}
-                {feedbackOpen && (
-                    <FeedbackDialog
-                        open={feedbackOpen}
-                        onClose={() => setFeedbackOpen(false)}
                     />
                 )}
             </LevelsPanelContext.Provider>

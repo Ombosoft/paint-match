@@ -1,4 +1,3 @@
-import BugReportIcon from "@mui/icons-material/BugReport";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
 import { Stack } from "@mui/material";
 import PropTypes from "prop-types";
@@ -8,7 +7,7 @@ import CaptionButton from "./CaptionButton";
 import ItchSnackBar from "./ItchSnackBar";
 import RateButton from "./RateButton";
 
-function ExtraMenu({ onCredits, onFeedback }) {
+function ExtraMenu({ onCredits }) {
     const [rateOpen, setRateOpen] = useState(false);
     return (
         <>
@@ -32,14 +31,6 @@ function ExtraMenu({ onCredits, onFeedback }) {
                             setRateOpen(true);
                         }}
                     />
-                    <CaptionButton
-                        id="feedback"
-                        caption="Feedback"
-                        captionColor={textForeground}
-                        onClick={onFeedback}
-                    >
-                        <BugReportIcon />
-                    </CaptionButton>
                 </>)
                 }
                 <CaptionButton
