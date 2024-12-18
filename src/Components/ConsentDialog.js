@@ -7,7 +7,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import React, { useState } from "react";
 import { useDataConsent } from "../DataConsent";
 import { gaInit } from "../GA";
-import { sentryDisable } from "../Sentry";
 
 const ConsentDialog = () => {
     const [optIn, setOptIn] = useDataConsent();
@@ -18,8 +17,6 @@ const ConsentDialog = () => {
         setOptIn(consent);
         if (consent) {
             gaInit();
-        } else {
-            sentryDisable();
         }
     };
 
