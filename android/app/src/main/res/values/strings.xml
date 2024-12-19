@@ -4,7 +4,4 @@
     <string name="title_activity_main">Paint Match</string>
     <string name="package_name">com.ombosoft.paintmatch</string>
     <string name="custom_url_scheme">com.ombosoft.paintmatch</string>
-    <string name="facebook_app_id">1032819174550885</string>
-    <string name="fb_login_protocol_scheme">fb1032819174550885</string>
-    <string name="facebook_client_token">547addaf72490c4065fc50f5e9940884</string>
 </resources>
