@@ -4,12 +4,12 @@
   "homepage": ".",
   "private": true,
   "dependencies": {
-    "@capacitor/android": "5.0.5",
-    "@capacitor/app": "^5.0.6",
-    "@capacitor/browser": "^5.0.6",
-    "@capacitor/core": "^5.0.5",
-    "@capacitor/ios": "5.0.5",
-    "@capacitor/status-bar": "^5.0.5",
+    "@capacitor/android": "^5.0.5",
+    "@capacitor/app": "^5.0.8",
+    "@capacitor/browser": "^5.2.1",
+    "@capacitor/core": "^5.7.8",
+    "@capacitor/ios": "^5.0.5",
+    "@capacitor/status-bar": "^5.0.8",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
@@ -66,6 +66,6 @@
   "devDependencies": {
     "@babel/cli": "^7.21.5",
     "@babel/node": "^7.22.1",
-    "@capacitor/cli": "^5.0.5"
+    "@capacitor/cli": "^5.7.8"
   }
 }
